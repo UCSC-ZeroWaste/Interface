@@ -7,9 +7,9 @@ module.exports = React.createClass({
   parseSiteData: function(data){
     return _.map(data,
       function(entry, i) {
-        return { 'quantity' : entry.Quantity,
-                  'picked_up' : entry.PickupTime,
-                  'index' : i };
+        return { 'quantity' : entry.Load,
+                 'picked_up' : entry.PickupTime,
+                 'index' : i };
       }
     );
   },
@@ -19,7 +19,7 @@ module.exports = React.createClass({
       height: 400,
       xLabel: "Date",
       x: function(d) {
-        var parseTime = d3.timeFormat("%Y-%m-%d");
+        // var parseTime = d3.timeFormat("%c");
         return new Date(d.picked_up).valueOf()
       },
       yLabel: "Weight",
@@ -34,7 +34,7 @@ module.exports = React.createClass({
           name:  nextProps.site.name + ' - Site Waste Weight',
           color: '#c0c0c0',
           style: {
-            "strokeWidth": 8,
+            "strokeWidth": 6,
           }
         }]
       })

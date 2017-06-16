@@ -9,7 +9,6 @@ module.exports = React.createClass({
   },
 
   setSite: function(e) {
-    e.preventDefault();
     this.setState({
       site: e.target.value
     });
@@ -17,7 +16,7 @@ module.exports = React.createClass({
 
   render: function () {
     if (!this.props.records.recordset) return(<h1>Could not get data.</h1>);
-    var sites = _.groupBy(this.props.records.recordset, 'CustomerName');
+    var sites = _.groupBy(this.props.records.recordset, 'Site');
     var siteOptions = _.map(sites, function (record, site) {
       return <option key={ site } value= { site }>
       { site }
