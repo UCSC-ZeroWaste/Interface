@@ -11,7 +11,9 @@ class Records extends Component {
   }
 
   componentWillMount() {
-    Store.addChangeListener(this._onChange);
+    // Store.addChangeListener(this._onChange);
+    Store.addChangeListener(() => this.setState({records: Store.getRecords()}));
+
   }
   // Use the ActionCreator to get the records.
   componentDidMount() {
@@ -34,19 +36,11 @@ class Records extends Component {
 
   render() {
     return (
-      
+      <div>
         <SelectRecord records={this.state.records}/>
+      </div>
       );
   }
 }
 
 export default Records;
-
-// { React.cloneElement(
-//   this.props.children,
-//   { records: this.state.records })
-// }
-
-// <SelectRecord>
-//   <SiteLineChart/>
-// </SelectRecord>

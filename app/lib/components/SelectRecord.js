@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
+import SiteLineChart from './SiteLineChart.js';
+
 
 class SelectRecord extends Component {
   constructor(props) {
@@ -29,8 +31,7 @@ class SelectRecord extends Component {
             <option value="">Select a Site</option>
             { siteOptions  }
           </select>
-          { React.cloneElement(this.props.children,
-          { site: selectedSite }) }
+          <SiteLineChart site={selectedSite}/>
         </div>
         );
   }
