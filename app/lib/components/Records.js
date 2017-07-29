@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Store from '../stores/Store';
 import ActionCreator from '../actions/ActionCreator';
 import SelectRecord from './SelectRecord.js';
+import LeaderBoard from './LeaderBoard.js';
 
 
 export default class Records extends Component {
@@ -38,6 +39,7 @@ export default class Records extends Component {
     return (
       <div>
         <SelectRecord records={this.state.records}/>
+        <LeaderBoard records={this.state.records}/>
       </div>
       );
   }

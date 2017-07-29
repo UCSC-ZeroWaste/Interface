@@ -1,20 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
 import _ from 'underscore';
 import {LineChart} from 'react-d3-basic';
 import d3 from 'd3';
 
-module.exports = React.createClass({
-  parseSiteData: function(data){
-    return _.map(data,
-      function(entry, i) {
-        return { 'quantity' : entry.Load,
-                 'picked_up' : entry.PickupTime,
-                 'index' : i };
-      }
-    );
-  },
-  getInitialState: function() {
-    return {
+export default class LineChartComponent extends Component {
+  constructor() {
+    super();
+    this.state = {
       width: 600,
       height: 400,
       xLabel: "Date",
@@ -25,8 +17,19 @@ module.exports = React.createClass({
       yLabel: "Weight",
       yLabelPosition: 'right'
     };
-  },
-  componentWillReceiveProps: function(nextProps) {
+  }
+
+  parseSiteData(data) {
+    return _.map(data,
+      function(entry, i) {
+        return { 'quantity' : entry.Load,
+                 'picked_up' : entry.PickupTime,
+                 'index' : i };
+      }
+    );
+  }
+
+  componentWillReceiveProps(nextProps) {
     if (nextProps.site.data !== undefined) {
       this.setState({
         series: [{
@@ -39,9 +42,10 @@ module.exports = React.createClass({
         }]
       });
     }
-  },
+  }
+
   render() {
-    if (this.props.site.data === undefined) return(<div></div>);
+    if (this.props.site.data === undefined) return (<div></div>);
     console.log("Site Data: ", this.parseSiteData(this.props.site.data));
     return (
       <div>
@@ -57,4 +61,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+}

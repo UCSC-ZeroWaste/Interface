@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
-import SiteLineChart from './SiteLineChart.js';
+import LineChart from './LineChart.js';
 
 export default class SelectRecord extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ export default class SelectRecord extends Component {
             <option value="">Select a Site</option>
             { siteOptions  }
           </select>
-          <SiteLineChart site={selectedSite}/>
+          <LineChart site={selectedSite}/>
         </div>
         );
   }
