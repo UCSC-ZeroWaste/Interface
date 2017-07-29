@@ -9,12 +9,11 @@ export default class Records extends Component {
   constructor(props) {
     super(props);
     this.state = {records: []};
+    this._onChange = this._onChange.bind(this);
   }
 
   componentWillMount() {
-    // Store.addChangeListener(this._onChange);
-    Store.addChangeListener(() => this.setState({records: Store.getRecords()}));
-
+    Store.addChangeListener(this._onChange);
   }
   // Use the ActionCreator to get the records.
   componentDidMount() {
