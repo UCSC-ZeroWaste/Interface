@@ -4,7 +4,7 @@ import ActionCreator from '../actions/ActionCreator';
 import SelectRecord from './SelectRecord.js';
 
 
-class Records extends Component {
+export default class Records extends Component {
   constructor(props) {
     super(props);
     this.state = {records: []};
@@ -42,5 +42,3 @@ class Records extends Component {
       );
   }
 }
-
-export default Records;

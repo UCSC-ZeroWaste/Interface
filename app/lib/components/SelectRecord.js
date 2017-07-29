@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import _ from 'underscore';
 import SiteLineChart from './SiteLineChart.js';
 
-
-class SelectRecord extends Component {
+export default class SelectRecord extends Component {
   constructor(props) {
     super(props);
     this.state = {site: undefined};
@@ -15,7 +14,7 @@ class SelectRecord extends Component {
   }
 
   render() {
-    if (!this.props.records.recordset) return(<h1>Could not get data.</h1>);
+    if (!this.props.records.recordset) return (<h1>Could not get data.</h1>);
     var sites = _.groupBy(this.props.records.recordset, 'Site');
     var siteOptions = _.map(sites, function (record, site) {
       return <option key={ site } value= { site }>
@@ -36,5 +35,3 @@ class SelectRecord extends Component {
         );
   }
 }
-
-export default SelectRecord;
