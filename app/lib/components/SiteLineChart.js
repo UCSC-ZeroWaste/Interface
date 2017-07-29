@@ -1,7 +1,7 @@
-var React = require('react');
-var _ = require('underscore');
-var LineChart = require('react-d3-basic').LineChart;
-var d3 = require('d3');
+import React from 'react';
+import _ from 'underscore';
+import {LineChart} from 'react-d3-basic';
+import d3 from 'd3';
 
 module.exports = React.createClass({
   parseSiteData: function(data){
@@ -20,14 +20,14 @@ module.exports = React.createClass({
       xLabel: "Date",
       x: function(d) {
         // var parseTime = d3.timeFormat("%c");
-        return new Date(d.picked_up).valueOf()
+        return new Date(d.picked_up).valueOf();
       },
       yLabel: "Weight",
       yLabelPosition: 'right'
-    }
+    };
   },
   componentWillReceiveProps: function(nextProps) {
-    if (nextProps.site.data != undefined) {
+    if (nextProps.site.data !== undefined) {
       this.setState({
         series: [{
           field: 'quantity',
@@ -37,12 +37,12 @@ module.exports = React.createClass({
             "strokeWidth": 6,
           }
         }]
-      })
+      });
     }
   },
   render() {
-    if (this.props.site.data == undefined) return(<div></div>);
-    console.log("Site Data: ", this.parseSiteData(this.props.site.data))
+    if (this.props.site.data === undefined) return(<div></div>);
+    console.log("Site Data: ", this.parseSiteData(this.props.site.data));
     return (
       <div>
         <LineChart

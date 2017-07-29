@@ -1,20 +1,18 @@
-var React = require('react');
-var _ = require('underscore');
+import React, {Component} from 'react';
+import _ from 'underscore';
 
-module.exports = React.createClass({
-  getInitialState: function(){
-    return {
-      site: undefined
-    };
-  },
+class SelectRecord extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {site: undefined};
+    this.setSite = this.setSite.bind(this);
+  }
 
-  setSite: function(e) {
-    this.setState({
-      site: e.target.value
-    });
-  },
+  setSite(e) {
+    this.setState({site: e.target.value});
+  }
 
-  render: function () {
+  render() {
     if (!this.props.records.recordset) return(<h1>Could not get data.</h1>);
     var sites = _.groupBy(this.props.records.recordset, 'Site');
     var siteOptions = _.map(sites, function (record, site) {
@@ -36,4 +34,6 @@ module.exports = React.createClass({
         </div>
         );
   }
-});
+}
+
+export default SelectRecord;

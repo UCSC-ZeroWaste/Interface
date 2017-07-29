@@ -1,9 +1,8 @@
-var React = require('react');
-var styles = require('./App.css');
-var Records = require('./lib/components/Records.js');
-var SelectRecord = require('./lib/components/SelectRecord.js');
-var SiteLineChart = require('./lib/components/SiteLineChart.js');
-var SiteLeaderBoard = require('./lib/components/SiteLeaderBoard.js');
+import React from 'react';
+import styles from './App.css';
+import Records from './lib/components/Records.js';
+import SiteLineChart from './lib/components/SiteLineChart.js';
+import SiteLeaderBoard from './lib/components/SiteLeaderBoard.js';
 
 export default class App extends React.Component {
   render() {
@@ -13,11 +12,7 @@ export default class App extends React.Component {
         <div className={styles.bap}>
           Zero Waste
         </div>
-        <RecordSet>
-          <SelectRecord>
-            <SiteLineChart/>
-          </SelectRecord>
-        </RecordSet>
+        <RecordSet/>
         <Records>
           <SiteLeaderBoard/>
         </Records>

@@ -1,5 +1,5 @@
-var React = require('react');
-var _ = require('underscore');
+import React from 'react';
+import _ from 'underscore';
 
 class LeaderRow extends React.Component {
   render() {
@@ -12,6 +12,8 @@ class LeaderRow extends React.Component {
         );
   }
 }
+
+
 module.exports = React.createClass({
   parseSiteData: function(data){
     return _.map(data, function(entry, i) {
