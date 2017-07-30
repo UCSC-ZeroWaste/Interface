@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import configureStore from './store/store';
-import Root from './components/root';
+import configureStore from './lib/store/store';
+import App from './App';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store = configureStore();

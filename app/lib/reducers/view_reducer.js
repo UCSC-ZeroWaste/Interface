@@ -1,13 +1,16 @@
-import {UPDATE_VIEW} from '../constants/ActionConstants';
+// import {UPDATE_VIEW} from '../constants/ActionConstants';
 import merge from 'lodash/merge';
+import {UPDATE_CURRENT_VIEW} from '../actions/nav_actions';
 
-const defaultState = {data: undefined};
+const defaultState = 1;
 
 const ViewReducer = (state = defaultState, action) => {
+  console.log('hit reducer');
   Object.freeze(state);
   switch(action.type) {
-    case UPDATE_VIEW:
-      return                ;
+    case UPDATE_CURRENT_VIEW:
+      console.log('UPDATE_CURRENT_VIEW');
+      return action.view;
     default:
       return state;
   }
