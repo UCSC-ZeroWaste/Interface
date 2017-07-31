@@ -13,7 +13,7 @@ class LineChartComponent extends Component {
       height: 400,
       xLabel: "Date",
       x: function(d) {
-        // var parseTime = d3.timeFormat("%c");
+        // let parseTime = d3.timeFormat("%c");
         return new Date(d.picked_up).valueOf();
       },
       yLabel: "Weight",
@@ -32,9 +32,6 @@ class LineChartComponent extends Component {
   }
 
   render() {
-    // var selectedSite = {};
-    // if (this.state.site) selectedSite = { name: this.state.site, data: sites[ this.state.site ] };
-
     if (this.props.siteRecords === undefined) return (<div></div>);
     // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
     return (

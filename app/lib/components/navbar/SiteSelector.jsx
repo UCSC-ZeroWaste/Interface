@@ -17,8 +17,8 @@ class SiteSelector extends Component {
 
   render() {
     // if (!this.props.records.recordset) return (<h1>Could not get data.</h1>);
-    var sites = _.groupBy(this.props.records.recordset, 'Site');
-    var siteOptions = _.map(sites, function (record, site) {
+    const sites = _.groupBy(this.props.records.recordset, 'Site');
+    const siteOptions = _.map(sites, function (record, site) {
       return <option key={ site } value= { site }>
       { site }
       </option>;

@@ -1,4 +1,4 @@
-import Api from '../services/api';
+import * as Api from '../services/api';
 export const RECEIVE_RECORDS = 'RECEIVE_RECORDS';
 export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 
@@ -14,7 +14,7 @@ export const receiveError = (error) => ({
 
 //TODO need to set up error handling -- maybe do this for TDD?
 export const fetchRecords = () => (dispatch) => (
-  Api.get('http://zerowaste.ucsc.edu:3001/api/db')
+  Api.fetchRecords('http://zerowaste.ucsc.edu:3001/api/db')
     .then((records) => dispatch(receiveRecords(records)))
     .catch((error) => dispatch(receiveError(error)))
 );

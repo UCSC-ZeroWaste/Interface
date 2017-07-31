@@ -27,9 +27,9 @@ class LeaderBoard extends Component {
   }
 
   render() {
-    var sites = this.props.records.recordset;
+    let sites = this.props.records.recordset;
     if (!sites) return (<h1>Could not get data.</h1>);
-    var collegeSet = [
+    const collegeSet = [
       "College Nine and Ten",
       "Cowell-Stevenson",
       "Crown-Merrill",
@@ -41,19 +41,19 @@ class LeaderBoard extends Component {
     sites = _.filter(sites, function(site){
       return collegeSet.includes(site.Site);
     });
-    var siteGroup = _.groupBy(sites, 'Site');
-    var siteCol = [];
+    let siteGroup = _.groupBy(sites, 'Site');
+    let siteCol = [];
     _.each(siteGroup, function(site){
       siteCol = siteCol.concat(site);
     });
     console.log("Site ", siteCol);
 
     siteGroup = _.keys(siteGroup);
-    var collegeGroup = _.map(siteGroup, function(siteName){
-      var currentSite = _.filter(siteCol, (site) => { if (site.Site === siteName) return site; });
-      var totalLoad = _.reduce(currentSite, (prev, site) => { return prev + site.Load; }, 0);
-      var LoadWithoutRefuse = _.reduce(currentSite, function(prev, site){ if(site.Product === "Refuse") return prev; return prev + site.Load; }, 0);
-      var divertLoad = (LoadWithoutRefuse/totalLoad) * 100;
+    let collegeGroup = _.map(siteGroup, function(siteName){
+      let currentSite = _.filter(siteCol, (site) => { if (site.Site === siteName) return site; });
+      let totalLoad = _.reduce(currentSite, (prev, site) => { return prev + site.Load; }, 0);
+      let LoadWithoutRefuse = _.reduce(currentSite, function(prev, site){ if(site.Product === "Refuse") return prev; return prev + site.Load; }, 0);
+      let divertLoad = (LoadWithoutRefuse/totalLoad) * 100;
         console.log(siteName);
         console.log("Total Load ", totalLoad);
         console.log("Total Load without Refuse ", LoadWithoutRefuse);
@@ -61,9 +61,9 @@ class LeaderBoard extends Component {
       return  { "site": siteName, "totalLoad": totalLoad,"LoadWithoutRefuse": LoadWithoutRefuse,"divertLoad": divertLoad };
     });
 
-    var leaders = collegeGroup.sort( (siteA, siteB) => siteB.divertLoad - siteA.divertLoad );
+    let leaders = collegeGroup.sort( (siteA, siteB) => siteB.divertLoad - siteA.divertLoad );
     console.log("Lead", leaders);
-    var leaderColl = [];
+    let leaderColl = [];
     _.each(leaders, function(site, i){
       leaderColl.push(<LeaderRow rank={i+1} site={site} key={i}/>);
     });
