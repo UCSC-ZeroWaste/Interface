@@ -5,8 +5,9 @@ import d3 from 'd3';
 import {connect} from 'react-redux';
 
 class LineChartComponent extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(this.props.site, this.props.siteRecords);
     this.state = {
       width: 600,
       height: 400,
@@ -30,29 +31,24 @@ class LineChartComponent extends Component {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.site.data !== undefined) {
-      this.setState({
-        series: [{
-          field: 'quantity',
-          name:  nextProps.site.name + ' - Site Waste Weight',
-          color: '#c0c0c0',
-          style: {
-            "strokeWidth": 6,
-          }
-        }]
-      });
-    }
-  }
-
   render() {
-    if (this.props.site.data === undefined) return (<div></div>);
-    console.log("Site Data: ", this.parseSiteData(this.props.site.data));
+    // var selectedSite = {};
+    // if (this.state.site) selectedSite = { name: this.state.site, data: sites[ this.state.site ] };
+
+    if (this.props.siteRecords === undefined) return (<div></div>);
+    // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
     return (
       <div>
         <LineChart
-          data= {this.parseSiteData(this.props.site.data)}
-          chartSeries= {this.state.series}
+          data= {this.parseSiteData(this.props.siteRecords)}
+          chartSeries= {[{
+                  field: 'quantity',
+                  name:  this.props.site + ' - Site Waste Weight',
+                  color: '#c0c0c0',
+                  style: {
+                    "strokeWidth": 6,
+                  }
+                }]}
           xLabel= {this.state.xLabel}
           x= {this.state.x}
           xScale= 'time'
@@ -65,8 +61,8 @@ class LineChartComponent extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  records: state.records,
+  siteRecords: _.groupBy(state.records.recordset, 'Site')[state.site],
   site: state.site
 });
 
-export default connect(mapStateToProps)(LineChart);
+export default connect(mapStateToProps)(LineChartComponent);

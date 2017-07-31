@@ -23,8 +23,6 @@ class SiteSelector extends Component {
       { site }
       </option>;
     });
-    var selectedSite = {};
-    if (this.state.site) selectedSite = { name: this.state.site, data: sites[ this.state.site ] };
 
     return (
         <div>
