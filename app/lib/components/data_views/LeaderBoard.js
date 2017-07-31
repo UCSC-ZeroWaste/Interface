@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
+import {connect} from 'react-redux';
 
 const LeaderRow = ({rank, site}) => {
   return (
@@ -11,7 +12,7 @@ const LeaderRow = ({rank, site}) => {
   );
 };
 
-export default class LeaderBoard extends Component {
+class LeaderBoard extends Component {
   constructor(props) {
     super(props);
   }
@@ -81,3 +82,9 @@ export default class LeaderBoard extends Component {
     );
   }
  }
+
+const mapStateToProps = (state) => ({
+  records: state.records
+});
+
+export default connect(mapStateToProps)(LeaderBoard);
