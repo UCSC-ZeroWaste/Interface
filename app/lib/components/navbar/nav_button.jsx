@@ -10,7 +10,7 @@ class NavButton extends Component {
   render() {
     return (
       <button
-        style={{width: '50', height: '50', border: 'solid 1px black', display:'flex', flexDirection:'column'}}
+        style={{width: '100', height: '50', border: 'solid 1px black', display:'flex', flexDirection:'column'}}
         onClick={() => this.props.handleNavSelect(this.props.view)}>
         {this.props.name}
         {this.props.view}

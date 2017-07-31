@@ -1,5 +1,0 @@
-module.exports = {
-  RECEIVE_RECORDS: 'RECEIVE_RECORDS',
-  RECEIVE_ERROR: 'RECEIVE_ERROR',
-  
-};

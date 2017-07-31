@@ -5,7 +5,6 @@ import SiteSelector from './site_selector';
 export default class NavBar extends Component {
   constructor(props){
     super(props);
-    // props.getRecords();
   }
 
   render (){
@@ -14,8 +13,8 @@ export default class NavBar extends Component {
         <SiteSelector/>
         <NavButton title={'button1'} view={1}/>
         <NavButton title={'button2'} view={2}/>
-        <NavButton title={'button3'} view={3}/>
-        <NavButton title={'button4'} view={4}/>
+        <NavButton title={'LeaderBoard'} view={3}/>
+        <NavButton title={'LineChart'} view={4}/>
         <NavButton title={'button5'} view={5}/>
       </div>
     );

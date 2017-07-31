@@ -17,7 +17,7 @@ class LeaderBoard extends Component {
     super(props);
   }
 
-  //  is this function even used?
+  // TODO is this function even used?
   parseSiteData(data) {
     return _.map(data, function(entry, i) {
       return { 'load' : entry.Load,

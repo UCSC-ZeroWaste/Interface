@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './App.css';
-import Records from './lib/components/Records.js';
 import NavBar from './lib/components/navbar/navbar.jsx';
 import DataVisual from './lib/components/data_visual.jsx';
 import { Provider } from 'react-redux';
