@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
-import LineChart from './LineChart.js';
+import LineChart from './data_views/LineChart.js';
 
 export default class SelectRecord extends Component {
   constructor(props) {

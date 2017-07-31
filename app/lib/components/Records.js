@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Store from '../stores/Store';
 import ActionCreator from '../actions/ActionCreator';
 import SelectRecord from './SelectRecord.js';
-import LeaderBoard from './LeaderBoard.js';
+import LeaderBoard from './data_views/LeaderBoard.js';
 
 
 export default class Records extends Component {
