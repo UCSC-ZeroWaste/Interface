@@ -13,8 +13,8 @@ class NavButton extends Component {
         style={{width: '100', height: '50', border: 'solid 1px black', display:'flex', flexDirection:'column'}}
         onClick={() => this.props.handleNavSelect(this.props.view)}>
         {this.props.name}
-        {this.props.view}
-        {this.props.currentView === this.props.view ? 'Selected' : 'Not'}
+        {'{' + this.props.view + '}'}
+        {this.props.currentView === this.props.view ? 'Selected' : ''}
       </button>
     );
   }
