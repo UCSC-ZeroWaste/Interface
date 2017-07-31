@@ -1,8 +1,6 @@
 'use strict';
 
 var request = require('superagent');
-var Promise = require('es6-promise').Promise; // jshint ignore:line
-
 /**
  ** Wrapper for calling a API
  **/

@@ -28,8 +28,6 @@
   "dependencies": {
     "babel-cli": "^6.4.0",
     "babel-core": "^6.22.1",
-    "es6-promise": "^4.1.1",
-    "flux": "^2.1.1",
     "lodash": "^4.17.4",
     "react": "^0.14.3",
     "react-d3-basic": "^1.6.11",
