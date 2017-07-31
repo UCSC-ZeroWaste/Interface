@@ -1,20 +1,11 @@
 import React from 'react';
 import styles from './App.css';
-import NavBar from './lib/components/navbar/navbar.jsx';
-import DataVisual from './lib/components/data_visual.jsx';
+import NavBar from './lib/components/NavBar.jsx';
+import DataVisualization from './lib/components/DataVisualization.jsx';
 import { Provider } from 'react-redux';
-import {fetchRecords} from './lib/actions/records_actions';
+import {fetchRecords} from './lib/actions/records';
 import {connect} from 'react-redux';
-// const App = ({store}) => {
-//     return (
-//       <Provider store={store}>
-//         <NavBar/>
-//         <Records/>
-//       </Provider>
-//     );
-// };
-//
-// export default App;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +17,7 @@ class App extends React.Component {
       <Provider store={this.props.store}>
         <div>
           <NavBar/>
-          <DataVisual/>
+          <DataVisualization/>
         </div>
       </Provider>
     );

@@ -1,4 +1,4 @@
-import {UPDATE_CURRENT_SITE} from '../actions/nav_actions';
+import {UPDATE_CURRENT_SITE} from '../actions/views';
 import merge from 'lodash/merge';
 
 const defaultState = null;

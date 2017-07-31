@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
 import {connect} from 'react-redux';
-import {handleSiteSelect} from '../../actions/nav_actions';
+import {handleSiteSelect} from '../../actions/views';
 
 class SiteSelector extends Component {
   constructor(props) {

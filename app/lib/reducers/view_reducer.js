@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import {UPDATE_CURRENT_VIEW} from '../actions/nav_actions';
+import {UPDATE_CURRENT_VIEW} from '../actions/views';
 
 const defaultState = 3;
 
