@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './App.css';
 import Records from './lib/components/Records.js';
-import NavBar from './lib/components/navbar.jsx';
+import NavBar from './lib/components/navbar/navbar.jsx';
 import DataVisual from './lib/components/data_visual.jsx';
 import { Provider } from 'react-redux';
-
+import {fetchRecords} from './lib/actions/records_actions';
+import {connect} from 'react-redux';
 // const App = ({store}) => {
 //     return (
 //       <Provider store={store}>
@@ -15,16 +16,12 @@ import { Provider } from 'react-redux';
 // };
 //
 // export default App;
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
+    props.getRecords();
   }
 
-
-
-
-
-  
   render() {
     return (
       <Provider store={this.props.store}>
@@ -36,5 +33,12 @@ export default class App extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  getRecords: () => dispatch(fetchRecords())
+});
+
+export default connect(null, mapDispatchToProps)(App);
+
 //TODO add this back to render
 // <Records/>

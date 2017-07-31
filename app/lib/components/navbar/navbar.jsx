@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import NavButton from './nav_button';
+import SiteSelector from './site_selector';
 
 export default class NavBar extends Component {
-  constructor(){
-    super();
-
+  constructor(props){
+    super(props);
+    // props.getRecords();
   }
 
   render (){

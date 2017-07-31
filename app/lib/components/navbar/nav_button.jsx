@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {handleNavSelect} from '../actions/nav_actions';
+import {handleNavSelect} from '../../actions/nav_actions';
 
 class NavButton extends Component {
   constructor(props) {
