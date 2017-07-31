@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 import {UPDATE_CURRENT_VIEW} from '../actions/views';
 
-const defaultState = 3;
+const defaultState = 'leaderBoard';
 
 const ViewReducer = (state = defaultState, action) => {
   console.log('hit reducer');

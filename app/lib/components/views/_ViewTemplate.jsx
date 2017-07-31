@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 export default class ViewTemplate extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render(){
@@ -10,7 +10,6 @@ export default class ViewTemplate extends Component {
       <div>
         {this.props.title}
       </div>
-
-    )
+    );
   }
 }

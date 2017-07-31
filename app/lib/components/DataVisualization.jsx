@@ -11,18 +11,18 @@ class DataVisualization extends Component {
 
   renderView() {
     switch(this.props.currentView) {
-      case 1:
-        return <_ViewTemplate title={'view1'} view={1}/>;
-      case 2:
-        return <_ViewTemplate title={'view2'} view={2}/>;
+      case 'leaderBoard':
+        return <LeaderBoard/>;
+      case 'lineChart':
+        return <LineChart/>;
       case 3:
-        return <LeaderBoard view={3}/>;
+        return <_ViewTemplate title={'Empty View 3'}/>;
       case 4:
-        return <LineChart view={4}/>;
+        return <_ViewTemplate title={'Empty View 4'}/>;
       case 5:
-        return <_ViewTemplate title={'view5'} view={5}/>;
+        return <_ViewTemplate title={'Empty View 5'}/>;
       default:
-        return 6;
+        return <_ViewTemplate title={'Default View'}/>;
     }
   }
 
