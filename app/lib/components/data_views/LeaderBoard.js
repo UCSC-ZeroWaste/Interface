@@ -84,7 +84,8 @@ class LeaderBoard extends Component {
  }
 
 const mapStateToProps = (state) => ({
-  records: state.records
+  records: state.records,
+  site: state.site
 });
 
 export default connect(mapStateToProps)(LeaderBoard);

@@ -11,6 +11,7 @@ export default class NavBar extends Component {
   render (){
     return (
       <div style={{width: '100%', height: '100', border: 'solid 1px black', display: 'flex', justifyContent: 'space-between'}}>
+        <SiteSelector/>
         <NavButton title={'button1'} view={1}/>
         <NavButton title={'button2'} view={2}/>
         <NavButton title={'button3'} view={3}/>

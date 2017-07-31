@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
+import {connect} from 'react-redux';
+import {handleSiteSelect} from '../../actions/nav_actions';
 
-export default class SelectRecord extends Component {
+class SiteSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {site: undefined};
@@ -10,10 +12,11 @@ export default class SelectRecord extends Component {
 
   setSite(e) {
     this.setState({site: e.target.value});
+    this.props.handleSiteSelect(e.target.value);
   }
 
   render() {
-    if (!this.props.records.recordset) return (<h1>Could not get data.</h1>);
+    // if (!this.props.records.recordset) return (<h1>Could not get data.</h1>);
     var sites = _.groupBy(this.props.records.recordset, 'Site');
     var siteOptions = _.map(sites, function (record, site) {
       return <option key={ site } value= { site }>
@@ -29,8 +32,18 @@ export default class SelectRecord extends Component {
             <option value="">Select a Site</option>
             { siteOptions  }
           </select>
-          <LineChart site={selectedSite}/>
         </div>
         );
   }
 }
+
+
+const mapStateToProps = (state) => ({
+  records: state.records
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleSiteSelect: (site) => dispatch(handleSiteSelect(site))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SiteSelector);

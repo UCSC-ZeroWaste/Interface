@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import _ from 'underscore';
 import {LineChart} from 'react-d3-basic';
 import d3 from 'd3';
+import {connect} from 'react-redux';
 
-export default class LineChartComponent extends Component {
+class LineChartComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -62,3 +63,10 @@ export default class LineChartComponent extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  records: state.records,
+  site: state.site
+});
+
+export default connect(mapStateToProps)(LineChart);

@@ -1,4 +1,3 @@
-// import {UPDATE_VIEW} from '../constants/ActionConstants';
 import merge from 'lodash/merge';
 import {UPDATE_CURRENT_VIEW} from '../actions/nav_actions';
 
