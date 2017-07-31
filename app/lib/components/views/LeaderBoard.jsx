@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
+import {connect} from 'react-redux';
 
 const LeaderRow = ({rank, site}) => {
   return (
@@ -11,12 +12,12 @@ const LeaderRow = ({rank, site}) => {
   );
 };
 
-export default class LeaderBoard extends Component {
+class LeaderBoard extends Component {
   constructor(props) {
     super(props);
   }
 
-  //  is this function even used?
+  // TODO is this function even used?
   parseSiteData(data) {
     return _.map(data, function(entry, i) {
       return { 'load' : entry.Load,
@@ -81,3 +82,10 @@ export default class LeaderBoard extends Component {
     );
   }
  }
+
+const mapStateToProps = (state) => ({
+  records: state.records,
+  site: state.site
+});
+
+export default connect(mapStateToProps)(LeaderBoard);

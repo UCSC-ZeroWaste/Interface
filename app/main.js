@@ -1,5 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.js';
+import configureStore from './lib/store/store';
+import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+document.addEventListener('DOMContentLoaded', () => {
+  let store = configureStore();
+  const root = document.getElementById('root');
+
+  window.store = store;
+  ReactDOM.render(<App store={store}/>, root);
+});
