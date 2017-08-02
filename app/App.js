@@ -1,27 +1,32 @@
-var React = require('react');
-var styles = require('./App.css');
-var Records = require('./lib/components/Records.js');
-var SelectRecord = require('./lib/components/SelectRecord.js');
-var SiteLineChart = require('./lib/components/SiteLineChart.js');
-var SiteLeaderBoard = require('./lib/components/SiteLeaderBoard.js');
+import React from 'react';
+import styles from './App.css';
+import NavBar from './lib/components/NavBar.jsx';
+import DataVisualization from './lib/components/DataVisualization.jsx';
+import { Provider } from 'react-redux';
+import {fetchRecords} from './lib/actions/records';
+import {connect} from 'react-redux';
 
-export default class App extends React.Component {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    //TODO currently only getting records when the app loads
+    props.getRecords();
+  }
+
   render() {
-    var RecordSet = Records;
     return (
-      <div>
-        <div className={styles.bap}>
-          Zero Waste
+      <Provider store={this.props.store}>
+        <div>
+          <NavBar/>
+          <DataVisualization/>
         </div>
-        <RecordSet>
-          <SelectRecord>
-            <SiteLineChart/>
-          </SelectRecord>
-        </RecordSet>
-        <Records>
-          <SiteLeaderBoard/>
-        </Records>
-      </div>
+      </Provider>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  getRecords: () => dispatch(fetchRecords())
+});
+
+export default connect(null, mapDispatchToProps)(App);
