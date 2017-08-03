@@ -3,14 +3,7 @@ import _ from 'underscore';
 import {LineChart} from 'react-d3-basic';
 import d3 from 'd3';
 import {connect} from 'react-redux';
-
-const WASTE_TYPES = [
-  " --unspecified-- ",
-  "Refuse",
-  "Cardboard",
-  "Recycle",
-  "Greenwaste"
-];
+import {WASTE_TYPES} from '../../constants/constants';
 
 class LineChartComponent extends Component {
   constructor(props) {
