@@ -1,9 +1,5 @@
-body {
-  margin: 0;
-}
-
-
-.app {
+@import './lib/stylesheets/reset.css';
+/*.app {
   background-color: green;
   height: 50px;
   border: 1px solid blue;
@@ -12,23 +8,7 @@ body {
 .bap {
   background-color: red;
   height: 25px;
-}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
+}*/
 
 .leaderRow {
   width: 60%;
