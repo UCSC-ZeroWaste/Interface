@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styles from '../../../App.css';
 import _ from 'underscore';
 import {connect} from 'react-redux';
-import {collegeSet} from '../../constants/constants';
+import {COLLEGE_SET} from '../../constants/constants';
 
 const LeaderRow = ({rank, site, selected}) => {
   let details = selected ? styles.details_selected : styles.details;
@@ -37,7 +37,7 @@ class LeaderBoard extends Component {
     if (!sites) return (<h1>Could not get data.</h1>);
 
     sites = _.filter(sites, function(site){
-      return collegeSet.includes(site.Site);
+      return COLLEGE_SET.includes(site.Site);
     });
     let siteGroup = _.groupBy(sites, 'Site');
     let siteCol = [];
