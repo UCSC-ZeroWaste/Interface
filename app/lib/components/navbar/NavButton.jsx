@@ -13,11 +13,11 @@ class NavButton extends Component {
     let styleButton = this.props.currentView === this.props.name ? styles.nav_button_selected : styles.nav_button;
 
     return (
-      <div
+      <button
         className={styleButton}
         onClick={() => this.props.handleNavSelect(this.props.view)}>
         {this.props.name}
-      </div>
+      </button>
     );
   }
 }

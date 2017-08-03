@@ -67,6 +67,16 @@
   background-color: #5f6266;
 }
 
+/*TODO create transistion*/
+.nav_button:active, .nav_button_selected:active {
+  background-color: green;
+}
+
+/*TODO may want to create a hover effect for viewing on the web*/
+/*.nav_button:hover, .nav_button_selected:hover {
+  background-color: lightgreen;
+}*/
+
 
 .nav_bar {
   width: 100%;
