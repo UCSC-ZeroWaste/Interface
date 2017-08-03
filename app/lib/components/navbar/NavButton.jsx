@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {handleNavSelect} from '../../actions/views';
+import styles from '../../../App.css';
+
 
 class NavButton extends Component {
   constructor(props) {
@@ -8,14 +10,14 @@ class NavButton extends Component {
   }
 
   render() {
+    let styleButton = this.props.currentView === this.props.name ? styles.nav_button_selected : styles.nav_button;
+
     return (
-      <button
-        style={{width: '100', height: '50', border: 'solid 1px black', display:'flex', flexDirection:'column'}}
+      <div
+        className={styleButton}
         onClick={() => this.props.handleNavSelect(this.props.view)}>
         {this.props.name}
-        {'{' + this.props.view + '}'}
-        {this.props.currentView === this.props.view ? 'Selected' : ''}
-      </button>
+      </div>
     );
   }
 }

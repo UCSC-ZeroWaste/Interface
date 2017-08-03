@@ -14,8 +14,8 @@ export default class NavBar extends Component {
         <NavButton title={'LeaderBoard'} view={'LeaderBoard'}/>
         <NavButton title={'LineChart'} view={'LineChart'}/>
         <NavButton title={'SizeView'} view={'SizeView'}/>
-        <NavButton title={'button4'} view={4}/>
-        <NavButton title={'button5'} view={5}/>
+        <NavButton title={'button4'} view={'button4'}/>
+        <NavButton title={'button5'} view={'button5'}/>
       </div>
     );
   }

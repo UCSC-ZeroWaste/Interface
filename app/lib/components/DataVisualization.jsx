@@ -18,9 +18,9 @@ class DataVisualization extends Component {
         return <LineChart />;
       case 'SizeView':
         return <SizeView />;
-      case 4:
+      case 'button4':
         return <_ViewTemplate title={'Empty View 4'}/>;
-      case 5:
+      case 'button5':
         return <_ViewTemplate title={'Empty View 5'}/>;
       default:
         return <_ViewTemplate title={'Default View'}/>;
