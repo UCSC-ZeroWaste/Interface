@@ -53,7 +53,7 @@ tr:nth-child(even) {
 .details {
   width: 70%;
   height: 100%;
-  border: solid 1px black;
+  border: solid 1px grey;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -63,4 +63,5 @@ tr:nth-child(even) {
 .details_selected {
   composes: details;
   border: solid 3px grey;
+  background-color: lightgrey;
 }

@@ -12,7 +12,6 @@ const LeaderRow = ({rank, site, selected}) => {
       <div className={ranking}>{rank}</div>
       <div className={details}>
         <div>{site.site}</div>
-        <div> {selected} </div>
         <div>{Math.round(site.divertLoad)}%</div>
       </div>
     </div>
