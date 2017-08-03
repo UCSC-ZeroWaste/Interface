@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
+import styles from '../../../App.css';
 import _ from 'underscore';
 import {connect} from 'react-redux';
+import {collegeSet} from '../../constants/constants';
 
-const LeaderRow = ({rank, site}) => {
+const LeaderRow = ({rank, site, selected}) => {
+  let details = selected ? styles.details_selected : styles.details;
+  let ranking = selected ? styles.rank_selected : styles.rank;
   return (
-    <tr>
-      <td>{rank}</td>
-      <td>{site.site}</td>
-      <td>{Math.round(site.divertLoad)}%</td>
-    </tr>
+    <div className={styles.leaderRow}>
+      <div className={ranking}>{rank}</div>
+      <div className={details}>
+        <div>{site.site}</div>
+        <div>{Math.round(site.divertLoad)}%</div>
+      </div>
+    </div>
   );
 };
 
@@ -26,18 +32,10 @@ class LeaderBoard extends Component {
     });
   }
 
-  render() {
+  getLeaderRows() {
     let sites = this.props.records.recordset;
     if (!sites) return (<h1>Could not get data.</h1>);
-    const collegeSet = [
-      "College Nine and Ten",
-      "Cowell-Stevenson",
-      "Crown-Merrill",
-      "Kresge",
-      "Oakes",
-      "Porter",
-      "College Eight"
-    ];
+
     sites = _.filter(sites, function(site){
       return collegeSet.includes(site.Site);
     });
@@ -60,24 +58,22 @@ class LeaderBoard extends Component {
         console.log("Diverted ", divertLoad,"%" );
       return  { "site": siteName, "totalLoad": totalLoad,"LoadWithoutRefuse": LoadWithoutRefuse,"divertLoad": divertLoad };
     });
-
     let leaders = collegeGroup.sort( (siteA, siteB) => siteB.divertLoad - siteA.divertLoad );
     console.log("Lead", leaders);
-    let leaderColl = [];
-    _.each(leaders, function(site, i){
-      leaderColl.push(<LeaderRow rank={i+1} site={site} key={i}/>);
+
+    return leaders.map( (site, i) => {
+      let selected = (site.site === this.props.site);
+      return (<LeaderRow rank={i+1} site={site} key={i} selected={selected}/> );
     });
+  }
+
+  render() {
+    let leaderColl = this.getLeaderRows();
 
     return (
-      <div>
-        <table>
-          <tr>
-            <th>Rank</th>
-            <th>College</th>
-            <th>Diversion</th>
-          </tr>
-          {leaderColl}
-        </table>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div style={{width: '80%', fontSize: '40', textAlign: 'left'}}>Zero Waste LeaderBoard</div>
+        {leaderColl}
       </div>
     );
   }

@@ -1,4 +1,5 @@
-.app {
+@import './lib/stylesheets/reset.css';
+/*.app {
   background-color: green;
   height: 50px;
   border: 1px solid blue;
@@ -7,20 +8,82 @@
 .bap {
   background-color: red;
   height: 25px;
+}*/
+
+.leaderRow {
+  width: 60%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
+.rank {
+  border: solid 1px grey;
+  border-radius: 25px;
+  background-color: grey;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.rank_selected {
+  composes: rank;
+  background-color: lightgrey;
+
+}
+
+.details {
+  width: 70%;
+  height: 100%;
+  border: solid 1px grey;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details_selected {
+  composes: details;
+  border: solid 3px grey;
+  background-color: lightgrey;
+}
+
+.nav_button {
+  width: 100px;
+  height: 50px;
+  border: solid 1px black;
+  background-color: lightgrey;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav_button_selected {
+  composes: nav_button;
+  background-color: #5f6266;
+}
+
+/*TODO create transistion*/
+.nav_button:active, .nav_button_selected:active {
+  background-color: green;
+}
+
+/*TODO may want to create a hover effect for viewing on the web*/
+/*.nav_button:hover, .nav_button_selected:hover {
+  background-color: lightgreen;
+}*/
+
+
+.nav_bar {
   width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
+  height: 70px;
+  border-bottom: solid 1px grey;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

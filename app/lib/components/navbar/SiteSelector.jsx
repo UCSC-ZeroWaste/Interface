@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import _ from 'underscore';
 import {connect} from 'react-redux';
 import {handleSiteSelect} from '../../actions/views';
+import {collegeSet} from '../../constants/constants';
 
 class SiteSelector extends Component {
   constructor(props) {
@@ -17,18 +18,20 @@ class SiteSelector extends Component {
 
   render() {
     // if (!this.props.records.recordset) return (<h1>Could not get data.</h1>);
-    const sites = _.groupBy(this.props.records.recordset, 'Site');
-    const siteOptions = _.map(sites, function (record, site) {
-      return <option key={ site } value= { site }>
-      { site }
-      </option>;
-    });
+    // const sites = _.groupBy(this.props.records.recordset, 'Site');
+
+    const siteOptions = collegeSet.map((site) => (
+        <option key={ site } value= { site }>
+          { site }
+        </option>
+      )
+    );
 
     return (
         <div>
           <select name="record" onChange={ this.setSite }>
             <option value="">Select a Site</option>
-            { siteOptions  }
+            { siteOptions }
           </select>
         </div>
         );

@@ -16,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <div>
+        <div >
           <NavBar/>
           <DataVisualization/>
         </div>
