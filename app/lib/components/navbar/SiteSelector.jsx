@@ -29,7 +29,7 @@ class SiteSelector extends Component {
 
     return (
         <div>
-          <select name="record" onChange={ this.setSite }>
+          <select onChange={ this.setSite }>
             <option value="">Select a Site</option>
             { siteOptions }
           </select>

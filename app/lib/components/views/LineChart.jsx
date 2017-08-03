@@ -10,7 +10,7 @@ class LineChartComponent extends Component {
     super(props);
     console.log(this.props.site, this.props.siteRecords);
     this.state = {
-      wasteType: '',
+      wasteType: 'Refuse',
       width: 600,
       height: 400,
       xLabel: "Date",
@@ -57,6 +57,7 @@ class LineChartComponent extends Component {
   }
 
   render() {
+    console.log('this.props.siteRecords', this.props.siteRecords);
     if (this.props.siteRecords === undefined) return (<div></div>);
     // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
     return (
