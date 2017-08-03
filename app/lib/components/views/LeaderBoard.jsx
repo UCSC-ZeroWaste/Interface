@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
 import {connect} from 'react-redux';
+import {collegeSet} from '../../constants/constants';
 
 const LeaderRow = ({rank, site}) => {
   return (
@@ -29,15 +30,7 @@ class LeaderBoard extends Component {
   render() {
     let sites = this.props.records.recordset;
     if (!sites) return (<h1>Could not get data.</h1>);
-    const collegeSet = [
-      "College Nine and Ten",
-      "Cowell-Stevenson",
-      "Crown-Merrill",
-      "Kresge",
-      "Oakes",
-      "Porter",
-      "College Eight"
-    ];
+
     sites = _.filter(sites, function(site){
       return collegeSet.includes(site.Site);
     });

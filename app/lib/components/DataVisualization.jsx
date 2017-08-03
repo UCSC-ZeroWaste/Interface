@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import _ViewTemplate from './views/_ViewTemplate';
 import LeaderBoard from './views/LeaderBoard.jsx';
 import LineChart from './views/LineChart.jsx';
+import SizeView from './views/SizeView.jsx';
 
 class DataVisualization extends Component {
   constructor(props) {
@@ -11,12 +12,12 @@ class DataVisualization extends Component {
 
   renderView() {
     switch(this.props.currentView) {
-      case 'leaderBoard':
-        return <LeaderBoard/>;
-      case 'lineChart':
-        return <LineChart/>;
-      case 3:
-        return <_ViewTemplate title={'Empty View 3'}/>;
+      case 'LeaderBoard':
+        return <LeaderBoard />;
+      case 'LineChart':
+        return <LineChart />;
+      case 'SizeView':
+        return <SizeView />;
       case 4:
         return <_ViewTemplate title={'Empty View 4'}/>;
       case 5:
