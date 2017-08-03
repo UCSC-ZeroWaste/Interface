@@ -9,9 +9,9 @@ export const COLLEGE_SET = [
 ];
 
 export const WASTE_TYPES = [
-  " --unspecified-- ",
-  "Refuse",
-  "Cardboard",
-  "Recycle",
-  "Greenwaste"
+  'Refuse',
+  'Mixed Recycle',
+  'Cardboard',
+  'GreenWaste',
+  'PRODUCT  UNKNOWN'
 ];
