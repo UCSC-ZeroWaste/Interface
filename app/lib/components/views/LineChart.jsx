@@ -26,7 +26,7 @@ class LineChartComponent extends Component {
 
   parseSiteData(data) {
     return data
-      .filter( (datum) => (datum.AssetType === this.state.wasteType))
+      .filter( (datum) => (datum.Product === this.state.wasteType))
       .map((datum, i) => ({
         'quantity' : datum.Load,
         'picked_up' : datum.PickupTime,

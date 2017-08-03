@@ -23,10 +23,9 @@ Both Node server and frontend code runs with Babel. And all of it is linted. Wit
 With a beautify package installed in your editor it will also do that
 
 
-
-AssetType:
-" --unspecified-- "
-"Refuse"
-"Cardboard"
-"Recycle"
-"Greenwaste"
+## Data for pickups as of Aug 3, 2017:
+  Refuse:  508
+  Mixed Recycle:  512
+  Cardboard:  323
+  GreenWaste:  32
+  PRODUCT  UNKNOWN:  1
