@@ -24,3 +24,43 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.leaderRow {
+  width: 60%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.rank {
+  border: solid 1px grey;
+  border-radius: 25px;
+  background-color: grey;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: white;
+}
+
+.rank_selected {
+  composes: rank;
+  background-color: lightgrey;
+
+}
+
+.details {
+  width: 70%;
+  height: 100%;
+  border: solid 1px black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details_selected {
+  composes: details;
+  border: solid 3px grey;
+}
