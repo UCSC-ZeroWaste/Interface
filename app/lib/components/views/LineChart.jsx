@@ -4,11 +4,20 @@ import {LineChart} from 'react-d3-basic';
 import d3 from 'd3';
 import {connect} from 'react-redux';
 
+const WASTE_TYPES = [
+  " --unspecified-- ",
+  "Refuse",
+  "Cardboard",
+  "Recycle",
+  "Greenwaste"
+];
+
 class LineChartComponent extends Component {
   constructor(props) {
     super(props);
     console.log(this.props.site, this.props.siteRecords);
     this.state = {
+      wasteType: '',
       width: 600,
       height: 400,
       xLabel: "Date",
@@ -19,16 +28,39 @@ class LineChartComponent extends Component {
       yLabel: "Weight",
       yLabelPosition: 'right'
     };
+    this.handleSelector = this.handleSelector.bind(this);
   }
 
   parseSiteData(data) {
-    return _.map(data,
-      function(entry, i) {
-        return { 'quantity' : entry.Load,
-                 'picked_up' : entry.PickupTime,
-                 'index' : i };
-      }
+    return data
+      .filter( (datum) => (datum.AssetType === this.state.wasteType))
+      .map((datum, i) => ({
+        'quantity' : datum.Load,
+        'picked_up' : datum.PickupTime,
+        'index' : i
+      }));
+  }
+
+  handleSelector(e) {
+    this.setState({wasteType: e.target.value});
+  }
+
+  renderWasteTypeSelector() {
+    const wasteTypes = WASTE_TYPES.map((type) => (
+        <option key={ type } value= { type }>
+          { type }
+        </option>
+      )
     );
+
+    return (
+        <div>
+          <select onChange={ this.handleSelector } defaultValue={'Refuse'}>
+            <option disabled="true">Select a Refuse Type</option>
+            { wasteTypes }
+          </select>
+        </div>
+        );
   }
 
   render() {
@@ -36,6 +68,9 @@ class LineChartComponent extends Component {
     // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
     return (
       <div>
+
+        {this.renderWasteTypeSelector()}
+
         <LineChart
           data= {this.parseSiteData(this.props.siteRecords)}
           chartSeries= {[{

@@ -5,6 +5,7 @@ import DataVisualization from './lib/components/DataVisualization.jsx';
 import { Provider } from 'react-redux';
 import {fetchRecords} from './lib/actions/records';
 import {connect} from 'react-redux';
+import _ from 'underscore';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,9 @@ class App extends React.Component {
   }
 
   render() {
+    let tmp = _.groupBy(this.props.data.recordset, 'AssetType');
+    console.log('THIS IS TMP', tmp, Object.keys(tmp));
+
     return (
       <Provider store={this.props.store}>
         <div >
@@ -25,8 +29,12 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  data: state.records
+});
+
 const mapDispatchToProps = (dispatch) => ({
   getRecords: () => dispatch(fetchRecords())
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
