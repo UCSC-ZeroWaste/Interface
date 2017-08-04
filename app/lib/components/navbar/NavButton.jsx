@@ -10,16 +10,22 @@ class NavButton extends Component {
   }
 
   render() {
-    let styleButton = this.props.currentView === this.props.name ? styles.nav_button_selected : styles.nav_button;
+    if (this.props.currentView === this.props.name) {
+      var styleButton = styles.nav_button_selected;
+      var styleIcon = styles.nav_button_fa_selected;
+    } else {
+      styleButton = styles.nav_button;
+      styleIcon = styles.nav_button_fa;
+    }
 
     return (
       <button
         className={styleButton}
         onClick={() => this.props.handleNavSelect(this.props.view)}>
           <FontAwesome
+            className={styleIcon}
             name={this.props.fa}
             size='3x'
-            style={{ width: '50', height: '50' }}
             />
       </button>
     );
