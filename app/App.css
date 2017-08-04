@@ -58,30 +58,35 @@
 }
 
 .nav_button {
-  width: 60px;
-  height: 50px;
-  border: solid 1px black;
+  width: 70px;
+  height: 70px;
+  /*border: solid 1px black;*/
+  border: none;
+  border-radius: 5px;
   background-color: lightgrey;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav_button_selected {
   composes: nav_button;
-  background-color: #5f6266;
+  background-color: lightgrey;
 }
 
 .nav_button_fa {
+  /*border: 1px solid black;*/
   color: grey;
 }
 .nav_button_fa_selected {
   composes: nav_button_fa;
-  color: darkgrey;
+  color: black;
 }
 
 /*TODO create transistion*/
 .nav_button:active, .nav_button_selected:active {
-  background-color: green;
+  background-color: #5f6266;
 }
 
 /*TODO may want to create a hover effect for viewing on the web*/

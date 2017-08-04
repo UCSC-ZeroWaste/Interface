@@ -19,15 +19,15 @@ class NavButton extends Component {
     }
 
     return (
-      <button
-        className={styleButton}
-        onClick={() => this.props.handleNavSelect(this.props.view)}>
+      <div
+        className={styleButton}>
           <FontAwesome
+            onClick={() => this.props.handleNavSelect(this.props.view)}
             className={styleIcon}
             name={this.props.fa}
             size='3x'
             />
-      </button>
+        </div>
     );
   }
 }
