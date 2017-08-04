@@ -1,3 +1,7 @@
+/*@import '~node_modules/font-awesome/css/font-awesome.min.css';*/
+/*@import '~font-awesome.min.css';*/
+/*require('node_modules/font-awesome/css/font-awesome.min.css');*/
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import './lib/stylesheets/reset.css';
 /*.app {
   background-color: green;
@@ -80,7 +84,7 @@
 
 .nav_bar {
   width: 100%;
-  height: 70px;
+  height: 90px;
   border-bottom: solid 1px grey;
   background-color: lightgrey;
   display: flex;
