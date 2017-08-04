@@ -29,3 +29,26 @@ With a beautify package installed in your editor it will also do that
   Cardboard:  323
   GreenWaste:  32
   PRODUCT  UNKNOWN:  1
+
+
+#Redux Store
+
+sample state:
+  {
+    currentView: 'LeaderBoard',
+    records: {
+      recordset: [
+        {
+          ...
+          Load,
+          ...
+          PickupTime,
+          ...
+          Product,
+          ...
+          Site,
+        }
+      ]
+    },
+    site: 'Oakes'
+  }

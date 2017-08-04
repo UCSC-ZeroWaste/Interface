@@ -1,3 +1,7 @@
+/*@import '~node_modules/font-awesome/css/font-awesome.min.css';*/
+/*@import '~font-awesome.min.css';*/
+/*require('node_modules/font-awesome/css/font-awesome.min.css');*/
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import './lib/stylesheets/reset.css';
 /*.app {
   background-color: green;
@@ -54,22 +58,35 @@
 }
 
 .nav_button {
-  width: 100px;
-  height: 50px;
-  border: solid 1px black;
+  width: 70px;
+  height: 70px;
+  /*border: solid 1px black;*/
+  border: none;
+  border-radius: 5px;
   background-color: lightgrey;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav_button_selected {
   composes: nav_button;
-  background-color: #5f6266;
+  background-color: lightgrey;
+}
+
+.nav_button_fa {
+  /*border: 1px solid black;*/
+  color: grey;
+}
+.nav_button_fa_selected {
+  composes: nav_button_fa;
+  color: black;
 }
 
 /*TODO create transistion*/
 .nav_button:active, .nav_button_selected:active {
-  background-color: green;
+  background-color: #5f6266;
 }
 
 /*TODO may want to create a hover effect for viewing on the web*/
@@ -80,7 +97,7 @@
 
 .nav_bar {
   width: 100%;
-  height: 70px;
+  height: 90px;
   border-bottom: solid 1px grey;
   background-color: lightgrey;
   display: flex;
