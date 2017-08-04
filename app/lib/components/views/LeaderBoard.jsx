@@ -34,15 +34,11 @@ class LeaderBoard extends Component {
       }));
   }
 
-  parsePickups(data) {
-    let allPickups = data;
-    if (!allPickups) return (<h1>Could not get data.</h1>);
-
+  parsePickups(allPickups) {
     let relevantPickups = allPickups.filter(function(pickup){
       return COLLEGE_SET.includes(pickup.Site);
     });
     let siteGrouping = _.groupBy(relevantPickups, 'Site');
-    console.log(siteGrouping);
 
     return _.map(COLLEGE_SET, function(siteName){
       let sitePickups = siteGrouping[siteName];
@@ -57,9 +53,10 @@ class LeaderBoard extends Component {
     });
   }
 
-  getLeaderRows() {
-    let data = this.parsePickups(this.props.records.recordset);
-    let leaders = data.sort( (siteA, siteB) => siteB.greenRatio - siteA.greenRatio );
+  renderLeaderRows() {
+    if (!this.props.records.recordset) return (<h1>Could not get data.</h1>);
+    let siteParsedData = this.parsePickups(this.props.records.recordset);
+    let leaders = siteParsedData.sort( (siteA, siteB) => siteB.greenRatio - siteA.greenRatio );
 
     return leaders.map( (site, i) => {
       let selected = (site.site === this.props.site);
@@ -68,12 +65,10 @@ class LeaderBoard extends Component {
   }
 
   render() {
-    let leaderColl = this.getLeaderRows();
-
     return (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{width: '80%', fontSize: '40', textAlign: 'left'}}>Zero Waste LeaderBoard</div>
-        {leaderColl}
+        {this.renderLeaderRows()}
       </div>
     );
   }
