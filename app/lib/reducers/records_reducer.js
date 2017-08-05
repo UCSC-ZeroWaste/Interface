@@ -7,7 +7,7 @@ const RecordsReducer = (state = defaultState, action) => {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_RECORDS:
-      return action.records;
+      return action.pickups;
     case RECEIVE_ERROR:
       return action.error;
     default:
