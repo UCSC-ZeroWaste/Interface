@@ -63,23 +63,17 @@ class LineChartComponent extends Component {
   }
 
   parseGreenRatioData(sitePickups) {
-    console.log('parseGreenRatioData', sitePickups);
     let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
     let minTime = new Date(firstPickup.PickupTime).valueOf();
     let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
     let maxTime = new Date(lastPickup.PickupTime).valueOf();
-
     let daysLength = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
-    console.log('daysLength', daysLength);
     let totalLoad = Array(daysLength).fill(0);
     let totalRefuse = Array(daysLength).fill(0);
-
-    console.log('min and mac', minTime, maxTime, daysLength, totalLoad, totalRefuse);
 
     sitePickups.forEach( (pickup) => {
       let thisTime = new Date(pickup.PickupTime).valueOf();
       let timeDiff = Math.floor(this.getTimeDiff(thisTime, minTime));
-      console.log('timeDiff', timeDiff);
       if (pickup.Product === 'Refuse') {
         for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < daysLength); i++) {
           totalRefuse[i + timeDiff] += pickup.Load;
@@ -97,7 +91,6 @@ class LineChartComponent extends Component {
         (totalLoad[i] - totalRefuse[i]) / totalLoad[i]
       );
     }
-    console.log('asfdls;dfnaosdfa;sdf', greenRatio);
 
     return greenRatio
       .map((ratio, i) => ({
@@ -112,7 +105,6 @@ class LineChartComponent extends Component {
   }
 
   renderRollingAverageLengthSelector() {
-
     const daysOptions = _.range(5,30).map((days) => (
         <option key={ days } value= { days }>
           { days }

@@ -23,8 +23,7 @@ class LeaderBoard extends Component {
     super(props);
   }
 
-  parsePickups(allPickups) {
-    console.log('parsePickups', allPickups);
+  parsePickupData(allPickups) {
     let relevantPickups = allPickups.filter(function(pickup){
       return COLLEGE_SET.includes(pickup.Site);
     });
@@ -45,7 +44,7 @@ class LeaderBoard extends Component {
 
   renderLeaderRows() {
     if (!this.props.records) return (<h1>Could not get data.</h1>);
-    let siteParsedData = this.parsePickups(this.props.records);
+    let siteParsedData = this.parsePickupData(this.props.records);
     let leaders = siteParsedData.sort( (siteA, siteB) => siteB.greenRatio - siteA.greenRatio );
 
     return leaders.map( (site, i) => {
