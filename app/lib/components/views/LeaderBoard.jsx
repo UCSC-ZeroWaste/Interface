@@ -23,18 +23,8 @@ class LeaderBoard extends Component {
     super(props);
   }
 
-  // TODO is this function even used?
-  parseSiteData(data) {
-    return data
-      .filter( (datum) => (datum.Product === this.state.wasteType))
-      .map((datum, i) => ({
-        'quantity' : datum.Load,
-        'picked_up' : datum.PickupTime,
-        'index' : i
-      }));
-  }
-
   parsePickups(allPickups) {
+    console.log('parsePickups', allPickups);
     let relevantPickups = allPickups.filter(function(pickup){
       return COLLEGE_SET.includes(pickup.Site);
     });

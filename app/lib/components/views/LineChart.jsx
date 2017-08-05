@@ -10,6 +10,7 @@ class LineChartComponent extends Component {
     super(props);
     console.log(this.props.site, this.props.siteRecords);
     this.state = {
+      rollingAverageLength: 7,
       wasteType: 'Refuse',
       width: 600,
       height: 400,
@@ -22,6 +23,7 @@ class LineChartComponent extends Component {
       yLabelPosition: 'right'
     };
     this.handleSelector = this.handleSelector.bind(this);
+    this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
   }
 
   parseSiteData(data) {
@@ -56,12 +58,105 @@ class LineChartComponent extends Component {
         );
   }
 
+  getTimeDiff(a, b) {
+    return Math.abs((a - b) / (3600 * 24 * 1000));
+  }
+
+  parseGreenRatioData(sitePickups) {
+    console.log('parseGreenRatioData', sitePickups);
+    let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
+    let minTime = new Date(firstPickup.PickupTime).valueOf();
+    let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
+    let maxTime = new Date(lastPickup.PickupTime).valueOf();
+
+    let daysLength = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
+    console.log('daysLength', daysLength);
+    let totalLoad = Array(daysLength).fill(0);
+    let totalRefuse = Array(daysLength).fill(0);
+
+    console.log('min and mac', minTime, maxTime, daysLength, totalLoad, totalRefuse);
+
+    sitePickups.forEach( (pickup) => {
+      let thisTime = new Date(pickup.PickupTime).valueOf();
+      let timeDiff = Math.floor(this.getTimeDiff(thisTime, minTime));
+      console.log('timeDiff', timeDiff);
+      if (pickup.Product === 'Refuse') {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < daysLength); i++) {
+          totalRefuse[i + timeDiff] += pickup.Load;
+          totalLoad[i + timeDiff] += pickup.Load;
+        }
+      } else {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < daysLength); i++) {
+          totalLoad[i + timeDiff] += pickup.Load;
+        }
+      }
+    });
+    let greenRatio = [];
+    for (let i = 0 ; i < daysLength; i++) {
+      greenRatio.push(
+        (totalLoad[i] - totalRefuse[i]) / totalLoad[i]
+      );
+    }
+    console.log('asfdls;dfnaosdfa;sdf', greenRatio);
+
+    return greenRatio
+      .map((ratio, i) => ({
+        'quantity' : ratio,
+        'picked_up' : i,
+        'index' : i
+      }));
+  }
+
+  setRollingAverageLength(e) {
+    this.setState({rollingAverageLength: e.target.value});
+  }
+
+  renderRollingAverageLengthSelector() {
+
+    const daysOptions = _.range(5,30).map((days) => (
+        <option key={ days } value= { days }>
+          { days }
+        </option>
+      )
+    );
+
+    return (
+      <select onChange={ this.setRollingAverageLength }>
+        <option value="">Select # of Days for Rolling Average</option>
+        { daysOptions }
+      </select>
+    );
+  }
+
   render() {
     console.log('this.props.siteRecords', this.props.siteRecords);
     if (this.props.siteRecords === undefined) return (<div></div>);
     // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
     return (
       <div>
+        <div>
+          <div>
+            Green Ratio
+            {this.renderRollingAverageLengthSelector()}
+          </div>
+          <LineChart
+            data= {this.parseGreenRatioData(this.props.siteRecords)}
+            chartSeries= {[{
+              field: 'quantity',
+              name:  this.props.site + ' - Site Waste Weight',
+              color: '#c0c0c0',
+              style: {
+                "strokeWidth": 6,
+              }
+            }]}
+            xLabel= {this.state.xLabel}
+            x= {this.state.x}
+            xScale= 'time'
+            yLabel= {this.state.yLabel}
+            yLabelPosition = {this.state.yLabelPosition}
+            />
+
+        </div>
 
         {this.renderWasteTypeSelector()}
 
