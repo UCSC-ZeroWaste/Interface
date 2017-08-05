@@ -15,8 +15,8 @@ class App extends React.Component {
   }
 
   render() {
-    let assetType = _.groupBy(this.props.data.recordset, 'AssetType');
-    let Product = _.groupBy(this.props.data.recordset, 'Product');
+    let assetType = _.groupBy(this.props.data, 'AssetType');
+    let Product = _.groupBy(this.props.data, 'Product');
     console.log(
       'This is AssetType: ',
       Object.keys(assetType).map( (type) => (type + ':  ' + assetType[type].length))

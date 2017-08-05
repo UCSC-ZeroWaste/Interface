@@ -17,8 +17,6 @@ class SiteSelector extends Component {
   }
 
   render() {
-    // if (!this.props.records.recordset) return (<h1>Could not get data.</h1>);
-    // const sites = _.groupBy(this.props.records.recordset, 'Site');
 
     const siteOptions = COLLEGE_SET.map((site) => (
         <option key={ site } value= { site }>

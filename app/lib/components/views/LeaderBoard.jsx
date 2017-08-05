@@ -12,7 +12,7 @@ const LeaderRow = ({rank, site, selected}) => {
       <div className={ranking}>{rank}</div>
       <div className={details}>
         <div>{site.site}</div>
-        <div>{Math.round(site.divertLoad)}%</div>
+        <div>{Math.round(site.greenRatio)}%</div>
       </div>
     </div>
   );
@@ -23,43 +23,29 @@ class LeaderBoard extends Component {
     super(props);
   }
 
-  // TODO is this function even used?
-  parseSiteData(data) {
-    return _.map(data, function(entry, i) {
-      return { 'load' : entry.Load,
-        'picked_up' : entry.PickupTime,
-        'index' : i };
+  parsePickupData(allPickups) {
+    let relevantPickups = allPickups.filter(function(pickup){
+      return COLLEGE_SET.includes(pickup.Site);
+    });
+    let siteGrouping = _.groupBy(relevantPickups, 'Site');
+
+    return _.map(COLLEGE_SET, function(siteName){
+      let sitePickups = siteGrouping[siteName];
+      let totalLoad = _.reduce(sitePickups, (sum, pickup) => { return sum + pickup.Load; }, 0);
+      let loadWithoutRefuse = _.reduce(sitePickups, (sum, pickup) => pickup.Product === "Refuse" ? sum : sum + pickup.Load , 0);
+      let greenRatio = (loadWithoutRefuse/totalLoad) * 100;
+      return  { site: siteName,
+                totalLoad: totalLoad,
+                loadWithoutRefuse: loadWithoutRefuse,
+                greenRatio: greenRatio
+              };
     });
   }
 
-  getLeaderRows() {
-    let sites = this.props.records.recordset;
-    if (!sites) return (<h1>Could not get data.</h1>);
-
-    sites = _.filter(sites, function(site){
-      return COLLEGE_SET.includes(site.Site);
-    });
-    let siteGroup = _.groupBy(sites, 'Site');
-    let siteCol = [];
-    _.each(siteGroup, function(site){
-      siteCol = siteCol.concat(site);
-    });
-    console.log("Site ", siteCol);
-
-    siteGroup = _.keys(siteGroup);
-    let collegeGroup = _.map(siteGroup, function(siteName){
-      let currentSite = _.filter(siteCol, (site) => { if (site.Site === siteName) return site; });
-      let totalLoad = _.reduce(currentSite, (prev, site) => { return prev + site.Load; }, 0);
-      let LoadWithoutRefuse = _.reduce(currentSite, function(prev, site){ if(site.Product === "Refuse") return prev; return prev + site.Load; }, 0);
-      let divertLoad = (LoadWithoutRefuse/totalLoad) * 100;
-        console.log(siteName);
-        console.log("Total Load ", totalLoad);
-        console.log("Total Load without Refuse ", LoadWithoutRefuse);
-        console.log("Diverted ", divertLoad,"%" );
-      return  { "site": siteName, "totalLoad": totalLoad,"LoadWithoutRefuse": LoadWithoutRefuse,"divertLoad": divertLoad };
-    });
-    let leaders = collegeGroup.sort( (siteA, siteB) => siteB.divertLoad - siteA.divertLoad );
-    console.log("Lead", leaders);
+  renderLeaderRows() {
+    if (!this.props.records) return (<h1>Could not get data.</h1>);
+    let siteParsedData = this.parsePickupData(this.props.records);
+    let leaders = siteParsedData.sort( (siteA, siteB) => siteB.greenRatio - siteA.greenRatio );
 
     return leaders.map( (site, i) => {
       let selected = (site.site === this.props.site);
@@ -68,12 +54,10 @@ class LeaderBoard extends Component {
   }
 
   render() {
-    let leaderColl = this.getLeaderRows();
-
     return (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div style={{width: '80%', fontSize: '40', textAlign: 'left'}}>Zero Waste LeaderBoard</div>
-        {leaderColl}
+        {this.renderLeaderRows()}
       </div>
     );
   }
