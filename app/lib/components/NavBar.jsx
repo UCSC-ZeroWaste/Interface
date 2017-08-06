@@ -13,13 +13,13 @@ export default class NavBar extends Component {
     return (
       <div className={styles.nav_bar}>
         <SiteSelector/>
-        <NavButton title={'LeaderBoard'} view={'LeaderBoard'} fa={'bars'}/>
-        <NavButton title={'LineChart'} view={'LineChart'} fa={'area-chart'}/>
-        <NavButton title={'SizeView'} view={'SizeView'} fa={'trash'}/>
-        <NavButton title={'Map'} view={'Map'} fa={'map'}/>
-        <NavButton title={'Rank'} view={'Rank'} fa={'cubes'}/>
-        <NavButton title={'Progress'} view={'Progress'} fa={'tasks'}/>
-        <NavButton title={'Star'} view={'Star'} fa={'star-half-o'}/>
+        <NavButton title={'LeaderBoard'} view={0} fa={'bars'}/>
+        <NavButton title={'LineChart'} view={1} fa={'area-chart'}/>
+        <NavButton title={'SizeView'} view={2} fa={'trash'}/>
+        <NavButton title={'Map'} view={3} fa={'map'}/>
+        <NavButton title={'Rank'} view={4} fa={'cubes'}/>
+        <NavButton title={'Progress'} view={5} fa={'tasks'}/>
+        <NavButton title={'Star'} view={6} fa={'star-half-o'}/>
       </div>
     );
   }

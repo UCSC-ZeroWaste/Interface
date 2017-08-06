@@ -4,42 +4,85 @@ import _ViewTemplate from './views/_ViewTemplate';
 import LeaderBoard from './views/LeaderBoard.jsx';
 import LineChart from './views/LineChart.jsx';
 import SizeView from './views/SizeView.jsx';
+import Slider from 'react-slick';
+import {handleNavSelect} from '../actions/views';
+import styles from '../../App.css';
+
 
 class DataVisualization extends Component {
   constructor(props) {
     super(props);
+    this.handleSliderChange = this.handleSliderChange.bind(this);
   }
 
-  renderView() {
-    switch(this.props.currentView) {
-      case 'LeaderBoard':
-        return <LeaderBoard />;
-      case 'LineChart':
-        return <LineChart />;
-      case 'SizeView':
-        return <SizeView />;
-      case 'button4':
-        return <_ViewTemplate title={'Empty View 4'}/>;
-      case 'button5':
-        return <_ViewTemplate title={'Empty View 5'}/>;
-      default:
-        return <_ViewTemplate title={'Default View'}/>;
-    }
+  handleSliderChange(e) {
+    this.props.handleNavSelect(e);
+  }
+  //
+  // // TODO need to see if there is a more efficient lifecycle method
+  // componentWillReceiveProps(nextProps) {
+  //   this.refs.slider.slickGoTo(this.props.view);
+  //   this.refs.slider.slickGoTo(nextProps.currentView);
+  //   console.log('nextProps', nextProps);
+  // }
+
+  renderSlides() {
+    const components = [
+      <LeaderBoard/>,
+      <LineChart />,
+      <SizeView />,
+      <_ViewTemplate title={'Empty View 4'}/>,
+      <_ViewTemplate title={'Empty View 5'}/>,
+      <_ViewTemplate title={'Empty View 6'}/>,
+      <_ViewTemplate title={'Empty View 7'}/>
+    ];
+
+    return components.map( (component, index) => {
+      return (
+        <div className={styles.slide} key={index} >
+          {component}
+        </div>
+      );
+    });
   }
 
   render() {
+    var settings = {
+      adaptiveHeight: true,
+      // afterChange: this.handleSliderChange,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      dots: true,
+      // centerMode: true,
+      // fade: true,
+      infinite: true,
+      lazyLoad: false,
+      pauseOnHover: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      speed: 500,
+      swipeToSlide: true,
+      variableWidth: false,
+    };
+    // style={{height:"100%",width:"100%"}}
     return (
-      <div>
-        {this.renderView()}
+      <div className={styles.main_view}>
+        <Slider ref='slider' {...settings} className={styles.slider}>
+          {this.renderSlides()}
+        </Slider>
       </div>
     );
   }
 }
 
-
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  handleNavSelect: (navButtonNum) => dispatch(handleNavSelect(navButtonNum))
+});
+
 // export default DataVisual;
-export default connect(mapStateToProps)(DataVisualization);
+export default connect(mapStateToProps, mapDispatchToProps)(DataVisualization);

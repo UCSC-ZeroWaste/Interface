@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './App.css';
 import NavBar from './lib/components/NavBar.jsx';
+import Footer from './lib/components/Footer.jsx';
 import DataVisualization from './lib/components/DataVisualization.jsx';
 import { Provider } from 'react-redux';
 import {fetchRecords} from './lib/actions/records';
@@ -26,9 +27,10 @@ class App extends React.Component {
 
     return (
       <Provider store={this.props.store}>
-        <div >
-          <NavBar/>
+        <div className={styles.page}>
+          <NavBar />
           <DataVisualization/>
+          <Footer/>
         </div>
       </Provider>
     );

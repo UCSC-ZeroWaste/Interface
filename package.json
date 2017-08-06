@@ -35,8 +35,10 @@
     "react-dom": "^0.14.3",
     "react-fontawesome": "^1.6.1",
     "react-redux": "^5.0.5",
+    "react-slick": "^0.14.11",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "slick-carousel": "^1.6.0",
     "superagent": "^3.5.2"
   },
   "devDependencies": {

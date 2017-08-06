@@ -123,7 +123,7 @@ class LineChartComponent extends Component {
   render() {
     console.log('this.props.siteRecords', this.props.siteRecords);
     if (this.props.siteRecords === undefined) return (<div></div>);
-    // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
+    console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
     return (
       <div>
         <div>
@@ -149,29 +149,29 @@ class LineChartComponent extends Component {
             />
 
         </div>
-
-        {this.renderWasteTypeSelector()}
-
-        <LineChart
-          data= {this.parseSiteData(this.props.siteRecords)}
-          chartSeries= {[{
-                  field: 'quantity',
-                  name:  this.props.site + ' - Site Waste Weight',
-                  color: '#c0c0c0',
-                  style: {
-                    "strokeWidth": 6,
-                  }
-                }]}
-          xLabel= {this.state.xLabel}
-          x= {this.state.x}
-          xScale= 'time'
-          yLabel= {this.state.yLabel}
-          yLabelPosition = {this.state.yLabelPosition}
-        />
       </div>
     );
   }
 }
+// {this.renderWasteTypeSelector()}
+//
+// <LineChart
+//   data= {this.parseSiteData(this.props.siteRecords)}
+//   chartSeries= {[{
+//     field: 'quantity',
+//     name:  this.props.site + ' - Site Waste Weight',
+//     color: '#c0c0c0',
+//     style: {
+//       "strokeWidth": 6,
+//     }
+//   }]}
+//   xLabel= {this.state.xLabel}
+//   x= {this.state.x}
+//   xScale= 'time'
+//   yLabel= {this.state.yLabel}
+//   yLabelPosition = {this.state.yLabelPosition}
+//   />
+
 
 const mapStateToProps = (state) => ({
   siteRecords: _.groupBy(state.records, 'Site')[state.site],

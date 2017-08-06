@@ -7,10 +7,15 @@ import FontAwesome from 'react-fontawesome';
 class NavButton extends Component {
   constructor(props) {
     super(props);
+    this.clickHander = this.clickHander.bind(this);
+  }
+
+  clickHander() {
+    this.props.handleNavSelect(this.props.view);
   }
 
   render() {
-    if (this.props.currentView === this.props.name) {
+    if (this.props.currentView === this.props.view) {
       var styleButton = styles.nav_button_selected;
       var styleIcon = styles.nav_button_fa_selected;
     } else {
@@ -19,15 +24,14 @@ class NavButton extends Component {
     }
 
     return (
-      <div
-        className={styleButton}>
-          <FontAwesome
-            onClick={() => this.props.handleNavSelect(this.props.view)}
-            className={styleIcon}
-            name={this.props.fa}
-            size='3x'
-            />
-        </div>
+      <div className={styleButton}>
+        <FontAwesome
+          onClick={this.clickHander}
+          className={styleIcon}
+          name={this.props.fa}
+          size='3x'
+          />
+      </div>
     );
   }
 }
