@@ -15,16 +15,16 @@ class DataVisualization extends Component {
     this.handleSliderChange = this.handleSliderChange.bind(this);
   }
 
-  handleSliderChange(e) {
-    this.props.handleNavSelect(e);
+  handleSliderChange(prevSlide, nextSlide) {
+    this.props.handleNavSelect(nextSlide);
   }
   //
   // // TODO need to see if there is a more efficient lifecycle method
-  // componentWillReceiveProps(nextProps) {
-  //   this.refs.slider.slickGoTo(this.props.view);
-  //   this.refs.slider.slickGoTo(nextProps.currentView);
-  //   console.log('nextProps', nextProps);
-  // }
+  componentWillReceiveProps(nextProps) {
+    //TODO need a check to see if nextProps were due to clicked nav button vs view change
+    this.refs.slider.slickGoTo(nextProps.currentView);
+    console.log('nextProps', nextProps);
+  }
 
   renderSlides() {
     const components = [
@@ -50,6 +50,7 @@ class DataVisualization extends Component {
     var settings = {
       adaptiveHeight: true,
       // afterChange: this.handleSliderChange,
+      beforeChange: this.handleSliderChange,
       arrows: true,
       autoplay: true,
       autoplaySpeed: 5000,

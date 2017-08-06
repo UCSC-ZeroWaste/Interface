@@ -104,6 +104,12 @@ body > div {
   align-items: center;
 }
 
+.leader_board_header {
+  width: 80%;
+  font-size: 2em;
+  text-align: left;
+}
+
 .leaderRow {
   width: 60%;
   height: 50px;

@@ -56,7 +56,7 @@ class LeaderBoard extends Component {
   render() {
     return (
       <div className={styles.leader_board_container}>
-        <div style={{width: '80%', fontSize: '40', textAlign: 'left'}}>Zero Waste LeaderBoard</div>
+        <div className={styles.leader_board_header}>Zero Waste LeaderBoard</div>
         {this.renderLeaderRows()}
       </div>
     );
