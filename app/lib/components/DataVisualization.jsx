@@ -52,7 +52,7 @@ class DataVisualization extends Component {
       // afterChange: this.handleSliderChange,
       beforeChange: this.handleSliderChange,
       arrows: true,
-      autoplay: true,
+      autoplay: false,
       autoplaySpeed: 5000,
       dots: true,
       // centerMode: true,
@@ -69,16 +69,18 @@ class DataVisualization extends Component {
     // style={{height:"100%",width:"100%"}}
     return (
       <div className={styles.main_view}>
-        <Slider ref='slider' {...settings} className={styles.slider}>
-          {this.renderSlides()}
-        </Slider>
+        <LineChart />
       </div>
     );
   }
 }
+// <Slider ref='slider' {...settings} className={styles.slider}>
+//   {this.renderSlides()}
+// </Slider>
 
 const mapStateToProps = (state, ownProps) => ({
-  currentView: state.currentView
+  currentView: state.currentView,
+  // autoplay: state.autoplay
 });
 
 const mapDispatchToProps = (dispatch) => ({

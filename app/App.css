@@ -71,9 +71,6 @@ body > div {
   width: 100%;
   height: 70%;
   box-sizing: border-box;
-  /*flex: 80;*/
-  /*border: solid 3px darkred;*/
-  background-color: pink;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -96,6 +93,7 @@ body > div {
   width: 100%;
   height: 100%;
   flex: 1;
+  background-color: lightblue;
 }
 
 .leader_board_container {
@@ -104,12 +102,46 @@ body > div {
   align-items: center;
 }
 
+
+
+.line_chart_container {
+  /*display: inline-block;*/
+  /*vertical-align: top;*/
+  /*flex-direction: column;
+  align-items: center;*/
+  width: 100%;
+  height: 100%;
+  border: 2px solid red;
+}
+.line_chart_container > div {
+  /*display: inline-block;*/
+  /*flex-direction: column;
+  align-items: center;*/
+  /*width: 40%;
+  height: 40%;
+  border: 2px solid red;*/
+}
+.line_chart_container  svg {
+  /*display: inline-block;*/
+  /*flex-direction: column;
+  align-items: center;*/
+  /*width: 50%;
+  height: 50%;
+  border: 2px solid red;*/
+}
+.line_chart {
+  border: 2px solid blue;
+  width: 200px;
+  height: 100px;
+}
+
+
+
 .leader_board_header {
   width: 80%;
   font-size: 2em;
   text-align: left;
 }
-
 .leaderRow {
   width: 60%;
   height: 50px;
@@ -118,7 +150,6 @@ body > div {
   align-items: center;
   padding: 10px;
 }
-
 .rank {
   border: solid 1px grey;
   border-radius: 25px;

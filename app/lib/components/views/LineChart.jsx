@@ -4,6 +4,7 @@ import {LineChart} from 'react-d3-basic';
 import d3 from 'd3';
 import {connect} from 'react-redux';
 import {WASTE_TYPES} from '../../constants/constants';
+import styles from '../../../App.css';
 
 class LineChartComponent extends Component {
   constructor(props) {
@@ -12,8 +13,8 @@ class LineChartComponent extends Component {
     this.state = {
       rollingAverageLength: 7,
       wasteType: 'Refuse',
-      width: 600,
-      height: 400,
+      width: 100,
+      height: 100,
       xLabel: "Date",
       x: function(d) {
         // let parseTime = d3.timeFormat("%c");
@@ -22,9 +23,21 @@ class LineChartComponent extends Component {
       yLabel: "Weight",
       yLabelPosition: 'right'
     };
+
+
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
   }
+
+  componentDidMount() {
+    // console.log('WIDTH',this.refs.childNode.parentNode);
+    // width={this.refs.parentNode}
+  }
+
+  componentDidReceiveProps(){
+    // console.log('WIDTH',this.refs.childNode.parentNode);
+  //  this.refs.chart.onWindowResized();
+ }
 
   parseSiteData(data) {
     return data
@@ -119,58 +132,67 @@ class LineChartComponent extends Component {
       </select>
     );
   }
+  // {this.renderWasteTypeSelector()}
 
   render() {
     console.log('this.props.siteRecords', this.props.siteRecords);
     if (this.props.siteRecords === undefined) return (<div></div>);
     console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
-    return (
-      <div>
-        <div>
-          <div>
-            Green Ratio
-            {this.renderRollingAverageLengthSelector()}
-          </div>
-          <LineChart
-            data= {this.parseGreenRatioData(this.props.siteRecords)}
-            chartSeries= {[{
-              field: 'quantity',
-              name:  this.props.site + ' - Site Waste Weight',
-              color: '#c0c0c0',
-              style: {
-                "strokeWidth": 6,
-              }
-            }]}
-            xLabel= {this.state.xLabel}
-            x= {this.state.x}
-            xScale= 'time'
-            yLabel= {this.state.yLabel}
-            yLabelPosition = {this.state.yLabelPosition}
-            />
 
-        </div>
+    return (
+      <div className={styles.line_chart_container}>
+        <LineChart
+          className={styles.line_chart}
+          data= {this.parseSiteData(this.props.siteRecords)}
+          chartSeries= {[{
+            field: 'quantity',
+            name:  this.props.site + ' - Site Waste Weight',
+            color: '#c0c0c0',
+            style: {
+              "strokeWidth": 6,
+            }
+          }]}
+          width='1000'
+          height='450'
+          xLabel= {this.state.xLabel}
+          x= {this.state.x}
+          xScale= 'time'
+          yLabel= {this.state.yLabel}
+          yLabelPosition = {this.state.yLabelPosition}
+          />
+
       </div>
     );
+
   }
 }
-// {this.renderWasteTypeSelector()}
+// <div>heellelfeafonsdnoa</div>
+
+
+// <div>
+//   <div>
+//     Green Ratio
+//     {this.renderRollingAverageLengthSelector()}
+//   </div>
+//   <LineChart
+//     data= {this.parseGreenRatioData(this.props.siteRecords)}
+//     chartSeries= {[{
+//       field: 'quantity',
+//       name:  this.props.site + ' - Site Waste Weight',
+//       color: '#c0c0c0',
+//       style: {
+//         "strokeWidth": 6,
+//       }
+//     }]}
+//     xLabel= {this.state.xLabel}
+//     x= {this.state.x}
+//     xScale= 'time'
+//     yLabel= {this.state.yLabel}
+//     yLabelPosition = {this.state.yLabelPosition}
+//     />
 //
-// <LineChart
-//   data= {this.parseSiteData(this.props.siteRecords)}
-//   chartSeries= {[{
-//     field: 'quantity',
-//     name:  this.props.site + ' - Site Waste Weight',
-//     color: '#c0c0c0',
-//     style: {
-//       "strokeWidth": 6,
-//     }
-//   }]}
-//   xLabel= {this.state.xLabel}
-//   x= {this.state.x}
-//   xScale= 'time'
-//   yLabel= {this.state.yLabel}
-//   yLabelPosition = {this.state.yLabelPosition}
-//   />
+// </div>
+
 
 
 const mapStateToProps = (state) => ({
