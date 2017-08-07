@@ -13,8 +13,8 @@ class LineChartComponent extends Component {
     this.state = {
       rollingAverageLength: 7,
       wasteType: 'Refuse',
-      width: 100,
-      height: 100,
+      width: 900,
+      height: 400,
       xLabel: "Date",
       x: function(d) {
         // let parseTime = d3.timeFormat("%c");
@@ -30,11 +30,13 @@ class LineChartComponent extends Component {
   }
 
   componentDidMount() {
+    // console.log('widthreceiveprops', this.props.widtha);
     // console.log('WIDTH',this.refs.childNode.parentNode);
     // width={this.refs.parentNode}
   }
 
-  componentDidReceiveProps(){
+  componentWillReceiveProps(nextProps){
+    // console.log('widthreceiveprops', nextProps);
     // console.log('WIDTH',this.refs.childNode.parentNode);
   //  this.refs.chart.onWindowResized();
  }
@@ -51,24 +53,6 @@ class LineChartComponent extends Component {
 
   handleSelector(e) {
     this.setState({wasteType: e.target.value});
-  }
-
-  renderWasteTypeSelector() {
-    const wasteTypes = WASTE_TYPES.map((type) => (
-        <option key={ type } value= { type }>
-          { type }
-        </option>
-      )
-    );
-
-    return (
-        <div>
-          <select onChange={ this.handleSelector } defaultValue={'Refuse'}>
-            <option disabled="true">Select a Refuse Type</option>
-            { wasteTypes }
-          </select>
-        </div>
-        );
   }
 
   getTimeDiff(a, b) {
@@ -117,22 +101,107 @@ class LineChartComponent extends Component {
     this.setState({rollingAverageLength: e.target.value});
   }
 
-  renderRollingAverageLengthSelector() {
-    const daysOptions = _.range(5,30).map((days) => (
-        <option key={ days } value= { days }>
-          { days }
-        </option>
-      )
-    );
-
+  renderSelector() {
+    let settings;
+    switch (this.props.type) {
+      case 'green':
+        settings = {
+          array: _.range(5,30),
+          changeHandler: this.setRollingAverageLength,
+          defaultValue: 'Refuse',
+          title: 'Select # of Days for Rolling Average'
+        };
+        break;
+      case 'general':
+        settings = {
+          array: WASTE_TYPES,
+          changeHandler: this.handleSelector,
+          defaultValue: 'Refuse',
+          title: 'Select a Refuse Type'
+        };
+        break;
+      default:
+        break;
+    }
+    const options = settings.array.map((type) => (
+      <option key={ type } value= { type }>
+        { type }
+      </option>
+    ));
     return (
-      <select onChange={ this.setRollingAverageLength }>
-        <option value="">Select # of Days for Rolling Average</option>
-        { daysOptions }
+      <select onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
+        <option disabled="true">{settings.title}</option>
+        { options }
       </select>
     );
   }
-  // {this.renderWasteTypeSelector()}
+
+//   renderWasteTypeSelector() {
+//     const wasteTypes = WASTE_TYPES.map((type) => (
+//       <option key={ type } value= { type }>
+//         { type }
+//       </option>
+//     )
+//   );
+//
+//   return (
+//     <select onChange={ this.handleSelector } defaultValue={'Refuse'}>
+//       <option disabled="true">Select a Refuse Type</option>
+//       { wasteTypes }
+//     </select>
+//   );
+// }
+
+  // renderRollingAverageLengthSelector() {
+  //   const daysOptions = _.range(5,30).map((days) => (
+  //       <option key={ days } value= { days }>
+  //         { days }
+  //       </option>
+  //     )
+  //   // );
+  //
+  //   return (
+  //     <select onChange={ this.setRollingAverageLength }>
+  //       <option value="">Select # of Days for Rolling Average</option>
+  //       { daysOptions }
+  //     </select>
+  //   );
+  // }
+
+  renderChart() {
+    let options = {};
+    switch (this.props.type) {
+      case 'green':
+        options = {data: this.parseGreenRatioData(this.props.siteRecords)};
+        break;
+      case 'general':
+        options = {data: this.parseSiteData(this.props.siteRecords)};
+        break;
+      default:
+        options = {data: {}};
+    }
+
+    return (
+      <LineChart
+      data= {options.data}
+      chartSeries= {[{
+        field: 'quantity',
+        name:  this.props.site + ' - Site Waste Weight',
+        color: '#c0c0c0',
+        style: {
+          "strokeWidth": 6,
+        }
+      }]}
+      width={this.state.width}
+      height={this.state.height}
+      xLabel= {this.state.xLabel}
+      x= {this.state.x}
+      xScale= 'time'
+      yLabel= {this.state.yLabel}
+      yLabelPosition = {this.state.yLabelPosition}
+      />)
+    ;
+  }
 
   render() {
     console.log('this.props.siteRecords', this.props.siteRecords);
@@ -141,57 +210,35 @@ class LineChartComponent extends Component {
 
     return (
       <div className={styles.line_chart_container}>
-        <LineChart
-          className={styles.line_chart}
-          data= {this.parseSiteData(this.props.siteRecords)}
-          chartSeries= {[{
-            field: 'quantity',
-            name:  this.props.site + ' - Site Waste Weight',
-            color: '#c0c0c0',
-            style: {
-              "strokeWidth": 6,
-            }
-          }]}
-          width='1000'
-          height='450'
-          xLabel= {this.state.xLabel}
-          x= {this.state.x}
-          xScale= 'time'
-          yLabel= {this.state.yLabel}
-          yLabelPosition = {this.state.yLabelPosition}
-          />
-
+        {this.renderSelector()}
+        {this.renderChart()}
       </div>
     );
 
   }
+  // {this.renderWasteTypeSelector()}
+  // <LineChart
+  //
+  //   data= {this.parseSiteData(this.props.siteRecords)}
+  //   chartSeries= {[{
+  //     field: 'quantity',
+  //     name:  this.props.site + ' - Site Waste Weight',
+  //     color: '#c0c0c0',
+  //     style: {
+  //       "strokeWidth": 6,
+  //     }
+  //   }]}
+  //   width={this.state.width}
+  //   height={this.state.height}
+  //   xLabel= {this.state.xLabel}
+  //   x= {this.state.x}
+  //   xScale= 'time'
+  //   yLabel= {this.state.yLabel}
+  //   yLabelPosition = {this.state.yLabelPosition}
+  //   />
 }
-// <div>heellelfeafonsdnoa</div>
 
 
-// <div>
-//   <div>
-//     Green Ratio
-//     {this.renderRollingAverageLengthSelector()}
-//   </div>
-//   <LineChart
-//     data= {this.parseGreenRatioData(this.props.siteRecords)}
-//     chartSeries= {[{
-//       field: 'quantity',
-//       name:  this.props.site + ' - Site Waste Weight',
-//       color: '#c0c0c0',
-//       style: {
-//         "strokeWidth": 6,
-//       }
-//     }]}
-//     xLabel= {this.state.xLabel}
-//     x= {this.state.x}
-//     xScale= 'time'
-//     yLabel= {this.state.yLabel}
-//     yLabelPosition = {this.state.yLabelPosition}
-//     />
-//
-// </div>
 
 
 

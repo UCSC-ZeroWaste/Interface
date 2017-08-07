@@ -29,7 +29,8 @@ class DataVisualization extends Component {
   renderSlides() {
     const components = [
       <LeaderBoard/>,
-      <LineChart />,
+      <LineChart type={'green'}/>,
+      <LineChart type={'general'}/>,
       <SizeView />,
       <_ViewTemplate title={'Empty View 4'}/>,
       <_ViewTemplate title={'Empty View 5'}/>,
@@ -69,14 +70,15 @@ class DataVisualization extends Component {
     // style={{height:"100%",width:"100%"}}
     return (
       <div className={styles.main_view}>
-        <LineChart />
+        <Slider ref='slider' {...settings} className={styles.slider}>
+          {this.renderSlides()}
+        </Slider>
+
       </div>
     );
   }
 }
-// <Slider ref='slider' {...settings} className={styles.slider}>
-//   {this.renderSlides()}
-// </Slider>
+// <LeaderBoard/>,
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView,

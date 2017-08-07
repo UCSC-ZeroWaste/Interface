@@ -14,8 +14,8 @@ export default class NavBar extends Component {
       <div className={styles.nav_bar}>
         <SiteSelector/>
         <NavButton title={'LeaderBoard'} view={0} fa={'bars'}/>
-        <NavButton title={'LineChart'} view={1} fa={'area-chart'}/>
-        <NavButton title={'SizeView'} view={2} fa={'trash'}/>
+        <NavButton title={'RefuseTypesChart'} view={1} fa={'area-chart'}/>
+        <NavButton title={'RatioChart'} view={2} fa={'area-chart'}/>
         <NavButton title={'Map'} view={3} fa={'map'}/>
         <NavButton title={'Rank'} view={4} fa={'cubes'}/>
         <NavButton title={'Progress'} view={5} fa={'tasks'}/>
