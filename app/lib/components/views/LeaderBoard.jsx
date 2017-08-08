@@ -3,25 +3,17 @@ import styles from '../../../App.css';
 import _ from 'underscore';
 import {connect} from 'react-redux';
 import {COLLEGE_SET} from '../../constants/constants';
-
-const LeaderRow = ({rank, site, selected}) => {
-  let details = selected ? styles.details_selected : styles.details;
-  let ranking = selected ? styles.rank_selected : styles.rank;
-  return (
-    <div className={styles.leaderRow}>
-      <div className={ranking}>{rank}</div>
-      <div className={details}>
-        <div>{site.site}</div>
-        <div>{Math.round(site.greenRatio)}%</div>
-      </div>
-    </div>
-  );
-};
+import LeaderRow from './LeaderRow';
 
 class LeaderBoard extends Component {
   constructor(props) {
     super(props);
   }
+
+  // componentDidMount() {
+  //   let cw = $('.rank').height();
+  //   $('.rank').css({'width':cw+'px'});
+  // }
 
   parsePickupData(allPickups) {
     let relevantPickups = allPickups.filter(function(pickup){

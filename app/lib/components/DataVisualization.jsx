@@ -23,7 +23,7 @@ class DataVisualization extends Component {
   componentWillReceiveProps(nextProps) {
     //TODO need a check to see if nextProps were due to clicked nav button vs view change
     this.refs.slider.slickGoTo(nextProps.currentView);
-    console.log('nextProps', nextProps);
+    // console.log('nextProps', nextProps);
   }
 
   renderSlides() {
@@ -49,21 +49,21 @@ class DataVisualization extends Component {
 
   render() {
     var settings = {
-      adaptiveHeight: true,
+      adaptiveHeight: false,
       // afterChange: this.handleSliderChange,
       beforeChange: this.handleSliderChange,
       arrows: true,
       autoplay: false,
-      autoplaySpeed: 5000,
+      autoplaySpeed: 3000,
       dots: true,
       // centerMode: true,
-      // fade: true,
+      fade: false,
       infinite: true,
       lazyLoad: false,
       pauseOnHover: true,
       slidesToShow: 1,
-      slidesToScroll: 1,
-      speed: 500,
+      // slidesToScroll: 1,
+      speed: 1000,
       swipeToSlide: true,
       variableWidth: false,
     };

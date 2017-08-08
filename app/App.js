@@ -18,11 +18,14 @@ class App extends React.Component {
   render() {
     let assetType = _.groupBy(this.props.data, 'AssetType');
     let Product = _.groupBy(this.props.data, 'Product');
-    console.log(
-      'This is AssetType: ',
-      Object.keys(assetType).map( (type) => (type + ':  ' + assetType[type].length))
-    );
-    console.log('This is Product: ', Object.keys(Product).map( (type) => (type + ':  ' + Product[type].length) ));
+    // console.log(
+    //   'This is AssetType: ',
+    //   Object.keys(assetType).map( (type) => (type + ':  ' + assetType[type].length) )
+    // );
+    // console.log(
+    //   'This is Product: ',
+    //   Object.keys(Product).map( (type) => (type + ':  ' + Product[type].length) )
+    // );
 
 
     return (

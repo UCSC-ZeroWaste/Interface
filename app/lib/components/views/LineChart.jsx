@@ -9,7 +9,7 @@ import styles from '../../../App.css';
 class LineChartComponent extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.site, this.props.siteRecords);
+    // console.log(this.props.site, this.props.siteRecords);
     this.state = {
       rollingAverageLength: 7,
       wasteType: 'Refuse',
@@ -20,7 +20,6 @@ class LineChartComponent extends Component {
       yLabelPosition: 'right'
     };
 
-
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
   }
@@ -30,8 +29,6 @@ class LineChartComponent extends Component {
     // console.log('WIDTH',this.refs.childNode.parentNode);
     // width={this.refs.parentNode}
   }
-
-
 
   componentWillReceiveProps(nextProps){
     // console.log('widthreceiveprops', nextProps);
@@ -47,7 +44,7 @@ class LineChartComponent extends Component {
         'y' : datum.Load,
       }));
 
-      console.log('pickup date', data);
+      // console.log('pickup date', data);
 
       return [{
         name: 'site name goes here',
@@ -95,17 +92,19 @@ class LineChartComponent extends Component {
       );
     }
 
+    // const randColors = ['#a32590', '#57aa40', '#bbc417', '#340893'];
+
     greenRatio = greenRatio
       .map((ratio, i) => ({
         y : ratio,
-        x : i,
+        x : i
       }));
 
     return [{
       name: 'site name goes here',
       values: greenRatio,
       strokeWidth: 2,
-      strokeDashArray: "5,5",
+      strokeDashArray: "5,5"
     }];
   }
 
@@ -148,47 +147,15 @@ class LineChartComponent extends Component {
     );
   }
 
-//   renderWasteTypeSelector() {
-//     const wasteTypes = WASTE_TYPES.map((type) => (
-//       <option key={ type } value= { type }>
-//         { type }
-//       </option>
-//     )
-//   );
-//
-//   return (
-//     <select onChange={ this.handleSelector } defaultValue={'Refuse'}>
-//       <option disabled="true">Select a Refuse Type</option>
-//       { wasteTypes }
-//     </select>
-//   );
-// }
-
-  // renderRollingAverageLengthSelector() {
-  //   const daysOptions = _.range(5,30).map((days) => (
-  //       <option key={ days } value= { days }>
-  //         { days }
-  //       </option>
-  //     )
-  //   // );
-  //
-  //   return (
-  //     <select onChange={ this.setRollingAverageLength }>
-  //       <option value="">Select # of Days for Rolling Average</option>
-  //       { daysOptions }
-  //     </select>
-  //   );
-  // }
-
   getChartDomain() {
     switch (this.props.type) {
       case 'green':
-        return {x: [,30], y: [0,]};
+        return {x: [undefined,30], y: [0,100]};
       case 'general':
       //TODO needs to update domain range for x axis to change dynamically -- currently static
         return {x: [new Date('Jul 07 2017'), new Date('Aug 07 2017')], y: [0,]};
       default:
-        return {x: [,], y: [,]};
+        return {x: [undefined,undefined], y: [undefined,undefined]};
       }
   }
 
@@ -200,7 +167,7 @@ class LineChartComponent extends Component {
         // return {};
         return {unit: 'day', interval: 5};
       default:
-        return {x: [,], y: [,]};
+        return {x: [undefined,undefined], y: [undefined,undefined]};
       }
 
   }
@@ -223,31 +190,15 @@ class LineChartComponent extends Component {
       default:
         options = {data: {}};
     }
-    console.log('Chart Data:', options.data);
-    // var lineData = [
-    //   {
-    //     name: 'series1',
-    //     values: [ { x: 0, y: 20}, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
-    //     strokeWidth: 3,
-    //     strokeDashArray: "5,5",
-    //   },
-    //   {
-    //     name: 'series2',
-    //     values : [ { x: 0, y: 8 }, { x: 1, y: 5 }, { x: 2, y: 20 }, { x: 3, y: 12 }, { x: 4, y: 4 }, { x: 5, y: 6 }, { x: 6, y: 2 } ]
-    //   },
-    //   {
-    //     name: 'series3',
-    //     values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ]
-    //   }
-    // ];
 
     return (
+      //TODO get a handle on color & colorAccessor props
       <LineChart
         legend={true}
         data={options.data}
         width='100%'
         height={this.state.height}
-        hoverAnimation={true}
+        hoverAnimation={false}
         circleRadius={4}
         viewBoxObject={{
           x: 0,
@@ -259,9 +210,23 @@ class LineChartComponent extends Component {
         yAxisLabel={this.state.yLabel}
         xAxisLabel={this.state.xLabel}
 
+        colors={
+          (idx) => {
+            // console.log('colors: ', idx);
+            return ['#408E2F','#2F4073','#AAA439','#AA3C39'][idx];
+            // return data.nodeColor;
+          }
+        }
+        colorAccessor={
+          (data, idx) => {
+            // console.log('colorAccessor: ', data, idx);
+            return 0;
+            // return data.nodeColor;
+          }
+        }
+
         domain={this.getChartDomain()}
         xAxisTickInterval={this.GetTickInterval()}
-
         gridHorizontal={true}
         gridVertical={true}
       />
@@ -275,9 +240,9 @@ class LineChartComponent extends Component {
   //   />
 
   render() {
-    console.log('this.props.siteRecords', this.props.siteRecords);
+    // console.log('this.props.siteRecords', this.props.siteRecords);
     if (this.props.siteRecords === undefined) return (<div></div>);
-    console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
+    // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
 
     return (
       <div className={styles.line_chart_container}>
