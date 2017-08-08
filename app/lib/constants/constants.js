@@ -5,8 +5,7 @@ export const COLLEGE_SET = [
   "Kresge",
   "Oakes",
   "Porter",
-  "College Eight",
-  
+  "College Eight"
 ];
 
 export const WASTE_TYPES = [

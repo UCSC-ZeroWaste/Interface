@@ -12,22 +12,8 @@ import styles from '../../App.css';
 class DataVisualization extends Component {
   constructor(props) {
     super(props);
-    this.handleSliderChange = this.handleSliderChange.bind(this);
-  }
-
-  handleSliderChange(prevSlide, nextSlide) {
-    this.props.handleNavSelect(nextSlide);
-  }
-  //
-  // // TODO need to see if there is a more efficient lifecycle method
-  componentWillReceiveProps(nextProps) {
-    //TODO need a check to see if nextProps were due to clicked nav button vs view change
-    this.refs.slider.slickGoTo(nextProps.currentView);
-    // console.log('nextProps', nextProps);
-  }
-
-  renderSlides() {
-    const components = [
+    // this.handleSliderChange = this.handleSliderChange.bind(this);
+    this.components = [
       <LeaderBoard/>,
       <LineChart type={'green'}/>,
       <LineChart type={'general'}/>,
@@ -37,8 +23,25 @@ class DataVisualization extends Component {
       <_ViewTemplate title={'Empty View 6'}/>,
       <_ViewTemplate title={'Empty View 7'}/>
     ];
+  }
 
-    return components.map( (component, index) => {
+  // handleSliderChange(prevSlide, nextSlide) {
+  //   this.props.handleNavSelect(nextSlide);
+  // }
+  //
+  // // TODO need to see if there is a more efficient lifecycle method
+  // componentWillReceiveProps(nextProps) {
+  //   //TODO need a check to see if nextProps were due to clicked nav button vs view change
+  //   this.refs.slider.slickGoTo(nextProps.currentView);
+  //   // console.log('nextProps', nextProps);
+  // }
+
+  renderViews() {
+    return this.components[this.props.currentView];
+  }
+
+  renderSlides() {
+    return this.components.map( (component, index) => {
       return (
         <div className={styles.slide} key={index} >
           {component}
@@ -70,15 +73,14 @@ class DataVisualization extends Component {
     // style={{height:"100%",width:"100%"}}
     return (
       <div className={styles.main_view}>
-        <Slider ref='slider' {...settings} className={styles.slider}>
-          {this.renderSlides()}
-        </Slider>
+        {this.renderViews()}
       </div>
     );
   }
 }
-// <LineChart type={'green'}/>
-// <LeaderBoard/>,
+// <Slider ref='slider' {...settings} className={styles.slider}>
+//   {this.renderSlides()}
+// </Slider>
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView,

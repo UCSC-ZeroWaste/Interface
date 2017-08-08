@@ -16,6 +16,8 @@ class LeaderBoard extends Component {
   // }
 
   parsePickupData(allPickups) {
+    let test = _.groupBy(allPickups, 'Site');
+    console.log(test);
     let relevantPickups = allPickups.filter(function(pickup){
       return COLLEGE_SET.includes(pickup.Site);
     });
