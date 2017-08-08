@@ -128,8 +128,8 @@ body > div {
 /*TODO - temporary fix for mis-aligned graph*/
 .line_chart_container  svg {
   /*border: 2px solid red;*/
-  position: relative;
-  bottom: 450px;
+  /*position: relative;*/
+  /*bottom: 450px;*/
 }
 .line_chart {
   /*border: 2px solid blue;*/

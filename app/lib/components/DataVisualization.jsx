@@ -73,11 +73,11 @@ class DataVisualization extends Component {
         <Slider ref='slider' {...settings} className={styles.slider}>
           {this.renderSlides()}
         </Slider>
-
       </div>
     );
   }
 }
+// <LineChart type={'green'}/>
 // <LeaderBoard/>,
 
 const mapStateToProps = (state, ownProps) => ({

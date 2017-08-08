@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
-import {LineChart} from 'react-d3-basic';
+import {LineChart} from 'rd3';
 import d3 from 'd3';
 import {connect} from 'react-redux';
 import {WASTE_TYPES} from '../../constants/constants';
@@ -16,10 +16,6 @@ class LineChartComponent extends Component {
       width: 900,
       height: 400,
       xLabel: "Date",
-      x: function(d) {
-        // let parseTime = d3.timeFormat("%c");
-        return new Date(d.picked_up).valueOf();
-      },
       yLabel: "Weight",
       yLabelPosition: 'right'
     };
@@ -35,6 +31,8 @@ class LineChartComponent extends Component {
     // width={this.refs.parentNode}
   }
 
+
+
   componentWillReceiveProps(nextProps){
     // console.log('widthreceiveprops', nextProps);
     // console.log('WIDTH',this.refs.childNode.parentNode);
@@ -42,13 +40,21 @@ class LineChartComponent extends Component {
  }
 
   parseSiteData(data) {
-    return data
+    data = data
       .filter( (datum) => (datum.Product === this.state.wasteType))
       .map((datum, i) => ({
-        'quantity' : datum.Load,
-        'picked_up' : datum.PickupTime,
-        'index' : i
+        'x' : new Date(datum.PickupTime),
+        'y' : datum.Load,
       }));
+
+      console.log('pickup date', data);
+
+      return [{
+        name: 'site name goes here',
+        values: data,
+        strokeWidth: 6,
+        strokeDashArray: "5,5"
+      }];
   }
 
   handleSelector(e) {
@@ -85,16 +91,22 @@ class LineChartComponent extends Component {
     let greenRatio = [];
     for (let i = 0 ; i < daysLength; i++) {
       greenRatio.push(
-        (totalLoad[i] - totalRefuse[i]) / totalLoad[i]
+        Math.floor(100 *(totalLoad[i] - totalRefuse[i]) / totalLoad[i])
       );
     }
 
-    return greenRatio
+    greenRatio = greenRatio
       .map((ratio, i) => ({
-        'quantity' : ratio,
-        'picked_up' : i,
-        'index' : i
+        y : ratio,
+        x : i,
       }));
+
+    return [{
+      name: 'site name goes here',
+      values: greenRatio,
+      strokeWidth: 2,
+      strokeDashArray: "5,5",
+    }];
   }
 
   setRollingAverageLength(e) {
@@ -106,7 +118,7 @@ class LineChartComponent extends Component {
     switch (this.props.type) {
       case 'green':
         settings = {
-          array: _.range(5,30),
+          array: _.range(2,30),
           changeHandler: this.setRollingAverageLength,
           defaultValue: 'Refuse',
           title: 'Select # of Days for Rolling Average'
@@ -168,40 +180,99 @@ class LineChartComponent extends Component {
   //   );
   // }
 
+  getChartDomain() {
+    switch (this.props.type) {
+      case 'green':
+        return {x: [,30], y: [0,]};
+      case 'general':
+      //TODO needs to update domain range for x axis to change dynamically -- currently static
+        return {x: [new Date('Jul 07 2017'), new Date('Aug 07 2017')], y: [0,]};
+      default:
+        return {x: [,], y: [,]};
+      }
+  }
+
+  GetTickInterval() {
+    switch (this.props.type) {
+      case 'green':
+        return {};
+      case 'general':
+        // return {};
+        return {unit: 'day', interval: 5};
+      default:
+        return {x: [,], y: [,]};
+      }
+
+  }
+
   renderChart() {
     let options = {};
     switch (this.props.type) {
       case 'green':
-        options = {data: this.parseGreenRatioData(this.props.siteRecords)};
+        options = {
+          data: this.parseGreenRatioData(this.props.siteRecords),
+          title: "Waste Ratio (higher is better)"
+        };
         break;
       case 'general':
-        options = {data: this.parseSiteData(this.props.siteRecords)};
+        options = {
+          data: this.parseSiteData(this.props.siteRecords),
+          title: "All Waste Data"
+        };
         break;
       default:
         options = {data: {}};
     }
+    console.log('Chart Data:', options.data);
+    // var lineData = [
+    //   {
+    //     name: 'series1',
+    //     values: [ { x: 0, y: 20}, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
+    //     strokeWidth: 3,
+    //     strokeDashArray: "5,5",
+    //   },
+    //   {
+    //     name: 'series2',
+    //     values : [ { x: 0, y: 8 }, { x: 1, y: 5 }, { x: 2, y: 20 }, { x: 3, y: 12 }, { x: 4, y: 4 }, { x: 5, y: 6 }, { x: 6, y: 2 } ]
+    //   },
+    //   {
+    //     name: 'series3',
+    //     values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ]
+    //   }
+    // ];
 
     return (
       <LineChart
-      data= {options.data}
-      chartSeries= {[{
-        field: 'quantity',
-        name:  this.props.site + ' - Site Waste Weight',
-        color: '#c0c0c0',
-        style: {
-          "strokeWidth": 6,
-        }
-      }]}
-      width={this.state.width}
-      height={this.state.height}
-      xLabel= {this.state.xLabel}
-      x= {this.state.x}
-      xScale= 'time'
-      yLabel= {this.state.yLabel}
-      yLabelPosition = {this.state.yLabelPosition}
-      />)
-    ;
+        legend={true}
+        data={options.data}
+        width='100%'
+        height={this.state.height}
+        hoverAnimation={true}
+        circleRadius={4}
+        viewBoxObject={{
+          x: 0,
+          y: 0,
+          width: this.state.width,
+          height: this.state.height
+        }}
+        title={this.props.site + ' - ' + options.title}
+        yAxisLabel={this.state.yLabel}
+        xAxisLabel={this.state.xLabel}
+
+        domain={this.getChartDomain()}
+        xAxisTickInterval={this.GetTickInterval()}
+
+        gridHorizontal={true}
+        gridVertical={true}
+      />
+    );
   }
+  // <LineChart
+  //   data= {options.data}
+  //   x= {(d) => new Date(d.picked_up).valueOf()}
+  //   xScale= 'time'
+  //   yLabelPosition = {this.state.yLabelPosition}
+  //   />
 
   render() {
     console.log('this.props.siteRecords', this.props.siteRecords);
