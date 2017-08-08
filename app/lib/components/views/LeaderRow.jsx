@@ -15,7 +15,7 @@ export default class LeaderRow extends Component {
     if (this.state.width !== this.refs.leader_row.clientHeight + 'px') {
       this.updateState();
     } else {
-      // console.log('done updating rank width', this.state);
+      // console.log('done updating ranks width', this.state);
     }
   }
 

@@ -49,7 +49,7 @@ class DataVisualization extends Component {
 
   render() {
     var settings = {
-      adaptiveHeight: false,
+      adaptiveHeight: true,
       // afterChange: this.handleSliderChange,
       beforeChange: this.handleSliderChange,
       arrows: true,

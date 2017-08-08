@@ -5,9 +5,8 @@
 
 @import './lib/stylesheets/reset.css';
 
-/*@import './lib/stylesheets/slick.css';
-@import './lib/stylesheets/slick-theme.css';
-@import "slick-carousel/slick/slick.css";
+/*TODO -- need to figure out how to import from node modules (i think i need to include a loader (eg. url-loader) for certain files: gif, eot, woff, ttf, svg)*/
+/*@import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";*/
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
