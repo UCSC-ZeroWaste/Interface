@@ -28,15 +28,18 @@
   "dependencies": {
     "babel-cli": "^6.4.0",
     "babel-core": "^6.22.1",
+    "d3": "^3.5.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
-    "react": "^0.14.3",
-    "react-d3-basic": "^1.6.11",
-    "react-dom": "^0.14.3",
+    "rd3": "^0.8.0",
+    "react": "^15.5.0",
+    "react-dom": "^15.5.0",
     "react-fontawesome": "^1.6.1",
     "react-redux": "^5.0.5",
+    "react-slick": "^0.14.11",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "slick-carousel": "^1.6.0",
     "superagent": "^3.5.2"
   },
   "devDependencies": {

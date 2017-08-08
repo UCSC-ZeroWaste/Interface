@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import styles from '../../../App.css';
 
 export default class ViewTemplate extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class ViewTemplate extends Component {
 
   render(){
     return (
-      <div>
+      <div className={styles.template}>
         {this.props.title}
       </div>
     );

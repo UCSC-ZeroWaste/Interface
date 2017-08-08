@@ -2,7 +2,15 @@
 /*@import '~font-awesome.min.css';*/
 /*require('node_modules/font-awesome/css/font-awesome.min.css');*/
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
 @import './lib/stylesheets/reset.css';
+
+/*TODO -- need to figure out how to import from node modules (i think i need to include a loader (eg. url-loader) for certain files: gif, eot, woff, ttf, svg)*/
+/*@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";*/
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
+
 /*.app {
   background-color: green;
   height: 50px;
@@ -14,21 +22,142 @@
   height: 25px;
 }*/
 
+
+
+html {
+  /*display: flex;*/
+  height: 100vh;
+  width: 100vw;
+  /*flex: 1;*/
+}
+
+body, #root {
+  /*display: flex;*/
+  height: 100%;
+  width: 100%;
+  /*flex: 1;*/
+}
+
+body > div {
+  /*display: flex;*/
+  height: 100%;
+  width: 100%;
+  /*flex: 1;*/
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  /*border: solid 3px darkblue;*/
+  width: 100%;
+  height: 100%;
+  /*overflow: hidden;*/
+}
+
+.nav_bar {
+  width: 100%;
+  height: 15%;
+  box-sizing: border-box;
+  /*flex: 15;*/
+  border: solid 3px grey;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main_view {
+  width: 100%;
+  height: 70%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.footer {
+  width: 100%;
+  height: 15%;
+  box-sizing: border-box;
+  /*flex: 5;*/
+  border-top: solid 1px grey;
+  background-color: lightgrey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.template {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  background-color: lightblue;
+}
+
+.leader_board_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.line_chart_container {
+  /*display: inline-block;*/
+  /*vertical-align: top;*/
+  /*flex-direction: column;
+  align-items: center;*/
+  width: 100%;
+  height: 100%;
+  /*border: 2px solid red;*/
+}
+.line_chart_container > div {
+  /*display: inline-block;*/
+  /*flex-direction: column;
+  align-items: center;*/
+  width: 100%;
+  height: 100%;
+  /*border: 2px solid red;*/
+}
+
+
+/*TODO - temporary fix for mis-aligned graph*/
+.line_chart_container  svg {
+  /*border: 2px solid red;*/
+  /*position: relative;*/
+  /*bottom: 450px;*/
+}
+.line_chart {
+  /*border: 2px solid blue;*/
+  /*width: 200px;*/
+  /*height: 100px;*/
+}
+
+
+
+.leader_board_header {
+  width: 80%;
+  font-size: 2em;
+  text-align: left;
+}
 .leaderRow {
   width: 60%;
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  margin: 10px;
 }
-
 .rank {
   border: solid 1px grey;
-  border-radius: 25px;
+  border-radius: 50%;
   background-color: grey;
-  width: 50px;
-  height: 50px;
+  /*width: 100vh;*/
+  /*padding-top: 100%;*/
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,7 +205,6 @@
 }
 
 .nav_button_fa {
-  /*border: 1px solid black;*/
   color: grey;
 }
 .nav_button_fa_selected {
@@ -93,14 +221,48 @@
 /*.nav_button:hover, .nav_button_selected:hover {
   background-color: lightgreen;
 }*/
+.slick-list {
+  height: 100%;
 
-
-.nav_bar {
-  width: 100%;
-  height: 90px;
-  border-bottom: solid 1px grey;
-  background-color: lightgrey;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
+.slick-track {
+  height: 100%;
+}
+.slick-slider {
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+
+
+
+/*Slider Settings: these settings keep the slide frames at 100% height*/
+.slider {
+  display: flex;
+  height: 94%;
+  width: 94%;
+  /*box-sizing: border-box;*/
+  /*border: 1px solid red;*/
+}
+.slider > button {
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+.slider > div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  /*box-sizing: border-box;*/
+  /*border: 1px solid red;*/
+}
+.slider > div > div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  /*box-sizing: border-box;*/
+  /*border: 1px solid red;*/
+}
+
+/*.slider div {
+  height: 100%;
+}*/

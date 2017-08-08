@@ -29,7 +29,8 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
+    loaders: [
+      {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
@@ -42,7 +43,15 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
-    }]
+    }
+    // , {
+    //     test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+    //     loader: 'url-loader',
+    //     options: {
+    //       limit: 10000
+    //     }
+    //   }
+    ]
   },
   resolve: {
     extensions: ["", ".js", ".jsx" ]
