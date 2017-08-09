@@ -3,7 +3,9 @@
 /*require('node_modules/font-awesome/css/font-awesome.min.css');*/
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-@import './lib/stylesheets/reset.css';
+@import './lib/assets/stylesheets/reset.css';
+/*@import './lib/assets/stylesheets/nav_bar.css';*/
+/*@import './lib/assets/background.png';*/
 
 /*TODO -- need to figure out how to import from node modules (i think i need to include a loader (eg. url-loader) for certain files: gif, eot, woff, ttf, svg)*/
 /*@import "slick-carousel/slick/slick.css";
@@ -22,7 +24,11 @@
   height: 25px;
 }*/
 
-
+.page {
+  background-image: url('./lib/assets/images/background.png');
+  background-size: cover;;
+  background-position: 100% 100%;
+}
 
 html {
   /*display: flex;*/
@@ -48,40 +54,94 @@ body > div {
 .page {
   display: flex;
   flex-direction: column;
-  /*border: solid 3px darkblue;*/
   width: 100%;
   height: 100%;
   /*overflow: hidden;*/
 }
 
-.nav_bar {
+.nav_bar_container {
   width: 100%;
-  height: 15%;
-  box-sizing: border-box;
-  /*flex: 15;*/
-  border: solid 3px grey;
-  background-color: lightgrey;
+  height: 10%;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+/*Opacity fix*/
+.nav_bar_container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: grey;
+  opacity: 0.3;
+}
+.nav_bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.nav_button {
+  width: 70px;
+  height: 100%;
+  opacity: 1;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.nav_button_selected {
+  composes: nav_button;
+}
+.nav_button_fa {
+  color: grey;
+}
+.nav_button_fa_selected {
+  composes: nav_button_fa;
+  color: black;
+}
 
 .main_view {
-  width: 100%;
-  height: 70%;
+  width: 80%;
+  height: 80%;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
-.footer {
+.footer_container {
   width: 100%;
-  height: 15%;
-  box-sizing: border-box;
-  /*flex: 5;*/
-  border-top: solid 1px grey;
-  background-color: lightgrey;
+  height: 10%;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+/*Opacity fix*/
+.footer_container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: grey;
+  opacity: 0.3;
+}
+.footer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -167,7 +227,18 @@ body > div {
 .rank_selected {
   composes: rank;
   background-color: lightgrey;
+}
 
+.slug_not_selected {
+  height: 100%;
+  border-radius: 50%;
+}
+
+.slug {
+  composes: slug_not_selected;
+  background-image: url('./lib/assets/images/slug.png');
+  background-size: cover;
+  background-position: 100% 100%;
 }
 
 .details {
@@ -186,31 +257,6 @@ body > div {
   background-color: lightgrey;
 }
 
-.nav_button {
-  width: 70px;
-  height: 70px;
-  /*border: solid 1px black;*/
-  border: none;
-  border-radius: 5px;
-  background-color: lightgrey;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.nav_button_selected {
-  composes: nav_button;
-  background-color: lightgrey;
-}
-
-.nav_button_fa {
-  color: grey;
-}
-.nav_button_fa_selected {
-  composes: nav_button_fa;
-  color: black;
-}
 
 /*TODO create transistion*/
 .nav_button:active, .nav_button_selected:active {

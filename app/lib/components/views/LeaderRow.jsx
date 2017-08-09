@@ -5,6 +5,7 @@ export default class LeaderRow extends Component {
   constructor(props) {
     super(props);
     this.state = ({width: '10px'});
+    // this.renderSlug = this.renderSlug.bind(this);
   }
 
   componentDidMount() {
@@ -16,6 +17,16 @@ export default class LeaderRow extends Component {
       this.updateState();
     } else {
       // console.log('done updating ranks width', this.state);
+    }
+  }
+
+  renderSlug() {
+    if (this.props.selected) {
+      return (
+        <div className={styles.slug} style={this.state}></div>
+      );
+    } else {
+      return (<div className={styles.slug_not_selected} style={this.state}></div>);
     }
   }
 
@@ -31,6 +42,7 @@ export default class LeaderRow extends Component {
     // console.log("this.props: ", this.props);
     return (
       <div className={styles.leaderRow} ref="leader_row">
+        {this.renderSlug()}
         <div className={ranking} style={this.state}>{this.props.rank}</div>
         <div className={details}>
           <div>{this.props.site.site}</div>

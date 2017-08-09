@@ -29,7 +29,7 @@ class NavButton extends Component {
           onClick={this.clickHander}
           className={styleIcon}
           name={this.props.fa}
-          size='3x'
+          size='2x'
           />
       </div>
     );

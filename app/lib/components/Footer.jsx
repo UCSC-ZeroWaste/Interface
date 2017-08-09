@@ -9,8 +9,10 @@ export default class NavBar extends Component {
 
   render (){
     return (
-      <div className={styles.footer}>
+      <div className={styles.footer_container}>
+          <div className={styles.footer}>
 
+          </div>
       </div>
     );
   }

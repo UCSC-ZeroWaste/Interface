@@ -17,8 +17,10 @@ class LineChartComponent extends Component {
       height: 400,
       xLabel: "Date",
       yLabel: "Weight",
-      yLabelPosition: 'right'
+      yLabelPosition: 'right',
     };
+    this.strokeWidth = 6;
+    this.strokeDashArray = undefined;//"5,5";
 
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
@@ -49,8 +51,8 @@ class LineChartComponent extends Component {
       return [{
         name: 'site name goes here',
         values: data,
-        strokeWidth: 6,
-        strokeDashArray: "5,5"
+        strokeWidth: this.strokeWidth,
+        strokeDashArray: this.strokeDashArray
       }];
   }
 
@@ -103,8 +105,8 @@ class LineChartComponent extends Component {
     return [{
       name: 'site name goes here',
       values: greenRatio,
-      strokeWidth: 2,
-      strokeDashArray: "5,5"
+      strokeWidth: this.strokeWidth,
+      strokeDashArray: this.strokeDashArray
     }];
   }
 
@@ -227,8 +229,8 @@ class LineChartComponent extends Component {
 
         domain={this.getChartDomain()}
         xAxisTickInterval={this.GetTickInterval()}
-        gridHorizontal={true}
-        gridVertical={true}
+        gridHorizontal={false}
+        gridVertical={false}
       />
     );
   }
