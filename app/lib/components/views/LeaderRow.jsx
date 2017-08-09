@@ -22,12 +22,35 @@ export default class LeaderRow extends Component {
   }
 
   renderSlug() {
+
+    let slugContainer;
+
+    if (this.props.selected) {
+      slugContainer = {
+        width: this.state.slugHeight,
+        height: this.state.slugHeight,
+        // position: 'relative'
+      };
+    } else {
+      slugContainer = {
+        width: this.state.rowHeight,
+        height: this.state.rowHeight,
+        // position: 'relative'
+      };
+    }
+
     if (this.props.selected) {
       return (
-        <div className={styles.slug} style={{width: this.state.slugHeight, height: this.state.slugHeight}}></div>
+        <div style={slugContainer}>
+          <div className={styles.slug}></div>
+        </div>
       );
     } else {
-      return (<div className={styles.slug_not_selected} style={{width: this.state.slugHeight, height: this.state.slugHeight}}></div>);
+      return (
+        <div className={styles.slug_container} style={slugContainer}>
+
+        </div>
+      );
     }
   }
 
@@ -41,17 +64,18 @@ export default class LeaderRow extends Component {
   }
 
   render() {
-    let details = this.props.selected ? styles.details_selected : styles.details;
-    let ranking = this.props.selected ? styles.rank_selected : styles.rank;
+    let rowStyle = this.props.selected ? styles.leader_row_selected : styles.leader_row;
     let color = this.props.selected ? {backgroundColor: this.props.color} : undefined;
+    let rankingStyle = this.props.selected ? styles.rank_selected : styles.rank;
+    let details = this.props.selected ? styles.details_selected : styles.details;
 
     // console.log("this.props: ", this.props);
     return (
-      <div className={styles.leader_row} ref="leader_row">
+      <div className={rowStyle} ref="leader_row">
 
         {this.renderSlug()}
 
-        <div className={ranking} style={merge({backgroundColor: this.props.color}, {width: this.state.rowHeight})}>
+        <div className={rankingStyle} style={merge({backgroundColor: this.props.color}, {width: this.state.rowHeight})}>
           {this.props.rank}
         </div>
 
