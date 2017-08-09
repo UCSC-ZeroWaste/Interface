@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styles from '../../../App.css';
 import _ from 'underscore';
 import {connect} from 'react-redux';
-import {COLLEGE_SET} from '../../constants/constants';
+import {COLLEGE_SET, LEADER_BOARD_COLORS} from '../../constants/constants';
 import LeaderRow from './LeaderRow';
 
 class LeaderBoard extends Component {
@@ -16,8 +16,8 @@ class LeaderBoard extends Component {
   // }
 
   parsePickupData(allPickups) {
-    let test = _.groupBy(allPickups, 'Site');
-    console.log(test);
+    // let test = _.groupBy(allPickups, 'Site');
+    // console.log(test);
     let relevantPickups = allPickups.filter(function(pickup){
       return COLLEGE_SET.includes(pickup.Site);
     });
@@ -43,15 +43,25 @@ class LeaderBoard extends Component {
 
     return leaders.map( (site, i) => {
       let selected = (site.site === this.props.site);
-      return (<LeaderRow rank={i+1} site={site} key={i} selected={selected}/> );
+      return (
+        <LeaderRow
+          rank={i+1}
+          site={site}
+          key={i}
+          selected={selected}
+          color={LEADER_BOARD_COLORS[i]}
+        />
+      );
     });
   }
 
   render() {
     return (
       <div className={styles.leader_board_container}>
-        <div className={styles.leader_board_header}>Zero Waste LeaderBoard</div>
-        {this.renderLeaderRows()}
+        <div className={styles.leader_board_header}>Can your college reach 100% zero waste?</div>
+        <div className={styles.leader_rows}>
+          {this.renderLeaderRows()}
+        </div>
       </div>
     );
   }

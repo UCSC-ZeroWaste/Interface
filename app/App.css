@@ -155,13 +155,6 @@ body > div {
   background-color: lightblue;
 }
 
-.leader_board_container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
 
 
 
@@ -197,65 +190,131 @@ body > div {
 }
 
 
-
-.leader_board_header {
-  width: 80%;
-  font-size: 2em;
-  text-align: left;
+.leader_board_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
 }
-.leaderRow {
-  width: 60%;
-  height: 50px;
+.leader_board_header {
+  color: white;
+  width: 80%;
+  /*height: 10%;*/
+  font-size: 1.5em;
+  text-align: center;
+}
+.leader_rows {
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+.leader_row {
+  width: 70%;
+  height: 12%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px;
+  /*color: white;*/
 }
+
 .rank {
-  border: solid 1px grey;
+  border: solid 2px white;
   border-radius: 50%;
-  background-color: grey;
+  box-sizing: border-box;
   /*width: 100vh;*/
   /*padding-top: 100%;*/
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
 }
-
 .rank_selected {
   composes: rank;
   background-color: lightgrey;
 }
 
 .slug_not_selected {
-  height: 100%;
   border-radius: 50%;
 }
-
 .slug {
   composes: slug_not_selected;
   background-image: url('./lib/assets/images/slug.png');
   background-size: cover;
-  background-position: 100% 100%;
+  /*background-position: 100% 100%;*/
 }
 
-.details {
+
+
+
+
+.details_container {
   width: 70%;
   height: 100%;
-  border: solid 1px grey;
+  position: relative;
+}
+
+/*Opacity fix*/
+.details_container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: grey;
   border-radius: 10px;
+  opacity: 0.3;
+}
+.details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /*border: solid 1px grey;*/
+  border-radius: 10px;
+  display: flex;
 }
-
 .details_selected {
   composes: details;
-  border: solid 3px grey;
-  background-color: lightgrey;
+  box-sizing: border-box;
+  border: solid 3px white;
+  /*background-color: lightgrey;*/
 }
+.details_site {
+  box-sizing: border-box;
+  padding-left: .2em;
+  font-size: 1.2em;
+}
+
+.details_ratio {
+  box-sizing: border-box;
+  padding-right: .2em;
+  font-size: 1.4em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*TODO create transistion*/
