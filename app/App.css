@@ -13,6 +13,11 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 
+@font-face {
+    font-family: "logofont";
+    src: url("./lib/assets/fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff") format('woff');
+}
+
 /*.app {
   background-color: green;
   height: 50px;
@@ -87,6 +92,12 @@ body > div {
   justify-content: space-between;
   align-items: center;
 }
+
+.logo {
+  font-family: 'logofont';
+  color: white;
+  font-size: 3em;
+}
 .nav_button {
   width: 70px;
   height: 100%;
@@ -106,7 +117,7 @@ body > div {
 }
 .nav_button_fa_selected {
   composes: nav_button_fa;
-  color: black;
+  color: white;
 }
 
 .main_view {

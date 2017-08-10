@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import NavButton from './navbar/NavButton';
-import SiteSelector from './navbar/SiteSelector';
 import styles from '../../App.css';
 
 
@@ -13,7 +12,7 @@ export default class NavBar extends Component {
     return (
       <div className={styles.nav_bar_container}>
         <div className={styles.nav_bar}>
-          <SiteSelector/>
+          <div className={styles.logo}>ZERO</div>
           <NavButton title={'LeaderBoard'} view={0} fa={'bars'}/>
           <NavButton title={'RefuseTypesChart'} view={1} fa={'area-chart'}/>
           <NavButton title={'RatioChart'} view={2} fa={'area-chart'}/>
