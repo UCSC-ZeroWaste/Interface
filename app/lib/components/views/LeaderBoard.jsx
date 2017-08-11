@@ -69,7 +69,7 @@ class LeaderBoard extends Component {
 
 const mapStateToProps = (state) => ({
   records: state.records,
-  site: state.site
+  site: state.currentView.site
 });
 
 export default connect(mapStateToProps)(LeaderBoard);

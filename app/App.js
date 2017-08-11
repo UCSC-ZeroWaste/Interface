@@ -4,7 +4,7 @@ import NavBar from './lib/components/NavBar.jsx';
 import Footer from './lib/components/Footer.jsx';
 import DataVisualization from './lib/components/DataVisualization.jsx';
 import { Provider } from 'react-redux';
-import {fetchRecords} from './lib/actions/records';
+import {fetchRecords} from './lib/actions/record_actions';
 import {connect} from 'react-redux';
 import _ from 'underscore';
 

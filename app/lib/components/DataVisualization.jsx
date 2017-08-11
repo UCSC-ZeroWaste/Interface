@@ -5,7 +5,7 @@ import LeaderBoard from './views/LeaderBoard.jsx';
 import LineChart from './views/LineChart.jsx';
 import SizeView from './views/SizeView.jsx';
 import Slider from 'react-slick';
-import {handleNavSelect} from '../actions/views';
+import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
 
 
@@ -13,6 +13,7 @@ class DataVisualization extends Component {
   constructor(props) {
     super(props);
     // this.handleSliderChange = this.handleSliderChange.bind(this);
+    this.keyHandler = this.keyHandler.bind(this);
     this.components = [
       <LeaderBoard/>,
       <LineChart type={'green'}/>,
@@ -26,7 +27,7 @@ class DataVisualization extends Component {
   }
 
   // handleSliderChange(prevSlide, nextSlide) {
-  //   this.props.handleNavSelect(nextSlide);
+  //   this.props.handleViewSelect(nextSlide);
   // }
   //
   // // TODO need to see if there is a more efficient lifecycle method
@@ -48,6 +49,15 @@ class DataVisualization extends Component {
         </div>
       );
     });
+  }
+
+  keyHandler(e) {
+    if (e.key === 'ArrowRight') {
+      console.log('right arrow');
+    } else if (e.key === 'ArrowLeft') {
+      console.log('left arrow');
+
+    }
   }
 
   render() {
@@ -72,7 +82,11 @@ class DataVisualization extends Component {
     };
     // style={{height:"100%",width:"100%"}}
     return (
-      <div className={styles.main_view}>
+      <div
+        className={styles.main_view}
+        onKeyDown={this.keyHandler}
+        tabIndex="0"
+        >
         {this.renderViews()}
       </div>
     );
@@ -83,12 +97,12 @@ class DataVisualization extends Component {
 // </Slider>
 
 const mapStateToProps = (state, ownProps) => ({
-  currentView: state.currentView,
+  currentView: state.currentView.view,
   // autoplay: state.autoplay
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleNavSelect: (navButtonNum) => dispatch(handleNavSelect(navButtonNum))
+  handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum))
 });
 
 // export default DataVisual;

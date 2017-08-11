@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styles from '../../App.css';
 import SiteSelector from './navbar/SiteSelector';
+import NavButton from './navbar/NavButton';
 
 export default class NavBar extends Component {
   constructor(props){
@@ -12,6 +13,8 @@ export default class NavBar extends Component {
       <div className={styles.footer_container}>
           <div className={styles.footer}>
             <SiteSelector/>
+            <NavButton title={'Local'} nav={'scope'} scope={'local'} fa={'user'}/>
+            <NavButton title={'Global'} nav={'scope'} scope={'global'} fa={'globe'}/>
           </div>
       </div>
     );

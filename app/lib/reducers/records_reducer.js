@@ -1,4 +1,4 @@
-import {RECEIVE_RECORDS, RECEIVE_ERROR} from '../actions/records';
+import {RECEIVE_RECORDS, RECEIVE_ERROR} from '../actions/record_actions';
 import merge from 'lodash/merge';
 
 const defaultState = [];

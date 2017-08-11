@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
 import {connect} from 'react-redux';
-import {handleSiteSelect} from '../../actions/views';
+import {handleSiteSelect} from '../../actions/view_actions';
 import {COLLEGE_SET} from '../../constants/constants';
 
 class SiteSelector extends Component {
@@ -29,6 +29,7 @@ class SiteSelector extends Component {
         <div>
           <select onChange={ this.setSite }>
             <option value="">Select a Site</option>
+            <option value="">ALL COLLEGES</option>
             { siteOptions }
           </select>
         </div>

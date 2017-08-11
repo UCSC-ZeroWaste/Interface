@@ -13,13 +13,13 @@ export default class NavBar extends Component {
       <div className={styles.nav_bar_container}>
         <div className={styles.nav_bar}>
           <div className={styles.logo}>ZERO</div>
-          <NavButton title={'LeaderBoard'} view={0} fa={'bars'}/>
-          <NavButton title={'RefuseTypesChart'} view={1} fa={'area-chart'}/>
-          <NavButton title={'RatioChart'} view={2} fa={'area-chart'}/>
-          <NavButton title={'Map'} view={3} fa={'map'}/>
-          <NavButton title={'Rank'} view={4} fa={'cubes'}/>
-          <NavButton title={'Progress'} view={5} fa={'tasks'}/>
-          <NavButton title={'Star'} view={6} fa={'star-half-o'}/>
+          <NavButton title={'LeaderBoard'} nav={'view'} view={0} fa={'bars'}/>
+          <NavButton title={'RefuseTypesChart'} nav={'view'} view={1} fa={'area-chart'}/>
+          <NavButton title={'RatioChart'} nav={'view'} view={2} fa={'area-chart'}/>
+          <NavButton title={'Map'} nav={'view'} view={3} fa={'map'}/>
+          <NavButton title={'Rank'} nav={'view'} view={4} fa={'cubes'}/>
+          <NavButton title={'Progress'} nav={'view'} view={5} fa={'tasks'}/>
+          <NavButton title={'Star'} nav={'view'} view={6} fa={'star-half-o'}/>
         </div>
       </div>
     );

@@ -281,8 +281,8 @@ class LineChartComponent extends Component {
 
 
 const mapStateToProps = (state) => ({
-  siteRecords: _.groupBy(state.records, 'Site')[state.site],
-  site: state.site
+  siteRecords: _.groupBy(state.records, 'Site')[state.currentView.site],
+  site: state.currentView.site
 });
 
 export default connect(mapStateToProps)(LineChartComponent);
