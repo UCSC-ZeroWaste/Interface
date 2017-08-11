@@ -9,7 +9,7 @@ import styles from '../../../App.css';
 class LineChartComponent extends Component {
   constructor(props) {
     super(props);
-    // console.log(this.props.site, this.props.siteRecords);
+    // console.log(this.props.site, this.props.records);
     this.state = {
       rollingAverageLength: 7,
       wasteType: 'Refuse',
@@ -38,22 +38,20 @@ class LineChartComponent extends Component {
   //  this.refs.chart.onWindowResized();
  }
 
-  parseSiteData(data) {
-    data = data
+  parseWasteBreakdown(site) {
+    let data = this.props.records[site]
       .filter( (datum) => (datum.Product === this.state.wasteType))
       .map((datum, i) => ({
         'x' : new Date(datum.PickupTime),
         'y' : datum.Load,
       }));
 
-      // console.log('pickup date', data);
-
-      return [{
-        name: 'site name goes here',
+      return {
+        name: site,
         values: data,
         strokeWidth: this.strokeWidth,
         strokeDashArray: this.strokeDashArray
-      }];
+      };
   }
 
   handleSelector(e) {
@@ -64,31 +62,59 @@ class LineChartComponent extends Component {
     return Math.abs((a - b) / (3600 * 24 * 1000));
   }
 
-  parseGreenRatioData(sitePickups) {
+  getData() {
+    if (this.props.type === 'green') {
+      if (this.props.scope === 'global') {
+        //map
+      } else if (this.props.scope === 'local') {
+        return this.parseGreenRatioData(this.props.site);
+      }
+    }
+
+    else if (this.props.type === 'general') {
+      if (this.props.scope === 'global') {
+        let sites = _.keys(this.props.records);
+
+        return sites.map((site) => this.parseWasteBreakdown(site));
+        console.log('temp', temp);
+        return [this.parseWasteBreakdown(this.props.site)];
+        // // return _.map(this.props.records, (site, pickups) => this.parseWasteBreakdown(site)).join();
+      } else if (this.props.scope === 'local') {
+        return [this.parseWasteBreakdown(this.props.site)];
+      }
+    }
+
+  }
+
+  parseGreenRatioData(site) {
+    const siteName = _.keys(site);
+    let sitePickups = site[siteName];
     let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
-    let minTime = new Date(firstPickup.PickupTime).valueOf();
     let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
+    let minTime = new Date(firstPickup.PickupTime).valueOf();
     let maxTime = new Date(lastPickup.PickupTime).valueOf();
-    let daysLength = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
-    let totalLoad = Array(daysLength).fill(0);
-    let totalRefuse = Array(daysLength).fill(0);
+    let numDaysInCycle = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
+
+    //create empty arrays of n days
+    let totalLoad = Array(numDaysInCycle).fill(0);
+    let totalRefuse = Array(numDaysInCycle).fill(0);
 
     sitePickups.forEach( (pickup) => {
       let thisTime = new Date(pickup.PickupTime).valueOf();
       let timeDiff = Math.floor(this.getTimeDiff(thisTime, minTime));
       if (pickup.Product === 'Refuse') {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < daysLength); i++) {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < numDaysInCycle); i++) {
           totalRefuse[i + timeDiff] += pickup.Load;
           totalLoad[i + timeDiff] += pickup.Load;
         }
       } else {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < daysLength); i++) {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < numDaysInCycle); i++) {
           totalLoad[i + timeDiff] += pickup.Load;
         }
       }
     });
     let greenRatio = [];
-    for (let i = 0 ; i < daysLength; i++) {
+    for (let i = 0 ; i < numDaysInCycle; i++) {
       greenRatio.push(
         Math.floor(100 *(totalLoad[i] - totalRefuse[i]) / totalLoad[i])
       );
@@ -175,29 +201,17 @@ class LineChartComponent extends Component {
   }
 
   renderChart() {
-    let options = {};
-    switch (this.props.type) {
-      case 'green':
-        options = {
-          data: this.parseGreenRatioData(this.props.siteRecords),
-          title: "Waste Ratio (higher is better)"
-        };
-        break;
-      case 'general':
-        options = {
-          data: this.parseSiteData(this.props.siteRecords),
-          title: "All Waste Data"
-        };
-        break;
-      default:
-        options = {data: {}};
-    }
+    let title = (
+      this.props.type === 'green' ?
+      "Waste Ratio (higher is better)" :
+      "All Waste Data"
+    );
 
     return (
       //TODO get a handle on color & colorAccessor props
       <LineChart
         legend={true}
-        data={options.data}
+        data={this.getData()}
         width='100%'
         height={this.state.height}
         hoverAnimation={false}
@@ -208,7 +222,7 @@ class LineChartComponent extends Component {
           width: this.state.width,
           height: this.state.height
         }}
-        title={this.props.site + ' - ' + options.title}
+        title={this.props.site + ' - ' + title}
         yAxisLabel={this.state.yLabel}
         xAxisLabel={this.state.xLabel}
 
@@ -219,13 +233,7 @@ class LineChartComponent extends Component {
             // return data.nodeColor;
           }
         }
-        colorAccessor={
-          (data, idx) => {
-            // console.log('colorAccessor: ', data, idx);
-            return 0;
-            // return data.nodeColor;
-          }
-        }
+
 
         domain={this.getChartDomain()}
         xAxisTickInterval={this.GetTickInterval()}
@@ -242,9 +250,9 @@ class LineChartComponent extends Component {
   //   />
 
   render() {
-    // console.log('this.props.siteRecords', this.props.siteRecords);
-    if (this.props.siteRecords === undefined) return (<div></div>);
-    // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
+    // console.log('this.props.records', this.props.records);
+    if (this.props.records === undefined) return (<div></div>);
+    // console.log("Site Data: ", this.parseWasteBreakdown(this.props.records));
 
     return (
       <div className={styles.line_chart_container}>
@@ -257,7 +265,7 @@ class LineChartComponent extends Component {
   // {this.renderWasteTypeSelector()}
   // <LineChart
   //
-  //   data= {this.parseSiteData(this.props.siteRecords)}
+  //   data= {this.parseWasteBreakdown(this.props.records)}
   //   chartSeries= {[{
   //     field: 'quantity',
   //     name:  this.props.site + ' - Site Waste Weight',
@@ -277,12 +285,10 @@ class LineChartComponent extends Component {
 }
 
 
-
-
-
 const mapStateToProps = (state) => ({
-  siteRecords: _.groupBy(state.records, 'Site')[state.currentView.site],
-  site: state.currentView.site
+  records: state.records,
+  site: state.currentView.site,
+  scope: state.currentView.scope,
 });
 
 export default connect(mapStateToProps)(LineChartComponent);

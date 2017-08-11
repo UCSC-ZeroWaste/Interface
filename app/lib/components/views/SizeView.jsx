@@ -11,8 +11,7 @@ class SizeView extends Component {
   render() {
     return (
       <div>
-        RENDER SIZE VIEW
-        show relative size of trash using cartoon visuals
+        RELATIVE SIZE VIEW GOES HERE
       </div>
     );
   }

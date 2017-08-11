@@ -2,9 +2,9 @@ import * as Api from '../services/api';
 export const RECEIVE_RECORDS = 'RECEIVE_RECORDS';
 export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 
-export const receiveRecords = (pickups) => ({
+export const receiveRecords = (pickupData) => ({
   type: RECEIVE_RECORDS,
-  pickups
+  pickupData
 });
 
 export const receiveError = (error) => ({
