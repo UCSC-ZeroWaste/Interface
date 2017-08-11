@@ -15,6 +15,7 @@ class DataVisualization extends Component {
     this.keyHandler = this.keyHandler.bind(this);
     this.components = [
       <LeaderBoard/>,
+      <LineChart type={'green'}/>,
       <LineChart type={'general'}/>,
       <SizeView />,
       <_ViewTemplate title={'Empty View 5'}/>,
@@ -22,7 +23,6 @@ class DataVisualization extends Component {
       <_ViewTemplate title={'Empty View 7'}/>
     ];
   }
-  // <LineChart type={'green'}/>,
 
   // handleSliderChange(prevSlide, nextSlide) {
   //   this.props.handleViewSelect(nextSlide);
@@ -54,10 +54,10 @@ class DataVisualization extends Component {
     const view = this.props.currentView;
     const max = this.components.length - 1;
     if (e.key === 'ArrowRight') {
-      var nextView = ( view >= max ? max : view + 1);
+      var nextView = ( view >= max ? 0 : view + 1);
       this.props.handleViewSelect(nextView);
     } else if (e.key === 'ArrowLeft') {
-      nextView = ( view === 0 ? 0 : view - 1);
+      nextView = ( view === 0 ? max : view - 1);
       this.props.handleViewSelect(nextView);
     }
   }

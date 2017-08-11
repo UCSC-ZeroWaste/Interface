@@ -39,7 +39,7 @@ class LineChartComponent extends Component {
  }
 
   parseWasteBreakdown(site) {
-    let data = this.props.records[site]
+    let sitePickups = this.props.records[site]
       .filter( (datum) => (datum.Product === this.state.wasteType))
       .map((datum, i) => ({
         'x' : new Date(datum.PickupTime),
@@ -48,7 +48,7 @@ class LineChartComponent extends Component {
 
       return {
         name: site,
-        values: data,
+        values: sitePickups,
         strokeWidth: this.strokeWidth,
         strokeDashArray: this.strokeDashArray
       };
@@ -63,32 +63,18 @@ class LineChartComponent extends Component {
   }
 
   getData() {
-    if (this.props.type === 'green') {
-      if (this.props.scope === 'global') {
-        //map
-      } else if (this.props.scope === 'local') {
-        return this.parseGreenRatioData(this.props.site);
-      }
+    const parseData = (this.props.type === 'green' ? (site) => this.parseGreenRatioData(site) : (site) => this.parseWasteBreakdown(site) );
+
+    if (this.props.scope === 'global') {
+      let sites = _.keys(this.props.records);
+      return sites.map( (site) => parseData(site) );
+    } else if (this.props.scope === 'local') {
+      return [parseData(this.props.site)];
     }
-
-    else if (this.props.type === 'general') {
-      if (this.props.scope === 'global') {
-        let sites = _.keys(this.props.records);
-
-        return sites.map((site) => this.parseWasteBreakdown(site));
-        console.log('temp', temp);
-        return [this.parseWasteBreakdown(this.props.site)];
-        // // return _.map(this.props.records, (site, pickups) => this.parseWasteBreakdown(site)).join();
-      } else if (this.props.scope === 'local') {
-        return [this.parseWasteBreakdown(this.props.site)];
-      }
-    }
-
   }
 
-  parseGreenRatioData(site) {
-    const siteName = _.keys(site);
-    let sitePickups = site[siteName];
+  parseGreenRatioData(siteName) {
+    let sitePickups = this.props.records[siteName];
     let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
     let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
     let minTime = new Date(firstPickup.PickupTime).valueOf();
@@ -128,12 +114,12 @@ class LineChartComponent extends Component {
         x : i
       }));
 
-    return [{
-      name: 'site name goes here',
+    return {
+      name: siteName,
       values: greenRatio,
       strokeWidth: this.strokeWidth,
       strokeDashArray: this.strokeDashArray
-    }];
+    };
   }
 
   setRollingAverageLength(e) {
@@ -233,6 +219,14 @@ class LineChartComponent extends Component {
             // return data.nodeColor;
           }
         }
+        //
+        // colorAccessor={
+        //   (data, idx) => {
+        //     // console.log('colorAccessor: ', data, idx);
+        //     return 0;
+        //     // return data.nodeColor;
+        //   }
+        // }
 
 
         domain={this.getChartDomain()}
