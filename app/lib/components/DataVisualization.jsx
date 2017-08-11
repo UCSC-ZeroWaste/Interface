@@ -55,11 +55,11 @@ class DataVisualization extends Component {
     const max = this.components.length - 1;
     if (e.key === 'ArrowRight') {
       var nextView = ( view >= max ? max : view + 1);
+      this.props.handleViewSelect(nextView);
     } else if (e.key === 'ArrowLeft') {
       nextView = ( view === 0 ? 0 : view - 1);
+      this.props.handleViewSelect(nextView);
     }
-    console.log(nextView);
-    this.props.handleViewSelect(nextView);
   }
 
   render() {
