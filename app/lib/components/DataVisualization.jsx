@@ -8,7 +8,6 @@ import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
 
-
 class DataVisualization extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +18,6 @@ class DataVisualization extends Component {
       <LineChart type={'green'}/>,
       <LineChart type={'general'}/>,
       <SizeView />,
-      <_ViewTemplate title={'Empty View 4'}/>,
       <_ViewTemplate title={'Empty View 5'}/>,
       <_ViewTemplate title={'Empty View 6'}/>,
       <_ViewTemplate title={'Empty View 7'}/>
@@ -51,35 +49,39 @@ class DataVisualization extends Component {
     });
   }
 
+  // TODO allows for cycling through nav views -- this is just here for easier testing on the web
   keyHandler(e) {
+    const view = this.props.currentView;
+    const max = this.components.length - 1;
     if (e.key === 'ArrowRight') {
-      console.log('right arrow');
+      var nextView = ( view >= max ? max : view + 1);
     } else if (e.key === 'ArrowLeft') {
-      console.log('left arrow');
-
+      nextView = ( view === 0 ? 0 : view - 1);
     }
+    console.log(nextView);
+    this.props.handleViewSelect(nextView);
   }
 
   render() {
-    var settings = {
-      adaptiveHeight: true,
-      // afterChange: this.handleSliderChange,
-      beforeChange: this.handleSliderChange,
-      arrows: true,
-      autoplay: false,
-      autoplaySpeed: 3000,
-      dots: true,
-      // centerMode: true,
-      fade: false,
-      infinite: true,
-      lazyLoad: false,
-      pauseOnHover: true,
-      slidesToShow: 1,
-      // slidesToScroll: 1,
-      speed: 1000,
-      swipeToSlide: true,
-      variableWidth: false,
-    };
+    // var settings = {
+    //   adaptiveHeight: true,
+    //   // afterChange: this.handleSliderChange,
+    //   beforeChange: this.handleSliderChange,
+    //   arrows: true,
+    //   autoplay: false,
+    //   autoplaySpeed: 3000,
+    //   dots: true,
+    //   // centerMode: true,
+    //   fade: false,
+    //   infinite: true,
+    //   lazyLoad: false,
+    //   pauseOnHover: true,
+    //   slidesToShow: 1,
+    //   // slidesToScroll: 1,
+    //   speed: 1000,
+    //   swipeToSlide: true,
+    //   variableWidth: false,
+    // };
     // style={{height:"100%",width:"100%"}}
     return (
       <div
