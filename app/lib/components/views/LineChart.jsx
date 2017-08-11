@@ -13,11 +13,8 @@ class LineChartComponent extends Component {
     this.state = {
       rollingAverageLength: 7,
       wasteType: 'Refuse',
-      width: 900,
+      width: 700,
       height: 400,
-      xLabel: "Date",
-      yLabel: "Weight",
-      yLabelPosition: 'right',
     };
     this.strokeWidth = 6;
     this.strokeDashArray = undefined;//"5,5";
@@ -167,7 +164,7 @@ class LineChartComponent extends Component {
         return {x: [undefined,30], y: [0,100]};
       case 'general':
       //TODO needs to update domain range for x axis to change dynamically -- currently static
-        return {x: [new Date('Jul 07 2017'), new Date('Aug 07 2017')], y: [0,]};
+        return {x: [new Date(new Date().setDate(new Date().getDate()-30)), new Date()], y: [0,]};
       default:
         return {x: [undefined,undefined], y: [undefined,undefined]};
       }
@@ -187,11 +184,20 @@ class LineChartComponent extends Component {
   }
 
   renderChart() {
-    let title = (
-      this.props.type === 'green' ?
-      "Waste Ratio (higher is better)" :
-      "All Waste Data"
-    );
+
+    if (this.props.type === 'green') {
+      var options = {
+        title: "Waste Ratio (higher is better)",
+        xLabel: "Time Period",
+        yLabel: "Ratio",
+      };
+    } else {
+      options = {
+        title: "All Waste Data",
+        xLabel: "Date",
+        yLabel: "Weight",
+      };
+    }
 
     return (
       //TODO get a handle on color & colorAccessor props
@@ -199,7 +205,7 @@ class LineChartComponent extends Component {
         legend={true}
         data={this.getData()}
         width='100%'
-        height={this.state.height}
+        height={this.state.height + 100}
         hoverAnimation={false}
         circleRadius={4}
         viewBoxObject={{
@@ -208,25 +214,12 @@ class LineChartComponent extends Component {
           width: this.state.width,
           height: this.state.height
         }}
-        title={this.props.site + ' - ' + title}
-        yAxisLabel={this.state.yLabel}
-        xAxisLabel={this.state.xLabel}
+        title={this.props.site + ' - ' + options.title}
 
-        colors={
-          (idx) => {
-            // console.log('colors: ', idx);
-            return ['#408E2F','#2F4073','#AAA439','#AA3C39'][idx];
-            // return data.nodeColor;
-          }
-        }
-        //
-        // colorAccessor={
-        //   (data, idx) => {
-        //     // console.log('colorAccessor: ', data, idx);
-        //     return 0;
-        //     // return data.nodeColor;
-        //   }
-        // }
+        yAxisLabel={options.yLabel}
+        xAxisLabel={options.xLabel}
+
+
 
 
         domain={this.getChartDomain()}
