@@ -1,21 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {handleNavSelect} from '../../actions/views';
+import {handleViewSelect, handleSiteSelect, handleScopeSelect} from '../../actions/view_actions';
 import styles from '../../../App.css';
 import FontAwesome from 'react-fontawesome';
 
 class NavButton extends Component {
   constructor(props) {
     super(props);
-    this.clickHander = this.clickHander.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
-  clickHander() {
-    this.props.handleNavSelect(this.props.view);
+  clickHandler(e) {
+    if (this.props.nav === 'view') {
+      this.props.handleViewSelect(this.props.view);
+    } else if (this.props.nav === 'scope') {
+      // TODO need to flesh this out
+      this.props.handleScopeSelect(this.props.scope);
+      console.log('hit scope clickHandler', this.props.scope);
+    } else {
+      console.log('nav button clickHandler error');
+    }
   }
 
   render() {
-    if (this.props.currentView === this.props.view) {
+    if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
       var styleButton = styles.nav_button_selected;
       var styleIcon = styles.nav_button_fa_selected;
     } else {
@@ -26,10 +34,10 @@ class NavButton extends Component {
     return (
       <div className={styleButton}>
         <FontAwesome
-          onClick={this.clickHander}
+          onClick={this.clickHandler}
           className={styleIcon}
           name={this.props.fa}
-          size='3x'
+          size='2x'
           />
       </div>
     );
@@ -46,7 +54,9 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleNavSelect: (navButtonNum) => dispatch(handleNavSelect(navButtonNum))
+  handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum)),
+  handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
+  handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope))
 });
 
 export default connect(

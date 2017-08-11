@@ -44,13 +44,11 @@ module.exports = {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     }
-    // , {
-    //     test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-    //     loader: 'url-loader',
-    //     options: {
-    //       limit: 10000
-    //     }
-    //   }
+    , {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        // include: path.resolve(__dirname, 'lib/assets'),
+        loader: 'url-loader'
+      }
     ]
   },
   resolve: {

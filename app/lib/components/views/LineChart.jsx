@@ -9,16 +9,15 @@ import styles from '../../../App.css';
 class LineChartComponent extends Component {
   constructor(props) {
     super(props);
-    // console.log(this.props.site, this.props.siteRecords);
+    // console.log(this.props.site, this.props.records);
     this.state = {
       rollingAverageLength: 7,
       wasteType: 'Refuse',
-      width: 900,
+      width: 700,
       height: 400,
-      xLabel: "Date",
-      yLabel: "Weight",
-      yLabelPosition: 'right'
     };
+    this.strokeWidth = 6;
+    this.strokeDashArray = undefined;//"5,5";
 
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
@@ -36,22 +35,20 @@ class LineChartComponent extends Component {
   //  this.refs.chart.onWindowResized();
  }
 
-  parseSiteData(data) {
-    data = data
+  parseWasteBreakdown(site) {
+    let sitePickups = this.props.records[site]
       .filter( (datum) => (datum.Product === this.state.wasteType))
       .map((datum, i) => ({
         'x' : new Date(datum.PickupTime),
         'y' : datum.Load,
       }));
 
-      // console.log('pickup date', data);
-
-      return [{
-        name: 'site name goes here',
-        values: data,
-        strokeWidth: 6,
-        strokeDashArray: "5,5"
-      }];
+      return {
+        name: site,
+        values: sitePickups,
+        strokeWidth: this.strokeWidth,
+        strokeDashArray: this.strokeDashArray
+      };
   }
 
   handleSelector(e) {
@@ -62,31 +59,45 @@ class LineChartComponent extends Component {
     return Math.abs((a - b) / (3600 * 24 * 1000));
   }
 
-  parseGreenRatioData(sitePickups) {
+  getData() {
+    const parseData = (this.props.type === 'green' ? (site) => this.parseGreenRatioData(site) : (site) => this.parseWasteBreakdown(site) );
+
+    if (this.props.scope === 'global') {
+      let sites = _.keys(this.props.records);
+      return sites.map( (site) => parseData(site) );
+    } else if (this.props.scope === 'local') {
+      return [parseData(this.props.site)];
+    }
+  }
+
+  parseGreenRatioData(siteName) {
+    let sitePickups = this.props.records[siteName];
     let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
-    let minTime = new Date(firstPickup.PickupTime).valueOf();
     let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
+    let minTime = new Date(firstPickup.PickupTime).valueOf();
     let maxTime = new Date(lastPickup.PickupTime).valueOf();
-    let daysLength = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
-    let totalLoad = Array(daysLength).fill(0);
-    let totalRefuse = Array(daysLength).fill(0);
+    let numDaysInCycle = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
+
+    //create empty arrays of n days
+    let totalLoad = Array(numDaysInCycle).fill(0);
+    let totalRefuse = Array(numDaysInCycle).fill(0);
 
     sitePickups.forEach( (pickup) => {
       let thisTime = new Date(pickup.PickupTime).valueOf();
       let timeDiff = Math.floor(this.getTimeDiff(thisTime, minTime));
       if (pickup.Product === 'Refuse') {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < daysLength); i++) {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < numDaysInCycle); i++) {
           totalRefuse[i + timeDiff] += pickup.Load;
           totalLoad[i + timeDiff] += pickup.Load;
         }
       } else {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < daysLength); i++) {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < numDaysInCycle); i++) {
           totalLoad[i + timeDiff] += pickup.Load;
         }
       }
     });
     let greenRatio = [];
-    for (let i = 0 ; i < daysLength; i++) {
+    for (let i = 0 ; i < numDaysInCycle; i++) {
       greenRatio.push(
         Math.floor(100 *(totalLoad[i] - totalRefuse[i]) / totalLoad[i])
       );
@@ -100,12 +111,12 @@ class LineChartComponent extends Component {
         x : i
       }));
 
-    return [{
-      name: 'site name goes here',
+    return {
+      name: siteName,
       values: greenRatio,
-      strokeWidth: 2,
-      strokeDashArray: "5,5"
-    }];
+      strokeWidth: this.strokeWidth,
+      strokeDashArray: this.strokeDashArray
+    };
   }
 
   setRollingAverageLength(e) {
@@ -153,7 +164,7 @@ class LineChartComponent extends Component {
         return {x: [undefined,30], y: [0,100]};
       case 'general':
       //TODO needs to update domain range for x axis to change dynamically -- currently static
-        return {x: [new Date('Jul 07 2017'), new Date('Aug 07 2017')], y: [0,]};
+        return {x: [new Date(new Date().setDate(new Date().getDate()-30)), new Date()], y: [0,]};
       default:
         return {x: [undefined,undefined], y: [undefined,undefined]};
       }
@@ -173,31 +184,28 @@ class LineChartComponent extends Component {
   }
 
   renderChart() {
-    let options = {};
-    switch (this.props.type) {
-      case 'green':
-        options = {
-          data: this.parseGreenRatioData(this.props.siteRecords),
-          title: "Waste Ratio (higher is better)"
-        };
-        break;
-      case 'general':
-        options = {
-          data: this.parseSiteData(this.props.siteRecords),
-          title: "All Waste Data"
-        };
-        break;
-      default:
-        options = {data: {}};
+
+    if (this.props.type === 'green') {
+      var options = {
+        title: "Waste Ratio (higher is better)",
+        xLabel: "Time Period",
+        yLabel: "Ratio",
+      };
+    } else {
+      options = {
+        title: "All Waste Data",
+        xLabel: "Date",
+        yLabel: "Weight",
+      };
     }
 
     return (
       //TODO get a handle on color & colorAccessor props
       <LineChart
         legend={true}
-        data={options.data}
+        data={this.getData()}
         width='100%'
-        height={this.state.height}
+        height={this.state.height + 100}
         hoverAnimation={false}
         circleRadius={4}
         viewBoxObject={{
@@ -207,28 +215,17 @@ class LineChartComponent extends Component {
           height: this.state.height
         }}
         title={this.props.site + ' - ' + options.title}
-        yAxisLabel={this.state.yLabel}
-        xAxisLabel={this.state.xLabel}
 
-        colors={
-          (idx) => {
-            // console.log('colors: ', idx);
-            return ['#408E2F','#2F4073','#AAA439','#AA3C39'][idx];
-            // return data.nodeColor;
-          }
-        }
-        colorAccessor={
-          (data, idx) => {
-            // console.log('colorAccessor: ', data, idx);
-            return 0;
-            // return data.nodeColor;
-          }
-        }
+        yAxisLabel={options.yLabel}
+        xAxisLabel={options.xLabel}
+
+
+
 
         domain={this.getChartDomain()}
         xAxisTickInterval={this.GetTickInterval()}
-        gridHorizontal={true}
-        gridVertical={true}
+        gridHorizontal={false}
+        gridVertical={false}
       />
     );
   }
@@ -240,9 +237,9 @@ class LineChartComponent extends Component {
   //   />
 
   render() {
-    // console.log('this.props.siteRecords', this.props.siteRecords);
-    if (this.props.siteRecords === undefined) return (<div></div>);
-    // console.log("Site Data: ", this.parseSiteData(this.props.siteRecords));
+    // console.log('this.props.records', this.props.records);
+    if (this.props.records === undefined) return (<div></div>);
+    // console.log("Site Data: ", this.parseWasteBreakdown(this.props.records));
 
     return (
       <div className={styles.line_chart_container}>
@@ -255,7 +252,7 @@ class LineChartComponent extends Component {
   // {this.renderWasteTypeSelector()}
   // <LineChart
   //
-  //   data= {this.parseSiteData(this.props.siteRecords)}
+  //   data= {this.parseWasteBreakdown(this.props.records)}
   //   chartSeries= {[{
   //     field: 'quantity',
   //     name:  this.props.site + ' - Site Waste Weight',
@@ -275,12 +272,10 @@ class LineChartComponent extends Component {
 }
 
 
-
-
-
 const mapStateToProps = (state) => ({
-  siteRecords: _.groupBy(state.records, 'Site')[state.site],
-  site: state.site
+  records: state.records,
+  site: state.currentView.site,
+  scope: state.currentView.scope,
 });
 
 export default connect(mapStateToProps)(LineChartComponent);
