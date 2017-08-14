@@ -38,7 +38,8 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
+    loaders: [
+      {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
@@ -51,7 +52,16 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
-    }]
+    }
+    , {
+        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        // include: path.resolve(__dirname, 'lib/assets'),
+        loader: 'url-loader'
+      }
+    ]
+  },
+  resolve: {
+    extensions: ["", ".js", ".jsx" ]
   },
   postcss: [
     require('autoprefixer')
