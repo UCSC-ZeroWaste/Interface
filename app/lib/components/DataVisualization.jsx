@@ -7,6 +7,10 @@ import SizeView from './views/SizeView.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
+import transitions from './transitions.css';
+import sliding from './sliding.css';
+import { CSSTransitionGroup } from 'react-transition-group';
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class DataVisualization extends Component {
   constructor(props) {
@@ -35,7 +39,8 @@ class DataVisualization extends Component {
   //   // console.log('nextProps', nextProps);
   // }
 
-  renderViews() {
+  renderView() {
+    console.log('render view');
     return this.components[this.props.currentView];
   }
 
@@ -62,6 +67,10 @@ class DataVisualization extends Component {
     }
   }
 
+  renderTest() {
+
+  }
+
   render() {
     // var settings = {
     //   adaptiveHeight: true,
@@ -83,17 +92,33 @@ class DataVisualization extends Component {
     //   variableWidth: false,
     // };
     // style={{height:"100%",width:"100%"}}
+    const components = this.components.map((component, i) => (
+       <div key={component} >
+         {component}
+       </div>
+     ));
+
     return (
       <div
         className={styles.main_view}
         onKeyDown={this.keyHandler}
         tabIndex="0"
         >
-        {this.renderViews()}
+        <CSSTransitionGroup
+          transitionAppear
+          transitionName={sliding}
+          transitionEnterTimeout={4000}
+          transitionLeaveTimeout={4000}
+          transitionAppearTimeout={30000} >
+          {components[this.props.currentView]}
+        </CSSTransitionGroup>
       </div>
     );
   }
 }
+// {(this.props.currentView) % 2 === 1 ? <div> hi </div> : <div> bye </div>}
+// {this.renderView()}
+
 // <Slider ref='slider' {...settings} className={styles.slider}>
 //   {this.renderSlides()}
 // </Slider>

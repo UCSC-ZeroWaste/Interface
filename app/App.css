@@ -251,6 +251,33 @@ body > div {
    transform: translateX(-100%);
 }
 
+/*.gallery {
+  height: 100%;
+  width: 100%;
+}
+.carousel2-enter {
+  opacity: 0.01;
+  transform: translateX(100vw);
+
+}
+
+.carousel2-enter.carousel2-enter-active {
+  opacity: 1;
+  transition:  4000ms ease-out;
+  transform: translateX(0%);
+}
+
+.carousel2-leave {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.carousel2-leave.carousel2-leave-active {
+  opacity: 0.01;
+  transition: 4000ms ease-out;
+  transform: translateX(-100vw);
+}*/
+
 
 
 .line_chart_container {

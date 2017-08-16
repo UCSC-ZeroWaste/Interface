@@ -1,0 +1,30 @@
+.enter {
+  opacity: 0.01;
+  background-color: red;
+  transform: translateX(100vw);
+}
+.enterActive {
+  opacity: 1;
+  background-color: red;
+  transition:  4s ease-out;
+  transform: translateX(0%);
+}
+
+.leave {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.leaveActive {
+  opacity: 0.01;
+  transition: 4s ease-out;
+  transform: translateX(-100vw);
+}
+
+.appear {
+  opacity: 0.01;
+
+}
+.appearActive {
+  transition: opacity 3s ease-in;
+  opacity: 1;
+}
