@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import {fetchRecords} from './lib/actions/record_actions';
 import {connect} from 'react-redux';
 import _ from 'underscore';
+import TestTransitions from './lib/components/TestTransitions';
 
 class App extends React.Component {
   constructor(props) {
