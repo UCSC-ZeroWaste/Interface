@@ -43,6 +43,7 @@ export default class LeaderRow extends Component {
       return (
         <div style={slugContainer}>
           <div className={styles.slug}></div>
+
         </div>
       );
     } else {

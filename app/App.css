@@ -263,11 +263,18 @@ body > div {
   background-image: url('./lib/assets/images/slug.png');
   background-size: cover;
   position: relative;
-
+  background: white;
+  z-index:2;
   animation-duration: .6s, .3s;
   animation-name: slug_enlarge, slug_slide;
   animation-fill-mode: forwards, forwards;
   /*animation-delay: .2s, 1s;*/
+}
+
+.slug_circle_color {
+  composes: slug;
+  background: white;
+  z-index:1;
 }
 
 @keyframes slug_slide {
