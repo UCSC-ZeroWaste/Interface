@@ -7,8 +7,10 @@ import { Provider } from 'react-redux';
 import {fetchRecords} from './lib/actions/record_actions';
 import {connect} from 'react-redux';
 import _ from 'underscore';
-import TestTransitions from './lib/components/TestTransitions';
-import TestRouter from './lib/components/TestRouter';
+
+import TestTransitions from './lib/components/test_carousel/TestTransitions';
+import TestRouter from './lib/components/test_carousel/TestRouter';
+import TestSlide from './lib/components/test_carousel/TestSlide';
 
 class App extends React.Component {
   constructor(props) {
@@ -34,7 +36,7 @@ class App extends React.Component {
       <Provider store={this.props.store}>
         <div className={styles.page}>
           <NavBar />
-          <TestRouter/>
+          <DataVisualization/>
           <Footer/>
         </div>
       </Provider>

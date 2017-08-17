@@ -7,9 +7,10 @@ import SizeView from './views/SizeView.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
-import transitions from './transitions.css';
-import sliding from './sliding.css';
 import { CSSTransitionGroup } from 'react-transition-group';
+
+import transitions from './test_carousel/transitions.css';
+import sliding from './test_carousel/sliding.css';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class DataVisualization extends Component {
@@ -41,7 +42,12 @@ class DataVisualization extends Component {
 
   renderView() {
     console.log('render view');
-    return this.components[this.props.currentView];
+    if (!this.props.records) {
+      return this.components[this.props.currentView];
+    } else {
+      console.log(this.props.records);
+      return (<div style={{color: 'red'}}> Could not get data </div>);
+    }
   }
 
   renderSlides() {
@@ -104,18 +110,20 @@ class DataVisualization extends Component {
         onKeyDown={this.keyHandler}
         tabIndex="0"
         >
-        <CSSTransitionGroup
-          transitionAppear
-          transitionName={sliding}
-          transitionEnterTimeout={4000}
-          transitionLeaveTimeout={4000}
-          transitionAppearTimeout={30000} >
-          {components[this.props.currentView]}
-        </CSSTransitionGroup>
+        {this.renderView()}
       </div>
     );
   }
 }
+// <CSSTransitionGroup
+//   transitionAppear
+//   transitionName={sliding}
+//   transitionEnterTimeout={4000}
+//   transitionLeaveTimeout={4000}
+//   transitionAppearTimeout={500} >
+//   {components[this.props.currentView]}
+// </CSSTransitionGroup>
+
 // {(this.props.currentView) % 2 === 1 ? <div> hi </div> : <div> bye </div>}
 // {this.renderView()}
 
@@ -125,6 +133,7 @@ class DataVisualization extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView.view,
+  records: state.records,
   // autoplay: state.autoplay
 });
 

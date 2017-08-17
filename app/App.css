@@ -526,3 +526,55 @@ body > div {
 /*.slider div {
   height: 100%;
 }*/
+
+
+
+
+.router_fill {
+
+}
+
+.router_content {
+  display: 'flex';
+  flex-direction: 'column';
+  height: '500px';
+  width: '100%';
+  text-align: 'center';
+}
+
+.router_content > span {
+  display: 'flex';
+  flex-direction: 'column';
+  height: '100%';
+  width: '100%';
+}
+
+.router_navItem {
+  text-align: 'center';
+  flex: 1;
+  list-style-type: 'none';
+  padding: '10px';
+}
+
+.router_nav {
+  display: flex;
+  flex-direction: row;
+  height: '20%';
+  width: '100%';
+}
+
+.router_div {
+  color: 'white';
+  padding-top: '20px';
+  font-size: '30px';
+  border: 1px red solid;
+  box-sizing: border-box;
+  background-color: blue;
+}
+
+router_a {
+  display: 'flex';
+  flex-direction: 'column';
+  height: '100%';
+  width: '100%';
+}

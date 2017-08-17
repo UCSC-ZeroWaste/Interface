@@ -6,7 +6,7 @@
 .enterActive {
   opacity: 1;
   background-color: red;
-  transition:  4s ease-out;
+  transition:  1s ease-out;
   transform: translateX(0%);
 }
 
@@ -16,7 +16,7 @@
 }
 .leaveActive {
   opacity: 0.01;
-  transition: 4s ease-out;
+  transition: 1s ease-out;
   transform: translateX(-100vw);
 }
 
