@@ -8,6 +8,10 @@ import {fetchRecords} from './lib/actions/record_actions';
 import {connect} from 'react-redux';
 import _ from 'underscore';
 
+import TestTransitions from './lib/components/test_carousel/TestTransitions';
+import TestRouter from './lib/components/test_carousel/TestRouter';
+import TestSlide from './lib/components/test_carousel/TestSlide';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -41,7 +45,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.records
+  data: state.records.data
 });
 
 const mapDispatchToProps = (dispatch) => ({

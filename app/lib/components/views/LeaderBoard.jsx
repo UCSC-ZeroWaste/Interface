@@ -56,7 +56,7 @@ class LeaderBoard extends Component {
  }
 
 const mapStateToProps = (state) => ({
-  records: state.records,
+  records: state.records.data,
   site: state.currentView.site
 });
 

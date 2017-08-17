@@ -39,7 +39,7 @@ class SiteSelector extends Component {
 
 
 const mapStateToProps = (state) => ({
-  records: state.records
+  records: state.records.data
 });
 
 const mapDispatchToProps = (dispatch) => ({

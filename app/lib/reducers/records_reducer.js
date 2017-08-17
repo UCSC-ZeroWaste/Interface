@@ -3,15 +3,16 @@ import {COLLEGE_SET} from '../constants/constants';
 import _ from 'underscore';
 import merge from 'lodash/merge';
 
-const defaultState = {};
+const nullState = Object.freeze({data: null, errors: null});
 
-const RecordsReducer = (state = defaultState, action) => {
+const RecordsReducer = (state = nullState, action) => {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_RECORDS:
-      return parsePickupData(action.pickupData);
+      let data = parsePickupData(action.pickupData);
+      return merge({}, nullState, {data: data});
     case RECEIVE_ERROR:
-      return action.error;
+      return merge({}, nullState, {errors: action.errors});
     default:
       return state;
   }

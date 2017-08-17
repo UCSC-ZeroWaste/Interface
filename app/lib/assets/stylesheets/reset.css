@@ -13,7 +13,7 @@ span, article, footer, time, small {
   vertical-align: inherit;
   box-sizing: inherit;
   background: transparent;
-  font-family: helvetica;
+  font-family: 'HelveticaNeue-Light', Arial, Times;
 }
 
 ul {
