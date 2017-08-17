@@ -45,7 +45,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.records
+  data: state.records.data
 });
 
 const mapDispatchToProps = (dispatch) => ({

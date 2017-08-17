@@ -18,8 +18,6 @@ class SizeView extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  siteRecords: _.groupBy(state.records, 'Site')[state.site],
-  site: state.site
 });
 
 export default connect(mapStateToProps)(SizeView);

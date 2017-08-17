@@ -8,6 +8,8 @@ import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
 import { CSSTransitionGroup } from 'react-transition-group';
+import { MoonLoader } from 'halogen';
+
 
 import transitions from './test_carousel/transitions.css';
 import sliding from './test_carousel/sliding.css';
@@ -42,11 +44,27 @@ class DataVisualization extends Component {
 
   renderView() {
     console.log('render view');
-    if (!this.props.records) {
-      return this.components[this.props.currentView];
-    } else {
+    if (this.props.errors) {
+      console.log(this.props.errors);
+      return (
+        <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
+          DATA COULD NOT BE FETCHED <br/>
+          {this.props.errors}
+        </div>);
+    } else if (!this.props.records) {
       console.log(this.props.records);
-      return (<div style={{color: 'red'}}> Could not get data </div>);
+      return (
+        <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <MoonLoader
+            color={'white'}
+            size={'100px'}
+            margin={'5px'}
+            loading={true}
+            />
+        </div>);
+      // return (<div style={{color: 'red'}}> Could not get data </div>);
+    } else if (this.props.records) {
+      return this.components[this.props.currentView];
     }
   }
 
@@ -133,7 +151,8 @@ class DataVisualization extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView.view,
-  records: state.records,
+  records: state.records.data,
+  errors: state.records.errors
   // autoplay: state.autoplay
 });
 
