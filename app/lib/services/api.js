@@ -8,10 +8,11 @@ export const fetchRecords = (url) => {
       .timeout({response: 10000})
       .set('Accept', 'text/json')
       .end(function (err, res) {
+        console.log('API response: ', res);
+        console.log('API error: ', err);
         if (err) {
           reject(err.message);
         } else if (res.status === 404) {
-          // console.log('api err/res', err, res);
           reject(res);
         } else {
           resolve(JSON.parse(res.text));

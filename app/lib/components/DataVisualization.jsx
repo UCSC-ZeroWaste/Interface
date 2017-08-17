@@ -43,16 +43,13 @@ class DataVisualization extends Component {
   // }
 
   renderView() {
-    console.log('render view');
     if (this.props.errors) {
-      console.log(this.props.errors);
       return (
         <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
           DATA COULD NOT BE FETCHED <br/>
           {this.props.errors}
         </div>);
     } else if (!this.props.records) {
-      console.log(this.props.records);
       return (
         <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
           <MoonLoader

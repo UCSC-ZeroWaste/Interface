@@ -12,7 +12,6 @@ const RecordsReducer = (state = nullState, action) => {
       let data = parsePickupData(action.pickupData);
       return merge({}, nullState, {data: data});
     case RECEIVE_ERROR:
-      console.log('hit receive error', action.errors);
       return merge({}, nullState, {errors: action.errors});
     default:
       return state;
