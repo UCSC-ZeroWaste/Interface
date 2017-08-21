@@ -124,7 +124,7 @@ body > div {
   width: 100%;
   height: 80%;
   box-sizing: border-box;
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -482,9 +482,14 @@ body > div {
 /*.nav_button:hover, .nav_button_selected:hover {
   background-color: lightgreen;
 }*/
+
+
 .slick-list {
   height: 100%;
-
+}
+.slick-list div {
+  box-sizing: border-box;
+  border: 1px solid red;
 }
 .slick-track {
   height: 100%;
@@ -492,7 +497,7 @@ body > div {
 .slick-slider {
   height: 100%;
   box-sizing: border-box;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 

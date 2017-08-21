@@ -68,7 +68,7 @@ class DataVisualization extends Component {
     if (this.props.errors) {
       return this.components.map( (component, index) => {
         return (
-          <div className={styles.slide} key={index} style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
+          <div className={styles.slide} key={index} style={{boxSizing: 'borderBox', border: '5px solid white', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
             DATA COULD NOT BE FETCHED <br/>
             {this.props.errors}
           </div>
