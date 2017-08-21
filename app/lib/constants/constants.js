@@ -17,11 +17,11 @@ export const WASTE_TYPES = [
 ];
 
 export const LEADER_BOARD_COLORS = [
-  '#1a26ce',
-  '#1980ce',
-  '#19b2ce',
-  '#19ce79',
-  '#cace19',
-  '#ce9419',
-  '#ce3419'
+  '#3288bd',
+  '#66c2a5',
+  '#abdda4',
+  '#e6f598',
+  '#ffffbf',
+  '#fee08b',
+  '#fdae61'
 ];
