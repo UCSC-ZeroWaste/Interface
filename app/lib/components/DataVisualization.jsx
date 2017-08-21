@@ -18,7 +18,7 @@ import sliding from './test_carousel/sliding.css';
 class DataVisualization extends Component {
   constructor(props) {
     super(props);
-    // this.handleSliderChange = this.handleSliderChange.bind(this);
+    this.handleSliderChange = this.handleSliderChange.bind(this);
     this.keyHandler = this.keyHandler.bind(this);
     this.components = [
       <LeaderBoard/>,
@@ -31,16 +31,16 @@ class DataVisualization extends Component {
     ];
   }
 
-  // handleSliderChange(prevSlide, nextSlide) {
-  //   this.props.handleViewSelect(nextSlide);
-  // }
-  //
-  // // TODO need to see if there is a more efficient lifecycle method
-  // componentWillReceiveProps(nextProps) {
-  //   //TODO need a check to see if nextProps were due to clicked nav button vs view change
-  //   this.refs.slider.slickGoTo(nextProps.currentView);
-  //   // console.log('nextProps', nextProps);
-  // }
+  handleSliderChange(prevSlide, nextSlide) {
+    this.props.handleViewSelect(nextSlide);
+  }
+
+  // TODO need to see if there is a more efficient lifecycle method
+  componentWillReceiveProps(nextProps) {
+    //TODO need a check to see if nextProps were due to clicked nav button vs view change
+    this.refs.slider.slickGoTo(nextProps.currentView);
+    // console.log('nextProps', nextProps);
+  }
 
   renderView() {
     if (this.props.errors) {
@@ -59,20 +59,40 @@ class DataVisualization extends Component {
             loading={true}
             />
         </div>);
-      // return (<div style={{color: 'red'}}> Could not get data </div>);
     } else if (this.props.records) {
       return this.components[this.props.currentView];
     }
   }
 
   renderSlides() {
-    return this.components.map( (component, index) => {
+    if (this.props.errors) {
+      return this.components.map( (component, index) => {
+        return (
+          <div className={styles.slide} key={index} style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
+            DATA COULD NOT BE FETCHED <br/>
+            {this.props.errors}
+          </div>
+        );
+      });
+    } else if (!this.props.records) {
       return (
-        <div className={styles.slide} key={index} >
-          {component}
-        </div>
-      );
-    });
+        <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <MoonLoader
+            color={'white'}
+            size={'100px'}
+            margin={'5px'}
+            loading={true}
+            />
+        </div>);
+    } else if (this.props.records) {
+      return this.components.map( (component, index) => {
+        return (
+          <div className={styles.slide} key={index} >
+            {component}
+          </div>
+        );
+      });
+    }
   }
 
   // TODO allows for cycling through nav views -- this is just here for easier testing on the web
@@ -93,25 +113,25 @@ class DataVisualization extends Component {
   }
 
   render() {
-    // var settings = {
-    //   adaptiveHeight: true,
-    //   // afterChange: this.handleSliderChange,
-    //   beforeChange: this.handleSliderChange,
-    //   arrows: true,
-    //   autoplay: false,
-    //   autoplaySpeed: 3000,
-    //   dots: true,
-    //   // centerMode: true,
-    //   fade: false,
-    //   infinite: true,
-    //   lazyLoad: false,
-    //   pauseOnHover: true,
-    //   slidesToShow: 1,
-    //   // slidesToScroll: 1,
-    //   speed: 1000,
-    //   swipeToSlide: true,
-    //   variableWidth: false,
-    // };
+    var settings = {
+      adaptiveHeight: true,
+      // afterChange: this.handleSliderChange,
+      beforeChange: this.handleSliderChange,
+      arrows: true,
+      autoplay: false,
+      autoplaySpeed: 3000,
+      dots: true,
+      // centerMode: true,
+      fade: false,
+      infinite: true,
+      lazyLoad: false,
+      pauseOnHover: true,
+      slidesToShow: 1,
+      // slidesToScroll: 1,
+      speed: 1000,
+      swipeToSlide: true,
+      variableWidth: false,
+    };
     // style={{height:"100%",width:"100%"}}
     const components = this.components.map((component, i) => (
        <div key={component} >
@@ -125,11 +145,15 @@ class DataVisualization extends Component {
         onKeyDown={this.keyHandler}
         tabIndex="0"
         >
-        {this.renderView()}
+        <Slider ref='slider' {...settings} className={styles.slider}>
+          {this.renderSlides()}
+        </Slider>
       </div>
     );
   }
 }
+// {this.renderView()}
+
 // <CSSTransitionGroup
 //   transitionAppear
 //   transitionName={sliding}
@@ -142,9 +166,6 @@ class DataVisualization extends Component {
 // {(this.props.currentView) % 2 === 1 ? <div> hi </div> : <div> bye </div>}
 // {this.renderView()}
 
-// <Slider ref='slider' {...settings} className={styles.slider}>
-//   {this.renderSlides()}
-// </Slider>
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView.view,

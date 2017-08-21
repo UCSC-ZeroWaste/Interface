@@ -25,7 +25,7 @@ class LeaderBoard extends Component {
   }
 
   renderLeaderRows() {
-    if (!this.props.records) return (<h1>Could not get data.</h1>);
+    // if (!this.props.records) return (<h1>Could not get data.</h1>);
     let siteParsedData = this.parsePickupData();
     let leaders = siteParsedData.sort( (siteA, siteB) => siteB.greenRatio - siteA.greenRatio );
 
