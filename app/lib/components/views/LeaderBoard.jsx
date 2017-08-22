@@ -25,6 +25,12 @@ class LeaderBoard extends Component {
     });
   }
 
+  // getHeight() {
+  //   if (this.refs.leader_row) {
+  //     return this.refs.leader_row.clientHeight;
+  //   } else {return '10px';}
+  // }
+
   renderLeaderRows() {
     let siteParsedData = this.parsePickupData();
     let leaders = siteParsedData.sort( (siteA, siteB) => siteB.greenRatio - siteA.greenRatio );
@@ -33,6 +39,7 @@ class LeaderBoard extends Component {
       let selected = (site.site === this.props.site);
       return (
         <LeaderRow
+
           rank={i+1}
           site={site}
           key={i}

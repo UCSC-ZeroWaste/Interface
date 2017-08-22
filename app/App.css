@@ -359,12 +359,12 @@ body > div {
   align-items: center;
   margin: 10px 0px 10px 0px;
 
-  width: 70%;
+  width: 80%;
   flex: 1;
 }
 .leader_row_selected {
   composes: leader_row;
-  width: 75%;
+  width: 85%;
   flex: 1.5;
 }
 
@@ -425,7 +425,7 @@ body > div {
 
 
 .details_container {
-  width: 70%;
+  width: 60%;
   height: 100%;
   position: relative;
 }
