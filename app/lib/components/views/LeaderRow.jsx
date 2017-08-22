@@ -3,18 +3,6 @@ import styles from '../../../App.css';
 import merge from 'lodash/merge';
 import ContainerDimensions from 'react-container-dimensions';
 
-const Rank = ({width, height, color, style, rank}) => {
-  console.log('rank height', height, 'rank width', width);
-
-  return (
-    <div className={style} style={{backgroundColor: color, width: height}}>
-      <div>{ rank }</div>
-    </div>
-  );
-};
-
-
-// <sup>{ this.renderRankDegree() }</sup>
 
 export default class LeaderRow extends Component {
   constructor(props) {
