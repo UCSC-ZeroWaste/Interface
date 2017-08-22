@@ -354,9 +354,13 @@ body > div {
 
 }
 .leader_row {
+  border: 1px red solid;
+  box-sizing: border-box;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
   margin: 10px 0px 10px 0px;
 
   width: 80%;
@@ -364,16 +368,23 @@ body > div {
 }
 .leader_row_selected {
   composes: leader_row;
-  width: 85%;
   flex: 1.5;
+}
+
+.rank_and_slug_container {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px red solid;
+  box-sizing: border-box;
 }
 
 .rank {
   border: solid 3px #D0D3D3;
   border-radius: 50%;
   box-sizing: border-box;
-  /*font-size: 2.3em;*/
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -381,6 +392,9 @@ body > div {
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 
+  animation-duration: .1s;
+  animation-name: enlarge;
+  animation-fill-mode: forwards;
 }
 
 .rank_selected {
@@ -389,20 +403,25 @@ body > div {
 }
 
 .slug {
+  border: 1px red solid;
+  box-sizing: border-box;
+
   border-radius: 50%;
   background-image: url('./lib/assets/images/slug1.png');
   background-size: 75% 75%;
   background-repeat: no-repeat;
   background-position: center;
+  box-sizing: border-box;
   border: solid 3px #D0D3D3;
+
   animation-duration: .6s, .3s;
-  animation-name: slug_enlarge, slug_slide;
+  animation-name: enlarge, slide;
   animation-fill-mode: forwards, forwards;
   /*border: 4px solid lightgrey;*/
   /*animation-delay: .2s, 1s;*/
 }
 
-@keyframes slug_slide {
+@keyframes slide {
   from {
     left: -200%;
   }
@@ -410,7 +429,7 @@ body > div {
     left: 0%;
   }
 }
-@keyframes slug_enlarge {
+@keyframes enlarge {
   from {
     width: 0;
     height: 0;
@@ -425,7 +444,8 @@ body > div {
 
 
 .details_container {
-  width: 60%;
+  flex: 5;
+  /*width: 60%;*/
   height: 100%;
   position: relative;
 }

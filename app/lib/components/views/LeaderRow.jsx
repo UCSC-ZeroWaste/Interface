@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import styles from '../../../App.css';
 import merge from 'lodash/merge';
 import ContainerDimensions from 'react-container-dimensions';
+import {connect} from 'react-redux';
 
-
-export default class LeaderRow extends Component {
+class LeaderRow extends Component {
   constructor(props) {
     super(props);
     // this.state = {rowHeight: '10px', slugHeight: '10px'};
@@ -50,7 +50,7 @@ export default class LeaderRow extends Component {
       );
     } else {
       return (
-        <div className={styles.slug_container} style={slugContainer}>
+        <div style={slugContainer}>
 
         </div>
       );
@@ -68,13 +68,22 @@ export default class LeaderRow extends Component {
   //
   // }
 
+  renderRankAndSlug(height, width) {
+    return (
+      <div className={styles.rank_and_slug_container}>
+        {this.renderSlug(height, width)}
+        {this.renderRank(height, width)}
+      </div>
+    );
+  }
+
   renderRank(height, width) {
     console.log('rank height', height, 'rank width', width);
     let rankContainer;
     if (this.props.selected) {
       rankContainer = {
-        width: 1.2 * height,
-        height: 1.2 * height,
+        width: 1.0 * height,
+        height: 1.0 * height,
         // position: 'relative'
       };
     } else {
@@ -84,13 +93,33 @@ export default class LeaderRow extends Component {
         // position: 'relative'
       };
     }
-    let rankingStyle = this.props.selected ? styles.rank_selected : styles.rank;
-    return (
-      <div className={rankingStyle} style={{backgroundColor: this.props.color, width: height}}>
-        <div>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
-      </div>
+    if (this.props.selected) {
+      return (
+        <div style={rankContainer}>
+          <div style={{backgroundColor: this.props.color}} className={styles.rank_selected}>
+            <div>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div style={rankContainer}>
+          <div style={{backgroundColor: this.props.color}} className={styles.rank}>
+            <div>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
+          </div>
+        </div>
+      );
 
-    );
+    }
+    //
+    // return (
+    //   <div style={rankContainer}>
+    //     <div className={rankingStyle} style={{backgroundColor: this.props.color}}>
+    //       <div>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
+    //     </div>
+    //   </div>
+    //
+    // );
   }
 
 
@@ -116,12 +145,10 @@ export default class LeaderRow extends Component {
     // console.log("this.props: ", this.props);
     return (
       <div className={rowStyle} ref="leader_row">
-        <ContainerDimensions>
-          { ({ height, width }) => this.renderSlug(height, width) }
-        </ContainerDimensions>
+
 
         <ContainerDimensions>
-          { ({ height, width }) => this.renderRank(height, width) }
+          { ({ height, width }) => this.renderRankAndSlug(height, width) }
         </ContainerDimensions>
 
         <div className={styles.details_container}>
@@ -135,5 +162,11 @@ export default class LeaderRow extends Component {
 
   }
 }
+
+const mapStateToProps = (state) => ({
+  resizeFix: state.currentView.site
+});
+
+export default connect(mapStateToProps)(LeaderRow);
 
 // <Rank width={width} height={height} color={this.props.color} style={rankingStyle} rank={this.props.rank}/>
