@@ -81,6 +81,7 @@ body > div {
   width: 100%;
   background: grey;
   opacity: 0.3;
+  
 }
 .nav_bar {
   position: absolute;
@@ -97,6 +98,8 @@ body > div {
   font-family: 'logofont';
   color: white;
   font-size: 3em;
+  margin-left: 0.7em;
+  margin-top: 0.1em;
 }
 .nav_button {
   width: 70px;
@@ -114,6 +117,7 @@ body > div {
 }
 .nav_button_fa {
   color: grey;
+  margin-left: 0.7em;
 }
 .nav_button_fa_selected {
   composes: nav_button_fa;
@@ -227,6 +231,9 @@ body > div {
   justify-content: space-around;
   align-items: center;
   color: white;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 200;
+
 }
 .leader_row {
   width: 70%;
@@ -255,7 +262,6 @@ body > div {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1.0em;
 
 }
 
