@@ -121,9 +121,10 @@ body > div {
 }
 
 .main_view {
-  width: 80%;
+  width: 100%;
   height: 80%;
   box-sizing: border-box;
+  /*border: 1px red solid;*/
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -317,7 +318,7 @@ body > div {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
+  width: 80%;
   height: 100%;
 }
 .leader_board_header {
@@ -438,7 +439,7 @@ body > div {
 
 .details_text {
   height: 100%;
-  font-size: 2.3em;
+  font-size: 2.0em;
   align-items: center;
   box-sizing: border-box;
   padding: 1em;
@@ -481,9 +482,14 @@ body > div {
 /*.nav_button:hover, .nav_button_selected:hover {
   background-color: lightgreen;
 }*/
+
+
 .slick-list {
   height: 100%;
-
+}
+.slick-list div {
+  box-sizing: border-box;
+  border: 1px solid red;
 }
 .slick-track {
   height: 100%;
@@ -491,7 +497,13 @@ body > div {
 .slick-slider {
   height: 100%;
   box-sizing: border-box;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
+}
+
+.slick-arrow.slick-next {
+  height: 100px;
+  box-sizing: border-box;
+  background-color: red;
 }
 
 
