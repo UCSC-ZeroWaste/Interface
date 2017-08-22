@@ -7,9 +7,9 @@ export const receiveRecords = (pickupData) => ({
   pickupData
 });
 
-export const receiveError = (error) => ({
+export const receiveError = (errors) => ({
   type: RECEIVE_ERROR,
-  error: 'There was a problem getting the records.'
+  errors
 });
 
 //TODO need to set up error handling -- maybe do this for TDD?
