@@ -29,7 +29,6 @@ class SiteSelector extends Component {
         <div>
           <select onChange={ this.setSite }>
             <option value="">Select a Site</option>
-            <option value="">ALL COLLEGES</option>
             { siteOptions }
           </select>
         </div>

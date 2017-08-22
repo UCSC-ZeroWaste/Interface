@@ -81,7 +81,7 @@ body > div {
   width: 100%;
   background: grey;
   opacity: 0.3;
-  
+
 }
 .nav_bar {
   position: absolute;
@@ -97,7 +97,7 @@ body > div {
 .nav_icons_container {
   align-items: left;
   display: flex;
-  padding: 0.5em;
+  /*padding: 0.5em;*/
 }
 
 .logo {
@@ -105,7 +105,7 @@ body > div {
   color: white;
   font-size: 3em;
   margin-left: 0.7em;
-  margin-top: 0.1em;
+  /*margin-top: 0.1em;*/
 }
 .nav_button {
   width: 70px;
@@ -123,7 +123,7 @@ body > div {
 }
 .nav_button_fa {
   color: #a8a6a6;
-  margin-left: 0.7em;
+  /*margin-left: 0.7em;*/
 }
 .nav_button_fa_selected {
   composes: nav_button_fa;
@@ -337,8 +337,8 @@ body > div {
   /*height: 10%;*/
   font-size: 2.0em;
   text-align: center;
-  margin:1.0em 0em 1.0em 4.0em;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  /*margin:1.0em 0em 1.0em 4.0em;*/
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 }
 .leader_rows {
@@ -349,7 +349,7 @@ body > div {
   justify-content: space-around;
   align-items: center;
   color: white;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 
 }
@@ -359,12 +359,12 @@ body > div {
   align-items: center;
   margin: 10px 0px 10px 0px;
 
-  width: 70%;
+  width: 80%;
   flex: 1;
 }
 .leader_row_selected {
   composes: leader_row;
-  width: 75%;
+  width: 85%;
   flex: 1.5;
 }
 
@@ -372,13 +372,13 @@ body > div {
   border: solid 3px #D0D3D3;
   border-radius: 50%;
   box-sizing: border-box;
-  font-size: 2.3em;
+  /*font-size: 2.3em;*/
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2em;
-  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
 
 }
@@ -390,7 +390,6 @@ body > div {
 
 .slug {
   border-radius: 50%;
-  background-color: white;
   background-image: url('./lib/assets/images/slug1.png');
   background-size: 75% 75%;
   background-repeat: no-repeat;
@@ -426,7 +425,7 @@ body > div {
 
 
 .details_container {
-  width: 70%;
+  width: 60%;
   height: 100%;
   position: relative;
 }
