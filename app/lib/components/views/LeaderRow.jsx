@@ -24,7 +24,6 @@ export default class LeaderRow extends Component {
   renderSlug() {
 
     let slugContainer;
-
     if (this.props.selected) {
       slugContainer = {
         width: this.state.slugHeight,
@@ -42,7 +41,7 @@ export default class LeaderRow extends Component {
     if (this.props.selected) {
       return (
         <div style={slugContainer}>
-          <div className={styles.slug}>
+          <div style={{backgroundColor: this.props.color}} className={styles.slug}>
           </div>
         </div>
       );

@@ -390,7 +390,6 @@ body > div {
 
 .slug {
   border-radius: 50%;
-  background-color: white;
   background-image: url('./lib/assets/images/slug1.png');
   background-size: 75% 75%;
   background-repeat: no-repeat;

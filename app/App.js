@@ -37,7 +37,7 @@ class App extends React.Component {
       <Provider store={this.props.store}>
         <div className={styles.page}>
           <NavBar />
-          <DataVisualizationPRC/>
+          <DataVisualization/>
           <Footer/>
         </div>
       </Provider>
