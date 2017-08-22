@@ -54,6 +54,19 @@ export default class LeaderRow extends Component {
     }
   }
 
+  renderRankDegree() {
+    switch (this.props.rank) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  }
+
   updateState() {
     let rowHeight = this.refs.leader_row.clientHeight;
     let slugHeight = rowHeight * 1.2;
@@ -76,7 +89,8 @@ export default class LeaderRow extends Component {
         {this.renderSlug()}
 
         <div className={rankingStyle} style={merge({backgroundColor: this.props.color}, {width: this.state.rowHeight})}>
-          {this.props.rank}
+          <p>{this.props.rank}<sup>{this.renderRankDegree()}</sup></p>
+
         </div>
 
         <div className={styles.details_container}>
