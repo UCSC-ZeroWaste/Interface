@@ -81,6 +81,7 @@ body > div {
   width: 100%;
   background: grey;
   opacity: 0.3;
+  
 }
 .nav_bar {
   position: absolute;
@@ -89,14 +90,22 @@ body > div {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.nav_icons_container {
+  align-items: left;
+  display: flex;
+  padding: 0.5em;
 }
 
 .logo {
   font-family: 'logofont';
   color: white;
   font-size: 3em;
+  margin-left: 0.7em;
+  margin-top: 0.1em;
 }
 .nav_button {
   width: 70px;
@@ -113,7 +122,8 @@ body > div {
   composes: nav_button;
 }
 .nav_button_fa {
-  color: grey;
+  color: #a8a6a6;
+  margin-left: 0.7em;
 }
 .nav_button_fa_selected {
   composes: nav_button_fa;
@@ -325,8 +335,11 @@ body > div {
   color: white;
   width: 80%;
   /*height: 10%;*/
-  font-size: 1.5em;
+  font-size: 2.0em;
   text-align: center;
+  margin:1.0em 0em 1.0em 4.0em;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 200;
 }
 .leader_rows {
   width: 100%;
@@ -336,6 +349,9 @@ body > div {
   justify-content: space-around;
   align-items: center;
   color: white;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 200;
+
 }
 .leader_row {
   display: flex;
@@ -353,7 +369,7 @@ body > div {
 }
 
 .rank {
-  border: solid 4px white;
+  border: solid 3px #D0D3D3;
   border-radius: 50%;
   box-sizing: border-box;
   font-size: 2.3em;
@@ -361,20 +377,29 @@ body > div {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.2em;
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+
 }
+
 .rank_selected {
   composes: rank;
+  /*background-color: lightgrey;*/
 }
 
 .slug {
   border-radius: 50%;
-  background-image: url('./lib/assets/images/slug.png');
-  background-size: cover;
-  position: relative;
-
+  background-color: white;
+  background-image: url('./lib/assets/images/slug1.png');
+  background-size: 75% 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: solid 3px #D0D3D3;
   animation-duration: .6s, .3s;
   animation-name: slug_enlarge, slug_slide;
   animation-fill-mode: forwards, forwards;
+  /*border: 4px solid lightgrey;*/
   /*animation-delay: .2s, 1s;*/
 }
 
@@ -398,6 +423,7 @@ body > div {
     top: 0%;
   }
 }
+
 
 .details_container {
   width: 70%;
@@ -429,12 +455,16 @@ body > div {
   /*border: solid 1px grey;*/
   border-radius: 10px;
   display: flex;
+  padding-right: 1.0em;
+  padding-left: 1.0em;
 }
 .details_selected {
   composes: details;
   box-sizing: border-box;
-  border: solid 4px white;
-
+  border: solid 3px #D0D3D3;
+  padding-left: 1.0em;
+  padding-right: 1.0em;
+  /*background-color: lightgrey;*/
 }
 
 .details_text {

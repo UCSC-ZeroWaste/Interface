@@ -42,7 +42,8 @@ export default class LeaderRow extends Component {
     if (this.props.selected) {
       return (
         <div style={slugContainer}>
-          <div className={styles.slug}></div>
+          <div className={styles.slug}>
+          </div>
         </div>
       );
     } else {
