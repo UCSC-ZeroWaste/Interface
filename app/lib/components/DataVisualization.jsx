@@ -67,12 +67,18 @@ class DataVisualization extends Component {
   renderSlides() {
     if (this.props.errors) {
       return this.components.map( (component, index) => {
-        return (
+        if (index > 0) {return (
           <div className={styles.slide} key={index} style={{boxSizing: 'borderBox', border: '5px solid white', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
             DATA COULD NOT BE FETCHED <br/>
             {this.props.errors}
           </div>
-        );
+        );} else {
+          return (
+            <div className={styles.slide} key={index} >
+              {component}
+            </div>
+          );
+        }
       });
     } else if (!this.props.records) {
       return (
@@ -120,7 +126,7 @@ class DataVisualization extends Component {
       arrows: true,
       autoplay: false,
       autoplaySpeed: 3000,
-      dots: true,
+      dots: false,
       // centerMode: true,
       fade: false,
       infinite: true,
