@@ -5,6 +5,7 @@ import d3 from 'd3';
 import {connect} from 'react-redux';
 import {WASTE_TYPES} from '../../constants/constants';
 import styles from '../../../App.css';
+import ContainerDimensions from 'react-container-dimensions';
 
 class LineChartComponent extends Component {
   constructor(props) {
@@ -13,8 +14,6 @@ class LineChartComponent extends Component {
     this.state = {
       rollingAverageLength: 7,
       wasteType: 'Refuse',
-      width: 700,
-      height: 400,
     };
     this.strokeWidth = 6;
     this.strokeDashArray = undefined;//"5,5";
@@ -151,7 +150,7 @@ class LineChartComponent extends Component {
       </option>
     ));
     return (
-      <select onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
+      <select className={styles.selector} onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
         <option disabled="true">{settings.title}</option>
         { options }
       </select>
@@ -183,7 +182,7 @@ class LineChartComponent extends Component {
 
   }
 
-  renderChart() {
+  renderChart(height, width) {
 
     if (this.props.type === 'green') {
       var options = {
@@ -204,15 +203,15 @@ class LineChartComponent extends Component {
       <LineChart
         legend={true}
         data={this.getData()}
-        width='100%'
-        height={this.state.height + 100}
+        width={width * .7}
+        height={height * .9}
         hoverAnimation={false}
         circleRadius={4}
         viewBoxObject={{
           x: 0,
           y: 0,
-          width: this.state.width,
-          height: this.state.height
+          width: width * .7,
+          height: height * .9
         }}
         title={this.props.site + ' - ' + options.title}
 
@@ -243,8 +242,10 @@ class LineChartComponent extends Component {
 
     return (
       <div className={styles.line_chart_container}>
+        <ContainerDimensions>
+          { ({ height, width }) => this.renderChart(height, width) }
+        </ContainerDimensions>
         {this.renderSelector()}
-        {this.renderChart()}
       </div>
     );
 
