@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import styles from '../../../App.css';
 import merge from 'lodash/merge';
 import ContainerDimensions from 'react-container-dimensions';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 
-class LeaderRow extends Component {
+export default class LeaderRow extends Component {
   constructor(props) {
     super(props);
     // this.state = {rowHeight: '10px', slugHeight: '10px'};
@@ -163,10 +163,10 @@ class LeaderRow extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  resizeFix: state.currentView.site
-});
-
-export default connect(mapStateToProps)(LeaderRow);
+// const mapStateToProps = (state) => ({
+//   resizeFix: state.currentView.site
+// });
+//
+// export default connect(mapStateToProps)(LeaderRow);
 
 // <Rank width={width} height={height} color={this.props.color} style={rankingStyle} rank={this.props.rank}/>

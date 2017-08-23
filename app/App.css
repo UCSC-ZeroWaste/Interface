@@ -327,23 +327,27 @@ body > div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 80%;
   height: 100%;
 }
 .leader_board_header {
+  border: 1px red solid;
+  box-sizing: border-box;
   color: white;
   width: 80%;
-  /*height: 10%;*/
+  flex: 2;
   font-size: 2.8em;
-  text-align: center;
-  /*margin:1.0em 0em 1.0em 4.0em;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 }
 .leader_rows {
+  flex: 9;
   width: 100%;
-  height: 100%;
+  margin-bottom: 1em;
   flex-direction: column;
   display: flex;
   justify-content: space-around;
@@ -354,6 +358,8 @@ body > div {
 
 }
 .leader_row {
+  flex: 1;
+
   border: 1px red solid;
   box-sizing: border-box;
 
@@ -361,14 +367,13 @@ body > div {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  margin: 10px 0px 10px 0px;
+  margin: .25em 0em .25em 0em;
 
   width: 80%;
-  flex: 1;
 }
 .leader_row_selected {
   composes: leader_row;
-  flex: 1.5;
+  flex: 1.3;
 }
 
 .rank_and_slug_container {
@@ -376,7 +381,7 @@ body > div {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-end;
   border: 1px red solid;
   box-sizing: border-box;
 }
@@ -461,7 +466,7 @@ body > div {
   top: 0;
   left: 0;
   right: 0;
-  width: 80%;
+  width: 87%;
   height: 100%;
   background: grey;
   border-radius: 10px;
@@ -474,7 +479,7 @@ body > div {
   top: 0;
   left: 0;
   right: 0;
-  width: 80%;
+  width: 87%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -569,8 +574,10 @@ body > div {
 /*Slider Settings: these settings keep the slide frames at 100% height*/
 .slider {
   display: flex;
-  height: 94%;
+  height: 100%;
   width: 94%;
+  border: 1px solid green;
+  box-sizing: border-box;
   /*box-sizing: border-box;*/
   /*border: 1px solid red;*/
 }
