@@ -335,7 +335,7 @@ body > div {
   color: white;
   width: 80%;
   /*height: 10%;*/
-  font-size: 2.0em;
+  font-size: 2.8em;
   text-align: center;
   /*margin:1.0em 0em 1.0em 4.0em;*/
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -448,25 +448,33 @@ body > div {
   /*width: 60%;*/
   height: 100%;
   position: relative;
+  /*display: flex;*/
+  justify-content: center;
 }
 
 /*Opacity fix*/
 .details_container::before {
   content: '';
   position: absolute;
+  margin-left: auto;
+  margin-right: auto;
   top: 0;
   left: 0;
+  right: 0;
+  width: 80%;
   height: 100%;
-  width: 100%;
   background: grey;
   border-radius: 10px;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 .details {
   position: absolute;
+  margin-left: auto;
+  margin-right: auto;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
+  width: 80%;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -479,6 +487,7 @@ body > div {
 }
 .details_selected {
   composes: details;
+  width: 90%;
   box-sizing: border-box;
   border: solid 3px #D0D3D3;
   padding-left: 1.0em;
