@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
+
+//TODO switch back to 'rd3' when my changes have been accepted
+// import {LineChart} from '../../../../../_FORKED-rd3';
+// /build/cjs/linechart/LineChart';
 import {LineChart} from 'rd3';
+
+
 import d3 from 'd3';
 import {connect} from 'react-redux';
-import {WASTE_TYPES} from '../../constants/constants';
+import {WASTE_TYPES, CHART} from '../../constants/constants';
 import styles from '../../../App.css';
 import ContainerDimensions from 'react-container-dimensions';
 
@@ -201,30 +207,33 @@ class LineChartComponent extends Component {
     return (
       //TODO get a handle on color & colorAccessor props
       <LineChart
-        legend={true}
+
         data={this.getData()}
-        width={width * .7}
-        height={height * .9}
-        hoverAnimation={false}
-        circleRadius={4}
+        width={width * CHART.widthRatio}
+        height={height * CHART.heightRatio}
+
+        circleRadius={0}
         viewBoxObject={{
-          x: 0,
-          y: 0,
-          width: width * .7,
-          height: height * .9
+          x: -20,
+          y: 20,
+          width: width * CHART.viewBox_widthRatio,
+          height: height * CHART.viewBox_heightRatio
         }}
+
         title={this.props.site + ' - ' + options.title}
+        xAxisLabel={options.xLabel}
+        xAxisLabelOffset={CHART.xAxisLabelOffset}
 
         yAxisLabel={options.yLabel}
-        xAxisLabel={options.xLabel}
-
-
-
+        yAxisLabelOffset={CHART.yAxisLabelOffset}
 
         domain={this.getChartDomain()}
         xAxisTickInterval={this.GetTickInterval()}
-        gridHorizontal={false}
-        gridVertical={false}
+
+        {...CHART.axes}
+        {...CHART.settings}
+
+
       />
     );
   }

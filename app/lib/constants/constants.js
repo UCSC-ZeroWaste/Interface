@@ -25,3 +25,37 @@ export const LEADER_BOARD_COLORS = [
   '#fee08b',
   '#fdae61'
 ];
+
+export const CHART = {
+  widthRatio: 0.8,
+  viewBox_widthRatio: 0.65,
+
+  heightRatio: 0.9,
+  viewBox_heightRatio: 0.75,
+
+  xAxisLabelOffset: 40,
+  yAxisLabelOffset: 40,
+
+  settings: {
+    legend: true,
+    gridHorizontal: false,
+    gridVertical: false,
+    hoverAnimation: false,
+  },
+
+  axes: {
+    // xAxisLabelStrokeWidth: 0.01,
+    // yAxisLabelStrokeWidth: 0.01,
+    axesColor: 'white',
+    xAxisLabelColor: 'white',
+    yAxisLabelColor: 'white',
+
+    xAxisStrokeWidth: '4',
+    yAxisStrokeWidth: '4',
+    xAxisTickStroke: 'white',
+    yAxisTickStroke: 'white',
+
+    xAxisTickTextStroke: 'white',
+    yAxisTickTextStroke: 'white',
+  }
+};
