@@ -23,16 +23,16 @@ class NavButton extends Component {
   }
 
   render() {
-    if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
-      var styleButton = styles.nav_button_selected;
-      var styleIcon = styles.nav_button_fa_selected;
+    if (this.props.nav === 'modal') {
+      var styleIcon = styles.info_button_fa;
+    } else if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
+      styleIcon = styles.nav_button_fa_selected;
     } else {
-      styleButton = styles.nav_button;
       styleIcon = styles.nav_button_fa;
     }
 
     return (
-      <div className={styleButton}>
+      <div className={styles.nav_button_press_response}>
         <FontAwesome
           onClick={this.clickHandler}
           className={styleIcon}
