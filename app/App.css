@@ -412,7 +412,7 @@ body > div {
   box-sizing: border-box;
 
   border-radius: 50%;
-  background-image: url('./lib/assets/images/slug1.png');
+  /*background-image: url('./lib/assets/images/slug1.png');*/
   background-size: 75% 75%;
   background-repeat: no-repeat;
   background-position: center;

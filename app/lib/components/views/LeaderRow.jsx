@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styles from '../../../App.css';
 import merge from 'lodash/merge';
 import ContainerDimensions from 'react-container-dimensions';
+import {SLUG_IMAGES} from '../../constants/constants';
 // import {connect} from 'react-redux';
 
 export default class LeaderRow extends Component {
@@ -44,7 +45,7 @@ export default class LeaderRow extends Component {
     if (this.props.selected) {
       return (
         <div style={slugContainer}>
-          <div style={{backgroundColor: this.props.color}} className={styles.slug}>
+          <div style={{backgroundColor: this.props.color, backgroundImage: 'url(' + SLUG_IMAGES[this.props.rank - 1] + ')' }} className={styles.slug}>
           </div>
         </div>
       );

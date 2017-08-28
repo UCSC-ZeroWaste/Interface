@@ -25,3 +25,13 @@ export const LEADER_BOARD_COLORS = [
   '#fee08b',
   '#fdae61'
 ];
+
+export const SLUG_IMAGES = [
+  'https://url.upwork.com/_01D2djbb_NUV6FaqhXpKXoevCxmTdlPUIa',
+  'https://url.upwork.com/_01D2djbb_NUV7M3z74O9obsA30vXcndgyX',
+  'https://url.upwork.com/_01D2djbb_NUV4w_tzFsJmBb25qdt1KrUCs',
+  'https://url.upwork.com/_01D2djbb_NUV4QEMvPUvQ6WJffI8YK98ir',
+  'https://url.upwork.com/_01D2djbb_NUV4Xt4Gvf42mnk8l0Sd_towU',
+  'https://url.upwork.com/_01D2djbb_NUV5MaQpky78uTiTdjbZiQGlN',
+  'https://url.upwork.com/_01D2djbb_NUV7yvwnjcgGFJR0Yqsg7_dVi'
+];
