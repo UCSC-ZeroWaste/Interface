@@ -10,7 +10,6 @@ import styles from '../../App.css';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { MoonLoader } from 'halogen';
 
-
 import transitions from './test_carousel/transitions.css';
 import sliding from './test_carousel/sliding.css';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';

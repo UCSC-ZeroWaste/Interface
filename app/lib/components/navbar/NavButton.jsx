@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {handleViewSelect, handleSiteSelect, handleScopeSelect} from '../../actions/view_actions';
+import {handleViewSelect, handleSiteSelect, handleScopeSelect, toggleModal} from '../../actions/view_actions';
 import styles from '../../../App.css';
 import FontAwesome from 'react-fontawesome';
 
@@ -11,7 +11,9 @@ class NavButton extends Component {
   }
 
   clickHandler(e) {
-    if (this.props.nav === 'view') {
+    if (this.props.nav === 'modal') {
+      this.props.toggleModal();
+    } else if (this.props.nav === 'view') {
       this.props.handleViewSelect(this.props.view);
     } else if (this.props.nav === 'scope') {
       // TODO need to flesh this out
@@ -56,7 +58,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum)),
   handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
-  handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope))
+  handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope)),
+  toggleModal: () => dispatch(toggleModal())
 });
 
 export default connect(

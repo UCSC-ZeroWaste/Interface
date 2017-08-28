@@ -3,14 +3,18 @@ import styles from './App.css';
 import NavBar from './lib/components/NavBar.jsx';
 import Footer from './lib/components/Footer.jsx';
 import DataVisualization from './lib/components/DataVisualization.jsx';
+import InfoModal from './lib/components/InfoModal.jsx';
 import { Provider } from 'react-redux';
 import {fetchRecords} from './lib/actions/record_actions';
+import {toggleModal} from './lib/actions/view_actions';
 import {connect} from 'react-redux';
 import _ from 'underscore';
 
 import TestTransitions from './lib/components/test_carousel/TestTransitions';
 import TestRouter from './lib/components/test_carousel/TestRouter';
 import TestSlide from './lib/components/test_carousel/TestSlide';
+import Modal from 'react-modal';
+import modalStyle from './lib/assets/stylesheets/modal';
 
 class App extends React.Component {
   constructor(props) {
@@ -37,6 +41,13 @@ class App extends React.Component {
         <div className={styles.page}>
           <NavBar />
           <DataVisualization/>
+          <Modal
+            isOpen={this.props.modalState}
+            contentLabel="Modal"
+            onRequestClose={this.props.toggleModal}
+            style={modalStyle}>
+            <InfoModal />
+          </Modal>
           <Footer/>
         </div>
       </Provider>
@@ -45,11 +56,13 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  data: state.records.data
+  data: state.records.data,
+  modalState: state.currentView.modal
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getRecords: () => dispatch(fetchRecords())
+  getRecords: () => dispatch(fetchRecords()),
+  toggleModal: () => dispatch(toggleModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
