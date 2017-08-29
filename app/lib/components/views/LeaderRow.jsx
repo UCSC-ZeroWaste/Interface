@@ -25,7 +25,7 @@ export default class LeaderRow extends Component {
   }
 
   renderSlug(height, width) {
-    console.log('slug height', height, 'slug width', width);
+    // console.log('slug height', height, 'slug width', width);
 
     let slugContainer;
     if (this.props.selected) {
@@ -79,7 +79,7 @@ export default class LeaderRow extends Component {
   }
 
   renderRank(height, width) {
-    console.log('rank height', height, 'rank width', width);
+    // console.log('rank height', height, 'rank width', width);
     let rankContainer;
     if (this.props.selected) {
       rankContainer = {

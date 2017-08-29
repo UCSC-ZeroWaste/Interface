@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import _ViewTemplate from './views/_ViewTemplate';
 import LeaderBoard from './views/LeaderBoard.jsx';
 import LineChart from './views/LineChart.jsx';
+import HeatMap from './views/HeatMap.jsx';
 import SizeView from './views/SizeView.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { MoonLoader } from 'halogen';
-
 
 import transitions from './test_carousel/transitions.css';
 import sliding from './test_carousel/sliding.css';
@@ -24,8 +24,8 @@ class DataVisualization extends Component {
       <LeaderBoard/>,
       <LineChart type={'green'}/>,
       <LineChart type={'general'}/>,
+      <HeatMap/>,
       <SizeView />,
-      <_ViewTemplate title={'Empty View 5'}/>,
       <_ViewTemplate title={'Empty View 6'}/>,
       <_ViewTemplate title={'Empty View 7'}/>
     ];
