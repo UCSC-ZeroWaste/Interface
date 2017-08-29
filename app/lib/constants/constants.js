@@ -16,14 +16,22 @@ export const WASTE_TYPES = [
   'PRODUCT  UNKNOWN'
 ];
 
+const red = '#fc7e48';
+const orange = '#ffab4f';
+const yellow = '#efd553';
+const lightgreen = '#d6ee72';
+const green= '#89d48a';
+const bluegreen= '#2fcfa8';
+const blue= '#39bdc4';
+
 export const LEADER_BOARD_COLORS = [
-  '#3288bd',
-  '#66c2a5',
-  '#abdda4',
-  '#e6f598',
-  '#ffffbf',
-  '#fee08b',
-  '#fdae61'
+  blue,
+  bluegreen,
+  green,
+  lightgreen,
+  yellow,
+  orange,
+  red, 
 ];
 
 export const SLUG_IMAGES = [
