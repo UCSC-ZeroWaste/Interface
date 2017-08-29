@@ -3,6 +3,7 @@ import styles from './App.css';
 import NavBar from './lib/components/NavBar.jsx';
 import Footer from './lib/components/Footer.jsx';
 import DataVisualization from './lib/components/DataVisualization.jsx';
+// import HeatMap from './lib/components/views/HeatMap.jsx';
 import { Provider } from 'react-redux';
 import {fetchRecords} from './lib/actions/record_actions';
 import {connect} from 'react-redux';
