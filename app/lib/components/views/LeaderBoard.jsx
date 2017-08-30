@@ -10,21 +10,6 @@ class LeaderBoard extends Component {
     super(props);
   }
 
-  parsePickupData() {
-    return _.map(COLLEGE_SET, (siteName) => {
-      //TODO Need to ensure that this doesn't fail if this.props.records === undefined (i.e. no data is returned). Also need to think about what happens if there is no data for a certain site -- will anything break? Maybe consider setting up tests instead.
-      let sitePickups = this.props.records[siteName];
-      let totalLoad = _.reduce(sitePickups, (sum, pickup) => { return sum + pickup.Load; }, 0);
-      let loadWithoutRefuse = _.reduce(sitePickups, (sum, pickup) => pickup.Product === "Refuse" ? sum : sum + pickup.Load , 0);
-      let greenRatio = (loadWithoutRefuse/totalLoad) * 100;
-      return  { site: siteName,
-                totalLoad: totalLoad,
-                loadWithoutRefuse: loadWithoutRefuse,
-                greenRatio: greenRatio
-              };
-    });
-  }
-
   // getHeight() {
   //   if (this.refs.leader_row) {
   //     return this.refs.leader_row.clientHeight;
@@ -32,14 +17,10 @@ class LeaderBoard extends Component {
   // }
 
   renderLeaderRows() {
-    let siteParsedData = this.parsePickupData();
-    let leaders = siteParsedData.sort( (siteA, siteB) => siteB.greenRatio - siteA.greenRatio );
-
-    return leaders.map( (site, i) => {
+    return this.props.leaders.map( (site, i) => {
       let selected = (site.site === this.props.site);
       return (
         <LeaderRow
-
           rank={i+1}
           site={site}
           key={i}
@@ -63,7 +44,7 @@ class LeaderBoard extends Component {
  }
 
 const mapStateToProps = (state) => ({
-  records: state.records.data,
+  leaders: state.records.leaders,
   site: state.currentView.site
 });
 
