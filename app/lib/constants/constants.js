@@ -51,3 +51,21 @@ export const SLUG_IMAGES = [
   sadder,
   saddest,
 ];
+
+import pin_happiest from '../assets/images/slug_map_pins/slug-pin1.png';
+import pin_happier from '../assets/images/slug_map_pins/slug-pin2.png';
+import pin_happy from '../assets/images/slug_map_pins/slug-pin3.png';
+import pin_neutral from '../assets/images/slug_map_pins/slug-pin4.png';
+import pin_sad from '../assets/images/slug_map_pins/slug-pin5.png';
+import pin_sadder from '../assets/images/slug_map_pins/slug-pin6.png';
+import pin_saddest from '../assets/images/slug_map_pins/slug-pin7.png';
+
+export const SLUG_PINS = [
+  pin_happiest,
+  pin_happier,
+  pin_happy,
+  pin_neutral,
+  pin_sad,
+  pin_sadder,
+  pin_saddest,
+];

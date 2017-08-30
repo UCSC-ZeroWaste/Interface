@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {mapsStaticKey, mapsJavascriptKey} from '../../../config.js';
 import styles from '../../../App.css';
 import GoogleMapReact from 'google-map-react';
-import {SLUG_IMAGES} from '../../constants/constants';
-import SLUG_PNG from '../../assets/images/emotional_slugs/Slug7.png';
+import {SLUG_PINS} from '../../constants/constants';
 
 // const map1 = 'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=' + settings.key;
 
@@ -72,13 +71,10 @@ export default class HeatMap extends Component {
             lng={site.long}
             key={index}
             style={{
-              height: '50px',
-              width: '50px',
-              border: '2px solid black',
-              backgroundColor: 'lightblue',
-              backgroundImage: `url(${SLUG_IMAGES[4]})`,
+              height: '70px',
+              width: '70px',
+              backgroundImage: `url(${SLUG_PINS[4]})`,
               backgroundSize: 'contain',
-
             }}
             ></div>
         )
