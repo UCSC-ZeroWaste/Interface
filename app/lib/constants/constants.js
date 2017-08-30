@@ -31,15 +31,23 @@ export const LEADER_BOARD_COLORS = [
   lightgreen,
   yellow,
   orange,
-  red, 
+  red,
 ];
 
+import happiest from '../assets/images/emotional_slugs/Slug1.png';
+import happier from '../assets/images/emotional_slugs/Slug2.png';
+import happy from '../assets/images/emotional_slugs/Slug3.png';
+import neutral from '../assets/images/emotional_slugs/Slug4.png';
+import sad from '../assets/images/emotional_slugs/Slug5.png';
+import sadder from '../assets/images/emotional_slugs/Slug6.png';
+import saddest from '../assets/images/emotional_slugs/Slug7.png';
+
 export const SLUG_IMAGES = [
-  '../assets/images/emotional_slugs/Slug1.png',
-  '../assets/images/emotional_slugs/Slug2.png',
-  '../assets/images/emotional_slugs/Slug3.png',
-  '../assets/images/emotional_slugs/Slug4.png',
-  '../lib/assets/images/emotional_slugs/Slug5.png',
-  '../lib/assets/images/emotional_slugs/Slug6.png',
-  '../lib/assets/images/emotional_slugs/Slug7.png',
+  happiest,
+  happier,
+  happy,
+  neutral,
+  sad,
+  sadder,
+  saddest,
 ];
