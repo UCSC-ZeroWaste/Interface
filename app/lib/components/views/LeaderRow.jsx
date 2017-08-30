@@ -25,7 +25,7 @@ export default class LeaderRow extends Component {
   }
 
   renderSlug(height, width) {
-    console.log('slug height', height, 'slug width', width);
+    // console.log('slug height', height, 'slug width', width);
 
     let slugContainer;
     if (this.props.selected) {
@@ -45,7 +45,12 @@ export default class LeaderRow extends Component {
     if (this.props.selected) {
       return (
         <div style={slugContainer}>
-          <div style={{backgroundColor: this.props.color, backgroundImage: 'url(' + SLUG_IMAGES[this.props.rank - 1] + ')' }} className={styles.slug}>
+          <div
+              style={{
+                backgroundColor: this.props.color,
+                backgroundImage: `url(${SLUG_IMAGES[this.props.rank - 1]})`
+              }}
+              className={styles.slug}>
           </div>
         </div>
       );
@@ -79,7 +84,7 @@ export default class LeaderRow extends Component {
   }
 
   renderRank(height, width) {
-    console.log('rank height', height, 'rank width', width);
+    // console.log('rank height', height, 'rank width', width);
     let rankContainer;
     if (this.props.selected) {
       rankContainer = {
