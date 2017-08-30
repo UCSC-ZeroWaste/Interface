@@ -1,20 +1,11 @@
 import React, {Component} from 'react';
-import {mapsStaticKey, mapsJavascriptKey} from '../../../config.js';
-import styles from '../../../App.css';
-import GoogleMapReact from 'google-map-react';
+import {mapsStaticKey} from '../../../config.js';
 
 // const map1 = 'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=' + settings.key;
-
-const AnyReactComponent = ({ text }) => <div style={{height: '30px', width: '30px', backgroundColor: 'blue'}}></div>;
 
 export default class HeatMap extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidUpdate (a,b) {
-    console.log(this.props);
-
   }
 
   map() {
@@ -55,53 +46,17 @@ export default class HeatMap extends Component {
     return prefix + location + size + zoom + features+ markers + apiKey;
   }
 
-
-      static defaultProps = {
-      center: {lat: 36.995, lng: -122.060},
-      zoom: 15
-    };
-
-    createMapOptions(maps) {
-  // next props are exposed at maps
-  // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
-  // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
-  // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
-  // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
-  // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
-  return {
-    zoomControlOptions: {
-      position: maps.ControlPosition.RIGHT_CENTER,
-      style: maps.ZoomControlStyle.SMALL
-    },
-    mapTypeControlOptions: {
-      position: maps.ControlPosition.TOP_RIGHT
-    },
-    mapTypeControl: true
-  };
-}
-
   render() {
-    return (
-        <GoogleMapReact
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-          options={{zoomControl: false,
-                    mapTypeControl: false,
-                    scaleControl: false,
-                    streetViewControl: false,
-                    rotateControl: false,
-                    fullscreenControl: false,
-                    draggable: false,
-                  }}
-          bootstrapURLKeys={{key: mapsJavascriptKey}}
-          >
-          <AnyReactComponent
-            lat={36.995}
-            lng={-122.060}
-            text={'Kreyser Avrora'}
-            />
-        </GoogleMapReact>
-
-     );
+    return(
+      <div style={{height: '100%', width: '100%', display: 'flex', alignItems: 'center'}}>
+        <img
+          src={this.map()}
+          style={{height: '95%', width: '65%', opacity: '1'}}
+          onLoad={() => {window.dispatchEvent(new Event('resize'));}}
+          ></img>
+      </div>
+    );
   }
 }
+
+//
