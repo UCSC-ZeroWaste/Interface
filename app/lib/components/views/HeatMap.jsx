@@ -18,90 +18,79 @@ class HeatMap extends Component {
 
   }
 
-  map() {
-    const prefix = 'https://maps.googleapis.com/maps/api/staticmap?';
+  static defaultProps = {
+    center: {lat: 36.995, lng: -122.060},
+    zoom: 15
+  };
 
-    const lat = '36.995';
-    const long = '-122.060';
-    const location = 'center=' + lat + ', ' + long;
+  renderMarkers() {
 
-    const width = '1000';
-    const height = '400';
-    const size = '&size=' + width + 'x' + height;
-    const color = {tan: '0xdfd2ae', black: '0x000000', white: '0xffffff', blue: '0x363696'};
-    const zoom = '&zoom=15';
-
-
-
-    const features = [
-      '&style=feature:landscape|element:geometry|color:' + color.blue,
-      '&style=feature:poi|element:geometry|color:' + color.blue,
-      '&style=feature:poi.park|element:geometry|color:' + color.blue,
-      '&style=feature:poi.business|visibility:off',
-      '&style=feature:poi.attraction|visibility:off',
-      '&style=feature:road.local|element:geometry|color:' + color.white,
-    ].join('');
+    // const color = {tan: '0xdfd2ae', black: '0x000000', white: '0xffffff', blue: '0x363696'};
+    // const features = [
+    //   '&style=feature:landscape|element:geometry|color:' + color.blue,
+    //   '&style=feature:poi|element:geometry|color:' + color.blue,
+    //   '&style=feature:poi.park|element:geometry|color:' + color.blue,
+    //   '&style=feature:poi.business|visibility:off',
+    //   '&style=feature:poi.attraction|visibility:off',
+    //   '&style=feature:road.local|element:geometry|color:' + color.white,
+    // ].join('');
     // const feature3 = '&style=feature:road|visibility:off';
-    const apiKey = '&key=' + mapsStaticKey;
-    return prefix + location + size + zoom + features+ markers + apiKey;
-  }
 
-
-      static defaultProps = {
-      center: {lat: 36.995, lng: -122.060},
-      zoom: 15
+    const MARKERS = {
+      'Kresge': {lat: '36.9972381', long: '-122.0667945'},
+      'Oakes': {lat: '36.9890294', long: '-122.0646362'},
+      'Porter': {lat: '36.9943943', long: '-122.0652214'},
+      'College Eight': {lat: '36.9911913', long: '-122.0647242'},
+      'College Nine and Ten': {lat: '37.001788', long: '-122.057529'},
+      'Cowell-Stevenson': {lat: '36.997912', long: '-122.051273'},
+      'Crown-Merrill': {lat: '37.002078', long: '-122.053759'},
     };
 
+    return this.props.leaders.map( (leader, index) => {
+      let options = MARKERS[leader.site]
+      let slugImage = SLUG_PINS[index];
 
-    renderMarkers() {
-      const MARKERS = {
-        'Kresge': {lat: '36.9972381', long: '-122.0667945'},
-        'Oakes': {lat: '36.9890294', long: '-122.0646362'},
-        'Porter': {lat: '36.9943943', long: '-122.0652214'},
-        'College Eight': {lat: '36.9911913', long: '-122.0647242'},
-        'College Nine and Ten': {lat: '36.9911913', long: '-122.0647242'},
-        'Cowell-Stevenson': {lat: '36.9911913', long: '-122.0647242'},
-        'Crown-Merrill': {lat: '36.9911913', long: '-122.0647242'},
-      };
 
-      return this.props.leaders.map( (leader, index) => {
-        let options = MARKERS[leader.site]
-        let slugImage = SLUG_PINS[index];
+      const MARKER_SIZE = 100;
+      const markerPlacement = {
+        position: 'absolute',
+        width: MARKER_SIZE,
+        height: MARKER_SIZE,
+        left: -MARKER_SIZE / 2,
+        top: -MARKER_SIZE,
+        backgroundImage: `url(${slugImage})`,
+        backgroundSize: 'contain',
+      }
 
-        return (
-          <div
-            lat={options.lat}
-            lng={options.long}
-            key={index}
-            style={{
-              height: '70px',
-              width: '70px',
-              backgroundImage: `url(${slugImage})`,
-              backgroundSize: 'contain',
-            }}
-            ></div>
-        )
-      });
+      return (
+        <div
+          lat={options.lat}
+          lng={options.long}
+          key={index}
+          style={markerPlacement}
+          ></div>
+      )
+    });
 
-    }
+  }
 
-    createMapOptions(maps) {
+  createMapOptions(maps) {
   // next props are exposed at maps
   // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
   // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
   // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
   // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
   // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
-  return {
-    zoomControlOptions: {
-      position: maps.ControlPosition.RIGHT_CENTER,
-      style: maps.ZoomControlStyle.SMALL
-    },
-    mapTypeControlOptions: {
-      position: maps.ControlPosition.TOP_RIGHT
-    },
-    mapTypeControl: true
-  };
+  // return {
+  //   zoomControlOptions: {
+  //     position: maps.ControlPosition.RIGHT_CENTER,
+  //     style: maps.ZoomControlStyle.SMALL
+  //   },
+  //   mapTypeControlOptions: {
+  //     position: maps.ControlPosition.TOP_RIGHT
+  //   },
+  //   mapTypeControl: true
+  // };
 }
 
   render() {
