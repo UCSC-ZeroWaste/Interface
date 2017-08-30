@@ -8,6 +8,16 @@ import {connect} from 'react-redux';
 // const map1 = 'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=' + settings.key;
 
 
+
+const Marker = ({text, containerStyle, textStyle, markerStyle}) => {
+  return (
+    <div style={containerStyle}>
+      <div style={markerStyle}/>
+      <div style={textStyle}> {text} </div>
+    </div>
+  )
+}
+
 class HeatMap extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +29,7 @@ class HeatMap extends Component {
   }
 
   static defaultProps = {
-    center: {lat: 36.995, lng: -122.060},
+    center: {lat: 36.997, lng: -122.060},
     zoom: 15
   };
 
@@ -50,25 +60,47 @@ class HeatMap extends Component {
       let options = MARKERS[leader.site]
       let slugImage = SLUG_PINS[index];
 
-
       const MARKER_SIZE = 100;
-      const markerPlacement = {
+      const TEXT_WIDTH = 80;
+      const TEXT_HEIGHT = 30;
+
+      const containerStyle = {
         position: 'absolute',
-        width: MARKER_SIZE,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        width: MARKER_SIZE + TEXT_WIDTH,
         height: MARKER_SIZE,
         left: -MARKER_SIZE / 2,
         top: -MARKER_SIZE,
+      }
+
+      const textStyle = {
+        display: 'flex',
+        width: TEXT_WIDTH,
+        backgroundColor: 'white',
+        border: '1px grey solid',
+        borderRadius: '3px',
+        boxSizing: 'border-box',
+      }
+
+      const markerStyle = {
+        width: MARKER_SIZE,
+        height: MARKER_SIZE,
         backgroundImage: `url(${slugImage})`,
-        backgroundSize: 'contain',
+        backgroundSize: 'cover',
       }
 
       return (
-        <div
+        <Marker
           lat={options.lat}
           lng={options.long}
           key={index}
-          style={markerPlacement}
-          ></div>
+          markerStyle={markerStyle}
+          textStyle={textStyle}
+          containerStyle={containerStyle}
+          text={leader.site}
+        />
       )
     });
 
