@@ -3,6 +3,7 @@ import styles from '../../../App.css';
 import merge from 'lodash/merge';
 import ContainerDimensions from 'react-container-dimensions';
 import {SLUG_IMAGES} from '../../constants/constants';
+import IMAGE1 from '../../assets/images/emotional_slugs/Slug1.png';
 // import {connect} from 'react-redux';
 
 export default class LeaderRow extends Component {
@@ -57,6 +58,7 @@ export default class LeaderRow extends Component {
       );
     }
   }
+  // <div style={{backgroundColor: this.props.color, backgroundImage: 'url(' + IMAGE1 + ')'}} className={styles.slug}>
 
   // updateState() {
   //   let rowHeight = this.refs.leader_row.clientHeight;

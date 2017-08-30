@@ -420,7 +420,7 @@ body > div {
   background-position: center;
   box-sizing: border-box;
   border: solid 3px #D0D3D3;
-   
+
 
   animation-duration: .6s, .3s;
   animation-name: enlarge, slide;
