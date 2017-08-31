@@ -58,6 +58,7 @@ export default class LeaderRow extends Component {
         position: 'relative'
       };
       var rankCircleStyle = styles.rank_circle_selected;
+      var rankTextStyle = styles.rank_text_selected;
     } else {
       rankContainer = {
         width: height,
@@ -65,6 +66,7 @@ export default class LeaderRow extends Component {
         position: 'relative'
       };
       rankCircleStyle = styles.rank_circle;
+      rankTextStyle = styles.rank_text;
     }
     return (
       <div style={rankContainer}>
@@ -72,7 +74,7 @@ export default class LeaderRow extends Component {
           <div style={{backgroundColor: this.props.color}} className={rankCircleStyle}></div>
         </div>
         <div className={styles.opacityFixContainer}>
-          <div className={styles.rank_text}>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
+          <div className={rankTextStyle}>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
         </div>
       </div>
     );
@@ -95,6 +97,8 @@ export default class LeaderRow extends Component {
     let rowStyle = this.props.selected ? styles.leader_row_selected : styles.leader_row;
     let color = this.props.selected ? {backgroundColor: this.props.color} : undefined;
     let details = this.props.selected ? styles.details_selected : styles.details;
+    let site = this.props.selected ? styles.details_site_selected : styles.details_site;
+    let ratio = this.props.selected ? styles.details_ratio_selected : styles.details_ratio;
 
     return (
       <div className={rowStyle} ref="leader_row">
@@ -105,8 +109,8 @@ export default class LeaderRow extends Component {
 
         <div className={styles.details_container}>
           <div className={details} style={color}>
-            <div className={styles.details_site} >{this.props.site.site}</div>
-            <div className={styles.details_ratio} >{Math.round(this.props.site.greenRatio)}%</div>
+            <div className={site} >{this.props.site.site}</div>
+            <div className={ratio} >{Math.round(this.props.site.greenRatio)}%</div>
           </div>
         </div>
       </div>

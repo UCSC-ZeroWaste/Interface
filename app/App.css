@@ -66,7 +66,7 @@ body > div {
 
 .nav_bar_container {
   width: 100%;
-  height: 10%;
+  height: 9%;
   position: relative;
   justify-content: space-between;
   align-items: center;
@@ -97,18 +97,22 @@ body > div {
 .nav_icons_container {
   align-items: left;
   display: flex;
+  justify-content: space-between;
+  width: 30%;
   /*padding: 0.5em;*/
 }
 
+.logo_and_selected_icon_color {
+  color: #f6f6f6;
+}
+
 .logo {
+  composes: logo_and_selected_icon_color;
   font-family: 'logofont';
-  color: white;
-  font-size: 3em;
-  margin-left: 0.7em;
-  /*margin-top: 0.1em;*/
+  font-size: 2.8em;
+  margin: 0 0.7em 0 0.7em;
 }
 .nav_button {
-  width: 70px;
   height: 100%;
   opacity: 1;
   border: none;
@@ -126,13 +130,12 @@ body > div {
   /*margin-left: 0.7em;*/
 }
 .nav_button_fa_selected {
-  composes: nav_button_fa;
-  color: white;
+  composes: logo_and_selected_icon_color;
 }
 
 .main_view {
   width: 100%;
-  height: 80%;
+  height: 85%;
   box-sizing: border-box;
   /*border: 1px red solid;*/
   display: flex;
@@ -142,7 +145,7 @@ body > div {
 
 .footer_container {
   width: 100%;
-  height: 10%;
+  height: 6%;
   position: relative;
   justify-content: space-between;
   align-items: center;
@@ -167,6 +170,12 @@ body > div {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+.footer_icons_container {
+  width: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .template {
@@ -328,9 +337,8 @@ body > div {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
   height: 100%;
-  margin-left: 5%;
 }
 .leader_board_header {
   /*border: 1px red solid;*/
@@ -347,13 +355,14 @@ body > div {
 }
 .leader_rows {
   flex: 9;
-  width: 100%;
-  margin-bottom: 1em;
+  width: 80%;
+  margin-bottom: 5%;
   flex-direction: column;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: white;
+  margin-right: 10%;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 
@@ -368,7 +377,7 @@ body > div {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  margin: .25em 0em .25em 0em;
+  margin: .45% 0em .45% 0em;
 
   width: 80%;
 }
@@ -419,8 +428,12 @@ body > div {
 
 .rank_text {
   font-size: 1.2em;
-  font-family: "HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 500;
+  font-family: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  /*font-weight: 200;*/
+}
+.rank_text_selected {
+  composes: rank_text;
+  font-size: 2em;
 }
 
 .slugContainer {
@@ -473,6 +486,8 @@ body > div {
   position: relative;
   /*display: flex;*/
   justify-content: center;
+  box-sizing: border-box;
+
 }
 
 /*Opacity fix*/
@@ -487,7 +502,7 @@ body > div {
   width: 93%;
   height: 100%;
   background: grey;
-  border-radius: 10px;
+  border-radius: 12px;
   opacity: 0.5;
 }
 .details {
@@ -497,24 +512,21 @@ body > div {
   top: 0;
   left: 0;
   right: 0;
-  width: 97%;
+  width: 93%;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 3% 0 3%;
   /*border: solid 1px grey;*/
-  border-radius: 10px;
+  box-sizing: border-box;
+  border-radius: 12px;
   display: flex;
-  padding-right: 1.0em;
-  padding-left: 1.0em;
 }
 .details_selected {
   composes: details;
-  width: 97%;
-  box-sizing: border-box;
+  width: 96%;
   border: solid 3px #D0D3D3;
-  padding-left: 1.0em;
-  padding-right: 1.0em;
   /*background-color: lightgrey;*/
 }
 
@@ -523,20 +535,31 @@ body > div {
   font-size: 1.2em;
   align-items: center;
   box-sizing: border-box;
-  padding: 1em;
+  /*padding: 1em;*/
   display: flex;
-
 }
 .details_site {
   composes: details_text;
   width: 80%;
   justify-content: flex-start;
 }
+.details_site_selected {
+  composes: details_text;
+  width: 80%;
+  justify-content: flex-start;
+  font-size: 1.8em;
+}
 
 .details_ratio {
   composes: details_text;
   width: 20%;
   justify-content: flex-end;
+}
+.details_ratio_selected {
+  composes: details_text;
+  width: 20%;
+  justify-content: flex-end;
+  font-size: 1.8em;
 }
 
 
