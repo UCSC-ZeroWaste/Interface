@@ -30,6 +30,7 @@
     "babel-core": "^6.22.1",
     "d3": "^3.5.0",
     "font-awesome": "^4.7.0",
+    "google-map-react": "^0.24.0",
     "halogen": "^0.2.0",
     "lodash": "^4.17.4",
     "pure-react-carousel": "^1.9.6",
