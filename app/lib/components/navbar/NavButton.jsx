@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {handleViewSelect, handleSiteSelect, handleScopeSelect} from '../../actions/view_actions';
+import {handleViewSelect, handleSiteSelect, handleScopeSelect, toggleModal} from '../../actions/view_actions';
 import styles from '../../../App.css';
 import FontAwesome from 'react-fontawesome';
 
@@ -11,7 +11,9 @@ class NavButton extends Component {
   }
 
   clickHandler(e) {
-    if (this.props.nav === 'view') {
+    if (this.props.nav === 'modal') {
+      this.props.toggleModal();
+    } else if (this.props.nav === 'view') {
       this.props.handleViewSelect(this.props.view);
     } else if (this.props.nav === 'scope') {
       // TODO need to flesh this out
@@ -23,16 +25,16 @@ class NavButton extends Component {
   }
 
   render() {
-    if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
-      var styleButton = styles.nav_button_selected;
-      var styleIcon = styles.nav_button_fa_selected;
+    if (this.props.nav === 'modal') {
+      var styleIcon = styles.info_button_fa;
+    } else if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
+      styleIcon = styles.nav_button_fa_selected;
     } else {
-      styleButton = styles.nav_button;
       styleIcon = styles.nav_button_fa;
     }
 
     return (
-      <div className={styleButton}>
+      <div className={styles.nav_button_press_response}>
         <FontAwesome
           onClick={this.clickHandler}
           className={styleIcon}
@@ -56,7 +58,8 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum)),
   handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
-  handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope))
+  handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope)),
+  toggleModal: () => dispatch(toggleModal())
 });
 
 export default connect(

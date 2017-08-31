@@ -95,8 +95,8 @@ body > div {
 }
 
 .nav_icons_container {
-  align-items: left;
   display: flex;
+  height: 100%;
   justify-content: space-between;
   width: 30%;
   /*padding: 0.5em;*/
@@ -112,9 +112,11 @@ body > div {
   font-size: 2.8em;
   margin: 0 0.7em 0 0.7em;
 }
-.nav_button {
+.nav_button_press_response {
+  width: 70px;
   height: 100%;
   opacity: 1;
+  /*background-color: red;*/
   border: none;
   border-radius: 5px;
   display: flex;
@@ -122,8 +124,8 @@ body > div {
   align-items: center;
   justify-content: center;
 }
-.nav_button_selected {
-  composes: nav_button;
+.nav_button_press_response:active {
+    background-color: yellow;
 }
 .nav_button_fa {
   color: #a8a6a6;
@@ -132,6 +134,29 @@ body > div {
 .nav_button_fa_selected {
   composes: logo_and_selected_icon_color;
 }
+
+.info_button_fa {
+  color: blue;
+  animation: rotateY 3s infinite linear;
+}
+@keyframes rotateY {
+ to { transform: rotateY(360deg); }
+}
+
+/*
+@keyframes rotate {
+  from {
+    width: 0;
+    height: 0;
+    top: 50%;
+  }
+  to {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+  }
+}*/
+
 
 .main_view {
   width: 100%;
@@ -168,10 +193,19 @@ body > div {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
-.footer_icons_container {
+
+.footer_left {
+  height: 100%;
+  width: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.footer_right {
+  height: 100%;
   width: 8%;
   display: flex;
   flex-direction: row;
@@ -415,8 +449,8 @@ body > div {
   align-items: center;
   justify-content: center;
 
-  animation-duration: .1s;
   animation-name: enlarge;
+  animation-duration: .1s;
   animation-fill-mode: forwards;
 }
 
@@ -565,22 +599,6 @@ body > div {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*TODO create transistion*/
-.nav_button:active, .nav_button_selected:active {
-  background-color: #5f6266;
-}
 
 /*TODO may want to create a hover effect for viewing on the web*/
 /*.nav_button:hover, .nav_button_selected:hover {
