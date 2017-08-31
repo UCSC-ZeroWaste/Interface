@@ -330,10 +330,10 @@ body > div {
   justify-content: space-between;
   width: 80%;
   height: 100%;
-  margin-left: 10%;
+  margin-left: 5%;
 }
 .leader_board_header {
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   box-sizing: border-box;
   color: white;
   width: 80%;
@@ -361,7 +361,7 @@ body > div {
 .leader_row {
   flex: 1;
 
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   box-sizing: border-box;
 
   display: flex;
@@ -383,39 +383,55 @@ body > div {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   box-sizing: border-box;
 }
 
-.rank {
-  opacity: 0.7;
+.opacityFixContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.rank_circle {
+  opacity: 0.5;
   border-radius: 50%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2em;
-  font-family: "HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 500;
-
 
   animation-duration: .1s;
   animation-name: enlarge;
   animation-fill-mode: forwards;
 }
 
-.rank_selected {
-  composes: rank;
+.rank_circle_selected {
+  composes: rank_circle;
+  opacity: 1;
   border: solid 3px #D0D3D3;
-  /*background-color: lightgrey;*/
+}
+
+.rank_text {
+  font-size: 1.2em;
+  font-family: "HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 500;
+}
+
+.slugContainer {
+  /*width and height set using inline styles*/
+  margin-right: 3%;
 }
 
 .slug {
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   box-sizing: border-box;
-
   border-radius: 50%;
-  /*background-image: url('./lib/assets/images/slug1.png');*/
   background-size: 75% 75%;
   background-repeat: no-repeat;
   background-position: center;
@@ -426,7 +442,6 @@ body > div {
   animation-duration: .6s, .3s;
   animation-name: enlarge, slide;
   animation-fill-mode: forwards, forwards;
-  /*border: 4px solid lightgrey;*/
   /*animation-delay: .2s, 1s;*/
 }
 
@@ -450,7 +465,6 @@ body > div {
     top: 0%;
   }
 }
-
 
 .details_container {
   flex: 5;

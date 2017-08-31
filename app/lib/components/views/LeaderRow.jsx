@@ -8,71 +8,38 @@ import {SLUG_IMAGES} from '../../constants/constants';
 export default class LeaderRow extends Component {
   constructor(props) {
     super(props);
-    // this.state = {rowHeight: '10px', slugHeight: '10px'};
-    // this.renderSlug = this.renderSlug.bind(this);
-  }
-
-  componentDidMount() {
-    // console.log('BEFORE', this.state.rowHeight);
-    // this.updateState();
-    // console.log('AFTER', this.state.rowHeight);
-  }
-
-  componentDidUpdate() {
-    // if (this.state.rowHeight !== this.refs.leader_row.clientHeight + 'px') {
-    //   this.updateState();
-    // }
   }
 
   renderSlug(height, width) {
-    // console.log('slug height', height, 'slug width', width);
-
-    let slugContainer;
     if (this.props.selected) {
-      slugContainer = {
+      var slugContainer = {
         width: 1.2 * height,
         height: 1.2 * height,
-        // position: 'relative'
       };
     } else {
       slugContainer = {
         width: height,
         height: height,
-        // position: 'relative'
       };
     }
 
     if (this.props.selected) {
       return (
-        <div style={slugContainer}>
-          <div
+        <div style={slugContainer} className={styles.slugContainer}>
+          <img
               style={{
                 backgroundColor: this.props.color,
                 backgroundImage: `url(${SLUG_IMAGES[this.props.rank - 1]})`
               }}
-              className={styles.slug}>
-          </div>
+              className={styles.slug}/>
         </div>
       );
     } else {
       return (
-        <div style={slugContainer}>
-
-        </div>
+        <div style={slugContainer}/>
       );
     }
   }
-
-  // updateState() {
-  //   let rowHeight = this.refs.leader_row.clientHeight;
-  //   console.log('state', rowHeight);
-  //   let slugHeight = rowHeight * 1.2;
-  //   this.setState({
-  //     rowHeight: rowHeight + 'px',
-  //     slugHeight: slugHeight + 'px'
-  //   });
-  //
-  // }
 
   renderRankAndSlug(height, width) {
     return (
@@ -84,50 +51,32 @@ export default class LeaderRow extends Component {
   }
 
   renderRank(height, width) {
-    // console.log('rank height', height, 'rank width', width);
-    let rankContainer;
     if (this.props.selected) {
-      rankContainer = {
+      var rankContainer = {
         width: 1.0 * height,
         height: 1.0 * height,
-        // position: 'relative'
+        position: 'relative'
       };
+      var rankCircleStyle = styles.rank_circle_selected;
     } else {
       rankContainer = {
         width: height,
         height: height,
-        // position: 'relative'
+        position: 'relative'
       };
+      rankCircleStyle = styles.rank_circle;
     }
-    if (this.props.selected) {
-      return (
-        <div style={rankContainer}>
-          <div style={{backgroundColor: this.props.color}} className={styles.rank_selected}>
-            <div>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
-          </div>
+    return (
+      <div style={rankContainer}>
+        <div className={styles.opacityFixContainer}>
+          <div style={{backgroundColor: this.props.color}} className={rankCircleStyle}></div>
         </div>
-      );
-    } else {
-      return (
-        <div style={rankContainer}>
-          <div style={{backgroundColor: this.props.color}} className={styles.rank}>
-            <div>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
-          </div>
+        <div className={styles.opacityFixContainer}>
+          <div className={styles.rank_text}>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
         </div>
-      );
-
-    }
-    //
-    // return (
-    //   <div style={rankContainer}>
-    //     <div className={rankingStyle} style={{backgroundColor: this.props.color}}>
-    //       <div>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
-    //     </div>
-    //   </div>
-    //
-    // );
+      </div>
+    );
   }
-
 
   renderRankDegree() {
     switch (this.props.rank) {
@@ -142,16 +91,13 @@ export default class LeaderRow extends Component {
     }
   }
 
-
   render() {
     let rowStyle = this.props.selected ? styles.leader_row_selected : styles.leader_row;
     let color = this.props.selected ? {backgroundColor: this.props.color} : undefined;
     let details = this.props.selected ? styles.details_selected : styles.details;
-    let rankingStyle = this.props.selected ? styles.rank_selected : styles.rank;
-    // console.log("this.props: ", this.props);
+
     return (
       <div className={rowStyle} ref="leader_row">
-
 
         <ContainerDimensions>
           { ({ height, width }) => this.renderRankAndSlug(height, width) }
@@ -165,14 +111,5 @@ export default class LeaderRow extends Component {
         </div>
       </div>
     );
-
   }
 }
-
-// const mapStateToProps = (state) => ({
-//   resizeFix: state.currentView.site
-// });
-//
-// export default connect(mapStateToProps)(LeaderRow);
-
-// <Rank width={width} height={height} color={this.props.color} style={rankingStyle} rank={this.props.rank}/>
