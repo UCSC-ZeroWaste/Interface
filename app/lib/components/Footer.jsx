@@ -12,8 +12,10 @@ export default class NavBar extends Component {
     return (
       <div className={styles.footer_container}>
           <div className={styles.footer}>
-            <NavButton title={'Local'} nav={'scope'} scope={'local'} fa={'user'}/>
-            <NavButton title={'Global'} nav={'scope'} scope={'global'} fa={'globe'}/>
+            <div className={styles.footer_icons_container}>
+              <NavButton title={'Local'} nav={'scope'} scope={'local'} fa={'user'}/>
+              <NavButton title={'Global'} nav={'scope'} scope={'global'} fa={'globe'}/>
+            </div>
             <SiteSelector/>
           </div>
       </div>
