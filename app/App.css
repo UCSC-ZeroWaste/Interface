@@ -387,27 +387,47 @@ body > div {
   box-sizing: border-box;
 }
 
-.rank {
-  opacity: 0.7;
+.opacityFixContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.rank_circle {
+  opacity: 0.5;
   border-radius: 50%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2em;
-  font-family: "HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 500;
-
 
   animation-duration: .1s;
   animation-name: enlarge;
   animation-fill-mode: forwards;
 }
 
-.rank_selected {
-  composes: rank;
+.rank_circle_selected {
+  composes: rank_circle;
+  opacity: 1;
   border: solid 3px #D0D3D3;
-  /*background-color: lightgrey;*/
+}
+
+.rank_text {
+  /*display: inline-block;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  left: 0;
+  right: 0;*/
+  font-size: 1.2em;
+  font-family: "HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 500;
 }
 
 .slug {
@@ -450,7 +470,6 @@ body > div {
     top: 0%;
   }
 }
-
 
 .details_container {
   flex: 5;
