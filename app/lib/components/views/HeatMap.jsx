@@ -5,10 +5,6 @@ import GoogleMapReact from 'google-map-react';
 import {SLUG_PINS} from '../../constants/constants';
 import {connect} from 'react-redux';
 
-// const map1 = 'https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=' + settings.key;
-
-
-
 const Marker = ({text, containerStyle, textStyle, markerStyle}) => {
   return (
     <div style={containerStyle}>
@@ -21,11 +17,6 @@ const Marker = ({text, containerStyle, textStyle, markerStyle}) => {
 class HeatMap extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidUpdate (a,b) {
-    console.log(this.props);
-
   }
 
   static defaultProps = {
@@ -103,7 +94,6 @@ class HeatMap extends Component {
         />
       )
     });
-
   }
 
   createMapOptions(maps) {
@@ -130,14 +120,15 @@ class HeatMap extends Component {
         <GoogleMapReact
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
-          options={{zoomControl: false,
-                    mapTypeControl: false,
-                    scaleControl: false,
-                    streetViewControl: false,
-                    rotateControl: false,
-                    fullscreenControl: false,
-                    draggable: false,
-                  }}
+          options={{
+            zoomControl: false,
+            mapTypeControl: false,
+            scaleControl: false,
+            streetViewControl: false,
+            rotateControl: false,
+            fullscreenControl: false,
+            draggable: false,
+          }}
           bootstrapURLKeys={{key: mapsJavascriptKey}}
           >
           {this.renderMarkers()}
@@ -146,7 +137,6 @@ class HeatMap extends Component {
      );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   leaders: state.records.leaders
