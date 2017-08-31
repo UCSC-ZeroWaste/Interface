@@ -330,10 +330,10 @@ body > div {
   justify-content: space-between;
   width: 80%;
   height: 100%;
-  margin-left: 10%;
+  margin-left: 5%;
 }
 .leader_board_header {
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   box-sizing: border-box;
   color: white;
   width: 80%;
@@ -361,7 +361,7 @@ body > div {
 .leader_row {
   flex: 1;
 
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   box-sizing: border-box;
 
   display: flex;
@@ -383,7 +383,7 @@ body > div {
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  border: 1px red solid;
+  /*border: 1px red solid;*/
   box-sizing: border-box;
 }
 
@@ -418,24 +418,20 @@ body > div {
 }
 
 .rank_text {
-  /*display: inline-block;
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  top: 0;
-  left: 0;
-  right: 0;*/
   font-size: 1.2em;
   font-family: "HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 500;
 }
 
-.slug {
-  border: 1px red solid;
-  box-sizing: border-box;
+.slugContainer {
+  /*width and height set using inline styles*/
+  margin-right: 3%;
+}
 
+.slug {
+  /*border: 1px red solid;*/
+  box-sizing: border-box;
   border-radius: 50%;
-  /*background-image: url('./lib/assets/images/slug1.png');*/
   background-size: 75% 75%;
   background-repeat: no-repeat;
   background-position: center;
@@ -446,7 +442,6 @@ body > div {
   animation-duration: .6s, .3s;
   animation-name: enlarge, slide;
   animation-fill-mode: forwards, forwards;
-  /*border: 4px solid lightgrey;*/
   /*animation-delay: .2s, 1s;*/
 }
 

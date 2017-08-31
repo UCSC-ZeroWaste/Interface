@@ -25,8 +25,8 @@ export default class LeaderRow extends Component {
 
     if (this.props.selected) {
       return (
-        <div style={slugContainer}>
-          <div
+        <div style={slugContainer} className={styles.slugContainer}>
+          <img
               style={{
                 backgroundColor: this.props.color,
                 backgroundImage: `url(${SLUG_IMAGES[this.props.rank - 1]})`
