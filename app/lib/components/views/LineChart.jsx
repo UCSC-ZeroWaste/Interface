@@ -5,11 +5,10 @@ import _ from 'underscore';
 // import {LineChart} from '../../../../../_FORKED-rd3';
 // /build/cjs/linechart/LineChart';
 import {LineChart} from 'rd3';
-
-
 import d3 from 'd3';
+
 import {connect} from 'react-redux';
-import {WASTE_TYPES, CHART} from '../../constants/constants';
+import {WASTE_TYPES, CHART, LEADER_BOARD_COLORS} from '../../constants/constants';
 import styles from '../../../App.css';
 import ContainerDimensions from 'react-container-dimensions';
 
@@ -26,6 +25,7 @@ class LineChartComponent extends Component {
 
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
+    console.log('d3 color: ', d3.scale.category20());
   }
 
   componentDidMount() {
@@ -211,6 +211,8 @@ class LineChartComponent extends Component {
         data={this.getData()}
         width={width * CHART.widthRatio}
         height={height * CHART.heightRatio}
+        colors={ (colorAccessorFunc) => LEADER_BOARD_COLORS[colorAccessorFunc] }
+        colorAccessor={(d, idx) => idx}
 
         circleRadius={0}
         viewBoxObject={{
@@ -220,7 +222,6 @@ class LineChartComponent extends Component {
           height: height * CHART.viewBox_heightRatio
         }}
 
-        title={this.props.site + ' - ' + options.title}
         xAxisLabel={options.xLabel}
         xAxisLabelOffset={CHART.xAxisLabelOffset}
 
@@ -237,6 +238,20 @@ class LineChartComponent extends Component {
       />
     );
   }
+
+  renderHeader() {
+
+    if (this.props.type === 'green') {
+      var title = 'Green Ratio (higher is better) - ';
+    } else if (this.props.type === 'general') {
+      title = 'All Waste Data - ';
+    }
+    return (
+      <div className={styles.line_chart_header}>
+        {title + this.props.site}
+      </div>
+    );
+  }
   // <LineChart
   //   data= {options.data}
   //   x= {(d) => new Date(d.picked_up).valueOf()}
@@ -251,6 +266,7 @@ class LineChartComponent extends Component {
 
     return (
       <div className={styles.line_chart_container}>
+        {this.renderHeader()}
         <ContainerDimensions>
           { ({ height, width }) => this.renderChart(height, width) }
         </ContainerDimensions>
