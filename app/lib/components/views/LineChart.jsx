@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
 
+
 //TODO switch back to 'rd3' when my changes have been accepted
-// import {LineChart} from '../../../../../_FORKED-rd3';
+// import LineChart from '../../../../../_FORKED-rd3/build/cjs/linechart/LineChart.js';
 // /build/cjs/linechart/LineChart';
-import {LineChart} from 'rd3';
+// import {LineChart} from 'rd3';
+// import LineChart from '../../../../node_modules/rd3/src/linechart/LineChart.js';
+import LineChart from '../../../../node_modules/rd3/build/cjs/linechart/LineChart.js';
+
+import ChartLegend from './ChartLegend';
+
 import d3 from 'd3';
 
 import {connect} from 'react-redux';
@@ -214,6 +220,10 @@ class LineChartComponent extends Component {
         colors={ (colorAccessorFunc) => LEADER_BOARD_COLORS[colorAccessorFunc] }
         colorAccessor={(d, idx) => idx}
 
+        legendPosition={'left'}
+
+
+
         circleRadius={0}
         viewBoxObject={{
           x: -20,
@@ -266,10 +276,16 @@ class LineChartComponent extends Component {
 
     return (
       <div className={styles.line_chart_container}>
+
         {this.renderHeader()}
-        <ContainerDimensions>
-          { ({ height, width }) => this.renderChart(height, width) }
-        </ContainerDimensions>
+
+        <div className={styles.graph_container}>
+          <ContainerDimensions>
+            { ({ height, width }) => this.renderChart(height, width) }
+          </ContainerDimensions>
+          <ChartLegend />
+        </div>
+        
         {this.renderSelector()}
       </div>
     );

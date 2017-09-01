@@ -81,7 +81,7 @@ export const CHART = {
   yAxisLabelOffset: 40,
 
   settings: {
-    legend: true,
+    legend: false,
     gridHorizontal: false,
     gridVertical: false,
     hoverAnimation: false,
