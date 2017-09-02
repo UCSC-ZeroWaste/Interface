@@ -31,7 +31,6 @@ class LineChartComponent extends Component {
 
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
-    console.log('d3 color: ', d3.scale.category20());
   }
 
   componentDidMount() {
@@ -54,12 +53,12 @@ class LineChartComponent extends Component {
         'y' : datum.Load,
       }));
 
-      return {
-        name: site,
-        values: sitePickups,
-        strokeWidth: this.strokeWidth,
-        strokeDashArray: this.strokeDashArray
-      };
+    return {
+      name: site,
+      values: sitePickups,
+      strokeWidth: this.strokeWidth,
+      strokeDashArray: this.strokeDashArray
+    };
   }
 
   handleSelector(e) {
@@ -210,6 +209,13 @@ class LineChartComponent extends Component {
       };
     }
 
+    const index = this.props.leaders.findIndex( leader => leader.site === this.props.site );
+    const chartColorsArray = (
+      this.props.scope === 'local' ?
+      [LEADER_BOARD_COLORS[index]] :
+      LEADER_BOARD_COLORS
+    );
+
     return (
       //TODO get a handle on color & colorAccessor props
       <LineChart
@@ -217,12 +223,8 @@ class LineChartComponent extends Component {
         data={this.getData()}
         width={width * CHART.widthRatio}
         height={height * CHART.heightRatio}
-        colors={ (colorAccessorFunc) => LEADER_BOARD_COLORS[colorAccessorFunc] }
+        colors={ (colorAccessorFunc) => chartColorsArray[colorAccessorFunc] }
         colorAccessor={(d, idx) => idx}
-
-        legendPosition={'left'}
-
-
 
         circleRadius={0}
         viewBoxObject={{
@@ -285,7 +287,7 @@ class LineChartComponent extends Component {
           </ContainerDimensions>
           <ChartLegend />
         </div>
-        
+
         {this.renderSelector()}
       </div>
     );
@@ -318,6 +320,7 @@ const mapStateToProps = (state) => ({
   records: state.records.data,
   site: state.currentView.site,
   scope: state.currentView.scope,
+  leaders: state.records.leaders
 });
 
 export default connect(mapStateToProps)(LineChartComponent);
