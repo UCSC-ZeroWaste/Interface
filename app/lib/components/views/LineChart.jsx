@@ -3,11 +3,7 @@ import _ from 'underscore';
 
 
 //TODO switch back to 'rd3' when my changes have been accepted
-// import LineChart from '../../../../../_FORKED-rd3/build/cjs/linechart/LineChart.js';
-// /build/cjs/linechart/LineChart';
-// import {LineChart} from 'rd3';
-// import LineChart from '../../../../node_modules/rd3/src/linechart/LineChart.js';
-import LineChart from '../../../../node_modules/rd3/build/cjs/linechart/LineChart.js';
+import {LineChart} from 'rd3';
 
 import ChartLegend from './ChartLegend';
 
