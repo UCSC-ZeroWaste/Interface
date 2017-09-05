@@ -6,7 +6,7 @@ import {LEADER_BOARD_COLORS} from '../../constants/constants';
 const LegendRow = ({label, color}) => {
   return (
     <div className={styles.chart_legend_row}>
-      <div style={{height: '20px', width: '20px', backgroundColor: color, border: '1px solid black'}}></div>
+      <div style={{backgroundColor: color}} className={styles.legend_color_indicator}></div>
       {label}
     </div>
   );
@@ -29,8 +29,9 @@ class ChartLegend extends Component {
 
   render() {
     return (
-      <div className={styles.chart_legend_container}>
+      <div className={styles.legend_container}>
         {this.renderRows()}
+        {this.props.children}
       </div>
     );
   }

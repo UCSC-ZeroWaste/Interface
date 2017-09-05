@@ -71,14 +71,8 @@ export const SLUG_PINS = [
 ];
 
 export const CHART = {
-  widthRatio: 0.8,
-  viewBox_widthRatio: 0.65,
-
-  heightRatio: 0.9,
-  viewBox_heightRatio: 0.75,
-
-  xAxisLabelOffset: 40,
-  yAxisLabelOffset: 40,
+  // xAxisLabelOffset: 40,
+  // yAxisLabelOffset: 40,
 
   settings: {
     legend: false,
@@ -94,8 +88,8 @@ export const CHART = {
     xAxisLabelColor: 'white',
     yAxisLabelColor: 'white',
 
-    xAxisStrokeWidth: '4',
-    yAxisStrokeWidth: '4',
+    xAxisStrokeWidth: '3',
+    yAxisStrokeWidth: '3',
     xAxisTickStroke: 'white',
     yAxisTickStroke: 'white',
 

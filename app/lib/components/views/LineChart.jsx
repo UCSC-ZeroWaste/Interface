@@ -17,20 +17,40 @@ import {connect} from 'react-redux';
 import {WASTE_TYPES, CHART, LEADER_BOARD_COLORS} from '../../constants/constants';
 import styles from '../../../App.css';
 import ContainerDimensions from 'react-container-dimensions';
+import merge from 'lodash/merge';
 
 class LineChartComponent extends Component {
   constructor(props) {
     super(props);
     // console.log(this.props.site, this.props.records);
-    this.state = {
-      rollingAverageLength: 7,
-      wasteType: 'Refuse',
-    };
+    this.state = merge(
+      {rollingAverageLength: 7,
+      wasteType: 'Refuse'},
+      this.chartState()
+    );
+
     this.strokeWidth = 6;
     this.strokeDashArray = undefined;//"5,5";
 
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
+  }
+
+  chartState() {
+    if (this.props.type === 'green') {
+      var state = {
+        title: "Waste Ratio (higher is better)",
+        xLabel: "Time Period",
+        yLabel: "RatioRatioRatioRatioRatioRatioRatio",
+      };
+    } else {
+      state = {
+        title: "All Waste Data",
+        xLabel: "Date",
+        yLabel: "Weight",
+      };
+    }
+    return state;
   }
 
   componentDidMount() {
@@ -163,6 +183,7 @@ class LineChartComponent extends Component {
     return (
       <select className={styles.selector} onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
         <option disabled="true">{settings.title}</option>
+        <option selected>{7}</option>
         { options }
       </select>
     );
@@ -195,50 +216,34 @@ class LineChartComponent extends Component {
 
   renderChart(height, width) {
 
-    if (this.props.type === 'green') {
-      var options = {
-        title: "Waste Ratio (higher is better)",
-        xLabel: "Time Period",
-        yLabel: "Ratio",
-      };
-    } else {
-      options = {
-        title: "All Waste Data",
-        xLabel: "Date",
-        yLabel: "Weight",
-      };
-    }
-
     const index = this.props.leaders.findIndex( leader => leader.site === this.props.site );
     const chartColorsArray = (
       this.props.scope === 'local' ?
       [LEADER_BOARD_COLORS[index]] :
       LEADER_BOARD_COLORS
     );
+    // xAxisLabel={options.xLabel}
+    // xAxisLabelOffset={width * .04}
+    // yAxisLabel={options.yLabel}
+    // yAxisLabelOffset={height * .07}
 
     return (
       //TODO get a handle on color & colorAccessor props
       <LineChart
 
         data={this.getData()}
-        width={width * CHART.widthRatio}
-        height={height * CHART.heightRatio}
+        width={width}
+        height={height}
         colors={ (colorAccessorFunc) => chartColorsArray[colorAccessorFunc] }
         colorAccessor={(d, idx) => idx}
 
         circleRadius={0}
         viewBoxObject={{
-          x: -20,
-          y: 20,
-          width: width * CHART.viewBox_widthRatio,
-          height: height * CHART.viewBox_heightRatio
+          x: 0,
+          y: height * -.04,
+          width: Number(width) * 1,
+          height: Number(height) * 1
         }}
-
-        xAxisLabel={options.xLabel}
-        xAxisLabelOffset={CHART.xAxisLabelOffset}
-
-        yAxisLabel={options.yLabel}
-        yAxisLabelOffset={CHART.yAxisLabelOffset}
 
         domain={this.getChartDomain()}
         xAxisTickInterval={this.GetTickInterval()}
@@ -246,21 +251,15 @@ class LineChartComponent extends Component {
         {...CHART.axes}
         {...CHART.settings}
 
-
       />
     );
   }
 
   renderHeader() {
-
-    if (this.props.type === 'green') {
-      var title = 'Green Ratio (higher is better) - ';
-    } else if (this.props.type === 'general') {
-      title = 'All Waste Data - ';
-    }
+    console.log(this.state.title);
     return (
       <div className={styles.line_chart_header}>
-        {title + this.props.site}
+        {this.state.title}
       </div>
     );
   }
@@ -277,22 +276,34 @@ class LineChartComponent extends Component {
     // console.log("Site Data: ", this.parseWasteBreakdown(this.props.records));
 
     return (
-      <div className={styles.line_chart_container}>
+      <div className={styles.line_chart_view}>
 
         {this.renderHeader()}
 
-        <div className={styles.graph_container}>
-          <ContainerDimensions>
-            { ({ height, width }) => this.renderChart(height, width) }
-          </ContainerDimensions>
-          <ChartLegend />
+        <div className={styles.xLabel_chart_and_legend_container}>
+          <div className={styles.yLabel_container}>
+            <div className={styles.yAxisLabel}>{this.state.yLabel}</div>
+          </div>
+
+          <div className={styles.chart_container}>
+            <ContainerDimensions>
+              { ({ height, width }) => this.renderChart(height, width) }
+            </ContainerDimensions>
+          </div>
+
+          <ChartLegend>
+            {this.renderSelector()}
+          </ChartLegend>
         </div>
 
-        {this.renderSelector()}
+        <div className={styles.xAxisLabel}>{this.state.xLabel}</div>
+
       </div>
     );
 
   }
+
+
   // {this.renderWasteTypeSelector()}
   // <LineChart
   //
