@@ -41,7 +41,7 @@ class LineChartComponent extends Component {
       var state = {
         title: "Waste Ratio (higher is better)",
         xLabel: "Time Period",
-        yLabel: "RatioRatioRatioRatioRatioRatioRatio",
+        yLabel: "Ratio",
       };
     } else {
       state = {

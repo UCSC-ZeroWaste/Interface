@@ -339,8 +339,8 @@ body > div {
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  border: 1px solid red;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
 .line_chart_header {
   flex: 10;
@@ -352,8 +352,8 @@ body > div {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
   color: white;
-  box-sizing: border-box;
-  border: 1px solid red;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
 
 
@@ -363,8 +363,8 @@ body > div {
   display: flex;
   flex-direction: row;
   align-items: center;
-  box-sizing: border-box;
-  border: 1px solid pink;
+  /*box-sizing: border-box;
+  border: 1px solid pink;*/
 }
 .yLabel_container {
   display: flex;
@@ -372,8 +372,8 @@ body > div {
   height: 1px;
   width: 3%;
   align-items: center;
-  box-sizing: border-box;
-  border: 1px solid red;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
 .yAxisLabel {
   position: absolute;
@@ -383,8 +383,8 @@ body > div {
   transform-origin: left top 0;
   color: white;
   font-size: 1.4em;
-  box-sizing: border-box;
-  border: 1px solid yellow;
+  /*box-sizing: border-box;
+  border: 1px solid yellow;*/
 }
 .xAxisLabel {
   flex: 7;
@@ -394,14 +394,14 @@ body > div {
   font-size: 1.4em;
   text-align: center;
 
-  box-sizing: border-box;
-  border: 1px solid yellow;
+  /*box-sizing: border-box;
+  border: 1px solid yellow;*/
 }
 .chart_container {
   height: 100%;
   width: 77%;
-  box-sizing: border-box;
-  border: 1px solid red;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
 .legend_container {
   display: flex;
@@ -409,16 +409,16 @@ body > div {
   width: 20%;
   flex-direction: column;
   justify-content: flex-start;
-  box-sizing: border-box;
-  border: 1px solid red;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
 .chart_legend_row {
   display: flex;
   align-items: center;
   height: 8%;
   flex-direction: row;
-  box-sizing: border-box;
-  border: 1px solid red;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
   margin: 1% 0 1% 0;
   color: white;
 }
@@ -437,8 +437,8 @@ body > div {
   top: 30px;
   left: 600px;
   right: 0;*/
-  box-sizing: border-box;
-  border: 1px solid red;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
 
 .leader_board_container {
