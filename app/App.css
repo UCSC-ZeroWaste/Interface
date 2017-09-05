@@ -334,37 +334,112 @@ body > div {
 
 
 
-.line_chart_container {
-  /*display: inline-block;*/
-  /*vertical-align: top;*/
-  /*flex-direction: column;
-  align-items: center;*/
+.line_chart_view {
   width: 100%;
   height: 100%;
-  /*border: 2px solid red;*/
+  display: flex;
+  flex-direction: column;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
-.line_chart_container > div {
-  /*display: inline-block;*/
-  /*flex-direction: column;
-  align-items: center;*/
+.line_chart_header {
+  flex: 10;
   width: 100%;
+  font-size: 2.0em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
+  color: white;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
+}
+
+
+.xLabel_chart_and_legend_container {
+  width: 100%;
+  flex: 83;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /*box-sizing: border-box;
+  border: 1px solid pink;*/
+}
+.yLabel_container {
+  display: flex;
+  position: relative;
+  height: 1px;
+  width: 3%;
+  align-items: center;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
+}
+.yAxisLabel {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  transform: rotate(-90deg) translate(-50%, -100%);
+  transform-origin: left top 0;
+  color: white;
+  font-size: 1.4em;
+  /*box-sizing: border-box;
+  border: 1px solid yellow;*/
+}
+.xAxisLabel {
+  flex: 7;
+  width: 75%;
+  color: white;
+  margin-left: 5%;
+  font-size: 1.4em;
+  text-align: center;
+
+  /*box-sizing: border-box;
+  border: 1px solid yellow;*/
+}
+.chart_container {
   height: 100%;
-  /*border: 2px solid red;*/
+  width: 77%;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
+}
+.legend_container {
+  display: flex;
+  height: 100%;
+  width: 20%;
+  flex-direction: column;
+  justify-content: flex-start;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
+}
+.chart_legend_row {
+  display: flex;
+  align-items: center;
+  height: 8%;
+  flex-direction: row;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
+  margin: 1% 0 1% 0;
+  color: white;
+}
+.legend_color_indicator {
+  height: 30px;
+  width: 30px;
+  /*border: 1px solid black;*/
+  margin-right: 2%;
 }
 
 
-/*TODO - temporary fix for mis-aligned graph*/
-.line_chart_container  svg {
-  /*border: 2px solid red;*/
-  /*position: relative;*/
-  /*bottom: 450px;*/
+.selector {
+  /*position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 30px;
+  left: 600px;
+  right: 0;*/
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
-.line_chart {
-  /*border: 2px solid blue;*/
-  /*width: 200px;*/
-  /*height: 100px;*/
-}
-
 
 .leader_board_container {
   display: flex;

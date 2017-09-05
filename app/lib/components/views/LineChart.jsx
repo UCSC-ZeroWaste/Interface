@@ -1,26 +1,56 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
-import {LineChart} from 'rd3';
+
+
+//TODO switch back to 'rd3' when my changes have been accepted
+// import LineChart from '../../../../../_FORKED-rd3/build/cjs/linechart/LineChart.js';
+// /build/cjs/linechart/LineChart';
+// import {LineChart} from 'rd3';
+// import LineChart from '../../../../node_modules/rd3/src/linechart/LineChart.js';
+import LineChart from '../../../../node_modules/rd3/build/cjs/linechart/LineChart.js';
+
+import ChartLegend from './ChartLegend';
+
 import d3 from 'd3';
+
 import {connect} from 'react-redux';
-import {WASTE_TYPES} from '../../constants/constants';
+import {WASTE_TYPES, CHART, LEADER_BOARD_COLORS} from '../../constants/constants';
 import styles from '../../../App.css';
+import ContainerDimensions from 'react-container-dimensions';
+import merge from 'lodash/merge';
 
 class LineChartComponent extends Component {
   constructor(props) {
     super(props);
     // console.log(this.props.site, this.props.records);
-    this.state = {
-      rollingAverageLength: 7,
-      wasteType: 'Refuse',
-      width: 700,
-      height: 400,
-    };
+    this.state = merge(
+      {rollingAverageLength: 7,
+      wasteType: 'Refuse'},
+      this.chartState()
+    );
+
     this.strokeWidth = 6;
     this.strokeDashArray = undefined;//"5,5";
 
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
+  }
+
+  chartState() {
+    if (this.props.type === 'green') {
+      var state = {
+        title: "Waste Ratio (higher is better)",
+        xLabel: "Time Period",
+        yLabel: "Ratio",
+      };
+    } else {
+      state = {
+        title: "All Waste Data",
+        xLabel: "Date",
+        yLabel: "Weight",
+      };
+    }
+    return state;
   }
 
   componentDidMount() {
@@ -43,12 +73,12 @@ class LineChartComponent extends Component {
         'y' : datum.Load,
       }));
 
-      return {
-        name: site,
-        values: sitePickups,
-        strokeWidth: this.strokeWidth,
-        strokeDashArray: this.strokeDashArray
-      };
+    return {
+      name: site,
+      values: sitePickups,
+      strokeWidth: this.strokeWidth,
+      strokeDashArray: this.strokeDashArray
+    };
   }
 
   handleSelector(e) {
@@ -151,8 +181,9 @@ class LineChartComponent extends Component {
       </option>
     ));
     return (
-      <select onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
+      <select className={styles.selector} onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
         <option disabled="true">{settings.title}</option>
+        <option selected>{7}</option>
         { options }
       </select>
     );
@@ -183,50 +214,53 @@ class LineChartComponent extends Component {
 
   }
 
-  renderChart() {
+  renderChart(height, width) {
 
-    if (this.props.type === 'green') {
-      var options = {
-        title: "Waste Ratio (higher is better)",
-        xLabel: "Time Period",
-        yLabel: "Ratio",
-      };
-    } else {
-      options = {
-        title: "All Waste Data",
-        xLabel: "Date",
-        yLabel: "Weight",
-      };
-    }
+    const index = this.props.leaders.findIndex( leader => leader.site === this.props.site );
+    const chartColorsArray = (
+      this.props.scope === 'local' ?
+      [LEADER_BOARD_COLORS[index]] :
+      LEADER_BOARD_COLORS
+    );
+    // xAxisLabel={options.xLabel}
+    // xAxisLabelOffset={width * .04}
+    // yAxisLabel={options.yLabel}
+    // yAxisLabelOffset={height * .07}
 
     return (
       //TODO get a handle on color & colorAccessor props
       <LineChart
-        legend={true}
+
         data={this.getData()}
-        width='100%'
-        height={this.state.height + 100}
-        hoverAnimation={false}
-        circleRadius={4}
+        width={width}
+        height={height}
+        colors={ (colorAccessorFunc) => chartColorsArray[colorAccessorFunc] }
+        colorAccessor={(d, idx) => idx}
+
+        circleRadius={0}
         viewBoxObject={{
           x: 0,
-          y: 0,
-          width: this.state.width,
-          height: this.state.height
+          y: height * -.04,
+          width: Number(width) * 1,
+          height: Number(height) * 1
         }}
-        title={this.props.site + ' - ' + options.title}
-
-        yAxisLabel={options.yLabel}
-        xAxisLabel={options.xLabel}
-
-
-
 
         domain={this.getChartDomain()}
         xAxisTickInterval={this.GetTickInterval()}
-        gridHorizontal={false}
-        gridVertical={false}
+
+        {...CHART.axes}
+        {...CHART.settings}
+
       />
+    );
+  }
+
+  renderHeader() {
+    console.log(this.state.title);
+    return (
+      <div className={styles.line_chart_header}>
+        {this.state.title}
+      </div>
     );
   }
   // <LineChart
@@ -242,13 +276,34 @@ class LineChartComponent extends Component {
     // console.log("Site Data: ", this.parseWasteBreakdown(this.props.records));
 
     return (
-      <div className={styles.line_chart_container}>
-        {this.renderSelector()}
-        {this.renderChart()}
+      <div className={styles.line_chart_view}>
+
+        {this.renderHeader()}
+
+        <div className={styles.xLabel_chart_and_legend_container}>
+          <div className={styles.yLabel_container}>
+            <div className={styles.yAxisLabel}>{this.state.yLabel}</div>
+          </div>
+
+          <div className={styles.chart_container}>
+            <ContainerDimensions>
+              { ({ height, width }) => this.renderChart(height, width) }
+            </ContainerDimensions>
+          </div>
+
+          <ChartLegend>
+            {this.renderSelector()}
+          </ChartLegend>
+        </div>
+
+        <div className={styles.xAxisLabel}>{this.state.xLabel}</div>
+
       </div>
     );
 
   }
+
+
   // {this.renderWasteTypeSelector()}
   // <LineChart
   //
@@ -276,6 +331,7 @@ const mapStateToProps = (state) => ({
   records: state.records.data,
   site: state.currentView.site,
   scope: state.currentView.scope,
+  leaders: state.records.leaders
 });
 
 export default connect(mapStateToProps)(LineChartComponent);

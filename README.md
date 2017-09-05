@@ -7,7 +7,14 @@
 
 
 - The Heat Map requires a `config.js` file (located in 'app' folder) with the Google Maps API key.
-- The Line Chart is currently using a forked version of rd3 (hosted at https://github.com/DeliSauce/rd3). You need to npm install the forked version first and then navigate to the rd3 folder + npm install from there too.
+
+### rd3 library (npm) for creating charts
+- The Line Chart is currently using a forked version of rd3 (hosted at https://github.com/DeliSauce/rd3). You need to npm install the forked version first and then navigate to the rd3 folder + npm install from there too. (cd node_modules/rd3 && npm install)
+
+npm install --save https://github.com/DeliSauce/rd3/tarball/hotfix/add-props
+
+steps for updating the forked version of rd3:
+FYI, it's difficult to test changes because when I npm install in the ZeroWaste local folder, babel converts to ES5 so I can't just copy/paste my changes into the forked repo.
 
 ### CSS Modules
 CSS files loaded into components are locally scoped and you can point to class names with javascript. You can also compose classes together, also from other files. These are also hot loaded. Read more about them [here](http://glenmaddern.com/articles/css-modules).
