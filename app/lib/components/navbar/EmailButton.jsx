@@ -4,7 +4,7 @@ import {handleViewSelect, handleSiteSelect, handleScopeSelect, toggleModal} from
 import styles from '../../../App.css';
 import FontAwesome from 'react-fontawesome';
 
-class InfoButton extends Component {
+class EmailButton extends Component {
   constructor(props) {
     super(props);
     this.clickHandler = this.clickHandler.bind(this);
@@ -16,7 +16,7 @@ class InfoButton extends Component {
 
   render() {
     return (
-      <div onClick={this.clickHandler} className={styles.info_button}>
+      <div onClick={this.clickHandler} className={styles.email_button}>
         Take Action
       </div>
     );
@@ -33,4 +33,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps)(InfoButton);
+  mapDispatchToProps)(EmailButton);

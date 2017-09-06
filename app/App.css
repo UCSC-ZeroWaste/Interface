@@ -150,7 +150,7 @@ body > div {
 .nav_button_fa_selected {
   composes: logo_and_selected_icon_color;
 }
-.info_button {
+.email_button {
   /*margin-right: 5%;*/
   opacity: 1;
   /*border-radius: 7px;*/
@@ -165,7 +165,7 @@ body > div {
   text-transform: uppercase;
   /*animation: color_change1 5s infinite linear;*/
 }
-.info_button:active {
+.email_button:active {
   background-color: yellow;
 }
 
@@ -181,10 +181,6 @@ body > div {
   100% { box-shadow: 0 0 -10px #c4a300; }
 }
 
-/*.info_button_fa {
-  color: blue;
-  animation: rotateY 3s infinite linear;
-}*/
 @keyframes rotateY {
  to { transform: rotateY(360deg); }
 }

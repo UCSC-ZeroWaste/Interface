@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavButton from './navbar/NavButton';
-import InfoButton from './navbar/InfoButton';
+import EmailButton from './navbar/EmailButton';
 import styles from '../../App.css';
 
 export default class NavBar extends Component {
@@ -25,7 +25,7 @@ export default class NavBar extends Component {
             </div>
           </div>
           <div className={styles.nav_bar_right}>
-            <InfoButton />
+            <EmailButton />
           </div>
         </div>
       </div>
