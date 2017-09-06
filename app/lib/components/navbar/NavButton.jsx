@@ -11,9 +11,10 @@ class NavButton extends Component {
   }
 
   clickHandler(e) {
-    if (this.props.nav === 'modal') {
-      this.props.toggleModal();
-    } else if (this.props.nav === 'view') {
+    // if (this.props.nav === 'modal') {
+    //   this.props.toggleModal();
+    // } else
+    if (this.props.nav === 'view') {
       this.props.handleViewSelect(this.props.view);
     } else if (this.props.nav === 'scope') {
       // TODO need to flesh this out
@@ -25,10 +26,11 @@ class NavButton extends Component {
   }
 
   render() {
-    if (this.props.nav === 'modal') {
-      var styleIcon = styles.info_button_fa;
-    } else if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
-      styleIcon = styles.nav_button_fa_selected;
+    // if (this.props.nav === 'modal') {
+    //   var styleIcon = styles.info_button_fa;
+    // } else
+    if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
+      var styleIcon = styles.nav_button_fa_selected;
     } else {
       styleIcon = styles.nav_button_fa;
     }
@@ -45,10 +47,6 @@ class NavButton extends Component {
     );
   }
 }
-// {this.props.name}
-// <div style={{width: '50', height: '50', backgroundColor: 'blue'}}>
-// </div>
-// style={{ width: '50', height: '50', textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView,
@@ -59,7 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
   handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum)),
   handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
   handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope)),
-  toggleModal: () => dispatch(toggleModal())
+  // toggleModal: () => dispatch(toggleModal())
 });
 
 export default connect(

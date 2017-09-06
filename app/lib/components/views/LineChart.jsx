@@ -156,7 +156,7 @@ class LineChartComponent extends Component {
         settings = {
           array: _.range(2,30),
           changeHandler: this.setRollingAverageLength,
-          defaultValue: 'Refuse',
+          defaultValue: 7,
           title: 'Select # of Days for Rolling Average'
         };
         break;
@@ -179,7 +179,6 @@ class LineChartComponent extends Component {
     return (
       <select className={styles.selector} onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
         <option disabled="true">{settings.title}</option>
-        <option selected>{7}</option>
         { options }
       </select>
     );
