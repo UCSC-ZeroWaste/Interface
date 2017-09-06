@@ -109,10 +109,6 @@ body > div {
   /*box-sizing: border-box;
   border: 1px solid yellow;*/
 }
-.info_button {
-  height: 100%;
-  width:
-}
 
 .nav_icons_container {
   display: flex;
@@ -166,23 +162,22 @@ body > div {
   width: 25%;
   background-color: blue;
   font-size: 1.3em;
-  animation: color_change 5s infinite linear;
+  animation: color_change2 5s infinite linear;
 }
 .info_button:active {
   background-color: yellow;
-}
-
-@keyframes color_change {
-  0% { box-shadow: 0 0 -10px #c4a300; }
-  40% { box-shadow: 0 0 20px #c4a300; }
-  60% { box-shadow: 0 0 20px #c4a300; }
-  100% { box-shadow: 0 0 -10px #c4a300; }
 }
 
 @keyframes color_change1 {
   0%   {background-color: red;}
   50%  {background-color: #4286f4;}
   100% {background-color: red;}
+}
+@keyframes color_change2 {
+  0% { box-shadow: 0 0 -10px #c4a300; }
+  40% { box-shadow: 0 0 20px #c4a300; }
+  60% { box-shadow: 0 0 20px #c4a300; }
+  100% { box-shadow: 0 0 -10px #c4a300; }
 }
 
 /*.info_button_fa {
