@@ -162,7 +162,7 @@ body > div {
   width: 25%;
   background-color: blue;
   font-size: 1.3em;
-  animation: color_change2 5s infinite linear;
+  animation: color_change1 5s infinite linear;
 }
 .info_button:active {
   background-color: yellow;
