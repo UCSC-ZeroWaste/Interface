@@ -151,27 +151,28 @@ body > div {
   composes: logo_and_selected_icon_color;
 }
 .info_button {
-  margin-right: 5%;
-  opacity: .7;
-  border-radius: 7px;
-  color: white;
+  /*margin-right: 5%;*/
+  opacity: 1;
+  /*border-radius: 7px;*/
+  color: #0f3356;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 25%;
-  background-color: blue;
-  font-size: 1.3em;
-  animation: color_change1 5s infinite linear;
+  width: 30%;
+  background-color: #f6f6f6;
+  font-size: 1.0em;
+  text-transform: uppercase;
+  /*animation: color_change1 5s infinite linear;*/
 }
 .info_button:active {
   background-color: yellow;
 }
 
 @keyframes color_change1 {
-  0%   {background-color: red;}
+  0%   {background-color: #f6f6f6;}
   50%  {background-color: #4286f4;}
-  100% {background-color: red;}
+  100% {background-color: #f6f6f6;}
 }
 @keyframes color_change2 {
   0% { box-shadow: 0 0 -10px #c4a300; }

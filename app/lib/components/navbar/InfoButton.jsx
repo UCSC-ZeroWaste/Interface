@@ -17,7 +17,7 @@ class InfoButton extends Component {
   render() {
     return (
       <div onClick={this.clickHandler} className={styles.info_button}>
-        More Info
+        Take Action
       </div>
     );
   }
