@@ -10,6 +10,9 @@ import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { MoonLoader } from 'halogen';
+import Tip1 from './views/tips/Tip1';
+import Tip2 from './views/tips/Tip2';
+import Tip3 from './views/tips/Tip3';
 
 import transitions from './test_carousel/transitions.css';
 import sliding from './test_carousel/sliding.css';
@@ -20,18 +23,29 @@ class DataVisualization extends Component {
     super(props);
     this.handleSliderChange = this.handleSliderChange.bind(this);
     this.keyHandler = this.keyHandler.bind(this);
-    this.components = [
+
+    this.views = [
       <LeaderBoard/>,
       <LineChart type={'green'}/>,
       <LineChart type={'general'}/>,
       <HeatMap/>,
-      <SizeView />,
-      <_ViewTemplate title={'Empty View 6'}/>,
-      <_ViewTemplate title={'Empty View 7'}/>
     ];
+    this.tips = [
+      <Tip1 title={'tip1'}/>,
+      <Tip2 title={'tip2'}/>,
+      <Tip3 title={'tip3'}/>,
+    ];
+    this.slides = this.views.concat(this.tips);
   }
+  // <SizeView />,
+  // <_ViewTemplate title={'Empty View 6'}/>,
+  // <_ViewTemplate title={'Empty View 7'}/>
 
   handleSliderChange(prevSlide, nextSlide) {
+    console.log('handleSliderChange', prevSlide, nextSlide);
+    if (nextSlide > this.views.length) {
+      nextSlide = this.views.length;
+    }
     this.props.handleViewSelect(nextSlide);
   }
 
@@ -60,13 +74,13 @@ class DataVisualization extends Component {
             />
         </div>);
     } else if (this.props.records) {
-      return this.components[this.props.currentView];
+      return this.slides[this.props.currentView];
     }
   }
 
   renderSlides() {
     if (this.props.errors) {
-      return this.components.map( (component, index) => {
+      return this.slides.map( (component, index) => {
         if (index > 0) {return (
           <div className={styles.slide} key={index} style={{boxSizing: 'borderBox', border: '5px solid white', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
             DATA COULD NOT BE FETCHED <br/>
@@ -91,7 +105,7 @@ class DataVisualization extends Component {
             />
         </div>);
     } else if (this.props.records) {
-      return this.components.map( (component, index) => {
+      return this.slides.map( (component, index) => {
         return (
           <div className={styles.slide} key={index} >
             {component}
@@ -104,7 +118,7 @@ class DataVisualization extends Component {
   // TODO allows for cycling through nav views -- this is just here for easier testing on the web
   keyHandler(e) {
     const view = this.props.currentView;
-    const max = this.components.length - 1;
+    const max = this.slides.length - 1;
     if (e.key === 'ArrowRight') {
       var nextView = ( view >= max ? 0 : view + 1);
       this.props.handleViewSelect(nextView);
@@ -139,9 +153,9 @@ class DataVisualization extends Component {
       variableWidth: false,
     };
     // style={{height:"100%",width:"100%"}}
-    const components = this.components.map((component, i) => (
-       <div key={component} >
-         {component}
+    const components = this.slides.map((slide, i) => (
+       <div key={slide} >
+         {slide}
        </div>
      ));
 
