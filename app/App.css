@@ -185,19 +185,62 @@ body > div {
  to { transform: rotateY(360deg); }
 }
 
-/*
-@keyframes rotate {
-  from {
-    width: 0;
-    height: 0;
-    top: 50%;
-  }
-  to {
-    width: 100%;
-    height: 100%;
-    top: 0%;
-  }
-}*/
+
+
+
+.tip_container {
+  height: 100%;
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+.tip_header {
+  color: white;
+  font-size: 2.2em;
+  margin-bottom: 3%;
+}
+.tip_content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.tip_img {
+  height: 20%;
+  width: 60%;
+}
+.tip_column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.tip_text {
+  margin-left: 5%;
+  color: white;
+  font-size: 1.2em;
+}
+.tip_button_container {
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.tip_button_previous {
+  width: 30%;
+  height: 100%;
+  background-color: green;
+  border-radius: 5px;
+}
+.tip_button_next {
+  width: 30%;
+  height: 100%;
+  background-color: green;
+  border-radius: 5px;
+}
+
+
 
 
 .main_view {

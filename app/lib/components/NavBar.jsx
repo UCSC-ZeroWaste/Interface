@@ -19,9 +19,7 @@ export default class NavBar extends Component {
               <NavButton title={'RefuseTypesChart'} nav={'view'} view={1} fa={'area-chart'}/>
               <NavButton title={'RatioChart'} nav={'view'} view={2} fa={'pie-chart'}/>
               <NavButton title={'Map'} nav={'view'} view={3} fa={'map'}/>
-              <NavButton title={'Rank'} nav={'view'} view={4} fa={'cubes'}/>
-              <NavButton title={'Progress'} nav={'view'} view={5} fa={'tasks'}/>
-              <NavButton title={'Star'} nav={'view'} view={6} fa={'star-half-o'}/>
+              <NavButton title={'Tips'} nav={'view'} view={4} fa={'lightbulb-o'}/>
             </div>
           </div>
           <div className={styles.nav_bar_right}>
@@ -32,4 +30,6 @@ export default class NavBar extends Component {
     );
   }
 }
-// <div className={styles.info_button}></div>
+// <NavButton title={'Rank'} nav={'view'} view={4} fa={'cubes'}/>
+// <NavButton title={'Progress'} nav={'view'} view={5} fa={'tasks'}/>
+// <NavButton title={'Star'} nav={'view'} view={6} fa={'star-half-o'}/>
