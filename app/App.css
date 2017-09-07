@@ -207,14 +207,37 @@ body > div {
   display: flex;
   flex-direction: row;
 }
-.tip1_img {
+.tip_img {
   height: 20%;
   width: 60%;
+}
+.tip_column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .tip_text {
   margin-left: 5%;
   color: white;
   font-size: 1.2em;
+}
+.tip_button_container {
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.tip_button_previous {
+  width: 30%;
+  height: 100%;
+  background-color: green;
+  border-radius: 5px;
+}
+.tip_button_next {
+  width: 30%;
+  height: 100%;
+  background-color: green;
+  border-radius: 5px;
 }
 
 

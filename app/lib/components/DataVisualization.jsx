@@ -10,10 +10,11 @@ import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { MoonLoader } from 'halogen';
-import Tip1 from './views/tips/Tip1';
-import Tip2 from './views/tips/Tip2';
-import Tip3 from './views/tips/Tip3';
-import Tip4 from './views/tips/Tip4';
+import Tip from './views/tips/Tip';
+// import Tip1 from './views/tips/Tip1';
+// import Tip2 from './views/tips/Tip2';
+// import Tip3 from './views/tips/Tip3';
+// import Tip4 from './views/tips/Tip4';
 
 import transitions from './test_carousel/transitions.css';
 import sliding from './test_carousel/sliding.css';
@@ -30,24 +31,26 @@ class DataVisualization extends Component {
       <LineChart type={'green'}/>,
       <LineChart type={'general'}/>,
       <HeatMap/>,
+      <Tip/>
     ];
-    this.tips = [
-      <Tip1 title={'tip1'}/>,
-      <Tip2 title={'tip2'}/>,
-      <Tip3 title={'tip3'}/>,
-      <Tip4 title={'tip4'}/>,
-    ];
-    this.slides = this.views.concat(this.tips);
+    // this.tips = [
+    //   <Tip1 title={'tip1'}/>,
+    //   <Tip2 title={'tip2'}/>,
+    //   <Tip3 title={'tip3'}/>,
+    //   <Tip4 title={'tip4'}/>,
+    // ];
+    this.slides = this.views
+    // .concat(this.tips);
   }
   // <SizeView />,
   // <_ViewTemplate title={'Empty View 6'}/>,
   // <_ViewTemplate title={'Empty View 7'}/>
 
   handleSliderChange(prevSlide, nextSlide) {
-    console.log('handleSliderChange', prevSlide, nextSlide);
-    if (nextSlide > this.views.length) {
-      nextSlide = this.views.length;
-    }
+    // console.log('handleSliderChange', prevSlide, nextSlide);
+    // if (nextSlide > this.views.length) {
+    //   nextSlide = this.views.length;
+    // }
     this.props.handleViewSelect(nextSlide);
   }
 
