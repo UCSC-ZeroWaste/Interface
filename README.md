@@ -87,7 +87,30 @@ Type `store.getState()` in the chrome developer console to see the current redux
 ## Schema
 - Currently fetching pickup data over a 30 day span. Each pickup has 56 key/value pairs.
 
-      schema:
+      new schema:
+        [
+          {
+            PickupTime: "2017-08-09T00:13:00.000Z",
+            Year_Month: "2017-08",
+            Month_Num: 8,
+            Week_Num: "2017-32",
+            LoadmanAcct: 907,
+            LoadName: "RR-CMK-OR",
+            LoadName_Split: "RR-CMK-OR",
+            Product: "Compost",
+            Diversion_Type: "Diverted",
+            ContainerType: "Roll Off",
+            Size_CY: 20,
+            Location: "Crown/Merrill Kitchen",
+            Location_Type: "Dining",
+            Load_Split: 12120
+          },
+          ...
+        ]
+
+
+
+      old schema:
         [
           {
             Record: 98150,

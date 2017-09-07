@@ -1,18 +1,40 @@
+// export const COLLEGE_SET = [
+//   "College Nine and Ten",
+//   "Cowell-Stevenson",
+//   "Crown-Merrill",
+//   "Kresge",
+//   "Oakes",
+//   "Porter",
+//   "College Eight"
+// ];
+
+//location field
 export const COLLEGE_SET = [
-  "College Nine and Ten",
-  "Cowell-Stevenson",
-  "Crown-Merrill",
-  "Kresge",
-  "Oakes",
-  "Porter",
-  "College Eight"
+  "College 9/10",
+  "Cowell College",
+  "Crown College",
+  "Crown/Merrill Apartments",
+  "Kresge College",
+  "Merrill College",
+  "Oakes College",
+  "Porter College",
+  "Rachel Carson (Col. 8) College",
+  "Stevenson College",
 ];
 
+//field: Diversion_Type
+//TODO update Green Ratio Chart with this info
+export const DIVERSION_TYPES = [
+  "Diverted",
+  "Refuse",
+];
+
+//Product (there are others too but not including)
 export const WASTE_TYPES = [
-  'Refuse',
-  'Mixed Recycle',
   'Cardboard',
   'GreenWaste',
+  'Mixed Recycle',
+  'Refuse',
   'PRODUCT  UNKNOWN'
 ];
 
