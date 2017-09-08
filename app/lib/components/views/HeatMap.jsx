@@ -47,11 +47,11 @@ class HeatMap extends Component {
       'Porter College': {lat: '36.9943943', long: '-122.0652214'},
       'Rachel Carson (Col. 8) College': {lat: '36.9911913', long: '-122.0647242'},
 
-      'Cowell College': {lat: '36.9', long: '-122.0'},
-      'Crown College': {lat: '36.9', long: '-122.0'},
-      'Crown/Merrill Apartments': {lat: '36.9', long: '-122.0'},
-      'Merrill College': {lat: '36.9', long: '-122.0'},
-      'Stevenson College': {lat: '36.9', long: '-122.0'},
+      'Cowell College': {lat: '36.9914109', long: '-122.0696266'},
+      'Crown College': {lat: '36.9914782', long: '-122.0696266'},
+      'Crown/Merrill Apartments': {lat: '36.9915455', long: '-122.0696266'},
+      'Merrill College': {lat: '36.9915118', long: '-122.0696266'},
+      'Stevenson College': {lat: '36.9914446', long: '-122.0696266'},
     };
 
     return this.props.leaders.map( (leader, index) => {

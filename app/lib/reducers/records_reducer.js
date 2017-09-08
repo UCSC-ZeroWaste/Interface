@@ -2,6 +2,7 @@ import {RECEIVE_RECORDS, RECEIVE_ERROR} from '../actions/record_actions';
 import {COLLEGE_SET} from '../constants/constants';
 import _ from 'underscore';
 import merge from 'lodash/merge';
+import moment from 'moment';
 
 const nullState = Object.freeze({data: null, errors: null, leaders: null});
 
@@ -20,8 +21,30 @@ const RecordsReducer = (state = nullState, action) => {
 
 
 function parsePickupData(data) {
-  const firstPickupDate = new Date(data[0].PickupTime);
-  const lastPickupDate = new Date(data[data.length - 1].PickupTime);
+  // let firstPickupDate = new Date(data[0].PickupTime);
+  // firstPickupDate = moment(firstPickupDate).startOf('day');
+
+  // let firstPickupDate = moment(data[0].PickupTime.slice(0,9));
+  // console.log(firstPickupDate);
+  console.log(data[0].PickupTime.slice(0,10));
+
+  // let firstPickupDate = new Date(data[0].PickupTime.slice(0,10));
+  // let lastPickupDate = new Date(data[data.length - 1].PickupTime.slice(0,10));
+
+//
+// var momentObj = moment(dateObj);
+// var momentString = momentObj.format('YYYY-MM-DD');
+
+
+
+  let firstPickupDate = moment(data[0].PickupTime.slice(0,10)).startOf('day');
+  let lastPickupDate = moment(data[data.length - 1].PickupTime.slice(0,10)).startOf('day');
+  console.log(firstPickupDate,lastPickupDate);
+
+  const daysInRange = lastPickupDate.diff(firstPickupDate, 'days') + 1;
+  console.log(daysInRange);
+
+  // Math.floor(Math.abs((firstPickupDate.valueOf() - lastPickupDate.valueOf()) / (3600 * 24 * 1000)));
 
   let relevantPickups = data.filter(function(pickup){
     return COLLEGE_SET.includes(pickup.Location);
@@ -49,7 +72,7 @@ function parsePickupData(data) {
     //         };
   }).sort( (siteA, siteB) => siteB.diversionRatio - siteA.diversionRatio );
 
-  return {data: filteredData, leaders: leaders, dateRange: [firstPickupDate, lastPickupDate]};
+  return {data: filteredData, leaders: leaders, daysInRange, dateRange: [firstPickupDate, lastPickupDate]};
 }
 
 export default RecordsReducer;

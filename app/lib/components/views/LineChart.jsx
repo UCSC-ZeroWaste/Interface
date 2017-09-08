@@ -103,28 +103,28 @@ class LineChartComponent extends Component {
     let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
     let minTime = new Date(firstPickup.PickupTime).valueOf();
     let maxTime = new Date(lastPickup.PickupTime).valueOf();
-    let numDaysInCycle = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
+    // let this.props.daysInRange = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
 
     //create empty arrays of n days
-    let totalLoad = Array(numDaysInCycle).fill(0);
-    let totalRefuse = Array(numDaysInCycle).fill(0);
+    let totalLoad = Array(this.props.daysInRange).fill(0);
+    let totalRefuse = Array(this.props.daysInRange).fill(0);
 
     sitePickups.forEach( (pickup) => {
       let thisTime = new Date(pickup.PickupTime).valueOf();
       let timeDiff = Math.floor(this.getTimeDiff(thisTime, minTime));
       if (pickup.Diversion_Type === 'Refuse') {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < numDaysInCycle); i++) {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < this.props.daysInRange); i++) {
           totalRefuse[i + timeDiff] += pickup.Load_Split;
           totalLoad[i + timeDiff] += pickup.Load_Split;
         }
       } else if (pickup.Diversion_Type === 'Diverted') {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < numDaysInCycle); i++) {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < this.props.daysInRange); i++) {
           totalLoad[i + timeDiff] += pickup.Load_Split;
         }
       }
     });
     let diversionRatio = [];
-    for (let i = 0 ; i < numDaysInCycle; i++) {
+    for (let i = 0 ; i < this.props.daysInRange; i++) {
       diversionRatio.push(
         Math.floor(100 *(totalLoad[i] - totalRefuse[i]) / totalLoad[i])
       );
@@ -188,11 +188,8 @@ class LineChartComponent extends Component {
   getChartDomain() {
     switch (this.props.type) {
       case 'green':
-        return {x: [undefined,30], y: [0,100]};
+        return {x: [undefined, this.props.daysInRange - this.state.rollingAverageLength], y: [0,100]};
       case 'general':
-      //TODO needs to update domain range for x axis to change dynamically -- currently static
-        // console.log('date1', new Date(new Date().setDate(new Date().getDate()-30)));
-        // console.log('date2', new Date(this.props.dateRange[1]));
         // return {x: [new Date(new Date().setDate(new Date().getDate()-30)), new Date()], y: [0,]};
         return {x: this.props.dateRange, y: [0,]};
       default:
@@ -331,7 +328,8 @@ const mapStateToProps = (state) => ({
   site: state.currentView.site,
   scope: state.currentView.scope,
   leaders: state.records.leaders,
-  dateRange: state.records.dateRange
+  dateRange: state.records.dateRange,
+  daysInRange: state.records.daysInRange
 });
 
 export default connect(mapStateToProps)(LineChartComponent);
