@@ -37,14 +37,21 @@ class HeatMap extends Component {
     // ].join('');
     // const feature3 = '&style=feature:road|visibility:off';
 
+
+
+    //TODO
     const MARKERS = {
-      'Kresge': {lat: '36.9972381', long: '-122.0667945'},
-      'Oakes': {lat: '36.9890294', long: '-122.0646362'},
-      'Porter': {lat: '36.9943943', long: '-122.0652214'},
-      'College Eight': {lat: '36.9911913', long: '-122.0647242'},
-      'College Nine and Ten': {lat: '37.001788', long: '-122.057529'},
-      'Cowell-Stevenson': {lat: '36.997912', long: '-122.051273'},
-      'Crown-Merrill': {lat: '37.002078', long: '-122.053759'},
+      'College 9/10': {lat: '37.001788', long: '-122.057529'},
+      'Kresge College': {lat: '36.9972381', long: '-122.0667945'},
+      'Oakes College': {lat: '36.9890294', long: '-122.0646362'},
+      'Porter College': {lat: '36.9943943', long: '-122.0652214'},
+      'Rachel Carson (Col. 8) College': {lat: '36.9911913', long: '-122.0647242'},
+
+      'Cowell College': {lat: '36.9', long: '-122.0'},
+      'Crown College': {lat: '36.9', long: '-122.0'},
+      'Crown/Merrill Apartments': {lat: '36.9', long: '-122.0'},
+      'Merrill College': {lat: '36.9', long: '-122.0'},
+      'Stevenson College': {lat: '36.9', long: '-122.0'},
     };
 
     return this.props.leaders.map( (leader, index) => {

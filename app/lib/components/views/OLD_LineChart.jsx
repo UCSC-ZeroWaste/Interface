@@ -59,7 +59,7 @@ class LineChartComponent extends Component {
     return Math.abs((a - b) / (3600 * 24 * 1000));
   }
 
-  parseGreenRatioData(sitePickups) {
+  parseDiversionRatioData(sitePickups) {
     let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
     let minTime = new Date(firstPickup.PickupTime).valueOf();
     let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
@@ -82,14 +82,14 @@ class LineChartComponent extends Component {
         }
       }
     });
-    let greenRatio = [];
+    let diversionRatio = [];
     for (let i = 0 ; i < daysLength; i++) {
-      greenRatio.push(
+      diversionRatio.push(
         (totalLoad[i] - totalRefuse[i]) / totalLoad[i]
       );
     }
 
-    return greenRatio
+    return diversionRatio
       .map((ratio, i) => ({
         'quantity' : ratio,
         'picked_up' : i,
@@ -172,7 +172,7 @@ class LineChartComponent extends Component {
     let options = {};
     switch (this.props.type) {
       case 'green':
-        options = {data: this.parseGreenRatioData(this.props.siteRecords)};
+        options = {data: this.parseDiversionRatioData(this.props.siteRecords)};
         break;
       case 'general':
         options = {data: this.parseSiteData(this.props.siteRecords)};
