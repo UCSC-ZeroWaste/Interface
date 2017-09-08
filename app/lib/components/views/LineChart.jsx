@@ -18,7 +18,7 @@ import merge from 'lodash/merge';
 class LineChartComponent extends Component {
   constructor(props) {
     super(props);
-    // console.log(this.props.site, this.props.records);
+    // console.log(this.props.site, this.props.allData);
     this.state = merge(
       {rollingAverageLength: 7,
       wasteType: 'Refuse'},
@@ -62,11 +62,11 @@ class LineChartComponent extends Component {
  }
 
   parseWasteBreakdown(site) {
-    let sitePickups = this.props.records[site]
+    let sitePickups = this.props.allData[site]
       .filter( (datum) => (datum.Product === this.state.wasteType))
       .map((datum, i) => ({
         'x' : new Date(datum.PickupTime),
-        'y' : datum.Load,
+        'y' : datum.Load_Split,
       }));
 
     return {
@@ -86,52 +86,53 @@ class LineChartComponent extends Component {
   }
 
   getData() {
-    const parseData = (this.props.type === 'green' ? (site) => this.parseGreenRatioData(site) : (site) => this.parseWasteBreakdown(site) );
+    const parseData = (this.props.type === 'green' ? (site) => this.parseDiversionRatioData(site) : (site) => this.parseWasteBreakdown(site) );
 
     if (this.props.scope === 'global') {
-      let sites = _.keys(this.props.records);
+      let sites = _.keys(this.props.allData);
       return sites.map( (site) => parseData(site) );
     } else if (this.props.scope === 'local') {
       return [parseData(this.props.site)];
     }
   }
 
-  parseGreenRatioData(siteName) {
-    let sitePickups = this.props.records[siteName];
+  parseDiversionRatioData(siteName) {
+    let sitePickups = this.props.allData[siteName];
+    //TODO probably can simplify next two lines since data should be in date order
     let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
     let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
     let minTime = new Date(firstPickup.PickupTime).valueOf();
     let maxTime = new Date(lastPickup.PickupTime).valueOf();
-    let numDaysInCycle = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
+    // let this.props.daysInRange = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
 
     //create empty arrays of n days
-    let totalLoad = Array(numDaysInCycle).fill(0);
-    let totalRefuse = Array(numDaysInCycle).fill(0);
+    let totalLoad = Array(this.props.daysInRange).fill(0);
+    let totalRefuse = Array(this.props.daysInRange).fill(0);
 
     sitePickups.forEach( (pickup) => {
       let thisTime = new Date(pickup.PickupTime).valueOf();
       let timeDiff = Math.floor(this.getTimeDiff(thisTime, minTime));
-      if (pickup.Product === 'Refuse') {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < numDaysInCycle); i++) {
-          totalRefuse[i + timeDiff] += pickup.Load;
-          totalLoad[i + timeDiff] += pickup.Load;
+      if (pickup.Diversion_Type === 'Refuse') {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < this.props.daysInRange); i++) {
+          totalRefuse[i + timeDiff] += pickup.Load_Split;
+          totalLoad[i + timeDiff] += pickup.Load_Split;
         }
-      } else {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < numDaysInCycle); i++) {
-          totalLoad[i + timeDiff] += pickup.Load;
+      } else if (pickup.Diversion_Type === 'Diverted') {
+        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < this.props.daysInRange); i++) {
+          totalLoad[i + timeDiff] += pickup.Load_Split;
         }
       }
     });
-    let greenRatio = [];
-    for (let i = 0 ; i < numDaysInCycle; i++) {
-      greenRatio.push(
+    let diversionRatio = [];
+    for (let i = 0 ; i < this.props.daysInRange; i++) {
+      diversionRatio.push(
         Math.floor(100 *(totalLoad[i] - totalRefuse[i]) / totalLoad[i])
       );
     }
 
     // const randColors = ['#a32590', '#57aa40', '#bbc417', '#340893'];
 
-    greenRatio = greenRatio
+    diversionRatio = diversionRatio
       .map((ratio, i) => ({
         y : ratio,
         x : i
@@ -139,7 +140,7 @@ class LineChartComponent extends Component {
 
     return {
       name: siteName,
-      values: greenRatio,
+      values: diversionRatio,
       strokeWidth: this.strokeWidth,
       strokeDashArray: this.strokeDashArray
     };
@@ -187,10 +188,10 @@ class LineChartComponent extends Component {
   getChartDomain() {
     switch (this.props.type) {
       case 'green':
-        return {x: [undefined,30], y: [0,100]};
+        return {x: [undefined, this.props.daysInRange - this.state.rollingAverageLength], y: [0,100]};
       case 'general':
-      //TODO needs to update domain range for x axis to change dynamically -- currently static
-        return {x: [new Date(new Date().setDate(new Date().getDate()-30)), new Date()], y: [0,]};
+        // return {x: [new Date(new Date().setDate(new Date().getDate()-30)), new Date()], y: [0,]};
+        return {x: this.props.dateRange, y: [0,]};
       default:
         return {x: [undefined,undefined], y: [undefined,undefined]};
       }
@@ -266,9 +267,9 @@ class LineChartComponent extends Component {
   //   />
 
   render() {
-    // console.log('this.props.records', this.props.records);
-    if (this.props.records === undefined) return (<div></div>);
-    // console.log("Site Data: ", this.parseWasteBreakdown(this.props.records));
+    // console.log('this.props.allData', this.props.allData);
+    if (this.props.allData === undefined) return (<div></div>);
+    // console.log("Site Data: ", this.parseWasteBreakdown(this.props.allData));
 
     return (
       <div className={styles.line_chart_view}>
@@ -302,7 +303,7 @@ class LineChartComponent extends Component {
   // {this.renderWasteTypeSelector()}
   // <LineChart
   //
-  //   data= {this.parseWasteBreakdown(this.props.records)}
+  //   data= {this.parseWasteBreakdown(this.props.allData)}
   //   chartSeries= {[{
   //     field: 'quantity',
   //     name:  this.props.site + ' - Site Waste Weight',
@@ -323,10 +324,12 @@ class LineChartComponent extends Component {
 
 
 const mapStateToProps = (state) => ({
-  records: state.records.data,
+  allData: state.records.data,
   site: state.currentView.site,
   scope: state.currentView.scope,
-  leaders: state.records.leaders
+  leaders: state.records.leaders,
+  dateRange: state.records.dateRange,
+  daysInRange: state.records.daysInRange
 });
 
 export default connect(mapStateToProps)(LineChartComponent);

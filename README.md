@@ -34,16 +34,18 @@ Type `store.getState()` in the chrome developer console to see the current redux
         records: {
           data: {
             Oakes: [
-              { Load: ...,
+              { Load_Split: ...,
                 PickupTime: ...,
                 Product: ...,
-                Site: ...,
+                Location: ...,
+                Diversion_Type: ...,
                 ...
               },
-              { Load: ...,
+              { Load_Split: ...,
                 PickupTime: ...,
                 Product: ...,
-                Site: ...,
+                Location: ...,
+                Diversion_Type: ...,
                 ...
               },
               ...
@@ -55,26 +57,12 @@ Type `store.getState()` in the chrome developer console to see the current redux
           }
           errors: [...],
           leaders: [
-            {site: "Kresge", totalLoad: 6902, loadWithoutRefuse: 2862, greenRatio: 41.46624},
-            {site: "Porter", totalLoad: 14695, loadWithoutRefuse: 5772, greenRatio: 39.27866},
+            {site: "Kresge", totalLoad: 6902, totalDiverted: 2862, totalRefuse: ####, diversionRatio: 41.46624},
+            {site: "Porter", totalLoad: 14695, totalDiverted: 5772, totalRefuse: ####, diversionRatio: 39.27866},
             ...
           ]
         }
       }
-
-
-
-
-- Consider parsing records.data? It currently includes all fields from each pickup. Perhaps this would be more effectively done on the backend.
-
-    records.data: [
-    { Load,
-      PickupTime,
-      Product,
-      Site,
-      ...
-      },
-
 
 ## Data for pickups as of Aug 3, 2017:
     Refuse:  508
@@ -85,7 +73,8 @@ Type `store.getState()` in the chrome developer console to see the current redux
 
 
 ## Schema
-- Currently fetching pickup data over a 30 day span. Each pickup has 56 key/value pairs.
+
+- Currently fetching pickup data over a 60 day span. Each pickup has 14 key/value pairs.
 
       new schema:
         [

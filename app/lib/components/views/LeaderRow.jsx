@@ -110,7 +110,7 @@ export default class LeaderRow extends Component {
         <div className={styles.details_container}>
           <div className={details} style={color}>
             <div className={site} >{this.props.site.site}</div>
-            <div className={ratio} >{Math.round(this.props.site.greenRatio)}%</div>
+            <div className={ratio} >{Math.round(this.props.site.diversionRatio)}%</div>
           </div>
         </div>
       </div>

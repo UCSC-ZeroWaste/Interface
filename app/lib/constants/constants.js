@@ -45,6 +45,7 @@ const lightgreen = '#d6ee72';
 const green= '#89d48a';
 const bluegreen= '#2fcfa8';
 const blue= '#39bdc4';
+const temp = 'black';
 
 export const LEADER_BOARD_COLORS = [
   blue,
@@ -54,6 +55,9 @@ export const LEADER_BOARD_COLORS = [
   yellow,
   orange,
   red,
+  temp,
+  temp,
+  temp
 ];
 
 import happiest from '../assets/images/emotional_slugs/Slug1.png';
@@ -72,6 +76,9 @@ export const SLUG_IMAGES = [
   sad,
   sadder,
   saddest,
+  saddest,
+  saddest,
+  saddest,
 ];
 
 import pin_happiest from '../assets/images/slug_map_pins/slug-pin1.png';
@@ -89,6 +96,9 @@ export const SLUG_PINS = [
   pin_neutral,
   pin_sad,
   pin_sadder,
+  pin_saddest,
+  pin_saddest,
+  pin_saddest,
   pin_saddest,
 ];
 

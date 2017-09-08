@@ -61,43 +61,37 @@ class DataVisualization extends Component {
     // console.log('nextProps', nextProps);
   }
 
-  renderView() {
-    if (this.props.errors) {
-      return (
-        <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
-          DATA COULD NOT BE FETCHED <br/>
-          {this.props.errors}
-        </div>);
-    } else if (!this.props.records) {
-      return (
-        <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-          <MoonLoader
-            color={'white'}
-            size={'100px'}
-            margin={'5px'}
-            loading={true}
-            />
-        </div>);
-    } else if (this.props.records) {
-      return this.slides[this.props.currentView];
-    }
-  }
+  // renderView() {
+  //   if (this.props.errors) {
+  //     return (
+  //       <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
+  //         DATA COULD NOT BE FETCHED <br/>
+  //         {this.props.errors}
+  //       </div>);
+  //   } else if (!this.props.records) {
+  //     return (
+  //       <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+  //         <MoonLoader
+  //           color={'white'}
+  //           size={'100px'}
+  //           margin={'5px'}
+  //           loading={true}
+  //           />
+  //       </div>);
+  //   } else if (this.props.records) {
+  //     return this.slides[this.props.currentView];
+  //   }
+  // }
 
   renderSlides() {
     if (this.props.errors) {
       return this.slides.map( (component, index) => {
-        if (index > 0) {return (
+        return (
           <div className={styles.slide} key={index} style={{boxSizing: 'borderBox', border: '5px solid white', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
             DATA COULD NOT BE FETCHED <br/>
             {this.props.errors}
           </div>
-        );} else {
-          return (
-            <div className={styles.slide} key={index} >
-              {component}
-            </div>
-          );
-        }
+        );
       });
     } else if (!this.props.records) {
       return (
