@@ -29,6 +29,31 @@ export const DIVERSION_TYPES = [
   "Refuse",
 ];
 
+export const API_SAMPLE = {
+  PickupTime: "2017-08-09T00:13:00.000Z",
+  Year_Month: "2017-08",
+  Month_Num: 8,
+  Week_Num: "2017-32",
+  LoadmanAcct: 907,
+  LoadName: "RR-CMK-OR",
+  LoadName_Split: "RR-CMK-OR",
+  Product: "Compost",
+  Diversion_Type: "Diverted",
+  ContainerType: "Roll Off",
+  Size_CY: 20,
+  Location: "Crown College",
+  Location_Type: "Dining",
+  Load_Split: 12120
+};
+
+export const API_SAMPLE_RELEVANT = {
+  PickupTime: "2017-08-09T00:13:00.000Z",
+  Product: "Compost",
+  Diversion_Type: "Diverted",
+  Location: "Crown College",
+  Load_Split: 12120
+};
+
 //Product (there are others too but not including)
 export const WASTE_TYPES = [
   'Cardboard',

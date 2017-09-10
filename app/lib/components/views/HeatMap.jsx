@@ -47,9 +47,10 @@ class HeatMap extends Component {
       'Porter College': {lat: '36.9943943', long: '-122.0652214'},
       'Rachel Carson (Col. 8) College': {lat: '36.9911913', long: '-122.0647242'},
 
-      'Cowell College': {lat: '36.9914109', long: '-122.0696266'},
-      'Crown College': {lat: '36.9914782', long: '-122.0696266'},
-      'Crown/Merrill Apartments': {lat: '36.9915455', long: '-122.0696266'},
+      'Cowell College': {lat: '36.9971235', long: '122.0542672'},
+      'Crown College': {lat: '36.9996116', long: '-122.0549798'},
+      'Crown/Merrill Apartments': {lat: '37.0019539', long: '-122.0539588'},
+
       'Merrill College': {lat: '36.9915118', long: '-122.0696266'},
       'Stevenson College': {lat: '36.9914446', long: '-122.0696266'},
     };
