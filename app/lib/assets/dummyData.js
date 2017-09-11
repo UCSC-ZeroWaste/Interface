@@ -1,5 +1,6 @@
 import {COLLEGE_SET, DIVERSION_TYPES, WASTE_TYPES, API_SAMPLE_RELEVANT} from '../constants/constants';
 import _ from 'underscore';
+import moment from 'moment';
 
 const settings = {
   dataRows: 3000,
@@ -41,7 +42,8 @@ const createDataSet = function () {
   }
 
   //TODO should fix this so that it sorts by milliseconds instead
-  return recordSet.sort((objA, objB) => Number(objA.PickupTime.slice(0,10).split("-").join("")) - Number(objB.PickupTime.slice(0,10).split("-").join("")));
+  return recordSet.sort((objA, objB) => moment(objA.PickupTime).diff(moment(objB.PickupTime)));
+  // return recordSet.sort((objA, objB) => Number(objA.PickupTime.slice(0,10).split("-").join("")) - Number(objB.PickupTime.slice(0,10).split("-").join("")));
 };
 
 export default createDataSet();

@@ -21,8 +21,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     //TODO currently only getting records when the app loads
-    props.getRecords();
-    // props.getDummyRecords();
+    // props.getRecords();
+    props.getDummyRecords();
   }
 
   render() {
