@@ -194,13 +194,9 @@ class LineChartComponent extends Component {
   getChartDomain() {
     switch (this.props.type) {
       case 'green':
-        // return {x: [undefined, this.props.daysInRange - this.state.rollingAverageLength], y: [0,100]};
         let begRange = moment(this.props.dateRange[0]).add(this.state.rollingAverageLength, 'days');
-        console.log(begRange);
         begRange = new Date(begRange);
-        console.log(begRange);
         return {x: [begRange, new Date(this.props.dateRange[1])], y: [0,100]};
-        // return {x: this.props.dateRange.map( (dateString) => new Date(dateString) ), y: [0,]};
       case 'general':
         // return {x: [new Date(new Date().setDate(new Date().getDate()-30)), new Date()], y: [0,]};
         return {x: this.props.dateRange.map( (dateString) => new Date(dateString) ), y: [0,]};

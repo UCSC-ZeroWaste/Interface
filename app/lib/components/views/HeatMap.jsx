@@ -37,16 +37,14 @@ class HeatMap extends Component {
     // ].join('');
     // const feature3 = '&style=feature:road|visibility:off';
 
-
-
-    //TODO
     const MARKERS = {
       'Kresge College': {lat: '36.9972381', long: '-122.0667945'},
       'Porter College': {lat: '36.9943943', long: '-122.0652214'},
       'Rachel Carson (Col. 8) College': {lat: '36.9911913', long: '-122.0647242'},
       'Oakes College': {lat: '36.9890294', long: '-122.0646362'},
 
-      'College 9/10': {lat: '37.001788', long: '-122.057529'},
+      'College 9': {lat: '37.0015813', long: '-122.0572619'},
+      'College 10': {lat: '37.0004111', long: '-122.0583717'},
       'Crown/Merrill Apartments': {lat: '37.0019539', long: '-122.0539588'},
       'Crown College': {lat: '36.9996116', long: '-122.0549798'},
       'Merrill College': {lat: '36.9997926', long: '-122.0531943'},
