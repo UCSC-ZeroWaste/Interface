@@ -1,4 +1,5 @@
 import {COLLEGE_SET, DIVERSION_TYPES, WASTE_TYPES, API_SAMPLE_RELEVANT} from '../constants/constants';
+import _ from 'underscore';
 
 const settings = {
   dataRows: 1000,
@@ -28,7 +29,7 @@ const createDataSet = function () {
     let index = i % (COLLEGE_SET.length);
     let randomNum = Math.random();
     let Diversion_Type = ( settings.diversionRatioArray[index] < randomNum ? DIVERSION_TYPES[0] : DIVERSION_TYPES[1]);
-    let Product = (Diversion_Type === 'Refuse' ? 'Refuse' : 'Compost');
+    let Product = (Diversion_Type === 'Refuse' ? 'Refuse' : _.sample(WASTE_TYPES.filter( (type) => type != 'Refuse')) );
     let record = {
       PickupTime: getTime(),
       Product,
@@ -38,7 +39,9 @@ const createDataSet = function () {
     };
     recordSet.push(record);
   }
-  return recordSet;
+
+
+  return recordSet.sort((objA, objB) => Number(objA.PickupTime.slice(0,10).split("-").join("")) - Number(objB.PickupTime.slice(0,10).split("-").join("")));
 };
 
 export default createDataSet();
