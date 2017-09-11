@@ -10,7 +10,8 @@
 
 //location field
 export const COLLEGE_SET = [
-  "College 9/10",
+  "College 9",
+  "College 10",
   "Cowell College",
   "Crown College",
   "Crown/Merrill Apartments",
@@ -28,6 +29,31 @@ export const DIVERSION_TYPES = [
   "Diverted",
   "Refuse",
 ];
+
+export const API_SAMPLE = {
+  PickupTime: "2017-08-09T00:13:00.000Z",
+  Year_Month: "2017-08",
+  Month_Num: 8,
+  Week_Num: "2017-32",
+  LoadmanAcct: 907,
+  LoadName: "RR-CMK-OR",
+  LoadName_Split: "RR-CMK-OR",
+  Product: "Compost",
+  Diversion_Type: "Diverted",
+  ContainerType: "Roll Off",
+  Size_CY: 20,
+  Location: "Crown College",
+  Location_Type: "Dining",
+  Load_Split: 12120
+};
+
+export const API_SAMPLE_RELEVANT = {
+  PickupTime: "2017-08-09T00:13:00.000Z",
+  Product: "Compost",
+  Diversion_Type: "Diverted",
+  Location: "Crown College",
+  Load_Split: 12120
+};
 
 //Product (there are others too but not including)
 export const WASTE_TYPES = [
@@ -57,7 +83,8 @@ export const LEADER_BOARD_COLORS = [
   red,
   temp,
   temp,
-  temp
+  temp,
+  temp,
 ];
 
 import happiest from '../assets/images/emotional_slugs/Slug1.png';
@@ -79,6 +106,7 @@ export const SLUG_IMAGES = [
   saddest,
   saddest,
   saddest,
+  saddest,
 ];
 
 import pin_happiest from '../assets/images/slug_map_pins/slug-pin1.png';
@@ -96,6 +124,7 @@ export const SLUG_PINS = [
   pin_neutral,
   pin_sad,
   pin_sadder,
+  pin_saddest,
   pin_saddest,
   pin_saddest,
   pin_saddest,

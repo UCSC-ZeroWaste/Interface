@@ -26,7 +26,7 @@ function parsePickupData(data) {
 
   // let firstPickupDate = moment(data[0].PickupTime.slice(0,9));
   // console.log(firstPickupDate);
-  console.log(data[0].PickupTime.slice(0,10));
+  // console.log(data[0].PickupTime.slice(0,10));
 
   // let firstPickupDate = new Date(data[0].PickupTime.slice(0,10));
   // let lastPickupDate = new Date(data[data.length - 1].PickupTime.slice(0,10));
@@ -43,6 +43,9 @@ function parsePickupData(data) {
 
   const daysInRange = lastPickupDate.diff(firstPickupDate, 'days') + 1;
   console.log(daysInRange);
+
+  firstPickupDate = firstPickupDate.format('YYYY-MM-DD');
+  lastPickupDate = lastPickupDate.format('YYYY-MM-DD');
 
   // Math.floor(Math.abs((firstPickupDate.valueOf() - lastPickupDate.valueOf()) / (3600 * 24 * 1000)));
 

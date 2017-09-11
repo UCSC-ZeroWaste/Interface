@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
-
+import moment from 'moment';
 
 //TODO switch back to 'rd3' when my changes have been accepted
 import {LineChart} from 'rd3';
@@ -99,34 +99,40 @@ class LineChartComponent extends Component {
   parseDiversionRatioData(siteName) {
     let sitePickups = this.props.allData[siteName];
     //TODO probably can simplify next two lines since data should be in date order
-    let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
-    let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
-    let minTime = new Date(firstPickup.PickupTime).valueOf();
-    let maxTime = new Date(lastPickup.PickupTime).valueOf();
-    // let this.props.daysInRange = Math.floor(this.getTimeDiff(minTime, maxTime)) - this.state.rollingAverageLength;
+
+    // let firstPickup = _.min(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
+    // let lastPickup = _.max(sitePickups, (pickup) => new Date(pickup.PickupTime).valueOf());
+    let oneDayInMsec = 24 * 60 * 60 * 1000;
+    let begDateInMsec = new Date(this.props.dateRange[0]).valueOf();
+    let endDateInMsec = new Date(this.props.dateRange[1]).valueOf() + oneDayInMsec;
+    let timeDiff = endDateInMsec - begDateInMsec;
+    // let this.props.daysInRange = Math.floor(this.getDateDiff(begDate, endDate)) - this.state.rollingAverageLength;
 
     //create empty arrays of n days
-    let totalLoad = Array(this.props.daysInRange).fill(0);
+    let totalDiverted = Array(this.props.daysInRange).fill(0);
     let totalRefuse = Array(this.props.daysInRange).fill(0);
 
     sitePickups.forEach( (pickup) => {
-      let thisTime = new Date(pickup.PickupTime).valueOf();
-      let timeDiff = Math.floor(this.getTimeDiff(thisTime, minTime));
+      let thisDateInMsec = new Date(pickup.PickupTime).valueOf();
+      // let timeDiff = Math.floor(this.getTimeDiff(thisTime, begTime));
+      let day = Math.floor((thisDateInMsec - begDateInMsec) / oneDayInMsec);
       if (pickup.Diversion_Type === 'Refuse') {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < this.props.daysInRange); i++) {
-          totalRefuse[i + timeDiff] += pickup.Load_Split;
-          totalLoad[i + timeDiff] += pickup.Load_Split;
-        }
+        totalRefuse[day] += pickup.Load_Split;
       } else if (pickup.Diversion_Type === 'Diverted') {
-        for (let i = 0; (i < this.state.rollingAverageLength) && (i + timeDiff < this.props.daysInRange); i++) {
-          totalLoad[i + timeDiff] += pickup.Load_Split;
-        }
+        totalDiverted[day] += pickup.Load_Split;
       }
     });
+
     let diversionRatio = [];
-    for (let i = 0 ; i < this.props.daysInRange; i++) {
+    for (let i = 0 ; i < this.props.daysInRange - this.state.rollingAverageLength; i++) {
+      let diverted = totalDiverted
+        .slice(i, i + this.state.rollingAverageLength)
+        .reduce( (total, load) => total + load);
+      let refuse = totalRefuse
+        .slice(i, i + this.state.rollingAverageLength)
+        .reduce( (total, load) => total + load);
       diversionRatio.push(
-        Math.floor(100 *(totalLoad[i] - totalRefuse[i]) / totalLoad[i])
+        Math.floor(100 * diverted /( refuse + diverted ))
       );
     }
 
@@ -135,7 +141,7 @@ class LineChartComponent extends Component {
     diversionRatio = diversionRatio
       .map((ratio, i) => ({
         y : ratio,
-        x : i
+        x : new Date(begDateInMsec + (i + this.state.rollingAverageLength) * oneDayInMsec)
       }));
 
     return {
@@ -188,26 +194,55 @@ class LineChartComponent extends Component {
   getChartDomain() {
     switch (this.props.type) {
       case 'green':
-        return {x: [undefined, this.props.daysInRange - this.state.rollingAverageLength], y: [0,100]};
+        let begRange = moment(this.props.dateRange[0]).add(this.state.rollingAverageLength, 'days');
+        return {x: [begRange, this.props.dateRange[1]].map( (date) => new Date(date) ), y: [0,100]};
       case 'general':
         // return {x: [new Date(new Date().setDate(new Date().getDate()-30)), new Date()], y: [0,]};
-        return {x: this.props.dateRange, y: [0,]};
+        return {x: this.props.dateRange.map( (dateString) => new Date(dateString) ), y: [0,]};
       default:
         return {x: [undefined,undefined], y: [undefined,undefined]};
       }
   }
 
-  GetTickInterval() {
+  getTickInterval() {
     switch (this.props.type) {
       case 'green':
-        return {};
+        return {unit: 'day', interval: this.calculateInterval()};
       case 'general':
         // return {};
-        return {unit: 'day', interval: 5};
+        return {unit: 'day', interval: this.calculateInterval()};
       default:
         return {x: [undefined,undefined], y: [undefined,undefined]};
       }
-
+  }
+  calculateInterval() {
+    if (this.props.daysInRange <= 7) {
+      return 1;
+    } else if (this.props.daysInRange > 42) {
+      return 14;
+    } else {
+      return 7;
+    }
+  }
+  getXAccessor(){
+    switch (this.props.type) {
+      case 'green':
+        return (d) => {
+          // console.log(d.x);
+          return d.x;
+        };
+      case 'general':
+        // return {};
+        return (d) => {
+          // var formatter = d3.time.format("%Y-%m-%d").parse;
+          // return formatter(d.x.slice(0,10));
+            // console.log(d.x);
+            return d.x;
+            // return new Date(d.x);
+          };
+      default:
+        return {};
+      }
   }
 
   renderChart(height, width) {
@@ -242,7 +277,8 @@ class LineChartComponent extends Component {
         }}
 
         domain={this.getChartDomain()}
-        xAxisTickInterval={this.GetTickInterval()}
+        xAxisTickInterval={this.getTickInterval()}
+        xAccessor={this.getXAccessor()}
 
         {...CHART.axes}
         {...CHART.settings}
