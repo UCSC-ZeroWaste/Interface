@@ -153,7 +153,7 @@ class LineChartComponent extends Component {
   }
 
   setRollingAverageLength(e) {
-    this.setState({rollingAverageLength: e.target.value});
+    this.setState({rollingAverageLength: Number(e.target.value)});
   }
 
   renderSelector() {
@@ -288,7 +288,6 @@ class LineChartComponent extends Component {
   }
 
   renderHeader() {
-    console.log(this.state.title);
     return (
       <div className={styles.line_chart_header}>
         {this.state.title}
