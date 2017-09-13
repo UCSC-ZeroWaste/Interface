@@ -106,16 +106,19 @@ class LineChartComponent extends Component {
     let begDateInMsec = new Date(this.props.dateRange[0]).valueOf();
     let endDateInMsec = new Date(this.props.dateRange[1]).valueOf() + oneDayInMsec;
     let timeDiff = endDateInMsec - begDateInMsec;
+    // console.log('should be int: ', (timeDiff + 12)/oneDayInMsec);
     // let this.props.daysInRange = Math.floor(this.getDateDiff(begDate, endDate)) - this.state.rollingAverageLength;
 
     //create empty arrays of n days
     let totalDiverted = Array(this.props.daysInRange).fill(0);
     let totalRefuse = Array(this.props.daysInRange).fill(0);
 
-    sitePickups.forEach( (pickup) => {
+    sitePickups.forEach( (pickup, i) => {
+      // if (i === 0) console.log('begtime: ', new Date(this.props.dateRange[0]), "i is 0: ", pickup.PickupTime, new Date(pickup.PickupTime));
       let thisDateInMsec = new Date(pickup.PickupTime).valueOf();
       // let timeDiff = Math.floor(this.getTimeDiff(thisTime, begTime));
       let day = Math.floor((thisDateInMsec - begDateInMsec) / oneDayInMsec);
+      // console.log(day);
       if (pickup.Diversion_Type === 'Refuse') {
         totalRefuse[day] += pickup.Load_Split;
       } else if (pickup.Diversion_Type === 'Diverted') {
@@ -194,7 +197,9 @@ class LineChartComponent extends Component {
   getChartDomain() {
     switch (this.props.type) {
       case 'green':
-        let begRange = moment(this.props.dateRange[0]).add(this.state.rollingAverageLength, 'days');
+        let begRange = moment.utc(this.props.dateRange[0])
+                        .add(this.state.rollingAverageLength, 'days');
+        // console.log('Range date: ', new Date(begRange));
         return {x: [begRange, this.props.dateRange[1]].map( (date) => new Date(date) ), y: [0,100]};
       case 'general':
         // return {x: [new Date(new Date().setDate(new Date().getDate()-30)), new Date()], y: [0,]};
@@ -214,6 +219,7 @@ class LineChartComponent extends Component {
     }
   }
 
+  //TODO Don't think I need this. Also delete from chart props.
   getXAccessor(){
     switch (this.props.type) {
       case 'green':
