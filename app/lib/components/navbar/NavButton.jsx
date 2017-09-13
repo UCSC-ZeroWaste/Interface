@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {handleViewSelect, handleSiteSelect, handleScopeSelect, toggleModal} from '../../actions/view_actions';
+import {handleViewSelect, handleScopeSelect, toggleModal} from '../../actions/view_actions';
 import styles from '../../../App.css';
 import FontAwesome from 'react-fontawesome';
 
@@ -55,9 +55,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum)),
-  handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
   handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope)),
-  // toggleModal: () => dispatch(toggleModal())
 });
 
 export default connect(

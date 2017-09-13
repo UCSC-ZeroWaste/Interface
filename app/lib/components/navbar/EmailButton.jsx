@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {handleViewSelect, handleSiteSelect, handleScopeSelect, toggleModal} from '../../actions/view_actions';
+import {toggleModal} from '../../actions/view_actions';
 import styles from '../../../App.css';
 import FontAwesome from 'react-fontawesome';
 
