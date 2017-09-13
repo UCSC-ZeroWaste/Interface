@@ -17,11 +17,20 @@ import TestSlide from './lib/components/test_carousel/TestSlide';
 import Modal from 'react-modal';
 import modalStyle from './lib/assets/stylesheets/modal';
 
+const API_ENDPOINTS = {
+  15: 'http://zerowaste.ucsc.edu:3001/api/days/15',
+  30: 'http://zerowaste.ucsc.edu:3001/api/days/30',
+  45: 'http://zerowaste.ucsc.edu:3001/api/days/45',
+  60: 'http://zerowaste.ucsc.edu:3001/api/days/60',
+  fall: 'http://zerowaste.ucsc.edu:3001/api/2017/fall',
+  spring: 'http://zerowaste.ucsc.edu:3001/api/2017/spring'
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     //TODO currently only getting records when the app loads
-    props.getRecords();
+    props.getRecords(API_ENDPOINTS['fall']);
     // props.getDummyRecords();
   }
 
@@ -63,7 +72,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getRecords: () => dispatch(fetchRecords()),
+  getRecords: (url) => dispatch(fetchRecords(url)),
   getDummyRecords: () => dispatch(fetchDummyRecords()),
   toggleModal: () => dispatch(toggleModal())
 });

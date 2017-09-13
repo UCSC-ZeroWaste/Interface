@@ -14,9 +14,9 @@ export const receiveError = (errors) => ({
 });
 
 //TODO need to set up error handling -- maybe do this for TDD?
-export const fetchRecords = () => (dispatch) => (
-  Api.fetchRecords('http://zerowaste.ucsc.edu:3001/api/db')
-    .then((response) => dispatch(receiveRecords(response.recordset)))
+export const fetchRecords = (url) => (dispatch) => (
+  Api.fetchRecords(url)
+    .then((response) => dispatch(receiveRecords(response)))
     .catch((error) => dispatch(receiveError(error)))
 );
 
