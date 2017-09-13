@@ -29,7 +29,7 @@ const API_ENDPOINTS = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    //TODO currently only getting records when the app loads
+    //TODO Only getting records when the app loads. OK?
     props.getRecords(API_ENDPOINTS['spring']);
     // props.getDummyRecords();
   }
@@ -37,6 +37,7 @@ class App extends React.Component {
   render() {
     let assetType = _.groupBy(this.props.data, 'AssetType');
     let Product = _.groupBy(this.props.data, 'Product');
+
     // console.log(
     //   'This is AssetType: ',
     //   Object.keys(assetType).map( (type) => (type + ':  ' + assetType[type].length) )
