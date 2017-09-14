@@ -242,30 +242,32 @@ body > div {
 
 
 .landing_container {
-  width: 100%;
+  width: 80%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  border: 1px red solid;
+  /*box-sizing: border-box;
+  border: 1px red solid;*/
 }
 .landing_text {
   color: white;
   font-size: 3em;
-  box-sizing: border-box;
-  border: 1px red solid;
+  /*box-sizing: border-box;
+  border: 1px red solid;*/
 }
 .landing_text1 {
   composes: landing_text;
-  animation-name: fade-in;
+  margin: .5em 0 .1em 0;
+  /*animation-name: fade-in;
   animation-duration: 3s;
-  animation-fill-mode: forwards;
+  animation-fill-mode: forwards;*/
 }
 .landing_text2 {
   composes: landing_text;
+  margin: .1em 0 .5em 0;
   opacity: 0;
   animation-name: fade-in;
-  animation-delay: 3s;
+  animation-delay: 1s;
   animation-duration: 3s;
   animation-fill-mode: forwards;
 }
@@ -279,12 +281,12 @@ body > div {
   width: 60%;
   flex-direction: row;
   justify-content: space-around;
-  box-sizing: border-box;
-  border: 1px red solid;
+  /*box-sizing: border-box;
+  border: 1px red solid;*/
   opacity: 0;
   animation-name: fade-in;
-  animation-delay: 6s;
-  animation-duration: 0s;
+  animation-delay: 2s;
+  animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 .landing_page_button {
@@ -293,14 +295,17 @@ body > div {
   width: 10em;
   height: 3em;
   background-color: white;
-  border-radius: .3em;
+  border-radius: .15em;
   border: .1em solid grey;
   text-align: center;
 }
 .landing_page_site_selection_container {
   display: flex;
+  width: 70%;
   flex-direction: row;
   flex-wrap: wrap;
+  /*box-sizing: border-box;
+  border: 1px red solid;*/
 }
 .landing_page_site_button {
   font-size: 1em;
@@ -624,12 +629,12 @@ body > div {
   flex: 9;
   width: 80%;
   margin-bottom: 5%;
+  margin-right: 10%;
   flex-direction: column;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: white;
-  margin-right: 10%;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 

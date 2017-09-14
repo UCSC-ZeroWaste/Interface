@@ -69,12 +69,12 @@ class LandingPage extends Component {
               <button
                 className={styles.landing_page_button}
                 onClick={this.toggleSiteSelection}>
-                Choose Your House
+                Choose your house
               </button>
               <button
                 className={styles.landing_page_button}
                 onClick={this.handleCampusSelect}>
-                See Whole Campus
+                See whole campus
               </button>
             </div>
             {this.state.siteSelectionHidden
