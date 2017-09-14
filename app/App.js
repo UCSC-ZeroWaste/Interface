@@ -1,21 +1,19 @@
 import React from 'react';
 import styles from './App.css';
-import NavBar from './lib/components/NavBar.jsx';
-import Footer from './lib/components/Footer.jsx';
-import DataVisualization from './lib/components/DataVisualization.jsx';
-import InfoModal from './lib/components/InfoModal.jsx';
-import HeatMap from './lib/components/views/HeatMap.jsx';
+import Carousel from './lib/components/Carousel.jsx';
+import LandingPage from './lib/components/LandingPage.jsx';
+
 import { Provider } from 'react-redux';
 import {fetchRecords, fetchDummyRecords} from './lib/actions/record_actions';
-import {toggleModal} from './lib/actions/view_actions';
+
 import {connect} from 'react-redux';
 import _ from 'underscore';
+import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 
-import TestTransitions from './lib/components/test_carousel/TestTransitions';
-import TestRouter from './lib/components/test_carousel/TestRouter';
-import TestSlide from './lib/components/test_carousel/TestSlide';
-import Modal from 'react-modal';
-import modalStyle from './lib/assets/stylesheets/modal';
+// import TestTransitions from './lib/components/test_carousel/TestTransitions';
+// import TestRouter from './lib/components/test_carousel/TestRouter';
+// import TestSlide from './lib/components/test_carousel/TestSlide';
+
 
 const API_ENDPOINTS = {
   '15': 'http://zerowaste.ucsc.edu:3001/api/days/15',
@@ -29,14 +27,15 @@ const API_ENDPOINTS = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    //TODO currently only getting records when the app loads
-    props.getRecords(API_ENDPOINTS['spring']);
+    //TODO Only getting records when the app loads. OK?
+    props.getRecords(API_ENDPOINTS['30']);
     // props.getDummyRecords();
   }
 
   render() {
     let assetType = _.groupBy(this.props.data, 'AssetType');
     let Product = _.groupBy(this.props.data, 'Product');
+
     // console.log(
     //   'This is AssetType: ',
     //   Object.keys(assetType).map( (type) => (type + ':  ' + assetType[type].length) )
@@ -49,18 +48,16 @@ class App extends React.Component {
 
     return (
       <Provider store={this.props.store}>
-        <div className={styles.page}>
-          <NavBar />
-          <DataVisualization/>
-          <Modal
-            isOpen={this.props.modalState}
-            contentLabel="Modal"
-            onRequestClose={this.props.toggleModal}
-            style={modalStyle}>
-            <InfoModal />
-          </Modal>
-          <Footer/>
-        </div>
+        <HashRouter>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/:device/carousel/site/:siteIndex" component={Carousel} />
+            {
+              //default routing when no path matches
+            }
+            <Redirect from="*" to="/"/>
+          </Switch>
+        </HashRouter>
       </Provider>
     );
   }
@@ -68,13 +65,11 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   data: state.records.data,
-  modalState: state.currentView.modal
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getRecords: (url) => dispatch(fetchRecords(url)),
   getDummyRecords: () => dispatch(fetchDummyRecords()),
-  toggleModal: () => dispatch(toggleModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

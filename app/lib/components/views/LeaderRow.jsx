@@ -3,9 +3,9 @@ import styles from '../../../App.css';
 import merge from 'lodash/merge';
 import ContainerDimensions from 'react-container-dimensions';
 import {SLUG_IMAGES} from '../../constants/constants';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 
-export default class LeaderRow extends Component {
+class LeaderRow extends Component {
   constructor(props) {
     super(props);
   }
@@ -23,7 +23,7 @@ export default class LeaderRow extends Component {
       };
     }
 
-    if (this.props.selected) {
+    if (this.props.selected && this.props.scope === 'local') {
       return (
         <div style={slugContainer} className={styles.slugContainer}>
           <img
@@ -51,7 +51,7 @@ export default class LeaderRow extends Component {
   }
 
   renderRank(height, width) {
-    if (this.props.selected) {
+    if (this.props.selected && this.props.scope === 'local') {
       var rankContainer = {
         width: 1.0 * height,
         height: 1.0 * height,
@@ -94,11 +94,19 @@ export default class LeaderRow extends Component {
   }
 
   render() {
-    let rowStyle = this.props.selected ? styles.leader_row_selected : styles.leader_row;
-    let color = this.props.selected ? {backgroundColor: this.props.color} : undefined;
-    let details = this.props.selected ? styles.details_selected : styles.details;
-    let site = this.props.selected ? styles.details_site_selected : styles.details_site;
-    let ratio = this.props.selected ? styles.details_ratio_selected : styles.details_ratio;
+    if (this.props.selected && this.props.scope === 'local') {
+      var rowStyle = styles.leader_row_selected;
+      var color = {backgroundColor: this.props.color};
+      var details = styles.details_selected;
+      var site = styles.details_site_selected;
+      var ratio = styles.details_ratio_selected;
+    } else {
+      rowStyle = styles.leader_row;
+      color = undefined;
+      details = styles.details;
+      site = styles.details_site;
+      ratio = styles.details_ratio;
+    }
 
     return (
       <div className={rowStyle} ref="leader_row">
@@ -117,3 +125,9 @@ export default class LeaderRow extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  scope: state.currentView.scope
+});
+
+export default connect(mapStateToProps)(LeaderRow);
