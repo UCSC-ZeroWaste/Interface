@@ -4,6 +4,8 @@ import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 import {COLLEGE_SET} from '../constants/constants';
+import {connect} from 'react-redux';
+import {handleScopeSelect} from '../actions/view_actions';
 
 const SiteButton = ({siteName, goToCarousel}) => {
   return (
@@ -16,7 +18,7 @@ const SiteButton = ({siteName, goToCarousel}) => {
   );
 };
 
-export default class LandingPage extends Component {
+class LandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +29,8 @@ export default class LandingPage extends Component {
   }
 
   handleCampusSelect() {
+    this.props.handleScopeSelect('global');
+    this.props.history.push(`/carousel/site/0`);
   }
 
   toggleSiteSelection() {
@@ -85,3 +89,10 @@ export default class LandingPage extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope))
+});
+
+
+export default connect(null, mapDispatchToProps)(LandingPage);
