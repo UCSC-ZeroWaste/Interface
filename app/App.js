@@ -8,7 +8,7 @@ import {fetchRecords, fetchDummyRecords} from './lib/actions/record_actions';
 
 import {connect} from 'react-redux';
 import _ from 'underscore';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 
 // import TestTransitions from './lib/components/test_carousel/TestTransitions';
 // import TestRouter from './lib/components/test_carousel/TestRouter';
@@ -50,8 +50,12 @@ class App extends React.Component {
       <Provider store={this.props.store}>
         <HashRouter>
           <Switch>
-            <Route path="/carousel/site/:siteIndex" component={Carousel} />
-            <Route path="/home" component={LandingPage} />
+            <Route exact path="/home" component={LandingPage} />
+            <Route path="/home/carousel/site/:siteIndex" component={Carousel} />
+            {
+              //default routing when no path matches
+            }
+            <Redirect from="*" to="/home"/>
           </Switch>
         </HashRouter>
       </Provider>

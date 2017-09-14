@@ -45,7 +45,7 @@ class LandingPage extends Component {
             <SiteButton
               key={i}
               siteName={siteName}
-              goToCarousel={() => this.props.history.push(`/carousel/site/${i}`)}
+              goToCarousel={() => this.props.history.push(`/home/carousel/site/${i}`)}
               />
           );
         })}

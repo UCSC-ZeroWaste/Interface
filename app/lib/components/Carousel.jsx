@@ -41,6 +41,7 @@ class Carousel extends Component {
     );
   }
 }
+// <Route path={`${this.props.match.url}/carousel/site/:siteIndex`} component={Carousel} />
 
 
 const mapStateToProps = (state) => ({
