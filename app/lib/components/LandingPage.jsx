@@ -7,12 +7,12 @@ import {COLLEGE_SET} from '../constants/constants';
 
 const SiteButton = ({siteName, goToCarousel}) => {
   return (
-    <div
+    <button
       className={styles.landing_page_site_button}
       onClick={goToCarousel}
       >
       {siteName}
-    </div>
+    </button>
   );
 };
 
@@ -58,15 +58,17 @@ export default class LandingPage extends Component {
             <div className={styles.landing_text}>
               We're reaching zero waste...<br/> and having fun doing it.
             </div>
-            <div
-              className={styles.landing_page_button}
-              onClick={this.toggleSiteSelection}>
-              Choose Your House
-            </div>
-            <div
-              className={styles.landing_page_button}
-              onClick={this.handleCampusSelect}>
-              See Whole Campus
+            <div className={styles.landing_page_button_container}>
+              <button
+                className={styles.landing_page_button}
+                onClick={this.toggleSiteSelection}>
+                Choose Your House
+              </button>
+              <button
+                className={styles.landing_page_button}
+                onClick={this.handleCampusSelect}>
+                See Whole Campus
+              </button>
             </div>
             {this.state.siteSelectionHidden
               ?
