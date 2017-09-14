@@ -5,10 +5,17 @@
 2. npm start
 3. navigate to http://localhost:3000
 
-
 - The Heat Map requires a `config.js` file (located in 'app' folder) with the Google Maps API key.
 
-### rd3 library (npm) for creating charts
+## Production URLs
+For the desktop user: <br/>
+http://zerowaste.ucsc.edu:3000/<br/>
+http://zerowaste.ucsc.edu:3000/home/carousel/site/0<br/>
+For the touchscreen: <br/>
+http://zerowaste.ucsc.edu:3000/touchscreen/carousel/site/0<br/>
+
+
+### rd3 library (npm) for creating charts (REMOVE -- NO LONGER VALID)
 - The Line Chart is currently using a forked version of rd3 (hosted at https://github.com/DeliSauce/rd3). You need to npm install the forked version first and then navigate to the rd3 folder + npm install from there too. (cd node_modules/rd3 && npm install)
 
 npm install --save https://github.com/DeliSauce/rd3/tarball/hotfix/add-props

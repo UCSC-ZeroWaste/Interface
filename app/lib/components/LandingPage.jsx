@@ -30,7 +30,7 @@ class LandingPage extends Component {
 
   handleCampusSelect() {
     this.props.handleScopeSelect('global');
-    this.props.history.push(`/carousel/site/0`);
+    this.props.history.push(`/home/carousel/site/0`);
   }
 
   toggleSiteSelection() {

@@ -6,7 +6,7 @@ import Footer from './Footer.jsx';
 import DataVisualization from './DataVisualization.jsx';
 import InfoModal from './InfoModal.jsx';
 import HeatMap from './views/HeatMap.jsx';
-import {toggleModal, handleSiteSelect} from '../actions/view_actions';
+import {toggleModal, handleSiteSelect, handleDeviceSelect} from '../actions/view_actions';
 
 import {connect} from 'react-redux';
 import Modal from 'react-modal';
@@ -20,8 +20,12 @@ class Carousel extends Component {
     // console.log('THIS', props.match.params.siteIndex, COLLEGE_SET[Number(props.match.params.siteIndex)]);
     // console.log('THIS', props.match.params.siteIndex);
     // console.log(COLLEGE_SET[1]);
+    // console.log('props.match', props.match);
+    // console.log('props.location', props.location);
+    // console.log('props.history', props.history);
     const site = COLLEGE_SET[Number(props.match.params.siteIndex)];
     props.handleSiteSelect(site);
+    props.handleDeviceSelect(props.match.params.device);
   }
 
   render() {
@@ -51,7 +55,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   toggleModal: () => dispatch(toggleModal()),
-  handleSiteSelect: (site) => dispatch(handleSiteSelect(site))
+  handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
+  handleDeviceSelect: (device) => dispatch(handleDeviceSelect(device))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Carousel);

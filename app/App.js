@@ -50,12 +50,12 @@ class App extends React.Component {
       <Provider store={this.props.store}>
         <HashRouter>
           <Switch>
-            <Route exact path="/home" component={LandingPage} />
-            <Route path="/home/carousel/site/:siteIndex" component={Carousel} />
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/:device/carousel/site/:siteIndex" component={Carousel} />
             {
               //default routing when no path matches
             }
-            <Redirect from="*" to="/home"/>
+            <Redirect from="*" to="/"/>
           </Switch>
         </HashRouter>
       </Provider>
