@@ -255,6 +255,25 @@ body > div {
   box-sizing: border-box;
   border: 1px red solid;
 }
+.landing_text1 {
+  composes: landing_text;
+  animation-name: fade-in;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+.landing_text2 {
+  composes: landing_text;
+  opacity: 0;
+  animation-name: fade-in;
+  animation-delay: 3s;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+@keyframes fade-in {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
 .landing_page_button_container {
   display: flex;
   width: 60%;
@@ -262,6 +281,11 @@ body > div {
   justify-content: space-around;
   box-sizing: border-box;
   border: 1px red solid;
+  opacity: 0;
+  animation-name: fade-in;
+  animation-delay: 6s;
+  animation-duration: 0s;
+  animation-fill-mode: forwards;
 }
 .landing_page_button {
   font-size: 1.5em;

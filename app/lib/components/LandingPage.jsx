@@ -55,8 +55,11 @@ export default class LandingPage extends Component {
         <NavBar />
         <div className={styles.main_view}>
           <div className={styles.landing_container}>
-            <div className={styles.landing_text}>
-              We're reaching zero waste...<br/> and having fun doing it.
+            <div className={styles.landing_text1}>
+              We're reaching zero waste...
+            </div>
+            <div className={styles.landing_text2}>
+              and having fun doing it.
             </div>
             <div className={styles.landing_page_button_container}>
               <button
