@@ -36,14 +36,14 @@ class NavButton extends Component {
     }
 
     return (
-      <div className={styles.nav_button_press_response}>
+      <button className={styles.nav_button_press_response}>
         <FontAwesome
           onClick={this.clickHandler}
           className={styleIcon}
           name={this.props.fa}
           size='2x'
           />
-      </div>
+      </button>
     );
   }
 }
