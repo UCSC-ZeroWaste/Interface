@@ -24,7 +24,7 @@ class DataVisualization extends Component {
   constructor(props) {
     super(props);
     this.handleSliderChange = this.handleSliderChange.bind(this);
-    this.keyHandler = this.keyHandler.bind(this);
+    // this.keyHandler = this.keyHandler.bind(this);
 
     this.views = [
       <LeaderBoard/>,
@@ -39,7 +39,7 @@ class DataVisualization extends Component {
     //   <Tip3 title={'tip3'}/>,
     //   <Tip4 title={'tip4'}/>,
     // ];
-    this.slides = this.views
+    this.slides = this.views;
     // .concat(this.tips);
   }
   // <SizeView />,
@@ -115,17 +115,17 @@ class DataVisualization extends Component {
   }
 
   // TODO allows for cycling through nav views -- this is just here for easier testing on the web
-  keyHandler(e) {
-    const view = this.props.currentView;
-    const max = this.slides.length - 1;
-    if (e.key === 'ArrowRight') {
-      var nextView = ( view >= max ? 0 : view + 1);
-      this.props.handleViewSelect(nextView);
-    } else if (e.key === 'ArrowLeft') {
-      nextView = ( view === 0 ? max : view - 1);
-      this.props.handleViewSelect(nextView);
-    }
-  }
+  // keyHandler(e) {
+  //   const view = this.props.currentView;
+  //   const max = this.slides.length - 1;
+  //   if (e.key === 'ArrowRight') {
+  //     var nextView = ( view >= max ? 0 : view + 1);
+  //     this.props.handleViewSelect(nextView);
+  //   } else if (e.key === 'ArrowLeft') {
+  //     nextView = ( view === 0 ? max : view - 1);
+  //     this.props.handleViewSelect(nextView);
+  //   }
+  // }
 
   renderTest() {
 
@@ -133,10 +133,11 @@ class DataVisualization extends Component {
 
   render() {
     var settings = {
+      accessibility: true, //scrolling via tabs/arrows
       adaptiveHeight: true,
       // afterChange: this.handleSliderChange,
       beforeChange: this.handleSliderChange,
-      arrows: true,
+      arrows: false,
       autoplay: false,
       autoplaySpeed: 3000,
       dots: false,
@@ -158,10 +159,10 @@ class DataVisualization extends Component {
        </div>
      ));
 
+    //  onKeyDown={this.keyHandler}
     return (
       <div
         className={styles.main_view}
-        onKeyDown={this.keyHandler}
         tabIndex="0"
         >
         <Slider ref='slider' {...settings} className={styles.slider}>
