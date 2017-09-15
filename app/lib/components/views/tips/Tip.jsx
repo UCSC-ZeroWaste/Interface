@@ -34,13 +34,13 @@ export default class ViewTemplate extends Component {
         </div>
         <div className={styles.tip_content}>
           <img src={tips[this.state.tipIndex].image} className={styles.tip_img}/>
-          <div className={styles.tip_column}>
+          <div className={styles.tip_textbox_and_buttons}>
 
-            <div className={styles.tip_text}>
+            <div className={styles.tip_textbox}>
               {tips[this.state.tipIndex].text}
             </div>
 
-            <div className={styles.tip_button_container}>
+            <div className={styles.tip_buttons_container}>
               <button onClick={() => this.clickHandler('prev')} className={styles.tip_button_previous}>{"PREVIOUS"}</button>
               <button onClick={() => this.clickHandler('next')} className={styles.tip_button_next}>{"NEXT"}</button>
             </div>
