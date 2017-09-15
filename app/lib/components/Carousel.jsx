@@ -33,6 +33,7 @@ class Carousel extends Component {
       <div className={styles.page}>
         <NavBar />
         <DataVisualization/>
+        <Footer/>
         <Modal
           isOpen={this.props.modalState}
           contentLabel="Modal"
@@ -40,7 +41,6 @@ class Carousel extends Component {
           style={modalStyle}>
           <InfoModal />
         </Modal>
-        <Footer/>
       </div>
     );
   }

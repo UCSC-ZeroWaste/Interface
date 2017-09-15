@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavButton from './navbar/NavButton';
 import EmailButton from './navbar/EmailButton';
+import LogoButton from './navbar/LogoButton';
 import styles from '../../App.css';
 
 export default class NavBar extends Component {
@@ -13,7 +14,7 @@ export default class NavBar extends Component {
       <div className={styles.nav_bar_container}>
         <div className={styles.nav_bar}>
           <div className={styles.nav_bar_left}>
-            <div className={styles.logo}>ZERO</div>
+            <LogoButton/>
             <div className={styles.nav_icons_container}>
               <NavButton title={'LeaderBoard'} nav={'view'} view={0} fa={'bars'}/>
               <NavButton title={'RefuseTypesChart'} nav={'view'} view={1} fa={'area-chart'}/>
