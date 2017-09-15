@@ -131,26 +131,34 @@ class DataVisualization extends Component {
 
   }
 
+  autoPlaySetting() {
+    return true;
+  }
+
   render() {
     var settings = {
       accessibility: true, //scrolling via tabs/arrows
       adaptiveHeight: true,
-      // afterChange: this.handleSliderChange,
-      beforeChange: this.handleSliderChange,
+      // beforeChange: this.handleSliderChange,
       arrows: false,
-      autoplay: false,
-      autoplaySpeed: 3000,
+      autoplay: this.autoPlaySetting(),
+      autoplaySpeed: 4000,
+      cssEase: 'ease-out', // also 'ease' and 'ease-in' and 'ease-in-out'
       dots: false,
-      // centerMode: true,
+      draggable: true,
       fade: false,
+      focusOnSelect: false,
       infinite: true,
       lazyLoad: false,
-      pauseOnHover: true,
+      pauseOnHover: false,
       slidesToShow: 1,
-      // slidesToScroll: 1,
-      speed: 1000,
+      speed: 1500,
       swipeToSlide: true,
+      useCSS: true,
       variableWidth: false,
+      // afterChange: this.handleSliderChange,
+      // centerMode: true,
+      // slidesToScroll: 1,
     };
     // style={{height:"100%",width:"100%"}}
     const components = this.slides.map((slide, i) => (
