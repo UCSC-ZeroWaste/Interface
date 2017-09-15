@@ -875,14 +875,13 @@ body > div {
   display: flex;
   height: 100%;
   width: 94%;
-  border: 1px solid green;
   box-sizing: border-box;
-  /*box-sizing: border-box;*/
+  /*border: 1px solid green;*/
   /*border: 1px solid red;*/
 }
 .slider > button {
-  box-sizing: border-box;
-  border: 1px solid red;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
 }
 .slider > div {
   display: flex;
