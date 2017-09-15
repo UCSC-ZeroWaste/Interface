@@ -17,12 +17,12 @@ class LogoButton extends Component {
 
   render() {
     return (
-      <div
+      <button
         className={styles.logo}
         onClick={this.clickHandler}
         >
         ZERO
-      </div>
+      </button>
     );
   }
 }

@@ -127,6 +127,7 @@ body > div {
   font-family: 'logofont';
   font-size: 2.8em;
   margin: 0 0.7em 0 0.7em;
+  background-color: transparent;
 }
 .nav_button_press_response {
   width: 70px;
@@ -139,6 +140,7 @@ body > div {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
 }
 .nav_button_press_response:active {
     background-color: yellow;
@@ -222,22 +224,20 @@ body > div {
   font-size: 1.2em;
 }
 .tip_button_container {
-  height: 15%;
+  height: 25%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
-.tip_button_previous {
-  width: 30%;
+.tip_button_previous, .tip_button_next {
+  width: 35%;
   height: 100%;
-  background-color: green;
-  border-radius: 5px;
-}
-.tip_button_next {
-  width: 30%;
-  height: 100%;
-  background-color: green;
-  border-radius: 5px;
+  color: grey;
+  text-align: center;
+  background-color: white;
+  box-sizing: border-box;
+  border: .2em grey solid;
+  border-radius: .15em;
 }
 
 
