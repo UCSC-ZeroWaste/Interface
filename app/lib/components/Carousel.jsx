@@ -33,18 +33,18 @@ class Carousel extends Component {
       <div className={styles.page}>
         <NavBar />
         <DataVisualization/>
-        <Modal
-          isOpen={this.props.modalState}
-          contentLabel="Modal"
-          onRequestClose={this.props.toggleModal}
-          style={modalStyle}>
-          <InfoModal />
-        </Modal>
         <Footer/>
       </div>
     );
   }
 }
+// <Modal
+//   isOpen={this.props.modalState}
+//   contentLabel="Modal"
+//   onRequestClose={this.props.toggleModal}
+//   style={modalStyle}>
+//   <InfoModal />
+// </Modal>
 // <Route path={`${this.props.match.url}/carousel/site/:siteIndex`} component={Carousel} />
 
 
