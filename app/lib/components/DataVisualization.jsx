@@ -18,12 +18,13 @@ import Tip from './views/tips/Tip';
 
 import transitions from './test_carousel/transitions.css';
 import sliding from './test_carousel/sliding.css';
+import merge from 'lodash/merge';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class DataVisualization extends Component {
   constructor(props) {
     super(props);
-    this.handleSliderChange = this.handleSliderChange.bind(this);
+    // this.handleSliderChange = this.handleSliderChange.bind(this);
     // this.keyHandler = this.keyHandler.bind(this);
 
     this.views = [
@@ -41,47 +42,11 @@ class DataVisualization extends Component {
     // ];
     this.slides = this.views;
     // .concat(this.tips);
-  }
-  // <SizeView />,
-  // <_ViewTemplate title={'Empty View 6'}/>,
-  // <_ViewTemplate title={'Empty View 7'}/>
 
-  handleSliderChange(prevSlide, nextSlide) {
-    // console.log('handleSliderChange', prevSlide, nextSlide);
-    // if (nextSlide > this.views.length) {
-    //   nextSlide = this.views.length;
-    // }
-    this.props.handleViewSelect(nextSlide);
+    this.state = {
+      autoplay: true
+    };
   }
-
-  // TODO need to see if there is a more efficient lifecycle method
-  componentWillReceiveProps(nextProps) {
-    //TODO need a check to see if nextProps were due to clicked nav button vs view change
-    this.refs.slider.slickGoTo(nextProps.currentView);
-    // console.log('nextProps', nextProps);
-  }
-
-  // renderView() {
-  //   if (this.props.errors) {
-  //     return (
-  //       <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white'}}>
-  //         DATA COULD NOT BE FETCHED <br/>
-  //         {this.props.errors}
-  //       </div>);
-  //   } else if (!this.props.records) {
-  //     return (
-  //       <div style={{width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-  //         <MoonLoader
-  //           color={'white'}
-  //           size={'100px'}
-  //           margin={'5px'}
-  //           loading={true}
-  //           />
-  //       </div>);
-  //   } else if (this.props.records) {
-  //     return this.slides[this.props.currentView];
-  //   }
-  // }
 
   renderSlides() {
     if (this.props.errors) {
@@ -114,7 +79,8 @@ class DataVisualization extends Component {
     }
   }
 
-  // TODO allows for cycling through nav views -- this is just here for easier testing on the web
+  // TODO removed since there is already a slider prop that does this. might be useful for measuring touches though
+  //  onKeyDown={this.keyHandler}
   // keyHandler(e) {
   //   const view = this.props.currentView;
   //   const max = this.slides.length - 1;
@@ -127,21 +93,34 @@ class DataVisualization extends Component {
   //   }
   // }
 
-  renderTest() {
+  //TODO need to apply boolean based on last time screen touched.
+  // autoPlaySetting() {
+  //   return true;
+  // }
 
+  slideChangeSettings() {
+    return {};
+    return {afterChange: (nextSlide) => this.props.handleViewSelect(nextSlide)};
+    // return {beforeChange: (prevSlide, nextSlide) => this.props.handleViewSelect(nextSlide)};
   }
 
-  autoPlaySetting() {
-    return true;
+  //Fix: autoplay won't start until at least one slide has been moved
+  componentDidMount() {
+    setTimeout( () => this.refs.slider.slickNext(), 4000);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    //TODO need a check to see if nextProps were due to clicked nav button vs view change
+    this.refs.slider.slickGoTo(nextProps.currentView);
+    // console.log('nextProps', nextProps);
   }
 
   render() {
-    var settings = {
+    var settings = merge({
       accessibility: true, //scrolling via tabs/arrows
       adaptiveHeight: true,
-      // beforeChange: this.handleSliderChange,
       arrows: false,
-      autoplay: this.autoPlaySetting(),
+      autoplay: this.state.autoplay,
       autoplaySpeed: 4000,
       cssEase: 'ease-out', // also 'ease' and 'ease-in' and 'ease-in-out'
       dots: false,
@@ -154,20 +133,21 @@ class DataVisualization extends Component {
       slidesToShow: 1,
       speed: 1500,
       swipeToSlide: true,
+      // touchThreshold: 5,
       useCSS: true,
       variableWidth: false,
-      // afterChange: this.handleSliderChange,
+
       // centerMode: true,
       // slidesToScroll: 1,
-    };
-    // style={{height:"100%",width:"100%"}}
+    }, this.slideChangeSettings());
+
+
     const components = this.slides.map((slide, i) => (
        <div key={slide} >
          {slide}
        </div>
      ));
 
-    //  onKeyDown={this.keyHandler}
     return (
       <div
         className={styles.main_view}
