@@ -11,6 +11,7 @@ import styles from '../../App.css';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { MoonLoader } from 'halogen';
 import Tip from './views/tips/Tip';
+import {AUTOPLAY} from '../constants/settings';
 // import Tip1 from './views/tips/Tip1';
 // import Tip2 from './views/tips/Tip2';
 // import Tip3 from './views/tips/Tip3';
@@ -78,25 +79,6 @@ class DataVisualization extends Component {
     }
   }
 
-  // TODO removed since there is already a slider prop that does this. might be useful for measuring touches though
-  //  onKeyDown={this.keyHandler}
-  // keyHandler(e) {
-  //   const view = this.props.currentView;
-  //   const max = this.slides.length - 1;
-  //   if (e.key === 'ArrowRight') {
-  //     var nextView = ( view >= max ? 0 : view + 1);
-  //     this.props.handleViewSelect(nextView);
-  //   } else if (e.key === 'ArrowLeft') {
-  //     nextView = ( view === 0 ? max : view - 1);
-  //     this.props.handleViewSelect(nextView);
-  //   }
-  // }
-
-  //TODO need to apply boolean based on last time screen touched.
-  // autoPlaySetting() {
-  //   return true;
-  // }
-
   slideChangeSettings() {
     // return {};
     return {afterChange: (nextSlide) => this.props.handleViewSelect(nextSlide)};
@@ -104,16 +86,13 @@ class DataVisualization extends Component {
   }
 
   componentDidMount() {
-    // if (this.state.autoplay) {
-    //   setTimeout( () => this.refs.slider.slickNext(), 4000);
-    // }
     this.autoplayFix();
   }
 
   //Fix: autoplay won't start until at least one slide has been moved
   autoplayFix() {
     console.log('HIT THE AUTOPLAY FIX');
-    setTimeout( () => this.refs.slider.slickNext(), 4000);
+    setTimeout( () => this.refs.slider.slickNext(), AUTOPLAY.restartInterval);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -138,7 +117,8 @@ class DataVisualization extends Component {
       adaptiveHeight: true,
       arrows: false,
       autoplay: this.props.autoplay,
-      autoplaySpeed: 2000,
+      autoplaySpeed: AUTOPLAY.nextSlideInterval,
+      speed: AUTOPLAY.slideSpeed,
       cssEase: 'ease-out', // also 'ease' and 'ease-in' and 'ease-in-out'
       dots: false,
       draggable: true,
@@ -148,7 +128,6 @@ class DataVisualization extends Component {
       lazyLoad: false,
       pauseOnHover: false,
       slidesToShow: 1,
-      speed: 1500,
       swipeToSlide: true,
       // touchThreshold: 5,
       useCSS: true,
@@ -177,20 +156,6 @@ class DataVisualization extends Component {
     );
   }
 }
-// {this.renderView()}
-
-// <CSSTransitionGroup
-//   transitionAppear
-//   transitionName={sliding}
-//   transitionEnterTimeout={4000}
-//   transitionLeaveTimeout={4000}
-//   transitionAppearTimeout={500} >
-//   {components[this.props.currentView]}
-// </CSSTransitionGroup>
-
-// {(this.props.currentView) % 2 === 1 ? <div> hi </div> : <div> bye </div>}
-// {this.renderView()}
-
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView.view,
@@ -203,5 +168,4 @@ const mapDispatchToProps = (dispatch) => ({
   handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum))
 });
 
-// export default DataVisual;
 export default connect(mapStateToProps, mapDispatchToProps)(DataVisualization);

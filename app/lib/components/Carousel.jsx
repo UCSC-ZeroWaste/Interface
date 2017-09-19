@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import Modal from 'react-modal';
 import modalStyle from '../assets/stylesheets/modal';
 import {COLLEGE_SET} from '../constants/constants';
+import {AUTOPLAY} from '../constants/settings';
 
 class Carousel extends Component {
   constructor(props) {
@@ -69,7 +70,7 @@ const mapDispatchToProps = (dispatch) => {
     handleTouchEvent: (setting) => {
       clearTimeout(timer);
       dispatch(setAutoplay('off'));
-      timer = setTimeout(() => dispatch(setAutoplay('on')), 6000);
+      timer = setTimeout(() => dispatch(setAutoplay('on')), AUTOPLAY.restartInterval);
     }
   });
 };
