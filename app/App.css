@@ -192,10 +192,21 @@ body > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 20%;
+  /*height: 20%;*/
   width: 100%;
   color: white;
   font-size: 2.2em;
+  box-sizing: border-box;
+  margin-bottom: 3%;
+}
+.tip_subheader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*height: 20%;*/
+  width: 100%;
+  color: white;
+  font-size: 1.8em;
   box-sizing: border-box;
   margin-bottom: 3%;
 }
@@ -212,8 +223,9 @@ body > div {
   /*max-height: auto;*/
 }
 .tip_textbox_and_buttons {
-  width: 50%;
+  width: auto;
   height: 100%;
+  margin-left: 1em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -29,8 +29,13 @@ export default class ViewTemplate extends Component {
       <div className={styles.tip_container}>
         <div className={styles.tip_header}>
           {"Actions you can take to get to zero waste"}
-          <br/>
-          {tips[this.state.tipIndex].title}
+        </div>
+        <div className={styles.tip_subheader}>
+          {
+            tips[this.state.tipIndex].title
+            + "  "
+            + `[${this.state.tipIndex + 1} of ${this.numTips}]`
+          }
         </div>
         <div className={styles.tip_content}>
           <img src={tips[this.state.tipIndex].image} className={styles.tip_img}/>

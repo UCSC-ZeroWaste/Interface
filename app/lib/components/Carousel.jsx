@@ -32,6 +32,7 @@ class Carousel extends Component {
   }
 
   touchHandler(e) {
+    console.log("TOUCH EVENT!!!", e.target);
     this.props.handleTouchEvent();
   }
 
