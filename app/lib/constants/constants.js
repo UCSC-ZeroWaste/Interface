@@ -102,13 +102,13 @@ export const SLUG_IMAGES = [
   happiest,
   happier,
   happy,
+  happy,
+  neutral,
   neutral,
   sad,
+  sad,
   sadder,
-  saddest,
-  saddest,
-  saddest,
-  saddest,
+  sadder,
   saddest,
 ];
 
