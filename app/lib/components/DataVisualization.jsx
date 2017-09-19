@@ -42,7 +42,6 @@ class DataVisualization extends Component {
     // ];
     this.slides = this.views;
     // .concat(this.tips);
-
     this.state = {
       autoplay: true
     };
@@ -99,14 +98,19 @@ class DataVisualization extends Component {
   // }
 
   slideChangeSettings() {
-    return {};
+    // return {};
     return {afterChange: (nextSlide) => this.props.handleViewSelect(nextSlide)};
     // return {beforeChange: (prevSlide, nextSlide) => this.props.handleViewSelect(nextSlide)};
   }
 
   //Fix: autoplay won't start until at least one slide has been moved
   componentDidMount() {
-    setTimeout( () => this.refs.slider.slickNext(), 4000);
+    // if (this.state.autoplay) {
+    //   setTimeout( () => this.refs.slider.slickNext(), 4000);
+    // }
+    if (this.props.autoplay) {
+      setTimeout( () => this.refs.slider.slickNext(), 4000);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -115,12 +119,22 @@ class DataVisualization extends Component {
     // console.log('nextProps', nextProps);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate(nextProps, nextState)', nextProps, nextState);
+    // if(this.props.autoplay === nextProps.autoplay) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return true;
+  }
+
   render() {
     var settings = merge({
       accessibility: true, //scrolling via tabs/arrows
       adaptiveHeight: true,
       arrows: false,
-      autoplay: this.state.autoplay,
+      autoplay: this.props.autoplay,
       autoplaySpeed: 4000,
       cssEase: 'ease-out', // also 'ease' and 'ease-in' and 'ease-in-out'
       dots: false,
@@ -177,9 +191,9 @@ class DataVisualization extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView.view,
+  autoplay: state.touch.autoplay,
   records: state.records.data,
   errors: state.records.errors
-  // autoplay: state.autoplay
 });
 
 const mapDispatchToProps = (dispatch) => ({

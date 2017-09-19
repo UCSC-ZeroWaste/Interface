@@ -7,6 +7,7 @@ import DataVisualization from './DataVisualization.jsx';
 import InfoModal from './InfoModal.jsx';
 import HeatMap from './views/HeatMap.jsx';
 import {toggleModal, handleSiteSelect, handleDeviceSelect} from '../actions/view_actions';
+import {setAutoplay} from '../actions/touch_actions';
 
 import {connect} from 'react-redux';
 import Modal from 'react-modal';
@@ -26,11 +27,16 @@ class Carousel extends Component {
     const site = COLLEGE_SET[Number(props.match.params.siteIndex)];
     props.handleSiteSelect(site);
     props.handleDeviceSelect(props.match.params.device);
+    this.touchHandler = this.touchHandler.bind(this);
+  }
+
+  touchHandler(e) {
+    this.props.setAutoplay('toggle');
   }
 
   render() {
     return (
-      <div className={styles.page}>
+      <div className={styles.page} onMouseDown={this.touchHandler}>
         <NavBar />
         <DataVisualization/>
         <Footer/>
@@ -45,6 +51,7 @@ class Carousel extends Component {
     );
   }
 }
+
 // <Route path={`${this.props.match.url}/carousel/site/:siteIndex`} component={Carousel} />
 
 
@@ -56,7 +63,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   toggleModal: () => dispatch(toggleModal()),
   handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
-  handleDeviceSelect: (device) => dispatch(handleDeviceSelect(device))
+  handleDeviceSelect: (device) => dispatch(handleDeviceSelect(device)),
+  setAutoplay: (setting) => dispatch(setAutoplay(setting))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Carousel);
