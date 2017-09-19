@@ -64,17 +64,17 @@ export const WASTE_TYPES = [
   'PRODUCT  UNKNOWN'
 ];
 
-const red11 = ‘#ED6046’;
-const darkorange10 = ‘#FC7E48’
-const orange9 = ‘#FCA248’;
-const lightorange8 = ‘#F5BA5B’;
-const yellow7 = ‘#efd553’;
-const lightgreen6 = ‘#D2EA70’;
-const grassgreen5= ‘#B4E66D’;
-const midgreen4 = ‘#89D48A’;
-const bluegreen3= ‘#4DC79D’;
-const turquoise2 = ‘#39C4BF’;
-const blue1= ‘#39B9C4’;
+const red11 = '#ED6046';
+const darkorange10 = '#FC7E48';
+const orange9 = '#FCA248';
+const lightorange8 = '#F5BA5B';
+const yellow7 = '#efd553';
+const lightgreen6 = '#D2EA70';
+const grassgreen5= '#B4E66D';
+const midgreen4 = '#89D48A';
+const bluegreen3= '#4DC79D';
+const turquoise2 = '#39C4BF';
+const blue1= '#39B9C4';
 
 export const LEADER_BOARD_COLORS = [
   blue1,
