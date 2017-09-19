@@ -86,30 +86,27 @@ class DataVisualization extends Component {
   }
 
   componentDidMount() {
-    this.autoplayFix();
+    this.autoplayFix(AUTOPLAY.restartInterval);
   }
 
   //Fix: autoplay won't start until at least one slide has been moved
-  autoplayFix() {
-    console.log('HIT THE AUTOPLAY FIX');
-    setTimeout( () => this.refs.slider.slickNext(), AUTOPLAY.restartInterval);
+  autoplayFix(timeout) {
+    setTimeout( () => this.refs.slider.slickNext(), timeout);
   }
 
   componentWillReceiveProps(nextProps) {
     this.refs.slider.slickGoTo(nextProps.currentView);
-    if (nextProps.autoplay && nextProps.autoplay !== this.props.autoplay) this.autoplayFix();
-    console.log('nextProps', nextProps);
+    if (nextProps.autoplay && nextProps.autoplay !== this.props.autoplay) this.autoplayFix(0);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('shouldComponentUpdate(nextProps, nextState)', nextProps, nextState);
-    // if(this.props.autoplay === nextProps.autoplay) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    return true;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('shouldComponentUpdate(nextProps, nextState)', nextProps, nextState);
+  //   if(this.props.autoplay === nextProps.autoplay) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   render() {
     var settings = merge({
