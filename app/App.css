@@ -846,8 +846,8 @@ body > div {
 }*/
 
 
-.slick-list {
-  height: 100%;
+/*.slick-list {
+  height: 50%;
 }
 .slick-list div {
   box-sizing: border-box;
@@ -855,19 +855,23 @@ body > div {
 }
 .slick-track {
   height: 100%;
-}
-.slick-slider {
+}*/
+/*.slick-slider {
   height: 100%;
   box-sizing: border-box;
-  /*border: 1px solid red;*/
-}
+  border: 1px solid red;
+}*/
 
-.slick-arrow.slick-next {
+/*.slick-arrow.slick-next {
   height: 100px;
   box-sizing: border-box;
   background-color: red;
-}
+}*/
 
+/*.slick-initialized.slick-slider aka slider
+.slick-list
+.slick-track
+.slick-slide.slick-active aka slide*/
 
 
 /*Slider Settings: these settings keep the slide frames at 100% height*/

@@ -130,31 +130,3 @@ export const SLUG_PINS = [
   pin_saddest,
   pin_saddest,
 ];
-
-export const CHART = {
-  // xAxisLabelOffset: 40,
-  // yAxisLabelOffset: 40,
-
-  settings: {
-    legend: false,
-    gridHorizontal: false,
-    gridVertical: false,
-    hoverAnimation: false,
-  },
-
-  axes: {
-    // xAxisLabelStrokeWidth: 0.01,
-    // yAxisLabelStrokeWidth: 0.01,
-    axesColor: 'white',
-    xAxisLabelColor: 'white',
-    yAxisLabelColor: 'white',
-
-    xAxisStrokeWidth: '3',
-    yAxisStrokeWidth: '3',
-    xAxisTickStroke: 'white',
-    yAxisTickStroke: 'white',
-
-    xAxisTickTextStroke: 'white',
-    yAxisTickTextStroke: 'white',
-  }
-};
