@@ -112,24 +112,28 @@ export const SLUG_IMAGES = [
   saddest,
 ];
 
-import pin_happiest from '../assets/images/slug_map_pins/slug-pin1.png';
-import pin_happier from '../assets/images/slug_map_pins/slug-pin2.png';
-import pin_happy from '../assets/images/slug_map_pins/slug-pin3.png';
-import pin_neutral from '../assets/images/slug_map_pins/slug-pin4.png';
-import pin_sad from '../assets/images/slug_map_pins/slug-pin5.png';
-import pin_sadder from '../assets/images/slug_map_pins/slug-pin6.png';
-import pin_saddest from '../assets/images/slug_map_pins/slug-pin7.png';
+import pin1_happiest from '../assets/images/slug_map_pins/slug-pin1.png';
+import pin2 from '../assets/images/slug_map_pins/slug-pin2.png';
+import pin3 from '../assets/images/slug_map_pins/slug-pin3.png';
+import pin4 from '../assets/images/slug_map_pins/slug-pin4.png';
+import pin5 from '../assets/images/slug_map_pins/slug-pin5.png';
+import pin6 from '../assets/images/slug_map_pins/slug-pin6.png';
+import pin7 from '../assets/images/slug_map_pins/slug-pin7.png';
+import pin8 from '../assets/images/slug_map_pins/slug-pin8.png';
+import pin9 from '../assets/images/slug_map_pins/slug-pin9.png';
+import pin10 from '../assets/images/slug_map_pins/slug-pin10.png';
+import pin11_saddest from '../assets/images/slug_map_pins/slug-pin11.png';
 
 export const SLUG_PINS = [
-  pin_happiest,
-  pin_happier,
-  pin_happy,
-  pin_neutral,
-  pin_sad,
-  pin_sadder,
-  pin_saddest,
-  pin_saddest,
-  pin_saddest,
-  pin_saddest,
-  pin_saddest,
+  pin1_happiest,
+  pin2,
+  pin3,
+  pin4,
+  pin5,
+  pin6,
+  pin7,
+  pin8,
+  pin9,
+  pin10,
+  pin11_saddest,
 ];
