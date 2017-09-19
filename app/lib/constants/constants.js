@@ -64,27 +64,30 @@ export const WASTE_TYPES = [
   'PRODUCT  UNKNOWN'
 ];
 
-const red = '#fc7e48';
-const orange = '#ffab4f';
-const yellow = '#efd553';
-const lightgreen = '#d6ee72';
-const green= '#89d48a';
-const bluegreen= '#2fcfa8';
-const blue= '#39bdc4';
-const temp = 'black';
+const red11 = ‘#ED6046’;
+const darkorange10 = ‘#FC7E48’
+const orange9 = ‘#FCA248’;
+const lightorange8 = ‘#F5BA5B’;
+const yellow7 = ‘#efd553’;
+const lightgreen6 = ‘#D2EA70’;
+const grassgreen5= ‘#B4E66D’;
+const midgreen4 = ‘#89D48A’;
+const bluegreen3= ‘#4DC79D’;
+const turquoise2 = ‘#39C4BF’;
+const blue1= ‘#39B9C4’;
 
 export const LEADER_BOARD_COLORS = [
-  blue,
-  bluegreen,
-  green,
-  lightgreen,
-  yellow,
-  orange,
-  red,
-  temp,
-  temp,
-  temp,
-  temp,
+  blue1,
+  turquoise2,
+  bluegreen3,
+  midgreen4,
+  grassgreen5,
+  lightgreen6,
+  yellow7,
+  lightorange8,
+  orange9,
+  darkorange10,
+  red11,
 ];
 
 import happiest from '../assets/images/emotional_slugs/Slug1.png';
