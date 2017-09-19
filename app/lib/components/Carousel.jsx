@@ -31,7 +31,7 @@ class Carousel extends Component {
   }
 
   touchHandler(e) {
-    this.props.setAutoplay('toggle');
+    this.props.handleTouchEvent();
   }
 
   render() {
@@ -60,11 +60,18 @@ const mapStateToProps = (state) => ({
   modalState: state.currentView.modal
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleModal: () => dispatch(toggleModal()),
-  handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
-  handleDeviceSelect: (device) => dispatch(handleDeviceSelect(device)),
-  setAutoplay: (setting) => dispatch(setAutoplay(setting))
-});
+const mapDispatchToProps = (dispatch) => {
+  let timer = null;
+  return ({
+    toggleModal: () => dispatch(toggleModal()),
+    handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
+    handleDeviceSelect: (device) => dispatch(handleDeviceSelect(device)),
+    handleTouchEvent: (setting) => {
+      clearTimeout(timer);
+      dispatch(setAutoplay('off'));
+      timer = setTimeout(() => dispatch(setAutoplay('on')), 6000);
+    }
+  });
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Carousel);

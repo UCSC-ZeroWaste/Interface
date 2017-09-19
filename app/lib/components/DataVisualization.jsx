@@ -103,20 +103,23 @@ class DataVisualization extends Component {
     // return {beforeChange: (prevSlide, nextSlide) => this.props.handleViewSelect(nextSlide)};
   }
 
-  //Fix: autoplay won't start until at least one slide has been moved
   componentDidMount() {
     // if (this.state.autoplay) {
     //   setTimeout( () => this.refs.slider.slickNext(), 4000);
     // }
-    if (this.props.autoplay) {
-      setTimeout( () => this.refs.slider.slickNext(), 4000);
-    }
+    this.autoplayFix();
+  }
+
+  //Fix: autoplay won't start until at least one slide has been moved
+  autoplayFix() {
+    console.log('HIT THE AUTOPLAY FIX');
+    setTimeout( () => this.refs.slider.slickNext(), 4000);
   }
 
   componentWillReceiveProps(nextProps) {
-    //TODO need a check to see if nextProps were due to clicked nav button vs view change
     this.refs.slider.slickGoTo(nextProps.currentView);
-    // console.log('nextProps', nextProps);
+    if (nextProps.autoplay && nextProps.autoplay !== this.props.autoplay) this.autoplayFix();
+    console.log('nextProps', nextProps);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -135,7 +138,7 @@ class DataVisualization extends Component {
       adaptiveHeight: true,
       arrows: false,
       autoplay: this.props.autoplay,
-      autoplaySpeed: 4000,
+      autoplaySpeed: 2000,
       cssEase: 'ease-out', // also 'ease' and 'ease-in' and 'ease-in-out'
       dots: false,
       draggable: true,
