@@ -963,3 +963,9 @@ router_a {
   height: '100%';
   width: '100%';
 }
+
+.marker_college_labels {
+  font-size: 1.18em;
+  line-height: 1.3em;
+  padding-top: 0.1em;
+}

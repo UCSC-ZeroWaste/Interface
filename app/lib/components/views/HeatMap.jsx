@@ -25,9 +25,9 @@ const Marker = ({site, rank, containerStyle, textStyle, markerStyle}) => {
       <div style={markerStyle}/>
       <div style={textStyle}>
         <div style={{marginRight: '.2em'}}>
-          {rank}<sup>{getDegree(rank)}</sup>
+          {rank}<sup>{getDegree(rank)}</sup>&nbsp;Place
         </div>
-        <div>
+        <div className={styles.marker_college_labels}>
            {site}
         </div>
       </div>
@@ -65,16 +65,16 @@ class HeatMap extends Component {
     const MARKERS = {
       'Kresge College': {lat: '36.9972381', long: '-122.0667945'},
       'Porter College': {lat: '36.9943943', long: '-122.0652214'},
-      'Rachel Carson (Col. 8) College': {lat: '36.9911913', long: '-122.0647242'},
-      'Oakes College': {lat: '36.9890294', long: '-122.0646362'},
+      'Rachel Carson (Col. 8) College': {lat: '36.9917', long: '-122.0650'},
+      'Oakes College': {lat: '36.9894', long: '-122.0646362'},
 
-      'College 9': {lat: '37.0015813', long: '-122.0572619'},
-      'College 10': {lat: '37.00001', long: '-122.0583717'},
+      'College 9': {lat: '37.0025', long: '-122.0570'},
+      'College 10': {lat: '37.00001', long: '-122.0586'},
       'Crown/Merrill Apartments': {lat: '37.0019539', long: '-122.0539588'},
-      'Crown College': {lat: '36.9992', long: '-122.0549798'},
-      'Merrill College': {lat: '36.9997926', long: '-122.0525'},
+      'Crown College': {lat: '36.9994', long: '-122.0549798'},
+      'Merrill College': {lat: '36.9997926', long: '-122.0523'},
       'Cowell College': {lat: '36.9971235', long: '-122.0542672'},
-      'Stevenson College': {lat: '36.9965462', long: '-122.0520517'},
+      'Stevenson College': {lat: '36.9960', long: '-122.0520517'},
     };
 
     return this.props.leaders.map( (leader, index) => {
@@ -82,8 +82,8 @@ class HeatMap extends Component {
       let slugImage = SLUG_PINS[index];
 
       const MARKER_SIZE = '6.5em';
-      const TEXT_WIDTH = '9em';
-      const TEXT_HEIGHT = '2.5em';
+      const TEXT_WIDTH = '11em';
+      const TEXT_HEIGHT = '4.4em';
       const MARGIN = '.5em';
 
       const containerStyle = {
@@ -100,16 +100,18 @@ class HeatMap extends Component {
 
       const textStyle = {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         width: TEXT_WIDTH,
         height: TEXT_HEIGHT,
         backgroundColor: 'white',
-        border: '1px grey solid',
-        borderRadius: '3px',
+        padding: '5px',
+        border: '2.5px #B1AFAF solid',
+        borderRadius: '5px',
         boxSizing: 'border-box',
-        fontSize: '1em'
+        fontSize: '1em',
+        color: '#898989'
       }
 
       const markerStyle = {
