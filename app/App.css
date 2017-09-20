@@ -217,7 +217,7 @@ body > div {
   align-items: flex-start;
   height: 80%;
   width: 100%;
-  line-height: 1.8em;
+  line-height: 2.1em;
 }
 .tip_img {
   width: 68%;
@@ -227,6 +227,7 @@ body > div {
   width: auto;
   height: 100%;
   margin-left: 2.5em;
+  margin-right: 2.5em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
