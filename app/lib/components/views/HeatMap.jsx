@@ -25,9 +25,9 @@ const Marker = ({site, rank, containerStyle, textStyle, markerStyle}) => {
       <div style={markerStyle}/>
       <div style={textStyle}>
         <div style={{marginRight: '.2em'}}>
-          {rank}<sup>{getDegree(rank)}</sup>
+          {rank}<sup>{getDegree(rank)}</sup>&nbsp;Place
         </div>
-        <div>
+        <div className={styles.marker_college_labels}>
            {site}
         </div>
       </div>
@@ -82,8 +82,8 @@ class HeatMap extends Component {
       let slugImage = SLUG_PINS[index];
 
       const MARKER_SIZE = '6.5em';
-      const TEXT_WIDTH = '9em';
-      const TEXT_HEIGHT = '2.5em';
+      const TEXT_WIDTH = '11em';
+      const TEXT_HEIGHT = '4.4em';
       const MARGIN = '.5em';
 
       const containerStyle = {
@@ -100,16 +100,18 @@ class HeatMap extends Component {
 
       const textStyle = {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         width: TEXT_WIDTH,
         height: TEXT_HEIGHT,
         backgroundColor: 'white',
-        border: '1px grey solid',
-        borderRadius: '3px',
+        padding: '5px',
+        border: '2.5px #B1AFAF solid',
+        borderRadius: '5px',
         boxSizing: 'border-box',
-        fontSize: '1em'
+        fontSize: '1em',
+        color: '#898989'
       }
 
       const markerStyle = {
