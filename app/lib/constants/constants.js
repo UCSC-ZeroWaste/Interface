@@ -1,4 +1,4 @@
-// export const COLLEGE_SET = [
+// export const COLLEGE_NAMES = [
 //   "College Nine and Ten",
 //   "Cowell-Stevenson",
 //   "Crown-Merrill",
@@ -8,20 +8,21 @@
 //   "College Eight"
 // ];
 
-//location field
-export const COLLEGE_SET = [
-  "College 9",
-  "College 10",
-  "Cowell College",
-  "Crown College",
-  "Crown/Merrill Apartments",
-  "Kresge College",
-  "Merrill College",
-  "Oakes College",
-  "Porter College",
-  "Rachel Carson (Col. 8) College",
-  "Stevenson College",
-];
+export const COLLEGE_INFO = {
+  "College 9": {shortName: "College 9", lat: '37.0025', lng: '-122.0570'},
+  "College 10": {shortName: "College 10", lat: '37.00001', lng: '-122.0586'},
+  "Cowell College": {shortName: "Cowell College", lat: '36.9971235', lng: '-122.0542672'},
+  "Crown College": {shortName: "Crown College", lat: '36.9994', lng: '-122.0549798'},
+  "Crown/Merrill Apartments": {shortName: "Crown/Merrill Apts", lat: '37.0019539', lng: '-122.0539588'},
+  "Kresge College": {shortName: "Kresge College", lat: '36.9972381', lng: '-122.0667945'},
+  "Merrill College": {shortName: "Merrill College", lat: '36.9997926', lng: '-122.0523'},
+  "Oakes College": {shortName: "Oakes College", lat: '36.9894', lng: '-122.0646362'},
+  "Porter College": {shortName: "Porter College", lat: '36.9943943', lng: '-122.0652214'},
+  "Rachel Carson (Col. 8) College": {shortName: "R. Carson College", lat: '36.9917', lng: '-122.0650'},
+  "Stevenson College": {shortName: "Stevenson College", lat: '36.9960', lng: '-122.0520517'},
+};
+
+export const COLLEGE_NAMES = Object.keys(COLLEGE_INFO);
 
 //field: Diversion_Type
 //TODO update Green Ratio Chart with this info

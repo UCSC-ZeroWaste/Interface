@@ -1,10 +1,10 @@
-import {COLLEGE_SET, DIVERSION_TYPES, WASTE_TYPES, API_SAMPLE_RELEVANT} from '../constants/constants';
+import {COLLEGE_NAMES, DIVERSION_TYPES, WASTE_TYPES, API_SAMPLE_RELEVANT} from '../constants/constants';
 import _ from 'underscore';
 import moment from 'moment';
 
 const settings = {
   dataRows: 3000,
-  diversionRatioArray: COLLEGE_SET.map( () => Math.random() ),
+  diversionRatioArray: COLLEGE_NAMES.map( () => Math.random() ),
   recordFields: Object.keys(API_SAMPLE_RELEVANT)
 };
 
@@ -27,7 +27,7 @@ const createDataSet = function () {
   let recordSet = [];
 
   for(let i = 0; i < settings.dataRows; i++) {
-    let index = i % (COLLEGE_SET.length);
+    let index = i % (COLLEGE_NAMES.length);
     let randomNum = Math.random();
     let Diversion_Type = ( settings.diversionRatioArray[index] < randomNum ? DIVERSION_TYPES[0] : DIVERSION_TYPES[1]);
     let Product = (Diversion_Type === 'Refuse' ? 'Refuse' : _.sample(WASTE_TYPES.filter( (type) => type != 'Refuse')) );
@@ -35,7 +35,7 @@ const createDataSet = function () {
       PickupTime: getTime(),
       Product,
       Diversion_Type,
-      Location: COLLEGE_SET[index],
+      Location: COLLEGE_NAMES[index],
       Load_Split: getLoadSplit()
     };
     recordSet.push(record);

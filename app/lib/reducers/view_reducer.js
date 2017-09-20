@@ -1,8 +1,8 @@
 import merge from 'lodash/merge';
-import {COLLEGE_SET} from '../constants/constants';
+import {COLLEGE_NAMES} from '../constants/constants';
 import {UPDATE_VIEW, UPDATE_SITE, UPDATE_SCOPE, TOGGLE_MODAL, UPDATE_DEVICE} from '../actions/view_actions';
 
-const defaultState = {view: 0, site: COLLEGE_SET[0], scope: 'local', modal: false, device: 'home', autoplay: true};
+const defaultState = {view: 0, site: COLLEGE_NAMES[0], scope: 'local', modal: false, device: 'home', autoplay: true};
 
 const ViewReducer = (state = defaultState, action) => {
   Object.freeze(state);

@@ -3,7 +3,7 @@ import styles from '../../App.css';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-import {COLLEGE_SET} from '../constants/constants';
+import {COLLEGE_NAMES} from '../constants/constants';
 import {connect} from 'react-redux';
 import {handleScopeSelect} from '../actions/view_actions';
 
@@ -40,7 +40,7 @@ class LandingPage extends Component {
   renderSiteSelectionContainer() {
     return (
       <div className={styles.landing_page_site_selection_container}>
-        {COLLEGE_SET.map( (siteName, i) => {
+        {COLLEGE_NAMES.map( (siteName, i) => {
           return (
             <SiteButton
               key={i}
