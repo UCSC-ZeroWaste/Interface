@@ -1,21 +1,15 @@
-import template from "../../../assets/images/tips/corgy_image.jpg";
-let bottle = template;
-let cloth = template;
-let clothes = template;
-let compost = template;
-let straws = template;
 
 import toothbrush from "../../../assets/images/tips/bamboo_toothbrush.png";
-// import bottle from "../../../assets/images/tips/bottle.png";
-// import cloth from "../../../assets/images/tips/cloth.png";
-// import clothes from "../../../assets/images/tips/clothes.png";
+import bottle from "../../../assets/images/tips/bottle.png";
+import cloth from "../../../assets/images/tips/teatowel.png";
+import clothes from "../../../assets/images/tips/clothes.png";
 import coffee from "../../../assets/images/tips/coffee.png";
-// import compost from "../../../assets/images/tips/compost.png";
+import compost from "../../../assets/images/tips/compost.png";
 import container from "../../../assets/images/tips/container.png";
 import fun from "../../../assets/images/tips/fun.png";
 import handkerchief from "../../../assets/images/tips/handkerchief.png";
 import shampoo from "../../../assets/images/tips/shampoo_bar.png";
-// import straws from "../../../assets/images/tips/straws.png";
+import straws from "../../../assets/images/tips/straws.png";
 
 export default [
   {
