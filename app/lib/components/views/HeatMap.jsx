@@ -5,11 +5,32 @@ import GoogleMapReact from 'google-map-react';
 import {SLUG_PINS} from '../../constants/constants';
 import {connect} from 'react-redux';
 
-const Marker = ({text, containerStyle, textStyle, markerStyle}) => {
+const Marker = ({site, rank, containerStyle, textStyle, markerStyle}) => {
+
+  function getDegree(rank) {
+    switch (rank) {
+      case 1:
+      return 'st';
+      case 2:
+      return 'nd';
+      case 3:
+      return 'rd';
+      default:
+      return 'th';
+    }
+  }
+
   return (
     <div style={containerStyle}>
       <div style={markerStyle}/>
-      <div style={textStyle}> {text} </div>
+      <div style={textStyle}>
+        <div style={{marginRight: '.2em'}}>
+          {rank}<sup>{getDegree(rank)}</sup>
+        </div>
+        <div>
+           {site}
+        </div>
+      </div>
     </div>
   )
 }
@@ -19,10 +40,14 @@ class HeatMap extends Component {
     super(props);
   }
 
+  //TODO zoom of 16 appears to work on the touchscreen, need zoom of 15 for desktop
   static defaultProps = {
-    center: {lat: 36.997, lng: -122.060},
-    zoom: 15
+    center: {lat: 36.995, lng: -122.060},
+    zoom: 16
   };
+
+
+
 
   renderMarkers() {
 
@@ -44,10 +69,10 @@ class HeatMap extends Component {
       'Oakes College': {lat: '36.9890294', long: '-122.0646362'},
 
       'College 9': {lat: '37.0015813', long: '-122.0572619'},
-      'College 10': {lat: '37.0004111', long: '-122.0583717'},
+      'College 10': {lat: '37.00001', long: '-122.0583717'},
       'Crown/Merrill Apartments': {lat: '37.0019539', long: '-122.0539588'},
-      'Crown College': {lat: '36.9996116', long: '-122.0549798'},
-      'Merrill College': {lat: '36.9997926', long: '-122.0531943'},
+      'Crown College': {lat: '36.9992', long: '-122.0549798'},
+      'Merrill College': {lat: '36.9997926', long: '-122.0525'},
       'Cowell College': {lat: '36.9971235', long: '-122.0542672'},
       'Stevenson College': {lat: '36.9965462', long: '-122.0520517'},
     };
@@ -56,33 +81,41 @@ class HeatMap extends Component {
       let options = MARKERS[leader.site]
       let slugImage = SLUG_PINS[index];
 
-      const MARKER_SIZE = 20;
-      const TEXT_WIDTH = 80;
-      const TEXT_HEIGHT = 30;
+      const MARKER_SIZE = '6.5em';
+      const TEXT_WIDTH = '9em';
+      const TEXT_HEIGHT = '2.5em';
+      const MARGIN = '.5em';
 
       const containerStyle = {
         position: 'absolute',
         display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        width: MARKER_SIZE + TEXT_WIDTH,
-        height: MARKER_SIZE,
-        left: -MARKER_SIZE / 2,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: 'auto',
+        height: MARKER_SIZE + TEXT_HEIGHT,
+        left: -TEXT_WIDTH / 2,
         top: -MARKER_SIZE,
       }
 
       const textStyle = {
         display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         width: TEXT_WIDTH,
+        height: TEXT_HEIGHT,
         backgroundColor: 'white',
         border: '1px grey solid',
         borderRadius: '3px',
         boxSizing: 'border-box',
+        fontSize: '1em'
       }
 
       const markerStyle = {
         width: MARKER_SIZE,
         height: MARKER_SIZE,
+        marginBottom: MARGIN,
         backgroundImage: `url(${slugImage})`,
         backgroundSize: 'cover',
       }
@@ -95,7 +128,8 @@ class HeatMap extends Component {
           markerStyle={markerStyle}
           textStyle={textStyle}
           containerStyle={containerStyle}
-          text={leader.site}
+          site={leader.site}
+          rank={index + 1}
         />
       )
     });
