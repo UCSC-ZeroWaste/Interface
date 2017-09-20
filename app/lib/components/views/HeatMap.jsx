@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import {mapsStaticKey, mapsJavascriptKey} from '../../../config.js';
 import styles from '../../../App.css';
 import GoogleMapReact from 'google-map-react';
+import { fitBounds } from 'google-map-react/utils';
 import {SLUG_PINS} from '../../constants/constants';
+import {MAP_STYLE} from '../../constants/settings';
 import {connect} from 'react-redux';
+import ContainerDimensions from 'react-container-dimensions';
 
 const Marker = ({site, rank, containerStyle, textStyle, markerStyle}) => {
 
@@ -32,36 +35,37 @@ const Marker = ({site, rank, containerStyle, textStyle, markerStyle}) => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 class HeatMap extends Component {
   constructor(props) {
     super(props);
+    this.createMapOptions = this.createMapOptions.bind(this);
   }
 
   //TODO zoom of 16 appears to work on the touchscreen, need zoom of 15 for desktop
-  static defaultProps = {
-    center: {lat: 36.995, lng: -122.060},
-    zoom: 16
-  };
+  // static defaultProps = {
+  //   center: {lat: 36.995, lng: -122.060},
+  //   zoom: 15,
+  // };
+  // bounds: { nw: {lat: 37.003549, lng: -122.073339},
+  //           se: {lat: 36.987191, lng: -122.049263},
+  //         }
+  // ne: {lat: 37.003549, lng: -122.049263},
+  // sw: {lat: 36.987191, lng: -122.073339},
 
+  // getBounds() {
+  //   const nw = {lat: 37.003549, long: -122.073339};
+  //   const sw = {lat: 36.987191, long: -122.073339};
+  //   const ne = {lat: 37.003549, long: -122.049263};
+  //   const se = {lat: 36.987191, long: -122.049263};
+  //   return {nw, se, sw, ne};
+  // }
 
 
 
   renderMarkers() {
-
-    // const color = {tan: '0xdfd2ae', black: '0x000000', white: '0xffffff', blue: '0x363696'};
-    // const features = [
-    //   '&style=feature:landscape|element:geometry|color:' + color.blue,
-    //   '&style=feature:poi|element:geometry|color:' + color.blue,
-    //   '&style=feature:poi.park|element:geometry|color:' + color.blue,
-    //   '&style=feature:poi.business|visibility:off',
-    //   '&style=feature:poi.attraction|visibility:off',
-    //   '&style=feature:road.local|element:geometry|color:' + color.white,
-    // ].join('');
-    // const feature3 = '&style=feature:road|visibility:off';
-
     const MARKERS = {
       'Kresge College': {lat: '36.9972381', long: '-122.0667945'},
       'Porter College': {lat: '36.9943943', long: '-122.0652214'},
@@ -136,6 +140,19 @@ class HeatMap extends Component {
   }
 
   createMapOptions(maps) {
+
+
+    return {
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      draggable: false,
+      styles: MAP_STYLE,
+      backgroundColor: 'hsla(0, 0%, 0%, 0)',
+    };
   // next props are exposed at maps
   // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
   // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
@@ -152,26 +169,39 @@ class HeatMap extends Component {
   //   },
   //   mapTypeControl: true
   // };
-}
+  }
+
+  renderMap(width, height) {
+    const bounds = {
+              nw: {lat: 37.003549, lng: -122.073339},
+              se: {lat: 36.987191, lng: -122.049263},
+            };
+
+    const size = {
+      width, // Map width in pixels
+      height // Map height in pixels
+    };
+
+    const {center, zoom} = fitBounds(bounds, size);
+
+    return (
+      <GoogleMapReact
+        ref='map'
+        defaultCenter={center}
+        defaultZoom={zoom}
+        options={this.createMapOptions}
+        bootstrapURLKeys={{key: mapsJavascriptKey}}
+        >
+        {this.renderMarkers()}
+      </GoogleMapReact>
+    );
+  }
 
   render() {
     return (
-        <GoogleMapReact
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-          options={{
-            zoomControl: false,
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            rotateControl: false,
-            fullscreenControl: false,
-            draggable: false,
-          }}
-          bootstrapURLKeys={{key: mapsJavascriptKey}}
-          >
-          {this.renderMarkers()}
-        </GoogleMapReact>
+      <ContainerDimensions>
+        { ({ height, width }) => this.renderMap(height, width) }
+      </ContainerDimensions>
 
      );
   }
@@ -179,6 +209,6 @@ class HeatMap extends Component {
 
 const mapStateToProps = (state) => ({
   leaders: state.records.leaders
-})
+});
 
 export default connect(mapStateToProps)(HeatMap);
