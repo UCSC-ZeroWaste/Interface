@@ -45,10 +45,10 @@ class HeatMap extends Component {
   }
 
   //TODO zoom of 16 appears to work on the touchscreen, need zoom of 15 for desktop
-  // static defaultProps = {
-  //   center: {lat: 36.995, lng: -122.060},
-  //   zoom: 15,
-  // };
+  static defaultProps = {
+    center: {lat: 36.9935, lng: -122.060},
+    zoom: 15,
+  };
   // bounds: { nw: {lat: 37.003549, lng: -122.073339},
   //           se: {lat: 36.987191, lng: -122.049263},
   //         }
@@ -175,10 +175,9 @@ class HeatMap extends Component {
 
   renderMap(width, height) {
     const bounds = {
-              nw: {lat: 37.003549, lng: -122.073339},
-              se: {lat: 36.987191, lng: -122.049263},
+              nw: {lat: 37.003819, lng: -122.072791},
+              se: {lat: 36.988039, lng: -122.049016},
             };
-
     const size = {
       width, // Map width in pixels
       height // Map height in pixels
@@ -189,7 +188,7 @@ class HeatMap extends Component {
     return (
       <GoogleMapReact
         ref='map'
-        defaultCenter={center}
+        defaultCenter={this.props.center}
         defaultZoom={zoom}
         options={this.createMapOptions}
         bootstrapURLKeys={{key: mapsJavascriptKey}}
