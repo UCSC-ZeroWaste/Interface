@@ -8,9 +8,9 @@ import {MAP_STYLE} from '../../constants/settings';
 import {connect} from 'react-redux';
 import ContainerDimensions from 'react-container-dimensions';
 import {COLLEGE_INFO} from '../../constants/constants';
+import {withRouter} from 'react-router-dom';
 
 const Marker = ({site, rank, containerStyle, textStyle, markerStyle}) => {
-
   function getDegree(rank) {
     switch (rank) {
       case 1:
@@ -67,29 +67,23 @@ class HeatMap extends Component {
 
 
   renderMarkers() {
-    const MARKERS = {
-      'Kresge College': {lat: '36.9972381', lng: '-122.0667945'},
-      'Porter College': {lat: '36.9943943', lng: '-122.0652214'},
-      'Rachel Carson (Col. 8) College': {lat: '36.9917', lng: '-122.0650'},
-      'Oakes College': {lat: '36.9894', lng: '-122.0646362'},
-
-      'College 9': {lat: '37.0025', lng: '-122.0570'},
-      'College 10': {lat: '37.00001', lng: '-122.0586'},
-      'Crown/Merrill Apartments': {lat: '37.0019539', lng: '-122.0539588'},
-      'Crown College': {lat: '36.9994', lng: '-122.0549798'},
-      'Merrill College': {lat: '36.9997926', lng: '-122.0523'},
-      'Cowell College': {lat: '36.9971235', lng: '-122.0542672'},
-      'Stevenson College': {lat: '36.9960', lng: '-122.0520517'},
-    };
-
     return this.props.leaders.map( (leader, index) => {
       let options = COLLEGE_INFO[leader.site]
       let slugImage = SLUG_PINS[index];
 
-      const MARKER_SIZE = '6.5em';
-      const TEXT_WIDTH = '11em';
-      const TEXT_HEIGHT = '4.4em';
-      const MARGIN = '.5em';
+      if (this.props.device === 'touchscreen') {
+        var MARKER_SIZE = '6.5em';
+        var TEXT_WIDTH = '11em';
+        var TEXT_HEIGHT = '4.4em';
+        var MARGIN = '.5em';
+        var fontSize = '1em';
+      } else {
+        MARKER_SIZE = '4.0em';
+        TEXT_WIDTH = '12em';
+        TEXT_HEIGHT = '4.0em';
+        MARGIN = '.25em';
+        var fontSize = '.75em';
+      }
 
       const containerStyle = {
         position: 'absolute',
@@ -115,7 +109,7 @@ class HeatMap extends Component {
         border: '2.5px #B1AFAF solid',
         borderRadius: '5px',
         boxSizing: 'border-box',
-        fontSize: '1em',
+        fontSize: fontSize,
         color: '#898989'
       }
 
@@ -204,13 +198,13 @@ class HeatMap extends Component {
       <ContainerDimensions>
         { ({ height, width }) => this.renderMap(height, width) }
       </ContainerDimensions>
-
      );
   }
 }
 
 const mapStateToProps = (state) => ({
-  leaders: state.records.leaders
+  leaders: state.records.leaders,
+  device: state.currentView.device
 });
 
-export default connect(mapStateToProps)(HeatMap);
+export default withRouter(connect(mapStateToProps)(HeatMap));

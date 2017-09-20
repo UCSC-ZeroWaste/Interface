@@ -21,7 +21,7 @@ class LogoButton extends Component {
     // }
 
     //redux version:
-    if (this.props.device === 'home') {
+    if (this.props.device !== 'touchscreen') {
       this.props.history.push(`/home`);
     }
   }
