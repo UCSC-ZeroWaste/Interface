@@ -11,8 +11,8 @@ import {COLLEGE_INFO} from '../../constants/constants';
 import {withRouter} from 'react-router-dom';
 
 const Marker = ({site, rank, containerStyle, textStyle, markerStyle}) => {
-  function getDegree(rank) {
-    switch (rank) {
+  function getDegree(siteRank) {
+    switch (siteRank) {
       case 1:
       return 'st';
       case 2:
@@ -37,7 +37,7 @@ const Marker = ({site, rank, containerStyle, textStyle, markerStyle}) => {
       </div>
     </div>
   );
-}
+};
 
 class HeatMap extends Component {
   constructor(props) {
@@ -45,30 +45,9 @@ class HeatMap extends Component {
     this.createMapOptions = this.createMapOptions.bind(this);
   }
 
-  //TODO zoom of 16 appears to work on the touchscreen, need zoom of 15 for desktop
-  static defaultProps = {
-    center: {lat: 36.9935, lng: -122.060},
-    zoom: 15,
-  };
-  // bounds: { nw: {lat: 37.003549, lng: -122.073339},
-  //           se: {lat: 36.987191, lng: -122.049263},
-  //         }
-  // ne: {lat: 37.003549, lng: -122.049263},
-  // sw: {lat: 36.987191, lng: -122.073339},
-
-  // getBounds() {
-  //   const nw = {lat: 37.003549, long: -122.073339};
-  //   const sw = {lat: 36.987191, long: -122.073339};
-  //   const ne = {lat: 37.003549, long: -122.049263};
-  //   const se = {lat: 36.987191, long: -122.049263};
-  //   return {nw, se, sw, ne};
-  // }
-
-
-
   renderMarkers() {
     return this.props.leaders.map( (leader, index) => {
-      let options = COLLEGE_INFO[leader.site]
+      let options = COLLEGE_INFO[leader.site];
       let slugImage = SLUG_PINS[index];
 
       if (this.props.device === 'touchscreen') {
@@ -95,7 +74,7 @@ class HeatMap extends Component {
         height: MARKER_SIZE + TEXT_HEIGHT,
         left: -TEXT_WIDTH / 2,
         top: -MARKER_SIZE,
-      }
+      };
 
       const textStyle = {
         display: 'flex',
@@ -111,7 +90,7 @@ class HeatMap extends Component {
         boxSizing: 'border-box',
         fontSize: fontSize,
         color: '#898989'
-      }
+      };
 
       const markerStyle = {
         width: MARKER_SIZE,
@@ -119,7 +98,7 @@ class HeatMap extends Component {
         marginBottom: MARGIN,
         backgroundImage: `url(${slugImage})`,
         backgroundSize: 'cover',
-      }
+      };
 
       return (
         <Marker
@@ -132,7 +111,7 @@ class HeatMap extends Component {
           site={leader.site}
           rank={index + 1}
         />
-      )
+      );
     });
   }
 
@@ -168,36 +147,18 @@ class HeatMap extends Component {
   // };
   }
 
-  renderMap(width, height) {
-    const bounds = {
-              nw: {lat: 37.003819, lng: -122.072791},
-              se: {lat: 36.988039, lng: -122.049016},
-            };
-    const size = {
-      width, // Map width in pixels
-      height // Map height in pixels
-    };
 
-    const {center, zoom} = fitBounds(bounds, size);
-
+  render() {
     return (
       <GoogleMapReact
         ref='map'
-        defaultCenter={this.props.center}
-        defaultZoom={zoom}
+        defaultCenter={{lat: 36.9935, lng: -122.060}}
+        defaultZoom={this.props.device === 'touchscreen' ? 16 : 15}
         options={this.createMapOptions}
         bootstrapURLKeys={{key: mapsJavascriptKey}}
         >
         {this.renderMarkers()}
       </GoogleMapReact>
-    );
-  }
-
-  render() {
-    return (
-      <ContainerDimensions>
-        { ({ height, width }) => this.renderMap(height, width) }
-      </ContainerDimensions>
      );
   }
 }
