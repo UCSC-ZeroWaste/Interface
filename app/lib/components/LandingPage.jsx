@@ -55,7 +55,7 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <div className={styles.page}>
+      <div className={styles.landing_page}>
         <NavBar />
         <div className={styles.main_view}>
           <div className={styles.landing_container}>

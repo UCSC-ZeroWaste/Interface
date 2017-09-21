@@ -31,16 +31,15 @@
 
 .page {
   background-image: url('./lib/assets/images/background.png');
-  background-size: cover;;
+  background-size: cover;
   background-position: 100% 100%;
 }
 
-/*
 .landing_page {
-  background-image: url('./lib/assets/images/landingpage_background.png');
-  background-size: cover;;
+  background-image: url('./lib/assets/images/landingpage-background.png');
+  background-size: cover;
   background-position: 100% 100%;
-} */
+} 
 
 html, body, #root {
   display: flex;
