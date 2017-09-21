@@ -19,12 +19,12 @@ export default [
   },
   {
     title: "Take your reusable cup to the coffee shop",
-    text: "Get yourself a reusable coffee mug and quit accepting disposable paper cups at coffee shops. Reusable mugs are superior. They keep the heat in and they seal properly so you don’t need to worry about spills or leaks.  They can last indefinitely and many coffee shops offer a discount on your beverage when you use it!",
+    text: "Get yourself a reusable coffee mug and quit accepting disposable paper cups at coffee shops. Reusable mugs are superior. They keep the heat in and they seal properly so you don’t need to worry about spills or leaks.  They can last indefinitely and many coffee shops offer a discount on your beverage when you use it",
     image: coffee
   },
   {
     title: "Compost for the climate",
-    text: "Did you know that food waste makes up the largest portion of landfill? Organic matter (like food waste) releases methane gas when it is stored in low oxygen environments like landfills. Eighteen percent of America’s methane emissions come from landfills.12 This is bad because methane contributes 28 percent of the global warming we are experiencing and the amount of methane in the atmosphere has doubled in the last 100 years.12 This means that composting is a serious issue for climate change! When food waste is allowed to naturally decompose in an open air compost, doesn’t release methane and turns into nutrient dense, carbon rich soil. In addition to preventing methane production, composting will capture all those minerals and carbon that get absorbed from the soil by crops, and return it back into the soil. Think of food scraps like a multivitamin for soil. The last place we want compost is in the landfill!",
+    text: "Did you know that food waste makes up the largest portion of landfill? Organic matter (like food waste) releases methane gas when it is stored in low oxygen environments like landfills. Eighteen percent of America’s methane emissions come from landfills. This means that composting is a serious issue for climate change! When food waste is allowed to naturally decompose in an open air compost, doesn’t release methane and turns into nutrient dense, carbon rich soil.",
     image: compost
   },
     {
@@ -49,7 +49,7 @@ export default [
   },
     {
     title: "Buy bamboo toothbrushes",
-    text: "There is no need for plastic toothbrushes. We can get them made out of bamboo! Bamboo toothbrushes are made out of 100% compostable bamboo fibres - even the bristles!  They work just as well as plastic toothbrushes, but they do wear out a little sooner. You can get them from Wholefoods or purchase them online. But make sure you actually do compost them after they have worn out!",
+    text: "There is no need for plastic toothbrushes. We can get them made out of bamboo! Bamboo toothbrushes are made out of 100% compostable bamboo fibres - even the bristles!  They work just as well as plastic toothbrushes, but they do wear out a little sooner. You can get them from Wholefoods or purchase them online. But make sure you actually do compost them after they have worn out",
     image: toothbrush
   },
    {
