@@ -7,14 +7,17 @@ const defaultState = {view: 0, site: COLLEGE_NAMES[0], scope: 'local', modal: fa
 const ViewReducer = (state = defaultState, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
+  // console.log("view reducer action: ", action);
   switch(action.type) {
     case UPDATE_VIEW:
+      console.log("GOING TO UPDATE VIEW TO: ", action.view);
       newState.view = action.view;
       return newState;
     case UPDATE_SITE:
       newState.site = action.site;
       return newState;
     case UPDATE_SCOPE:
+      console.log("GOING TO UPDATE SCOPE TO: ", action.scope);
       newState.scope = action.scope;
       return newState;
     case UPDATE_DEVICE:

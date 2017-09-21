@@ -15,11 +15,11 @@ class NavButton extends Component {
     //   this.props.toggleModal();
     // } else
     if (this.props.nav === 'view') {
+      console.log('Hit navButton view clickHandler', this.props.view);
       this.props.handleViewSelect(this.props.view);
     } else if (this.props.nav === 'scope') {
       // TODO need to flesh this out
       this.props.handleScopeSelect(this.props.scope);
-      console.log('hit scope clickHandler', this.props.scope);
     } else {
       console.log('nav button clickHandler error');
     }

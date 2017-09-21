@@ -81,7 +81,11 @@ class DataVisualization extends Component {
 
   slideChangeSettings() {
     // return {};
-    return {afterChange: (nextSlide) => this.props.handleViewSelect(nextSlide)};
+    if (this.props.autoplay) {
+      return {afterChange: (nextSlide) => this.props.handleViewSelect(nextSlide)};
+    } else {
+      return {};
+    }
     // return {beforeChange: (prevSlide, nextSlide) => this.props.handleViewSelect(nextSlide)};
   }
 
