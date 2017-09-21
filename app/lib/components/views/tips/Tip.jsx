@@ -46,8 +46,8 @@ export default class ViewTemplate extends Component {
             </div>
 
             <div className={styles.tip_buttons_container}>
-              <button onClick={() => this.clickHandler('prev')} className={styles.tip_button_previous}>{"PREVIOUS"}</button>
-              <button onClick={() => this.clickHandler('next')} className={styles.tip_button_next}>{"NEXT"}</button>
+              <button onClick={() => this.clickHandler('prev')} className={styles.tip_button}>{"PREVIOUS"}</button>
+              <button onClick={() => this.clickHandler('next')} className={styles.tip_button}>{"NEXT"}</button>
             </div>
 
           </div>
