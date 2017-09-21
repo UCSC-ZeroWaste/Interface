@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styles from '../../App.css';
-import NavBar from './NavBar.jsx';
-import Footer from './Footer.jsx';
+// import NavBar from './NavBar.jsx';
+// import Footer from './Footer.jsx';
+import LogoButton from './navbar/LogoButton';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 import {COLLEGE_NAMES} from '../constants/constants';
 import {connect} from 'react-redux';
@@ -56,7 +57,15 @@ class LandingPage extends Component {
   render() {
     return (
       <div className={styles.landing_page}>
-        <NavBar />
+        <div className={styles.nav_bar_container}>
+          <div className={styles.nav_bar}>
+            <div className={styles.nav_bar_left}>
+              <LogoButton/>
+            </div>
+            <div className={styles.nav_bar_right}>
+            </div>
+          </div>
+        </div>
         <div className={styles.main_view}>
           <div className={styles.landing_container}>
             <div className={styles.landing_text1}>
@@ -84,7 +93,6 @@ class LandingPage extends Component {
             }
           </div>
         </div>
-        <Footer/>
       </div>
     );
   }
