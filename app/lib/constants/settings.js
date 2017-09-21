@@ -3,7 +3,7 @@
 
 export const AUTOPLAY = {
   restartInterval: 500 * 1000, //time interval for autoplay to restart after touch
-  nextSlideInterval: 5 * 1000, //time until slider moves to the next slide
+  nextSlideInterval: 20 * 1000, //time until slider moves to the next slide
   slideSpeed: 1 * 1000 //time it takes to move from one slide to the next
 };
 
