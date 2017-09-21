@@ -35,6 +35,13 @@
   background-position: 100% 100%;
 }
 
+/*
+.landing_page {
+  background-image: url('./lib/assets/images/landingpage_background.png');
+  background-size: cover;;
+  background-position: 100% 100%;
+} */
+
 html, body, #root {
   display: flex;
   height: 100%;
@@ -272,7 +279,7 @@ body > div {
 }
 .landing_text1 {
   composes: landing_text;
-  margin: .5em 0 .1em 0;
+  margin: 2.0em 0 .1em 0;
   /*animation-name: fade-in;
   animation-duration: 3s;
   animation-fill-mode: forwards;*/
@@ -294,7 +301,7 @@ body > div {
 .landing_page_button_container {
   display: flex;
   width: 60%;
-  padding-top: 10%;
+  padding-top: 7%;
   flex-direction: row;
   justify-content: flex-start;
   /*box-sizing: border-box;

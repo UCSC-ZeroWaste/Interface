@@ -60,7 +60,7 @@ class LandingPage extends Component {
         <div className={styles.main_view}>
           <div className={styles.landing_container}>
             <div className={styles.landing_text1}>
-              We're reaching zero waste...
+              We're reaching zero waste . . .
             </div>
             <div className={styles.landing_text2}>
               and having fun doing it.
