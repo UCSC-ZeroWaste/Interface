@@ -246,7 +246,7 @@ body > div {
   justify-content: space-between;
 }
 .tip_button_previous, .tip_button_next {
-  width: 35%;
+  width: 40%;
   height: 100%;
   color: grey;
   text-align: center;
