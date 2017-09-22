@@ -1031,3 +1031,31 @@ router_a {
   line-height: 1.3em;
   padding-top: 0.1em;
 }
+
+
+/*TABLE VIEW SETTINGS*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+caption {
+  font-size: 2em;
+  color: white;
+  margin: .5em 0;
+}
+tr {
+  height: 2.5em;
+}
+td, th {
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+thead {
+  background-color: grey;
+}
+tbody tr:nth-child(even) {
+  background-color: #dddddd;
+}
+tbody tr:nth-child(odd) {
+  background-color: #c6b6b6;
+}
