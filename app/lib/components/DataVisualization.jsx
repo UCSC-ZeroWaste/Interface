@@ -5,6 +5,7 @@ import LeaderBoard from './views/LeaderBoard.jsx';
 import LineChart from './views/LineChart.jsx';
 import HeatMap from './views/HeatMap.jsx';
 import SizeView from './views/SizeView.jsx';
+import Table from './views/Table.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
@@ -33,7 +34,8 @@ class DataVisualization extends Component {
       <LineChart type={'green'}/>,
       <LineChart type={'general'}/>,
       <HeatMap/>,
-      <Tip/>
+      <Tip/>,
+      <Table/>
     ];
     // this.tips = [
     //   <Tip1 title={'tip1'}/>,

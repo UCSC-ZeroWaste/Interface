@@ -21,6 +21,7 @@ export default class NavBar extends Component {
               <NavButton title={'RatioChart'} nav={'view'} view={2} fa={'pie-chart'}/>
               <NavButton title={'Map'} nav={'view'} view={3} fa={'map'}/>
               <NavButton title={'Tips'} nav={'view'} view={4} fa={'lightbulb-o'}/>
+              <NavButton title={'Table'} nav={'view'} view={5} fa={'table'}/>
             </div>
           </div>
           <div className={styles.nav_bar_right}>

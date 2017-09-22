@@ -14,7 +14,12 @@ import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 // import TestRouter from './lib/components/test_carousel/TestRouter';
 // import TestSlide from './lib/components/test_carousel/TestSlide';
 
-
+// spring dates:
+//   springStart = `'2017-04-03'`;
+//   springEnd = `'2017-06-15'`;
+// fall dates:
+//   fallStart = `'2017-09-23'`;
+//   fallEnd = `'2017-12-15'`;
 const API_ENDPOINTS = {
   '15': 'http://zerowaste.ucsc.edu:3001/api/days/15',
   '30': 'http://zerowaste.ucsc.edu:3001/api/days/30',
@@ -28,7 +33,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     //TODO Only getting records when the app loads. OK?
-    props.getRecords(API_ENDPOINTS['30']);
+    props.getRecords(API_ENDPOINTS['spring']);
     // props.getDummyRecords();
   }
 
