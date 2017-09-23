@@ -3,8 +3,8 @@
 /*require('node_modules/font-awesome/css/font-awesome.min.css');*/
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-@import './lib/assets/stylesheets/reset.css';
-/*@import './lib/assets/stylesheets/nav_bar.css';*/
+@import './lib/assets/stylesheets/reset.scss';
+/*@import './lib/assets/stylesheets/nav_bar.scss';*/
 /*@import './lib/assets/background.png';*/
 
 /*TODO -- need to figure out how to import from node modules (i think i need to include a loader (eg. url-loader) for certain files: gif, eot, woff, ttf, svg)*/
@@ -107,18 +107,32 @@ body > div {
   width: 60%;
   /*padding: 0.5em;*/
 }
-
 .logo_and_selected_icon_color {
   color: #f6f6f6;
 }
 
-.logo {
-  composes: logo_and_selected_icon_color;
-  font-family: 'logofont';
-  font-size: 2.8em;
-  margin: 0 0.7em 0 0.7em;
-  background-color: transparent;
+@media (max-width: 10px) {
+  .logo {
+    /*composes: logo_and_selected_icon_color;*/
+    color: red;
+    font-family: 'logofont';
+    font-size: 2.8em;
+    margin: 0 0.7em 0 0.7em;
+    background-color: transparent;
+  }
 }
+@media (min-width: 1000px) {
+  .logo {
+    /*composes: logo_and_selected_icon_color;*/
+    color: green;
+    font-family: 'logofont';
+    font-size: 2.8em;
+    margin: 0 0.7em 0 0.7em;
+    background-color: transparent;
+  }
+}
+
+
 .nav_button_press_response {
   width: 70px;
   height: 100%;

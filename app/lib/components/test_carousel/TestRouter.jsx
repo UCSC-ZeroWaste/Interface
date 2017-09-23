@@ -6,7 +6,7 @@ import LineChart from '../views/LineChart.jsx';
 import SizeView from '../views/SizeView.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../../actions/view_actions';
-import styles from '../../../App.css';
+import styles from '../../../App.scss';
 import { CSSTransitionGroup } from 'react-transition-group';
 import {
   HashRouter as Router,
@@ -14,8 +14,8 @@ import {
   Link,
   Redirect
 } from 'react-router-dom';
-import sliding from './sliding.css';
-import transitions from './transitions.css';
+import sliding from './sliding.scss';
+import transitions from './transitions.scss';
 
 
 /* you'll need this CSS somewhere

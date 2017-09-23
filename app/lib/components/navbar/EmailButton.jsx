@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {toggleModal} from '../../actions/view_actions';
-import styles from '../../../App.css';
+import styles from '../../../App.scss';
 import FontAwesome from 'react-fontawesome';
 
 class EmailButton extends Component {

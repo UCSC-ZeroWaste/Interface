@@ -6,14 +6,14 @@ import LineChart from './views/LineChart.jsx';
 import SizeView from './views/SizeView.jsx';
 // import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
-import styles from '../../App.css';
+import styles from '../../App.scss';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { MoonLoader } from 'halogen';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import transitions from './test_carousel/transitions.css';
-import sliding from './test_carousel/sliding.css';
+import transitions from './test_carousel/transitions.scss';
+import sliding from './test_carousel/sliding.scss';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class DataVisualizationPRC extends Component {

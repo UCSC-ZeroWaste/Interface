@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../../App.css';
+import styles from '../../App.scss';
 // import NavBar from './NavBar.jsx';
 // import Footer from './Footer.jsx';
 import LogoButton from './navbar/LogoButton';
@@ -60,7 +60,6 @@ class LandingPage extends Component {
         return (
           <button
             key={i}
-            siteName={siteName}
             onClick={() => this.props.history.push(`/home/carousel/site/${i}`)}
             >
             {siteName}
