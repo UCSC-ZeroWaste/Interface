@@ -23,7 +23,8 @@
     "start": "node server",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint .",
-    "jscs": "jscs ."
+    "jscs": "jscs .",
+      "fix-memory-limit": "cross-env LIMIT=4096 increase-memory-limit"
   },
   "dependencies": {
     "babel-cli": "^6.4.0",
@@ -70,21 +71,22 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^1.6.1",
+    "increase-memory-limit": "^1.0.4",
     "jscs": "^2.1.1",
     "jsdom": "^6.5.1",
     "json-loader": "^0.5.3",
     "mocha": "^2.3.3",
     "mocha-jsdom": "^1.0.0",
     "postcss-loader": "^0.6.0",
-    "react-addons-test-utils": "^0.14.3",
+    "react-addons-test-utils": "^0.14.8",
     "react-transform-hmr": "^1.0.0",
     "rimraf": "^2.4.3",
     "sinon": "^1.16.1",
     "sinon-chai": "^2.8.0",
-    "stats-webpack-plugin": "^0.2.1",
+    "stats-webpack-plugin": "^0.2.2",
     "style-loader": "^0.12.4",
     "url-loader": "^0.5.9",
-    "webpack": "^1.12.2",
+    "webpack": "^1.15.0",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.2.0"
   }
