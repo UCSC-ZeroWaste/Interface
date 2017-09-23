@@ -35,7 +35,7 @@ function parsePickupData(data) {
 // var momentObj = moment(dateObj);
 // var momentString = momentObj.format('YYYY-MM-DD');
 
-
+  if (data.length === 0) return nullState;
 
   let firstPickupDate = moment(data[0].PickupTime.slice(0,10)).startOf('day');
   let lastPickupDate = moment(data[data.length - 1].PickupTime.slice(0,10)).startOf('day');

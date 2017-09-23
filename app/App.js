@@ -33,8 +33,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     //TODO Only getting records when the app loads. OK?
-    props.getRecords(API_ENDPOINTS['spring']);
-    // props.getDummyRecords();
+  }
+
+  componentDidMount () {
+    this.props.getRecords(API_ENDPOINTS['spring']);
+    // this.props.getDummyRecords();
+
   }
 
   render() {

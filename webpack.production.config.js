@@ -5,6 +5,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
+// var autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: [
@@ -52,11 +53,11 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            "style-loader",
             {
               loader: "css-loader",
               options: {
                 modules: true,
+                importLoaders: 2,
                 localIdentName: '[name]---[local]---[hash:base64:5]'
               }
             },
@@ -68,14 +69,11 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         // include: path.resolve(__dirname, 'lib/assets'),
-        loader: 'url-loader'
+        use: 'url-loader'
       }
     ]
   },
   resolve: {
     extensions: [".js", ".jsx" ]
-  },
-  postcss: [
-    require('autoprefixer')
-  ]
+  }
 };

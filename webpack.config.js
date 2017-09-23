@@ -50,6 +50,7 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: true,
+              importLoaders: 1,
               localIdentName: '[name]---[local]---[hash:base64:5]'
             }
           },
@@ -59,7 +60,7 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         // include: path.resolve(__dirname, 'lib/assets'),
-        loader: 'url-loader'
+        use: 'url-loader'
       }
     ]
   },
