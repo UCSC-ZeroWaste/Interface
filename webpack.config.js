@@ -1,8 +1,12 @@
 'use strict';
+process.noDeprecation = true;
 
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+// var values = require('postcss-modules-values');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -23,28 +27,35 @@ module.exports = {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     })
   ],
   module: {
-    loaders: [
+    rules: [
       {
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        "presets": ["react", "es2015", "stage-0", "react-hmre"]
-      }
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
-    }
-    , {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          "presets": ["react", "es2015", "stage-0", "react-hmre"]
+        }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: '[name]---[local]---[hash:base64:5]'
+            }
+          }
+        ]
+      }, 
+      {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         // include: path.resolve(__dirname, 'lib/assets'),
         loader: 'url-loader'
@@ -52,6 +63,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ["", ".js", ".jsx" ]
+    extensions: [".js", ".jsx" ]
   }
 };

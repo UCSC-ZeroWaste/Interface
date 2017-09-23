@@ -38,22 +38,33 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [
+    rules: [
       {
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        "presets": ["es2015", "stage-0", "react"]
-      }
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
-    }
-    , {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          "presets": ["es2015", "stage-0", "react"]
+        }
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                modules: true,
+                localIdentName: '[name]---[local]---[hash:base64:5]'
+              }
+            },
+            'postcss-loader'
+          ]
+        })
+      },
+      {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         // include: path.resolve(__dirname, 'lib/assets'),
         loader: 'url-loader'
@@ -61,7 +72,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ["", ".js", ".jsx" ]
+    extensions: [".js", ".jsx" ]
   },
   postcss: [
     require('autoprefixer')
