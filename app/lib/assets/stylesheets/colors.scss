@@ -1,3 +1,23 @@
-@value Ablue: #0c77f8;
-@value Ared: #ff0000;
-@value Agreen: #aaf200;
+// $blue: #0c77f8;
+// $red: #ff0000;
+// $green: #aaf200;
+
+$off-white: #f6f6f6;
+
+$font: white;
+
+$logo: $off-white;
+
+$nav-selected: $off-white;
+$nav-unselected: #a8a6a6;
+$nav-response: yellow;
+
+$button-hover: lightgray;
+
+$dropdown_content: #f9f9f9;
+$dropdown_hover: #f1f1f1;
+
+// TABLE COLORS
+$thead: gray;
+$trow-even: #dddddd;
+$trow-odd: #c6b6b6;

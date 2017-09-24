@@ -3,7 +3,7 @@
 /*require('node_modules/font-awesome/css/font-awesome.min.css');*/
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-@import './lib/assets/stylesheets/reset.scss';
+
 /*@import './lib/assets/stylesheets/nav_bar.scss';*/
 /*@import './lib/assets/background.png';*/
 
@@ -18,18 +18,10 @@
     src: url("./lib/assets/fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff") format('woff');
 }
 
-/*.app {
-  background-color: green;
-  height: 50px;
-  border: 1px solid blue;
-}
-
-.bap {
-  background-color: red;
-  height: 25px;
-}*/
-
-
+@import './lib/assets/stylesheets/reset.scss';
+@import './lib/assets/stylesheets/colors.scss';
+@import './lib/assets/stylesheets/variables.scss';
+@import './lib/assets/stylesheets/fonts.scss';
 
 
 html, body, #root {
@@ -107,29 +99,13 @@ body > div {
   width: 60%;
   /*padding: 0.5em;*/
 }
-.logo_and_selected_icon_color {
-  color: #f6f6f6;
-}
 
-@media (max-width: 10px) {
-  .logo {
-    /*composes: logo_and_selected_icon_color;*/
-    color: red;
-    font-family: 'logofont';
-    font-size: 2.8em;
-    margin: 0 0.7em 0 0.7em;
-    background-color: transparent;
-  }
-}
-@media (min-width: 1000px) {
-  .logo {
-    /*composes: logo_and_selected_icon_color;*/
-    color: green;
-    font-family: 'logofont';
-    font-size: 2.8em;
-    margin: 0 0.7em 0 0.7em;
-    background-color: transparent;
-  }
+.logo {
+  color: $logo;
+  font-family: 'logofont';
+  font-size: 2.8em;
+  margin: 0 0.7em 0 0.7em;
+  background-color: transparent;
 }
 
 
@@ -147,14 +123,14 @@ body > div {
   background-color: transparent;
 }
 .nav_button_press_response:active {
-    background-color: yellow;
+  background-color: $nav-response;
 }
 .nav_button_fa {
-  color: #a8a6a6;
+  color: $nav-unselected;
   /*margin-left: 0.7em;*/
 }
 .nav_button_fa_selected {
-  composes: logo_and_selected_icon_color;
+  color: $nav-selected;
 }
 .email_button {
   /*margin-right: 5%;*/
@@ -172,7 +148,7 @@ body > div {
   /*animation: color_change1 5s infinite linear;*/
 }
 .email_button:active {
-  background-color: yellow;
+  background-color: $nav-response;
 }
 
 @keyframes color_change1 {
@@ -270,7 +246,7 @@ body > div {
 }
 
 .tip_button:hover {
-  background-color: lightgray;
+  background-color: $button-hover;
 }
 
 
@@ -350,7 +326,7 @@ body > div {
   /*margin-right: 4.0em;*/
 }
 .landing_page_button:hover {
-  background-color: lightgray;
+  background-color: $button-hover;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -366,7 +342,7 @@ body > div {
 .dropdown_content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: $dropdown_content;
   overflow: auto;
   width: 100%;
   /*min-width: 160px;*/
@@ -384,7 +360,7 @@ body > div {
 }
 /* Change color of dropdown links on hover */
 .dropdown_content button:hover {
-  background-color: #f1f1f1
+  background-color: $dropdown_hover
 }
 /* Show the dropdown menu on hover */
 .landing_page_site_selection_container:hover .dropdown_content {
@@ -602,7 +578,7 @@ body > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: $font2;
   font-weight: 200;
   color: white;
   /*box-sizing: border-box;
@@ -712,7 +688,7 @@ body > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: $font2;
   font-weight: 200;
 }
 .leader_rows {
@@ -725,22 +701,18 @@ body > div {
   justify-content: space-around;
   align-items: center;
   color: white;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: $font2;
   font-weight: 200;
 
 }
 .leader_row {
   flex: 1;
-
-  /*border: 1px red solid;*/
   box-sizing: border-box;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   margin: .45% 0em .45% 0em;
-
   width: 80%;
 }
 .leader_row_selected {
@@ -789,13 +761,26 @@ body > div {
 }
 
 .rank_text {
-  font-size: 1.2em;
-  font-family: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: $font;
+
+  @media (max-width: $small) {
+    font-size: 1.0em;
+  }
+  @media (min-width: $large) {
+    font-size: 1.2em;
+  }
   /*font-weight: 200;*/
 }
 .rank_text_selected {
   composes: rank_text;
-  font-size: 2em;
+  @media (max-width: $small) {
+    font-size: 1.0em;
+  }
+  @media (min-width: $large) {
+    font-size: 2em;
+  }
+
+
 }
 
 .slugContainer {
@@ -1065,11 +1050,11 @@ td, th {
   border: 1px solid black;
 }
 thead {
-  background-color: grey;
+  background-color: $thead;
 }
 tbody tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: $trow-even;
 }
 tbody tr:nth-child(odd) {
-  background-color: #c6b6b6;
+  background-color: $trow-odd;
 }
