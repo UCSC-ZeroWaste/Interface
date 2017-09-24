@@ -1,0 +1,239 @@
+
+.leader_board_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+.leader_board_header {
+  /*border: 1px red solid;*/
+  box-sizing: border-box;
+  color: white;
+  width: 80%;
+  flex: 2;
+  font-size: 2.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font2;
+  font-weight: 200;
+}
+.leader_rows {
+  flex: 9;
+  width: 80%;
+  margin-bottom: 5%;
+  margin-right: 10%;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-family: $font2;
+  font-weight: 200;
+
+}
+.leader_row {
+  flex: 1;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  margin: .45% 0em .45% 0em;
+  width: 80%;
+}
+.leader_row_selected {
+  composes: leader_row;
+  flex: 1.3;
+}
+
+.rank_and_slug_container {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  /*border: 1px red solid;*/
+  box-sizing: border-box;
+}
+
+.opacityFixContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.rank_circle {
+  opacity: 0.5;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation-name: enlarge;
+  animation-duration: .1s;
+  animation-fill-mode: forwards;
+}
+
+.rank_circle_selected {
+  composes: rank_circle;
+  opacity: 1;
+  border: solid 3px #D0D3D3;
+}
+
+.rank_text {
+  font-family: $font;
+
+  @media (max-width: $small) {
+    font-size: 1.0em;
+  }
+  @media (min-width: $large) {
+    font-size: 1.2em;
+  }
+  /*font-weight: 200;*/
+}
+.rank_text_selected {
+  composes: rank_text;
+  @media (max-width: $small) {
+    font-size: 1.0em;
+  }
+  @media (min-width: $large) {
+    font-size: 2em;
+  }
+
+
+}
+
+.slugContainer {
+  /*width and height set using inline styles*/
+  margin-right: 3%;
+}
+
+.slug {
+  /*border: 1px red solid;*/
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-size: 75% 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-sizing: border-box;
+  border: solid 3px #D0D3D3;
+
+
+  animation-duration: .6s, .3s;
+  animation-name: enlarge, slide;
+  animation-fill-mode: forwards, forwards;
+  /*animation-delay: .2s, 1s;*/
+}
+
+@keyframes slide {
+  from {
+    left: -200%;
+  }
+  to {
+    left: 0%;
+  }
+}
+@keyframes enlarge {
+  from {
+    width: 0;
+    height: 0;
+    top: 50%;
+  }
+  to {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+  }
+}
+
+.details_container {
+  flex: 5;
+  /*width: 60%;*/
+  height: 100%;
+  position: relative;
+  /*display: flex;*/
+  justify-content: center;
+  box-sizing: border-box;
+
+}
+
+/*Opacity fix*/
+.details_container::before {
+  content: '';
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 93%;
+  height: 100%;
+  background: grey;
+  border-radius: 12px;
+  opacity: 0.5;
+}
+.details {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 93%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3% 0 3%;
+  /*border: solid 1px grey;*/
+  box-sizing: border-box;
+  border-radius: 12px;
+  display: flex;
+}
+.details_selected {
+  composes: details;
+  width: 96%;
+  border: solid 3px #D0D3D3;
+  /*background-color: lightgrey;*/
+}
+
+.details_text {
+  height: 100%;
+  font-size: 1.2em;
+  align-items: center;
+  box-sizing: border-box;
+  /*padding: 1em;*/
+  display: flex;
+}
+.details_site {
+  composes: details_text;
+  width: 80%;
+  justify-content: flex-start;
+}
+.details_site_selected {
+  composes: details_text;
+  width: 80%;
+  justify-content: flex-start;
+  font-size: 1.8em;
+}
+
+.details_ratio {
+  composes: details_text;
+  width: 20%;
+  justify-content: flex-end;
+}
+.details_ratio_selected {
+  composes: details_text;
+  width: 20%;
+  justify-content: flex-end;
+  font-size: 1.8em;
+}

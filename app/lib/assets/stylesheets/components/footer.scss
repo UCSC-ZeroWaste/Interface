@@ -1,0 +1,43 @@
+.footer_container {
+  width: 100%;
+  height: 6%;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+/*Opacity fix*/
+.footer_container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: grey;
+  opacity: 0.3;
+}
+.footer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer_left {
+  height: 100%;
+  width: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.footer_right {
+  height: 100%;
+  width: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

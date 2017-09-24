@@ -38,7 +38,7 @@ class Carousel extends Component {
 
   render() {
     return (
-      <div className={styles.page} onMouseDown={this.touchHandler}>
+      <div className={styles.carousel_page} onMouseDown={this.touchHandler}>
         <NavBar />
         <DataVisualization/>
         <Footer/>

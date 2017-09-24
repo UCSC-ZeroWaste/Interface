@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {handleViewSelect, handleScopeSelect, toggleModal} from '../../actions/view_actions';
-import styles from '../../../App.scss';
 import FontAwesome from 'react-fontawesome';
+
+import styles from '../../../App.scss';
 
 class NavButton extends Component {
   constructor(props) {

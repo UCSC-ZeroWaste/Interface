@@ -1,0 +1,34 @@
+.email_button {
+  /*margin-right: 5%;*/
+  opacity: 1;
+  /*border-radius: 7px;*/
+  color: #0f3356;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 30%;
+  background-color: #f6f6f6;
+  font-size: 1.0em;
+  text-transform: uppercase;
+  /*animation: color_change1 5s infinite linear;*/
+}
+.email_button:active {
+  background-color: $nav-response;
+}
+
+@keyframes color_change1 {
+  0%   {background-color: #f6f6f6;}
+  50%  {background-color: #4286f4;}
+  100% {background-color: #f6f6f6;}
+}
+@keyframes color_change2 {
+  0% { box-shadow: 0 0 -10px #c4a300; }
+  40% { box-shadow: 0 0 20px #c4a300; }
+  60% { box-shadow: 0 0 20px #c4a300; }
+  100% { box-shadow: 0 0 -10px #c4a300; }
+}
+
+@keyframes rotateY {
+ to { transform: rotateY(360deg); }
+}

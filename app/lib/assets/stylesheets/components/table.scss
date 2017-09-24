@@ -1,0 +1,26 @@
+/*TABLE VIEW SETTINGS*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+caption {
+  font-size: 2em;
+  color: white;
+  margin: .5em 0;
+}
+tr {
+  height: 2.5em;
+}
+td, th {
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+thead {
+  background-color: $thead;
+}
+tbody tr:nth-child(even) {
+  background-color: $trow-even;
+}
+tbody tr:nth-child(odd) {
+  background-color: $trow-odd;
+}

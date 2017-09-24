@@ -1,0 +1,56 @@
+
+/*.slick-list {
+  height: 50%;
+}
+.slick-list div {
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+.slick-track {
+  height: 100%;
+}*/
+/*.slick-slider {
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid red;
+}*/
+
+/*.slick-arrow.slick-next {
+  height: 100px;
+  box-sizing: border-box;
+  background-color: red;
+}*/
+
+/*.slick-initialized.slick-slider aka slider
+.slick-list
+.slick-track
+.slick-slide.slick-active aka slide*/
+
+
+/*Slider Settings: these settings keep the slide frames at 100% height*/
+.slider {
+  display: flex;
+  height: 100%;
+  width: 94%;
+  box-sizing: border-box;
+  /*border: 1px solid green;*/
+  /*border: 1px solid red;*/
+}
+.slider > button {
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
+}
+.slider > div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  /*box-sizing: border-box;*/
+  /*border: 1px solid red;*/
+}
+.slider > div > div {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  /*box-sizing: border-box;*/
+  /*border: 1px solid red;*/
+}
