@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styles from '../../../App.scss';
+import styles from '../../../App.css';
 
 export default class ViewTemplate extends Component {
   constructor(props) {

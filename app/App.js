@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.scss';
+import styles from './App.css';
 import Carousel from './lib/components/Carousel.jsx';
 import LandingPage from './lib/components/LandingPage.jsx';
 

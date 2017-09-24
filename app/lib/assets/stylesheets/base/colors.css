@@ -1,0 +1,19 @@
+@value $off-white: #f6f6f6;
+
+@value $font: white;
+
+@value $logo: @value $off-white;
+
+@value $nav-selected: $off-white;
+@value $nav-unselected: #a8a6a6;
+@value nav-response: yellow;
+
+@value $button-hover: lightgray;
+
+@value $dropdown_content: #f9f9f9;
+@value $dropdown_hover: #f1f1f1;
+
+// TABLE COLORS
+@value $thead: gray;
+@value $trow-even: #dddddd;
+@value $trow-odd: #c6b6b6;

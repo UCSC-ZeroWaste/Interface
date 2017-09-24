@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import NavButton from './navbar/NavButton';
 import EmailButton from './navbar/EmailButton';
 import LogoButton from './navbar/LogoButton';
-import styles from '../../App.scss';
+import styles from '../../App.css';
 
 export default class NavBar extends Component {
   constructor(props){

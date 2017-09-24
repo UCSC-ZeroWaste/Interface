@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import tip1_image from '../../../assets/images/tips/corgy_image.jpg';
-import styles from '../../../../App.scss';
+import styles from '../../../../App.css';
 
 export default class ViewTemplate extends Component {
   constructor(props) {

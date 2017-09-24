@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../../App.scss';
+import styles from '../../../App.css';
 import { CSSTransitionGroup } from 'react-transition-group';
 import transitions from './transitions.scss';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';

@@ -8,7 +8,7 @@ import HeatMap from './views/HeatMap.jsx';
 import Table from './views/Table.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
-import styles from '../../App.scss';
+import styles from '../../App.css';
 // import { CSSTransitionGroup } from 'react-transition-group';
 import { MoonLoader } from 'halogen';
 import Tip from './views/tips/Tip';

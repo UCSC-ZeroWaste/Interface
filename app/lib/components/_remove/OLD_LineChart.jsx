@@ -4,7 +4,7 @@ import {LineChart} from 'react-d3-basic';
 import d3 from 'd3';
 import {connect} from 'react-redux';
 import {WASTE_TYPES} from '../../constants/constants';
-import styles from '../../../App.scss';
+import styles from '../../../App.css';
 
 class LineChartComponent extends Component {
   constructor(props) {

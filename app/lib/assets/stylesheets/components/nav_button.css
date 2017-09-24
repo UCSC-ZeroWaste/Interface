@@ -12,10 +12,10 @@
   background-color: transparent;
 }
 .nav_button_press_response:active {
-  background-color: $nav-response;
+  background-color: nav-response;
 }
 .nav_button_fa {
-  color: $nav-unselected;
+  color: yellow;
   /*margin-left: 0.7em;*/
 }
 .nav_button_fa_selected {

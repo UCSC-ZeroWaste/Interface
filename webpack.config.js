@@ -4,7 +4,7 @@ process.noDeprecation = true;
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var values = require('postcss-modules-values');
+var values = require('postcss-modules-values');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
@@ -43,9 +43,11 @@ module.exports = {
         }
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: [
-          "style-loader",
+          {
+            loader: 'style-loader'
+          },
           {
             loader: "css-loader",
             options: {
@@ -54,7 +56,9 @@ module.exports = {
               localIdentName: '[name]---[local]---[hash:base64:5]'
             }
           },
-          'fast-sass-loader'
+          {
+            loader: 'postcss-loader'
+          }
         ]
       },
       {

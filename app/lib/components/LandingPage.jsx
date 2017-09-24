@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../../App.scss';
+import styles from '../../App.css';
 // import NavBar from './NavBar.jsx';
 // import Footer from './Footer.jsx';
 import LogoButton from './navbar/LogoButton';

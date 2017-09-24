@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styles from '../../../App.scss';
+import styles from '../../../App.css';
 import merge from 'lodash/merge';
 import ContainerDimensions from 'react-container-dimensions';
 import {SLUG_IMAGES} from '../../constants/constants';

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {handleViewSelect, handleScopeSelect, toggleModal} from '../../actions/view_actions';
 import FontAwesome from 'react-fontawesome';
 
-import styles from '../../../App.scss';
+import styles from '../../../App.css';
 
 class NavButton extends Component {
   constructor(props) {
