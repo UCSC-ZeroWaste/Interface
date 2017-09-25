@@ -43,18 +43,40 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]---[local]---[hash:base64:5]'
+            }
+          }
+        ]
+      },
+      {
         test: /\.scss$/,
         use: [
           "style-loader",
           {
             loader: "css-loader",
             options: {
+              sourceMap: true,
               modules: true,
-              importLoaders: 1,
+              importLoaders: 2,
               localIdentName: '[name]---[local]---[hash:base64:5]'
             }
           },
-          'fast-sass-loader'
+          'resolve-url-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            }
+          },
         ]
       },
       {

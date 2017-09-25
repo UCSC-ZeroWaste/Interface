@@ -114,7 +114,7 @@ class DataVisualization extends Component {
     var settings = merge({
       accessibility: true, //scrolling via tabs/arrows
       adaptiveHeight: true,
-      arrows: false,
+      arrows: true,
       autoplay: this.props.autoplay,
       autoplaySpeed: AUTOPLAY.nextSlideInterval,
       speed: AUTOPLAY.slideSpeed,

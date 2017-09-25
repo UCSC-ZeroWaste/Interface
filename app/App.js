@@ -36,8 +36,8 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    this.props.getRecords(API_ENDPOINTS['spring']);
-    // this.props.getDummyRecords();
+    // this.props.getRecords(API_ENDPOINTS['spring']);
+    this.props.getDummyRecords();
 
   }
 
