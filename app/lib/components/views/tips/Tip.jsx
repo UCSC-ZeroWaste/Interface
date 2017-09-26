@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import tips from './tipContent.js';
 // import tip1_image from '../../../assets/images/tips/corgy_image.jpg';
-import styles from '../../../../App.css';
+import styles from '../../../../App.scss';
 
 export default class ViewTemplate extends Component {
   constructor(props) {
