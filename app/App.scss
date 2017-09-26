@@ -18,23 +18,19 @@
     src: url("./lib/assets/fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff") format('woff');
 }
 
-// BASE
 @import './lib/assets/stylesheets/base/reset.scss';
 @import './lib/assets/stylesheets/base/colors.scss';
 @import './lib/assets/stylesheets/base/variables.scss';
 @import './lib/assets/stylesheets/base/fonts.scss';
 
-// MISC
 @import './lib/assets/stylesheets/slider.scss';
 
-// COMPONENTS
 @import './lib/assets/stylesheets/components/landing_page.scss';
 @import './lib/assets/stylesheets/components/nav_bar.scss';
 @import './lib/assets/stylesheets/components/nav_button.scss';
 @import './lib/assets/stylesheets/components/email_button.scss';
 @import './lib/assets/stylesheets/components/footer.scss';
 
-// VIEWS
 @import './lib/assets/stylesheets/components/tip.scss';
 @import './lib/assets/stylesheets/components/line_chart.scss';
 @import './lib/assets/stylesheets/components/leader_board.scss';

@@ -1,12 +1,8 @@
 'use strict';
-process.noDeprecation = true;
 
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var values = require('postcss-modules-values');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -45,7 +41,9 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          "style-loader",
+          {
+            loader: 'style-loader'
+          },
           {
             loader: "css-loader",
             options: {
@@ -54,7 +52,12 @@ module.exports = {
               localIdentName: '[name]---[local]---[hash:base64:5]'
             }
           },
-          'fast-sass-loader'
+          {
+            loader: "fast-sass-loader",
+          },
+          {
+            loader: 'postcss-loader'
+          }
         ]
       },
       {
