@@ -39,10 +39,10 @@ function parsePickupData(data) {
 
   let firstPickupDate = moment(data[0].PickupTime.slice(0,10)).startOf('day');
   let lastPickupDate = moment(data[data.length - 1].PickupTime.slice(0,10)).startOf('day');
-  console.log(firstPickupDate,lastPickupDate);
+  // console.log(firstPickupDate,lastPickupDate);
 
   const daysInRange = lastPickupDate.diff(firstPickupDate, 'days') + 1;
-  console.log(daysInRange);
+  // console.log(daysInRange);
 
   firstPickupDate = firstPickupDate.format('YYYY-MM-DD');
   lastPickupDate = lastPickupDate.format('YYYY-MM-DD');

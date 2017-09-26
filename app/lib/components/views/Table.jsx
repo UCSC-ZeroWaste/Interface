@@ -10,9 +10,9 @@ class Table extends Component {
 
   renderTableRows() {
     let table = [];
-    console.log('parsing data for table');
+    // console.log('parsing data for table');
     return _.map(this.props.data, (sitePickups, site, list) => {
-      console.log(list);
+      // console.log(list);
       let refusePickups = 0;
       let divertedPickups = 0;
       sitePickups.forEach( (pickup) => {

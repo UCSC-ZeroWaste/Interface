@@ -10,7 +10,7 @@ import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.css';
 import { CSSTransitionGroup } from 'react-transition-group';
-import { MoonLoader } from 'halogen';
+import { MoonLoader } from 'halogenium';
 import Tip from './views/tips/Tip';
 import {AUTOPLAY} from '../constants/settings';
 // import Tip1 from './views/tips/Tip1';
