@@ -782,13 +782,29 @@ body > div {
 }
 
 .rank_text {
-  font-size: 1.2em;
   font-family: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  /*font-weight: 200;*/
 }
+@media (max-width: 2999px) {
+  .rank_text {
+    font-size: 0.95em; }
+}
+@media (min-width: 3000px) {
+  .rank_text {
+    font-size: 1.2em; }
+}
+
 .rank_text_selected {
-  composes: rank_text;
-  font-size: 2em;
+  font-family: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+@media (max-width: 2999px) {
+  .rank_text_selected {
+    font-size: 1.15em;
+  }
+}
+@media (min-width: 3000px) {
+  .rank_text_selected {
+    font-size: 2em;
+  }
 }
 
 .slugContainer {
