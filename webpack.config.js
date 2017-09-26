@@ -39,7 +39,7 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
           {
             loader: 'style-loader'
@@ -51,6 +51,9 @@ module.exports = {
               importLoaders: 1,
               localIdentName: '[name]---[local]---[hash:base64:5]'
             }
+          },
+          {
+            loader: "fast-sass-loader",
           },
           {
             loader: 'postcss-loader'

@@ -81,7 +81,7 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
@@ -92,6 +92,9 @@ module.exports = {
                 importLoaders: 2,
                 localIdentName: '[name]---[local]---[hash:base64:5]'
               }
+            },
+            {
+              loader: "fast-sass-loader",
             },
             {
               loader: 'postcss-loader',

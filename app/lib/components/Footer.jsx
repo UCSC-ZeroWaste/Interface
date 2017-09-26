@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styles from '../../App.css';
+import styles from '../../App.scss';
 import NavButton from './navbar/NavButton';
 
 export default class NavBar extends Component {

@@ -12,7 +12,7 @@ import d3 from 'd3';
 import {connect} from 'react-redux';
 import {WASTE_TYPES, LEADER_BOARD_COLORS} from '../../constants/constants';
 import {CHART} from '../../constants/settings';
-import styles from '../../../App.css';
+import styles from '../../../App.scss';
 import ContainerDimensions from 'react-container-dimensions';
 import merge from 'lodash/merge';
 
