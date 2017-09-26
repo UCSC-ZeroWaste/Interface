@@ -31,8 +31,6 @@
 }*/
 
 
-
-
 html, body, #root {
   display: flex;
   height: 100%;
@@ -47,6 +45,7 @@ body > div {
 
 .page {
   background-image: url('./lib/assets/images/background.png');
+  /*background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/background.png");*/
   background-size: cover;
   background-position: 100% 100%;
   display: flex;
@@ -269,6 +268,7 @@ body > div {
 
 .landing_page {
   background-image: url('./lib/assets/images/landingpage-background.png');
+  /*background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/landingpage-background.png");*/
   background-size: cover;
   background-position: 100% 100%;
   display: flex;
