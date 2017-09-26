@@ -781,31 +781,32 @@ body > div {
   border: solid 3px #D0D3D3;
 }
 
-.rank_text {
-  font-family: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-@media (max-width: 2999px) {
-  .rank_text {
-    font-size: 0.95em; }
-}
-@media (min-width: 3000px) {
-  .rank_text {
-    font-size: 1.2em; }
-}
 
-.rank_text_selected {
-  font-family: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-@media (max-width: 2999px) {
-  .rank_text_selected {
-    font-size: 1.15em;
+$font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$small: 3999px;
+$large: 4000px;
+.rank_text {
+  font-family: $font;
+  @media (max-width: $small) {
+    font-size: 0.95em;
   }
+  @media (min-width: $large) {
+    font-size: 1.2em;
+  }
+  /*font-weight: 200;*/
 }
-@media (min-width: 3000px) {
-  .rank_text_selected {
+.rank_text_selected {
+  composes: rank_text;
+  @media (max-width: $small) {
+    font-size: 1.10em;
+  }
+  @media (min-width: $large) {
     font-size: 2em;
   }
 }
+
+
+
 
 .slugContainer {
   /*width and height set using inline styles*/

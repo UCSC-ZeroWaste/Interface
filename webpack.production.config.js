@@ -40,9 +40,9 @@ module.exports = {
     // See "Definitions" section for more information.
     defaultSizes: 'parsed',
     // Automatically open report in default browser
-    openAnalyzer: true,
+    openAnalyzer: false,
     // If `true`, Webpack Stats JSON file will be generated in bundles output directory
-    generateStatsFile: false,
+    generateStatsFile: true,
     // Name of Webpack Stats JSON file that will be generated if `generateStatsFile` is `true`.
     // Relative to bundles output directory.
     statsFilename: 'stats.json',
@@ -100,7 +100,7 @@ module.exports = {
               loader: 'postcss-loader',
               options: {
                   plugins: function () {
-                      return [autoprefixer];
+                    return [autoprefixer('last 2 versions', 'ie 10')];
                   }
               }
             }

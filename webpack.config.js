@@ -54,9 +54,6 @@ module.exports = {
           },
           {
             loader: "fast-sass-loader",
-          },
-          {
-            loader: 'postcss-loader'
           }
         ]
       },
