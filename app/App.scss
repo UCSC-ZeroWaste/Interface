@@ -125,6 +125,7 @@ body > div {
   opacity: 1;
   /*background-color: red;*/
   border: none;
+  box-sizing: border-box;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -999,7 +1000,30 @@ $large: 4000px;
   /*box-sizing: border-box;*/
   /*border: 1px solid red;*/
 }
+.slider_arrow_container {
+  width: 5%;
+  height: 100%;
+  // opacity: 0;
+  /*background-color: red;*/
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
 
+    &:hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: grey;
+      opacity: 0.3;
+    }
+}
 
 .router_fill {
 

@@ -13,6 +13,8 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import { MoonLoader } from 'halogenium';
 import Tip from './views/tips/Tip';
 import {AUTOPLAY} from '../constants/settings';
+import FontAwesome from 'react-fontawesome';
+
 // import Tip1 from './views/tips/Tip1';
 // import Tip2 from './views/tips/Tip2';
 // import Tip3 from './views/tips/Tip3';
@@ -22,6 +24,21 @@ import {AUTOPLAY} from '../constants/settings';
 // import sliding from './test_carousel/sliding.css';
 import merge from 'lodash/merge';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+
+const SliderArrow = (props) => {
+  return (
+    <button
+      onClick={props.onClick}
+      className={styles.slider_arrow_container}>
+      <FontAwesome
+        name={props.type === 'prev' ? 'chevron-circle-left' : 'chevron-circle-right'}
+        size='3x'
+        />
+    </button>
+  );
+};
+
 
 class DataVisualization extends Component {
   constructor(props) {
@@ -114,7 +131,7 @@ class DataVisualization extends Component {
     var settings = merge({
       accessibility: true, //scrolling via tabs/arrows
       adaptiveHeight: true,
-      arrows: false,
+      arrows: true,
       autoplay: this.props.autoplay,
       autoplaySpeed: AUTOPLAY.nextSlideInterval,
       speed: AUTOPLAY.slideSpeed,
@@ -136,6 +153,8 @@ class DataVisualization extends Component {
       // slidesToScroll: 1,
     }, this.slideChangeSettings());
 
+  //   prevArrow: <SliderArrow type={'prev'} />,
+  // nextArrow: <SliderArrow type={'next'}/>,
 
     const components = this.slides.map((slide, i) => (
        <div key={slide} >

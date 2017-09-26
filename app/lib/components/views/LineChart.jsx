@@ -26,8 +26,13 @@ class LineChartComponent extends Component {
       this.chartState()
     );
 
-    this.strokeWidth = 6;
-    this.strokeDashArray = undefined;//"5,5";
+    this.diversionChartStrokeWidth = 4;
+    this.diversionChartCircleRadius = 0;
+    this.diversionChartStrokeDashArray = undefined;//"5,5";
+
+    this.refuseChartStrokeWidth = 0;
+    this.refuseChartCircleRadius = 7;
+    this.refuseChartStrokeDashArray = undefined;//"5,5";
 
     this.handleSelector = this.handleSelector.bind(this);
     this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
@@ -42,9 +47,9 @@ class LineChartComponent extends Component {
       };
     } else {
       state = {
-        title: "All Waste Data",
+        title: "Waste to Landfill",
         xLabel: "Date",
-        yLabel: "Weight",
+        yLabel: "Weight (lbs)",
       };
     }
     return state;
@@ -73,8 +78,8 @@ class LineChartComponent extends Component {
     return {
       name: site,
       values: sitePickups,
-      strokeWidth: this.strokeWidth,
-      strokeDashArray: this.strokeDashArray
+      strokeWidth: this.refuseChartStrokeWidth,
+      strokeDashArray: this.refuseChartStrokeDashArray,
     };
   }
 
@@ -151,8 +156,8 @@ class LineChartComponent extends Component {
     return {
       name: siteName,
       values: diversionRatio,
-      strokeWidth: this.strokeWidth,
-      strokeDashArray: this.strokeDashArray
+      strokeWidth: this.diversionChartStrokeWidth,
+      strokeDashArray: this.diversionChartStrokeDashArray,
     };
   }
 
@@ -160,40 +165,41 @@ class LineChartComponent extends Component {
     this.setState({rollingAverageLength: Number(e.target.value)});
   }
 
-  renderSelector() {
-    let settings;
-    switch (this.props.type) {
-      case 'green':
-        settings = {
-          array: _.range(2,30),
-          changeHandler: this.setRollingAverageLength,
-          defaultValue: 7,
-          title: 'Select # of Days for Rolling Average'
-        };
-        break;
-      case 'general':
-        settings = {
-          array: WASTE_TYPES,
-          changeHandler: this.handleSelector,
-          defaultValue: 'Refuse',
-          title: 'Select a Refuse Type'
-        };
-        break;
-      default:
-        break;
-    }
-    const options = settings.array.map((type) => (
-      <option key={ type } value= { type }>
-        { type }
-      </option>
-    ));
-    return (
-      <select className={styles.selector} onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
-        <option disabled="true">{settings.title}</option>
-        { options }
-      </select>
-    );
-  }
+  // NOTE not using selector in production version
+  // renderSelector() {
+  //   let settings;
+  //   switch (this.props.type) {
+  //     case 'green':
+  //       settings = {
+  //         array: _.range(2,30),
+  //         changeHandler: this.setRollingAverageLength,
+  //         defaultValue: 7,
+  //         title: 'Select # of Days for Rolling Average'
+  //       };
+  //       break;
+  //     case 'general':
+  //       settings = {
+  //         array: WASTE_TYPES,
+  //         changeHandler: this.handleSelector,
+  //         defaultValue: 'Refuse',
+  //         title: 'Select a Refuse Type'
+  //       };
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   const options = settings.array.map((type) => (
+  //     <option key={ type } value= { type }>
+  //       { type }
+  //     </option>
+  //   ));
+  //   return (
+  //     <select className={styles.selector} onChange={ settings.changeHandler } defaultValue={settings.defaultValue}>
+  //       <option disabled="true">{settings.title}</option>
+  //       { options }
+  //     </select>
+  //   );
+  // }
 
   getChartDomain() {
     switch (this.props.type) {
@@ -265,7 +271,7 @@ class LineChartComponent extends Component {
         colors={ (colorAccessorFunc) => chartColorsArray[colorAccessorFunc] }
         colorAccessor={(d, idx) => idx}
 
-        circleRadius={0}
+        circleRadius={this.props.type === 'green' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius}
         viewBoxObject={{
           x: 0,
           y: height * -.04,
@@ -322,7 +328,6 @@ class LineChartComponent extends Component {
           </div>
 
           <ChartLegend>
-            {this.renderSelector()}
           </ChartLegend>
         </div>
 
