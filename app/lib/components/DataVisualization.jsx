@@ -4,13 +4,13 @@ import _ViewTemplate from './views/_ViewTemplate';
 import LeaderBoard from './views/LeaderBoard.jsx';
 import LineChart from './views/LineChart.jsx';
 import HeatMap from './views/HeatMap.jsx';
-import SizeView from './views/SizeView.jsx';
+// import SizeView from './views/SizeView.jsx';
 import Table from './views/Table.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
-import styles from '../../App.css';
+import styles from '../../App.scss';
 import { CSSTransitionGroup } from 'react-transition-group';
-import { MoonLoader } from 'halogen';
+import { MoonLoader } from 'halogenium';
 import Tip from './views/tips/Tip';
 import {AUTOPLAY} from '../constants/settings';
 // import Tip1 from './views/tips/Tip1';
@@ -18,8 +18,8 @@ import {AUTOPLAY} from '../constants/settings';
 // import Tip3 from './views/tips/Tip3';
 // import Tip4 from './views/tips/Tip4';
 
-import transitions from './test_carousel/transitions.css';
-import sliding from './test_carousel/sliding.css';
+// import transitions from './test_carousel/transitions.css';
+// import sliding from './test_carousel/sliding.css';
 import merge from 'lodash/merge';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 

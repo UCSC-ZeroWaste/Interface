@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {mapsStaticKey, mapsJavascriptKey} from '../../../config.js';
-import styles from '../../../App.css';
+import styles from '../../../App.scss';
 import GoogleMapReact from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
 import {SLUG_PINS} from '../../constants/constants';

@@ -4,7 +4,7 @@
 /*<link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'/>*/
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-@import './lib/assets/stylesheets/reset.css';
+@import './lib/assets/stylesheets/reset.scss';
 /*@import './lib/assets/stylesheets/nav_bar.css';*/
 /*@import './lib/assets/background.png';*/
 
@@ -31,8 +31,6 @@
 }*/
 
 
-
-
 html, body, #root {
   display: flex;
   height: 100%;
@@ -47,6 +45,7 @@ body > div {
 
 .page {
   background-image: url('./lib/assets/images/background.png');
+  /*background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/background.png");*/
   background-size: cover;
   background-position: 100% 100%;
   display: flex;
@@ -269,6 +268,7 @@ body > div {
 
 .landing_page {
   background-image: url('./lib/assets/images/landingpage-background.png');
+  /*background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/landingpage-background.png");*/
   background-size: cover;
   background-position: 100% 100%;
   display: flex;
@@ -781,15 +781,32 @@ body > div {
   border: solid 3px #D0D3D3;
 }
 
+
+$font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$small: 3999px;
+$large: 4000px;
 .rank_text {
-  font-size: 1.2em;
-  font-family: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: $font;
+  @media (max-width: $small) {
+    font-size: 0.95em;
+  }
+  @media (min-width: $large) {
+    font-size: 1.2em;
+  }
   /*font-weight: 200;*/
 }
 .rank_text_selected {
   composes: rank_text;
-  font-size: 2em;
+  @media (max-width: $small) {
+    font-size: 1.10em;
+  }
+  @media (min-width: $large) {
+    font-size: 2em;
+  }
 }
+
+
+
 
 .slugContainer {
   /*width and height set using inline styles*/

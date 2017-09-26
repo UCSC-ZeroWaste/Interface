@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import styles from '../../../App.css';
+import styles from '../../../App.scss';
 import {LEADER_BOARD_COLORS} from '../../constants/constants';
 
 const LegendRow = ({label, color}) => {
