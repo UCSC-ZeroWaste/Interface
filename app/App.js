@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.css';
+import styles from './App.scss';
 import Carousel from './lib/components/Carousel.jsx';
 import LandingPage from './lib/components/LandingPage.jsx';
 
@@ -14,7 +14,12 @@ import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 // import TestRouter from './lib/components/test_carousel/TestRouter';
 // import TestSlide from './lib/components/test_carousel/TestSlide';
 
-
+// spring dates:
+//   springStart = `'2017-04-03'`;
+//   springEnd = `'2017-06-15'`;
+// fall dates:
+//   fallStart = `'2017-09-23'`;
+//   fallEnd = `'2017-12-15'`;
 const API_ENDPOINTS = {
   '15': 'http://zerowaste.ucsc.edu:3001/api/days/15',
   '30': 'http://zerowaste.ucsc.edu:3001/api/days/30',
@@ -28,9 +33,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     //TODO Only getting records when the app loads. OK?
-    props.getRecords(API_ENDPOINTS['30']);
+  }
+
+  componentDidMount() {
+    this.props.getRecords(API_ENDPOINTS['fall']);
     // props.getDummyRecords();
   }
+
 
   render() {
     let assetType = _.groupBy(this.props.data, 'AssetType');

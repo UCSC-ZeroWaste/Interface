@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styles from '../../App.css';
+import styles from '../../App.scss';
 
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
@@ -12,26 +12,27 @@ import {setAutoplay} from '../actions/touch_actions';
 import {connect} from 'react-redux';
 import Modal from 'react-modal';
 import modalStyle from '../assets/stylesheets/modal';
-import {COLLEGE_SET} from '../constants/constants';
+import {COLLEGE_NAMES} from '../constants/constants';
 import {AUTOPLAY} from '../constants/settings';
 
 class Carousel extends Component {
   constructor(props) {
     super(props);
     // console.log(this.props);
-    // console.log('THIS', props.match.params.siteIndex, COLLEGE_SET[Number(props.match.params.siteIndex)]);
+    // console.log('THIS', props.match.params.siteIndex, COLLEGE_NAMES[Number(props.match.params.siteIndex)]);
     // console.log('THIS', props.match.params.siteIndex);
-    // console.log(COLLEGE_SET[1]);
+    // console.log(COLLEGE_NAMES[1]);
     // console.log('props.match', props.match);
     // console.log('props.location', props.location);
     // console.log('props.history', props.history);
-    const site = COLLEGE_SET[Number(props.match.params.siteIndex)];
+    const site = COLLEGE_NAMES[Number(props.match.params.siteIndex)];
     props.handleSiteSelect(site);
     props.handleDeviceSelect(props.match.params.device);
     this.touchHandler = this.touchHandler.bind(this);
   }
 
   touchHandler(e) {
+    console.log("TOUCH EVENT!!!", e.target);
     this.props.handleTouchEvent();
   }
 

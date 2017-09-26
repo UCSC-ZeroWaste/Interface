@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import styles from '../../../App.css';
+import styles from '../../../App.scss';
 import _ from 'underscore';
 import {connect} from 'react-redux';
-import {COLLEGE_SET, LEADER_BOARD_COLORS} from '../../constants/constants';
+import {COLLEGE_NAMES, LEADER_BOARD_COLORS} from '../../constants/constants';
 import LeaderRow from './LeaderRow';
 
 class LeaderBoard extends Component {

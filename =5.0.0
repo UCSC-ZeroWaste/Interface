@@ -1,0 +1,8 @@
+interface@0.1.0 /Users/Evelyn/Desktop/NewProjects/ZERO_WASTE/Interface
+├── ajv@5.2.3 
+├─┬ node-sass@4.5.3
+│ └─┬ request@2.81.0
+│   └─┬ har-validator@4.2.1
+│     └── ajv@4.11.8 
+└── UNMET PEER DEPENDENCY webpack@3.6.0
+

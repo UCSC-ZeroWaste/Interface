@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import tips from './tipContent.js';
 // import tip1_image from '../../../assets/images/tips/corgy_image.jpg';
-import styles from '../../../../App.css';
+import styles from '../../../../App.scss';
 
 export default class ViewTemplate extends Component {
   constructor(props) {
@@ -29,11 +29,16 @@ export default class ViewTemplate extends Component {
       <div className={styles.tip_container}>
         <div className={styles.tip_header}>
           {"Actions you can take to get to zero waste"}
-          <br/>
-          {tips[this.state.tipIndex].title}
+        </div>
+        <div className={styles.tip_subheader}>
+          {
+            tips[this.state.tipIndex].title
+            + "  "
+            + `[${this.state.tipIndex + 1} of ${this.numTips}]`
+          }
         </div>
         <div className={styles.tip_content}>
-          <img src={tips[this.state.tipIndex].image} className={styles.tip_img}/>
+          <img draggable='false' src={tips[this.state.tipIndex].image} className={styles.tip_img}/>
           <div className={styles.tip_textbox_and_buttons}>
 
             <div className={styles.tip_textbox}>
@@ -41,8 +46,8 @@ export default class ViewTemplate extends Component {
             </div>
 
             <div className={styles.tip_buttons_container}>
-              <button onClick={() => this.clickHandler('prev')} className={styles.tip_button_previous}>{"PREVIOUS"}</button>
-              <button onClick={() => this.clickHandler('next')} className={styles.tip_button_next}>{"NEXT"}</button>
+              <button onClick={() => this.clickHandler('prev')} className={styles.tip_button}>{"PREVIOUS"}</button>
+              <button onClick={() => this.clickHandler('next')} className={styles.tip_button}>{"NEXT"}</button>
             </div>
 
           </div>

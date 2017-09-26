@@ -1,5 +1,5 @@
 import {RECEIVE_RECORDS, RECEIVE_ERROR} from '../actions/record_actions';
-import {COLLEGE_SET} from '../constants/constants';
+import {COLLEGE_NAMES} from '../constants/constants';
 import _ from 'underscore';
 import merge from 'lodash/merge';
 import moment from 'moment';
@@ -39,10 +39,10 @@ function parsePickupData(data) {
 
   let firstPickupDate = moment(data[0].PickupTime.slice(0,10)).startOf('day');
   let lastPickupDate = moment(data[data.length - 1].PickupTime.slice(0,10)).startOf('day');
-  console.log(firstPickupDate,lastPickupDate);
+  // console.log(firstPickupDate,lastPickupDate);
 
   const daysInRange = lastPickupDate.diff(firstPickupDate, 'days') + 1;
-  console.log(daysInRange);
+  // console.log(daysInRange);
 
   firstPickupDate = firstPickupDate.format('YYYY-MM-DD');
   lastPickupDate = lastPickupDate.format('YYYY-MM-DD');
@@ -50,11 +50,11 @@ function parsePickupData(data) {
   // Math.floor(Math.abs((firstPickupDate.valueOf() - lastPickupDate.valueOf()) / (3600 * 24 * 1000)));
 
   let relevantPickups = data.filter(function(pickup){
-    return COLLEGE_SET.includes(pickup.Location);
+    return COLLEGE_NAMES.includes(pickup.Location);
   });
   let filteredData = _.groupBy(relevantPickups, 'Location');
 
-  let leaders = COLLEGE_SET.map( (siteName) => {
+  let leaders = COLLEGE_NAMES.map( (siteName) => {
     //TODO Need to ensure that this doesn't fail if filteredData === undefined (i.e. no data is returned). Also need to think about what happens if there is no data for a certain site -- will anything break? Maybe consider setting up tests instead.
     let sitePickups = filteredData[siteName];
     let totalRefuse = _.reduce(sitePickups, (sum, pickup) => pickup.Diversion_Type === "Refuse" ? sum + pickup.Load_Split : sum , 0);
