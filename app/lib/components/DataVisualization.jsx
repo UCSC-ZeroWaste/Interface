@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-// import _ViewTemplate from './views/_ViewTemplate';
 import LeaderBoard from './views/LeaderBoard.jsx';
 import LineChart from './views/LineChart.jsx';
 import HeatMap from './views/HeatMap.jsx';
-// import SizeView from './views/SizeView.jsx';
 import Table from './views/Table.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
