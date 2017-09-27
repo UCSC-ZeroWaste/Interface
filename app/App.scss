@@ -19,6 +19,10 @@
     src: url("./lib/assets/fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff") format('woff');
 }
 
+$font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+$small: 3999px;
+$large: 4000px;
+
 /*.app {
   background-color: green;
   height: 50px;
@@ -45,7 +49,7 @@ body > div {
 
 .page {
   background-image: url('./lib/assets/images/background.png');
-  /*background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/background.png");*/
+  // background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/background.png");
   background-size: cover;
   background-position: 100% 100%;
   display: flex;
@@ -218,17 +222,20 @@ body > div {
   align-items: flex-start;
   height: 80%;
   width: 100%;
-  line-height: 2.1em;
 }
 .tip_img {
-  width: 68%;
-  /*max-height: auto;*/
+  @media (max-width: $small) {
+    width: 55%
+  }
+  @media (min-width: $large) {
+    width: 68%;
+  }
 }
 .tip_textbox_and_buttons {
   width: auto;
   height: 100%;
-  margin-left: 2.5em;
-  margin-right: 2.5em;
+  margin-left: 5%;
+  margin-right: 5%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -236,9 +243,15 @@ body > div {
 .tip_textbox {
   height: 80%;
   overflow-y: scroll;
-  /*margin-left: 5%;*/
   color: white;
-  font-size: 1.2em;
+  @media (max-width: $small) {
+    font-size: 1.1em;
+    line-height: 1.5em;
+  }
+  @media (min-width: $large) {
+    font-size: 1.2em;
+    line-height: 2.1em;
+  }
 }
 .tip_buttons_container {
   height: 12%;
@@ -261,15 +274,9 @@ body > div {
 }
 
 
-
-
-
-
-
-
 .landing_page {
   background-image: url('./lib/assets/images/landingpage-background.png');
-  /*background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/landingpage-background.png");*/
+  // background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/landingpage-background.png");
   background-size: cover;
   background-position: 100% 100%;
   display: flex;
@@ -782,10 +789,6 @@ body > div {
   border: solid 3px #D0D3D3;
 }
 
-
-$font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-$small: 3999px;
-$large: 4000px;
 .rank_text {
   font-family: $font;
   @media (max-width: $small) {
@@ -794,7 +797,6 @@ $large: 4000px;
   @media (min-width: $large) {
     font-size: 1.2em;
   }
-  /*font-weight: 200;*/
 }
 .rank_text_selected {
   composes: rank_text;

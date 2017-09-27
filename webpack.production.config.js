@@ -109,8 +109,23 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+        exclude: /node_modules/,
         // include: path.resolve(__dirname, 'lib/assets'),
-        use: 'url-loader'
+        use:  [{
+          loader: 'url-loader',
+          options: {
+            name: '[path][name].[ext]',
+            outputPath: 'images/',
+            limit: 100000
+          }
+        },
+        {
+          loader: 'image-webpack-loader',
+          options: {
+            webp: { quality: 75 }
+            // see web for more options
+          }
+        }]
       }
     ]
   },

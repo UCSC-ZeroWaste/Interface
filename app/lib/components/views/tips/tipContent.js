@@ -1,15 +1,15 @@
 
-import toothbrush from "../../../assets/images/tips/bamboo_toothbrush.png";
-import bottle from "../../../assets/images/tips/bottle.png";
-import cloth from "../../../assets/images/tips/teatowel.png";
-import clothes from "../../../assets/images/tips/clothes.png";
-import coffee from "../../../assets/images/tips/coffee.png";
-import compost from "../../../assets/images/tips/compost.png";
-import container from "../../../assets/images/tips/container.png";
-import fun from "../../../assets/images/tips/fun.png";
-import handkerchief from "../../../assets/images/tips/handkerchief.png";
-import shampoo from "../../../assets/images/tips/shampoo_bar.png";
-import straws from "../../../assets/images/tips/straws.png";
+import toothbrush from "Images/tips/bamboo_toothbrush.png";
+import bottle from "Images/tips/bottle.png";
+import cloth from "Images/tips/teatowel.png";
+import clothes from "Images/tips/clothes.png";
+import coffee from "Images/tips/coffee.png";
+import compost from "Images/tips/compost.png";
+import container from "Images/tips/container.png";
+import fun from "Images/tips/fun.png";
+import handkerchief from "Images/tips/handkerchief.png";
+import shampoo from "Images/tips/shampoo_bar.png";
+import straws from "Images/tips/straws.png";
 
 export default [
   {
