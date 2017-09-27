@@ -59,12 +59,22 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        // include: path.resolve(__dirname, 'lib/assets'),
-        use: 'url-loader'
+        exclude: /node_modules/,
+        use:  {
+          loader: 'url-loader',
+          options: {
+            name: '[path][name].[ext]',
+            outputPath: 'images/',
+            limit: 100000
+          }
+        }
       }
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx" ]
+    extensions: [".js", ".jsx" ],
+    alias: {
+      Images: path.resolve(__dirname, 'app/lib/assets/images/')
+    }
   }
 };

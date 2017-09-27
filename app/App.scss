@@ -19,6 +19,18 @@
     src: url("./lib/assets/fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff") format('woff');
 }
 
+$font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+$cutoff_for_touchscreen: 4000px;
+$small: $cutoff_for_touchscreen - 1px;
+$large: $small + 1px;
+
+$logo_color: #f6f6f6;
+$nav_click_color: #f6f6f6;
+$nav_touch_color: #2cf4a4;
+$nav_fa_color: #a8a6a6;
+$email_btn_font_color: #0f3356;
+
 /*.app {
   background-color: green;
   height: 50px;
@@ -45,7 +57,7 @@ body > div {
 
 .page {
   background-image: url('./lib/assets/images/background.png');
-  /*background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/background.png");*/
+  // background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/background.png");
   background-size: cover;
   background-position: 100% 100%;
   display: flex;
@@ -85,6 +97,7 @@ body > div {
 }
 .nav_bar_left {
   flex: 1;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -108,46 +121,58 @@ body > div {
   /*padding: 0.5em;*/
 }
 
-.logo_and_selected_icon_color {
-  color: #f6f6f6;
-}
 
 .logo {
-  composes: logo_and_selected_icon_color;
+  color: $logo_color;
   font-family: 'logofont';
   font-size: 2.8em;
   margin: 0 0.7em 0 0.7em;
   background-color: transparent;
 }
-.nav_button_press_response {
-  width: 70px;
+
+.nav_button_background {
+  width: 4em;
   height: 100%;
-  opacity: 1;
-  /*background-color: red;*/
-  border: none;
   box-sizing: border-box;
   border-radius: 5px;
   display: flex;
-  flex-direction: column;
+}
+.nav_button_press_response {
+  @extend .nav_button_background;
+  position: relative;
   align-items: center;
   justify-content: center;
   background-color: transparent;
+
+  &:hover::after {
+    @extend .nav_button_background;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: $nav_click_color;
+    opacity: 0.3;
+  }
+
+  &:active {
+    @media (max-width: $small) {
+      background-color: $nav_click_color;
+    }
+    @media (min-width: $large) {
+      background-color: $nav_touch_color;
+    }
+  }
 }
-.nav_button_press_response:active {
-    background-color: yellow;
-}
+
 .nav_button_fa {
-  color: #a8a6a6;
-  /*margin-left: 0.7em;*/
+  color: $nav_fa_color;
 }
 .nav_button_fa_selected {
-  composes: logo_and_selected_icon_color;
+  color: $logo_color;
 }
 .email_button {
-  /*margin-right: 5%;*/
   opacity: 1;
-  /*border-radius: 7px;*/
-  color: #0f3356;
+  color: $email_btn_font_color;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,7 +184,12 @@ body > div {
   /*animation: color_change1 5s infinite linear;*/
 }
 .email_button:active {
-  background-color: yellow;
+  @media (max-width: $small) {
+    background-color: $nav_click_color;
+  }
+  @media (min-width: $large) {
+    background-color: $nav_touch_color;
+  }
 }
 
 @keyframes color_change1 {
@@ -218,17 +248,20 @@ body > div {
   align-items: flex-start;
   height: 80%;
   width: 100%;
-  line-height: 2.1em;
 }
 .tip_img {
-  width: 68%;
-  /*max-height: auto;*/
+  @media (max-width: $small) {
+    width: 55%
+  }
+  @media (min-width: $large) {
+    width: 68%;
+  }
 }
 .tip_textbox_and_buttons {
   width: auto;
   height: 100%;
-  margin-left: 2.5em;
-  margin-right: 2.5em;
+  margin-left: 5%;
+  margin-right: 5%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -236,9 +269,15 @@ body > div {
 .tip_textbox {
   height: 80%;
   overflow-y: scroll;
-  /*margin-left: 5%;*/
   color: white;
-  font-size: 1.2em;
+  @media (max-width: $small) {
+    font-size: 1.1em;
+    line-height: 1.5em;
+  }
+  @media (min-width: $large) {
+    font-size: 1.2em;
+    line-height: 2.1em;
+  }
 }
 .tip_buttons_container {
   height: 12%;
@@ -261,15 +300,9 @@ body > div {
 }
 
 
-
-
-
-
-
-
 .landing_page {
   background-image: url('./lib/assets/images/landingpage-background.png');
-  /*background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/landingpage-background.png");*/
+  // background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/landingpage-background.png");
   background-size: cover;
   background-position: 100% 100%;
   display: flex;
@@ -782,10 +815,6 @@ body > div {
   border: solid 3px #D0D3D3;
 }
 
-
-$font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-$small: 3999px;
-$large: 4000px;
 .rank_text {
   font-family: $font;
   @media (max-width: $small) {
@@ -794,7 +823,6 @@ $large: 4000px;
   @media (min-width: $large) {
     font-size: 1.2em;
   }
-  /*font-weight: 200;*/
 }
 .rank_text_selected {
   composes: rank_text;
