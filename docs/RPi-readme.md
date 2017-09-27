@@ -59,4 +59,9 @@ Ensure VNC is Enabled.
       password: raspberry
 
 ## Kiosk Setup (incomplete)
+
+
+
+
+
 sudo apt-get install unclutter
