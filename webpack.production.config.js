@@ -130,6 +130,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx" ]
+    extensions: [".js", ".jsx" ],
+    alias: {
+      Images: path.resolve(__dirname, 'app/lib/assets/images/')
+    }
   }
 };
