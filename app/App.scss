@@ -20,8 +20,16 @@
 }
 
 $font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-$small: 3999px;
-$large: 4000px;
+
+$cutoff_for_touchscreen: 4000px;
+$small: $cutoff_for_touchscreen - 1px;
+$large: $small + 1px;
+
+$logo_color: #f6f6f6;
+$nav_click_color: #f6f6f6;
+$nav_touch_color: #2cf4a4;
+$nav_fa_color: #a8a6a6;
+$email_btn_font_color: #0f3356;
 
 /*.app {
   background-color: green;
@@ -89,6 +97,7 @@ body > div {
 }
 .nav_bar_left {
   flex: 1;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -112,46 +121,58 @@ body > div {
   /*padding: 0.5em;*/
 }
 
-.logo_and_selected_icon_color {
-  color: #f6f6f6;
-}
 
 .logo {
-  composes: logo_and_selected_icon_color;
+  color: $logo_color;
   font-family: 'logofont';
   font-size: 2.8em;
   margin: 0 0.7em 0 0.7em;
   background-color: transparent;
 }
-.nav_button_press_response {
-  width: 70px;
+
+.nav_button_background {
+  width: 4em;
   height: 100%;
-  opacity: 1;
-  /*background-color: red;*/
-  border: none;
   box-sizing: border-box;
   border-radius: 5px;
   display: flex;
-  flex-direction: column;
+}
+.nav_button_press_response {
+  @extend .nav_button_background;
+  position: relative;
   align-items: center;
   justify-content: center;
   background-color: transparent;
+
+  &:hover::after {
+    @extend .nav_button_background;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: $nav_click_color;
+    opacity: 0.3;
+  }
+
+  &:active {
+    @media (max-width: $small) {
+      background-color: $nav_click_color;
+    }
+    @media (min-width: $large) {
+      background-color: $nav_touch_color;
+    }
+  }
 }
-.nav_button_press_response:active {
-    background-color: yellow;
-}
+
 .nav_button_fa {
-  color: #a8a6a6;
-  /*margin-left: 0.7em;*/
+  color: $nav_fa_color;
 }
 .nav_button_fa_selected {
-  composes: logo_and_selected_icon_color;
+  color: $logo_color;
 }
 .email_button {
-  /*margin-right: 5%;*/
   opacity: 1;
-  /*border-radius: 7px;*/
-  color: #0f3356;
+  color: $email_btn_font_color;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -163,7 +184,12 @@ body > div {
   /*animation: color_change1 5s infinite linear;*/
 }
 .email_button:active {
-  background-color: yellow;
+  @media (max-width: $small) {
+    background-color: $nav_click_color;
+  }
+  @media (min-width: $large) {
+    background-color: $nav_touch_color;
+  }
 }
 
 @keyframes color_change1 {
