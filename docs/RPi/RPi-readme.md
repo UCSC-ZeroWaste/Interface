@@ -38,7 +38,8 @@ An alternative to using NOOBS to install Raspbian is to download and install the
 and then reboot. <br/>
 If you don’t use xrdp and would like to use the RealVNC server to remotely access your Pi, type the following: <br/>
 sudo apt-get install -y realvnc-vnc-server <br/>
-
+- install unclutter (removes cursor)
+`sudo apt-get install unclutter`
 
 ## REMOTE ACCESS
 http://lifehacker.com/how-to-control-a-raspberry-pi-remotely-from-anywhere-in-1792892937
@@ -60,8 +61,20 @@ Ensure VNC is Enabled.
 
 ## Kiosk Setup (incomplete)
 
+https://obrienlabs.net/setup-raspberry-pi-kiosk-chromium/
+
+      - place this file in /home/pi/.config/autostart
+      [see file](kiosk.desktop)
+
+      - place this file in /home/pi
+      [see file](kiosk.sh)
+
+      - make the kiosk script executable
+      `chmod +x kiosk.sh`
+
+      - reboot Pi to start in kiosk mode
+      - press Alt+F4 to close Chromium
 
 
-
-
-sudo apt-get install unclutter
+##### TO DO
+-

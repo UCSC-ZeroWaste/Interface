@@ -8,7 +8,7 @@
 - The Heat Map requires a `config.js` file (located in 'app' folder) with the Google Maps API key.
 
 ## Touchscreen Setup
-[Raspberry Pi Setup](docs/RPi-readme.md)
+[Raspberry Pi Setup](docs/RPi/RPi-readme.md)
 
 ## Production URLs
 For the desktop user: <br/>
