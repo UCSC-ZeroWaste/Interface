@@ -130,29 +130,16 @@ body > div {
   background-color: transparent;
 }
 
-.nav_button_background {
+.nav_button_press_response {
   width: 4em;
   height: 100%;
   box-sizing: border-box;
   border-radius: 5px;
   display: flex;
-}
-.nav_button_press_response {
-  @extend .nav_button_background;
   position: relative;
   align-items: center;
   justify-content: center;
   background-color: transparent;
-
-  &:hover::after {
-    @extend .nav_button_background;
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: $nav_click_color;
-    opacity: 0.3;
-  }
 
   &:active {
     @media (max-width: $small) {
