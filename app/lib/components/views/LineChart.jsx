@@ -41,9 +41,9 @@ class LineChartComponent extends Component {
   chartState() {
     if (this.props.type === 'green') {
       var state = {
-        title: "Waste Ratio (higher is better)",
+        title: "Percentage of waste diverted from landfill (higher is better)",
         xLabel: "Time Period",
-        yLabel: "Ratio",
+        yLabel: "Diversion percentage",
       };
     } else {
       state = {
