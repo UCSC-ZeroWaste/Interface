@@ -43,11 +43,11 @@ class LineChartComponent extends Component {
       var state = {
         title: "Percentage of waste diverted from landfill (higher is better)",
         xLabel: "Time Period",
-        yLabel: "Diversion percentage",
+        yLabel: "Diversion percentage (%)",
       };
     } else {
       state = {
-        title: "Waste to Landfill",
+        title: "Pounds of waste to landfill",
         xLabel: "Date",
         yLabel: "Weight (lbs)",
       };
