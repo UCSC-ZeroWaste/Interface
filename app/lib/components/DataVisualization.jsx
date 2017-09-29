@@ -32,6 +32,7 @@ const SliderArrow = (props) => {
       onClick={props.onClick}
       className={styles.slider_arrow_container}>
       <FontAwesome
+        className={styles.slider_arrow}
         name={props.type === 'prev' ? 'chevron-circle-left' : 'chevron-circle-right'}
         size='3x'
         />
@@ -132,6 +133,8 @@ class DataVisualization extends Component {
       accessibility: true, //scrolling via tabs/arrows
       adaptiveHeight: true,
       arrows: true,
+      prevArrow: <SliderArrow type={'prev'} />,
+      nextArrow: <SliderArrow type={'next'}/>,
       autoplay: this.props.autoplay,
       autoplaySpeed: AUTOPLAY.nextSlideInterval,
       speed: AUTOPLAY.slideSpeed,
@@ -153,8 +156,6 @@ class DataVisualization extends Component {
       // slidesToScroll: 1,
     }, this.slideChangeSettings());
 
-  //   prevArrow: <SliderArrow type={'prev'} />,
-  // nextArrow: <SliderArrow type={'next'}/>,
 
     const components = this.slides.map((slide, i) => (
        <div key={slide} >
@@ -167,9 +168,11 @@ class DataVisualization extends Component {
         className={styles.main_view}
         tabIndex="0"
         >
-        <Slider ref='slider' {...settings} className={styles.slider}>
-          {this.renderSlides()}
-        </Slider>
+        <div className={styles.slider_container}>
+          <Slider ref='slider' {...settings} className={styles.slider}>
+            {this.renderSlides()}
+          </Slider>
+        </div>
       </div>
     );
   }

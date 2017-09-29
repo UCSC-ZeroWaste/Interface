@@ -957,12 +957,20 @@ body > div {
 
 
 /*Slider Settings: these settings keep the slide frames at 100% height*/
+.slider_container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+  min-width: 0;
+}
 .slider {
   display: flex;
+  // position: static;
   height: 100%;
   width: 94%;
   box-sizing: border-box;
-  /*border: 1px solid green;*/
+  border: 1px solid green;
   /*border: 1px solid red;*/
 }
 .slider > button {
@@ -1006,7 +1014,21 @@ body > div {
       background: grey;
       opacity: 0.3;
     }
+
+    .slider_arrow {
+      color: $logo_color;
+    }
 }
+
+
+.slide {
+  display: flex;
+  width: 100px;
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+
+
 
 .router_fill {
 
