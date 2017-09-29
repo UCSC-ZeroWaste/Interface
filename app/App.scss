@@ -4,44 +4,16 @@
 /*<link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'/>*/
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-@import './lib/assets/stylesheets/reset.scss';
-/*@import './lib/assets/stylesheets/nav_bar.css';*/
-/*@import './lib/assets/background.png';*/
+@import './lib/assets/stylesheets/base/reset.scss';
+@import './lib/assets/stylesheets/base/colors.scss';
+@import './lib/assets/stylesheets/base/variables.scss';
+@import './lib/assets/stylesheets/base/fonts.scss';
 
 /*TODO -- need to figure out how to import from node modules (i think i need to include a loader (eg. url-loader) for certain files: gif, eot, woff, ttf, svg)*/
 /*@import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";*/
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
-
-@font-face {
-    font-family: "logofont";
-    src: url("./lib/assets/fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff") format('woff');
-}
-
-$font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-
-$cutoff_for_touchscreen: 1910px;
-$small: $cutoff_for_touchscreen - 1px;
-$large: $small + 1px;
-
-$logo_color: #f6f6f6;
-$nav_click_color: #f6f6f6;
-$nav_touch_color: #2cf4a4;
-$nav_fa_color: #a8a6a6;
-$email_btn_font_color: #0f3356;
-
-/*.app {
-  background-color: green;
-  height: 50px;
-  border: 1px solid blue;
-}
-
-.bap {
-  background-color: red;
-  height: 25px;
-}*/
-
 
 html, body, #root {
   display: flex;
@@ -202,7 +174,7 @@ body > div {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 80%;
+  width: 85%;
   padding: 5% 0 5% 10%;
   color: white;
 }
@@ -616,7 +588,6 @@ body > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
   color: white;
   /*box-sizing: border-box;
@@ -726,7 +697,6 @@ body > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 }
 .leader_rows {
@@ -739,7 +709,6 @@ body > div {
   justify-content: space-around;
   align-items: center;
   color: white;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 
 }
@@ -803,7 +772,6 @@ body > div {
 }
 
 .rank_text {
-  font-family: $font;
   @media (max-width: $small) {
     font-size: 0.95em;
   }
