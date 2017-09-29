@@ -152,7 +152,7 @@ class HeatMap extends Component {
     return (
       <GoogleMapReact
         ref='map'
-        defaultCenter={{lat: 36.9935, lng: -122.060}}
+        defaultCenter={{lat: 36.9945, lng: -122.060}}
         defaultZoom={this.props.device === 'touchscreen' ? 16 : 15}
         options={this.createMapOptions}
         bootstrapURLKeys={{key: mapsJavascriptKey}}
