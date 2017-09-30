@@ -25,6 +25,7 @@ export default class NavBar extends Component {
             </div>
           </div>
           <div className={styles.nav_bar_right}>
+            <EmailButton />
           </div>
         </div>
       </div>
@@ -32,7 +33,6 @@ export default class NavBar extends Component {
   }
 }
 //TODO add email button in nav_bar_right
-// <EmailButton />
 
 
 // <NavButton title={'Rank'} nav={'view'} view={4} fa={'cubes'}/>

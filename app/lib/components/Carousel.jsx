@@ -4,7 +4,7 @@ import styles from '../../App.scss';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import DataVisualization from './DataVisualization.jsx';
-import InfoModal from './InfoModal.jsx';
+import EmailModal from './EmailModal.jsx';
 import HeatMap from './views/HeatMap.jsx';
 import {toggleModal, handleSiteSelect, handleDeviceSelect} from '../actions/view_actions';
 import {setAutoplay} from '../actions/touch_actions';
@@ -47,7 +47,7 @@ class Carousel extends Component {
           contentLabel="Modal"
           onRequestClose={this.props.toggleModal}
           style={modalStyle}>
-          <InfoModal />
+          <EmailModal />
         </Modal>
       </div>
     );
