@@ -959,21 +959,30 @@ body > div {
 /*Slider Settings: these settings keep the slide frames at 100% height*/
 .slider_container {
   display: flex;
+  // position: relative;
   height: 100%;
-  width: 100%;
-  min-height: 0;
-  min-width: 0;
+  width: 90%;
+  // min-height: 0;
+  // min-width: 0;
 }
 .slider {
   display: flex;
-  // position: static;
+  position: absolute;
   height: 100%;
-  width: 94%;
+  width: 100%;
   box-sizing: border-box;
   border: 1px solid green;
   /*border: 1px solid red;*/
 }
-.slider > button {
+.slider:first-child {
+  position: relative;
+  left: -15%;
+  /*box-sizing: border-box;
+  border: 1px solid red;*/
+}
+.slider:last-child {
+  // position: absolute;
+  left: 5%;
   /*box-sizing: border-box;
   border: 1px solid red;*/
 }
@@ -986,6 +995,8 @@ body > div {
 }
 .slider > div > div {
   display: flex;
+  // position: absolute;
+  // left: -5%;
   height: 100%;
   width: 100%;
   /*box-sizing: border-box;*/
@@ -1019,13 +1030,13 @@ body > div {
       color: $logo_color;
     }
 }
-
-
 .slide {
-  display: flex;
-  width: 100px;
+  // display: flex !important;
+  // height: 100%;
+  // width: 90% !important;
   box-sizing: border-box;
   border: 1px solid red;
+
 }
 
 
