@@ -34,7 +34,7 @@ class LeaderBoard extends Component {
   render() {
     return (
       <div className={styles.leader_board_container}>
-        <div className={styles.leader_board_header}>Zero Waste Leaderboard</div>
+        <div className={styles.leader_board_header}>Zero waste leaderboard</div>
         <div className={styles.leader_rows}>
           {this.renderLeaderRows()}
         </div>
