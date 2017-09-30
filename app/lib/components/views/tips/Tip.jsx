@@ -33,8 +33,8 @@ export default class ViewTemplate extends Component {
         <div className={styles.tip_subheader}>
           {
             tips[this.state.tipIndex].title
-            + "  "
-            + `[${this.state.tipIndex + 1} of ${this.numTips}]`
+            // + "  "
+            // + `[${this.state.tipIndex + 1} of ${this.numTips}]`
           }
         </div>
         <div className={styles.tip_content}>
