@@ -129,7 +129,7 @@ export const MAP_STYLE = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#1b6b53"
+        "color": "#1b6b53" // GREEN SURROUNDING LANDSCAPE HERE
       }
     ]
   },
@@ -170,7 +170,7 @@ export const MAP_STYLE = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#283d6a"
+        "color": "#91b555"
       }
     ]
   },
@@ -313,7 +313,7 @@ export const MAP_STYLE = [
     "elementType": "labels.text.stroke",
     "stylers": [
       {
-        "color": "#1d2c4d"
+        "color": "#red"
       }
     ]
   },
@@ -322,7 +322,7 @@ export const MAP_STYLE = [
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": "#283d6a"
+        "color": "#red"
       }
     ]
   },
