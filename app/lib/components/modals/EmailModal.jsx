@@ -88,7 +88,7 @@ export default class EmailModal extends Component {
           required
           />
 
-        {this.renderKeyboard()}
+        //this.renderKeyboard()}
 
       </div>
     );

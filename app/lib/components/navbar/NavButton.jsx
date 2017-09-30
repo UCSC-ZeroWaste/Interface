@@ -12,7 +12,7 @@ class NavButton extends Component {
 
   clickHandler(e) {
     if (this.props.nav === 'modal') {
-      this.props.toggleModal();
+      this.props.toggleModal(this.props.scope);
     } else
     if (this.props.nav === 'view') {
       this.props.handleViewSelect(this.props.view);
@@ -57,7 +57,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum)),
   handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope)),
-  toggleModal: () => dispatch(toggleModal())
+  toggleModal: (type) => dispatch(toggleModal(type))
 });
 
 export default connect(

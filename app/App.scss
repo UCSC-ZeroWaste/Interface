@@ -617,20 +617,17 @@ body > div {
   height: 1px;
   width: 3%;
   align-items: center;
-  box-sizing: border-box;
-  border: 1px solid red;
 }
 .yAxisLabel {
+  display: block;
   position: absolute;
-  width: 11em;
+  white-space: nowrap;
   top: 0;
   left: 100%;
   transform: rotate(-90deg) translate(-50%, -100%);
   transform-origin: left top 0;
   color: white;
   font-size: 1.4em;
-  box-sizing: border-box;
-  border: 1px solid yellow;
 }
 .xAxisLabel {
   flex: 7;

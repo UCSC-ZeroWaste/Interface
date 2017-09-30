@@ -18,10 +18,9 @@ export default class NavBar extends Component {
             <div className={styles.nav_icons_container}>
               <NavButton title={'LeaderBoard'} nav={'view'} view={0} fa={'bars'}/>
               <NavButton title={'RefuseTypesChart'} nav={'view'} view={1} fa={'area-chart'}/>
-              <NavButton title={'RatioChart'} nav={'view'} view={2} fa={'pie-chart'}/>
+              <NavButton title={'RatioChart'} nav={'view'} view={2} fa={'bar-chart'}/>
               <NavButton title={'Map'} nav={'view'} view={3} fa={'map'}/>
               <NavButton title={'Tips'} nav={'view'} view={4} fa={'lightbulb-o'}/>
-              <NavButton title={'Table'} nav={'view'} view={5} fa={'table'}/>
             </div>
           </div>
           <div className={styles.nav_bar_right}>
@@ -32,6 +31,8 @@ export default class NavBar extends Component {
     );
   }
 }
+// <NavButton title={'Table'} nav={'view'} view={5} fa={'table'}/>
+// <NavButton title={'SizeView'} nav={'view'} view={6} fa={'trash'}/>
 //TODO add email button in nav_bar_right
 
 

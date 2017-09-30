@@ -4,8 +4,8 @@ import _ViewTemplate from './views/_ViewTemplate';
 import LeaderBoard from './views/LeaderBoard.jsx';
 import LineChart from './views/LineChart.jsx';
 import HeatMap from './views/HeatMap.jsx';
-// import SizeView from './views/SizeView.jsx';
-import Table from './views/Table.jsx';
+import SizeView from './views/SizeView.jsx';
+// import Table from './views/Table.jsx';
 import Slider from 'react-slick';
 import {handleViewSelect} from '../actions/view_actions';
 import styles from '../../App.scss';
@@ -14,11 +14,6 @@ import { MoonLoader } from 'halogenium';
 import Tip from './views/tips/Tip';
 import {AUTOPLAY} from '../constants/settings';
 import FontAwesome from 'react-fontawesome';
-
-// import Tip1 from './views/tips/Tip1';
-// import Tip2 from './views/tips/Tip2';
-// import Tip3 from './views/tips/Tip3';
-// import Tip4 from './views/tips/Tip4';
 
 // import transitions from './test_carousel/transitions.css';
 // import sliding from './test_carousel/sliding.css';
@@ -46,22 +41,16 @@ class DataVisualization extends Component {
     // this.handleSliderChange = this.handleSliderChange.bind(this);
     // this.keyHandler = this.keyHandler.bind(this);
 
-    this.views = [
+    this.slides = [
       <LeaderBoard/>,
       <LineChart type={'green'}/>,
       <LineChart type={'general'}/>,
       <HeatMap/>,
       <Tip/>,
-      <Table/>
     ];
-    // this.tips = [
-    //   <Tip1 title={'tip1'}/>,
-    //   <Tip2 title={'tip2'}/>,
-    //   <Tip3 title={'tip3'}/>,
-    //   <Tip4 title={'tip4'}/>,
-    // ];
-    this.slides = this.views;
-    // .concat(this.tips);
+    // <SizeView/>
+    // <Table/>
+
     this.state = {
       autoplay: true
     };

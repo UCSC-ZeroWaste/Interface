@@ -11,7 +11,7 @@ class EmailButton extends Component {
   }
 
   clickHandler() {
-    this.props.toggleModal();
+    this.props.toggleModal('email');
   }
 
   render() {
@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleModal: () => dispatch(toggleModal())
+  toggleModal: (type) => dispatch(toggleModal(type))
 });
 
 export default connect(
