@@ -17,7 +17,7 @@ export default class NavBar extends Component {
               <NavButton title={'Global'} nav={'scope'} scope={'global'} fa={'globe'}/>
             </div>
             <div className={styles.footer_right}>
-
+              <NavButton title={'Info'} nav={'modal'} scope={'info'} fa={'info-circle'} />
             </div>
 
           </div>
