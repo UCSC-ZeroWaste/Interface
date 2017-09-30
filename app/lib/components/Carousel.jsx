@@ -37,6 +37,16 @@ class Carousel extends Component {
     this.props.handleTouchEvent();
   }
 
+  renderModal() {
+    if (this.props.modalType === 'info') {
+      return <InfoModal />;
+    } else if (this.props.modalType === 'email') {
+      return <EmailModal />;
+    } else {
+      return <div>Not a proper value for toggle modal.</div>;
+    }
+  }
+
   render() {
     return (
       <div className={styles.page} onMouseDown={this.touchHandler}>
@@ -46,9 +56,9 @@ class Carousel extends Component {
         <Modal
           isOpen={this.props.modalState}
           contentLabel="Modal"
-          onRequestClose={this.props.toggleModal}
+          onRequestClose={ () => this.props.toggleModal(false) }
           style={modalStyle}>
-          <InfoModal />
+          {this.renderModal()}
         </Modal>
       </div>
     );
@@ -60,13 +70,14 @@ class Carousel extends Component {
 
 const mapStateToProps = (state) => ({
   data: state.records.data,
-  modalState: state.currentView.modal
+  modalState: !!state.currentView.modal,
+  modalType: state.currentView.modal
 });
 
 const mapDispatchToProps = (dispatch) => {
   let timer = null;
   return ({
-    toggleModal: () => dispatch(toggleModal()),
+    toggleModal: (type) => dispatch(toggleModal(type)),
     handleSiteSelect: (site) => dispatch(handleSiteSelect(site)),
     handleDeviceSelect: (device) => dispatch(handleDeviceSelect(device)),
     handleTouchEvent: (setting) => {

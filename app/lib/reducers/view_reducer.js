@@ -21,7 +21,7 @@ const ViewReducer = (state = defaultState, action) => {
       newState.device = action.device;
       return newState;
     case TOGGLE_MODAL:
-      newState.modal = !state.modal;
+      newState.modal = action.modal ? action.modal : false;
       return newState;
     default:
       return state;
