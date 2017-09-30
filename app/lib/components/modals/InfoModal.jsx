@@ -74,58 +74,11 @@ export default class EmailModal extends Component {
     return (
       <div>
         <div>
-          If you'd like to get more involved enter your email below:
+          The information shown on this interactive screen presents the amount of waste that is picked up on the University of Santa Cruz’s campus. The amount of waste is calculated using mechanical scales that are fitted to the arm of each garbage truck and weigh each load.  We believe that by presenting the campus’s waste data in a way that is public, color graded, and ranks colleges by their waste score, will help encourage students to adopt better zero waste behaviors and achieve the universities goal of becoming a complete zero waste campus.
+
+Click the TAKE ACTION button in the top right of the screen to sign up for more tips on how you can live without creating any garbage at all.
         </div>
-        <input
-          type="email"
-          value={this.state.email}
-          ref='email_input'
-          onChange={this.handleInput}
-          name="EMAIL"
-          className="email"
-          id="mce-EMAIL"
-          placeholder="email address"
-          required
-          />
-
-        {this.renderKeyboard()}
-
       </div>
     );
   }
 }
-
-// <div id="mc_embed_signup">
-//   <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
-//     <div id="mc_embed_signup_scroll">
-//       <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
-//       <input
-//         type="email"
-//         value={this.state.email}
-//         ref='email_input'
-//         onChange={this.handleInput}
-//         name="EMAIL"
-//         className="email"
-//         id="mce-EMAIL"
-//         placeholder="email address"
-//         required
-//         />
-//       <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
-//         <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
-//       </div>
-//       <div className="clear">
-//         <input
-//           type="submit"
-//           onClick={this.handleSubmit}
-//           value="Subscribe"
-//           name="subscribe"
-//           id="mc-embedded-subscribe"
-//           className="button"
-//           />
-//       </div>
-//     </div>
-//   </form>
-// </div>
-
-
-// "//ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1"
