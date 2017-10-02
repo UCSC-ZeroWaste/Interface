@@ -214,31 +214,31 @@ body > div {
 .tip_img_container {
   display: flex;
   height: 100%;
-  flex: 75;
-}
-//all images are 1500x1000
-.tip_img {
-  height: 100%;
+  flex: 65;
+  //all images are 1500x1000
+  .tip_img {
+    height: 100%;
+  }
 }
 .tip_textbox_and_buttons {
   display: flex;
   flex: 35;
   height: 100%;
-  padding: 0 5%;
+  padding: 0 2% 0 2%;
   flex-direction: column;
   justify-content: space-between;
 }
 .tip_textbox {
   flex: 8;
-  overflow-y: scroll;
+  overflow-y: auto;
   color: white;
   @media (max-width: $small) {
     font-size: 1.1em;
-    line-height: 1.5em;
+    line-height: 1.3em;
   }
   @media (min-width: $large) {
     font-size: 1.2em;
-    line-height: 2.1em;
+    line-height: 1.5em;
   }
 }
 .tip_buttons_container {
