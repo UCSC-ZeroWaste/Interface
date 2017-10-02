@@ -34,7 +34,7 @@ class LeaderBoard extends Component {
   render() {
     return (
       <div className={styles.leader_board_container}>
-        <div className={styles.leader_board_header}>Zero waste leaderboard</div>
+        <div className={styles.leader_board_header}>Zero waste leaderboard ({this.props.daysInRange} days)</div>
         <div className={styles.leader_rows}>
           {this.renderLeaderRows()}
         </div>
@@ -45,7 +45,8 @@ class LeaderBoard extends Component {
 
 const mapStateToProps = (state) => ({
   leaders: state.records.leaders,
-  site: state.currentView.site
+  site: state.currentView.site,
+  daysInRange: state.records.daysInRange,
 });
 
 export default connect(mapStateToProps)(LeaderBoard);

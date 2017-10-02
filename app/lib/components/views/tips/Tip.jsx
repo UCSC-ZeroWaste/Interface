@@ -38,7 +38,9 @@ export default class ViewTemplate extends Component {
           }
         </div>
         <div className={styles.tip_content}>
-          <img draggable='false' src={tips[this.state.tipIndex].image} className={styles.tip_img}/>
+          <div className={styles.tip_img_container}>
+            <img draggable='false' src={tips[this.state.tipIndex].image} className={styles.tip_img}/>
+          </div>
           <div className={styles.tip_textbox_and_buttons}>
 
             <div className={styles.tip_textbox}>
