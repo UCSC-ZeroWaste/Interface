@@ -10,6 +10,7 @@ class SizeView extends Component {
     this.calculateSize();
   }
 
+  //TODO will need to calculate size of images based on trash/week
   calculateSize () {
 
   }
