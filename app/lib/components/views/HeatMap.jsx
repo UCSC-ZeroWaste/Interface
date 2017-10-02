@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {mapsStaticKey, mapsJavascriptKey} from '../../../config.js';
 import styles from '../../../App.scss';
 import GoogleMapReact from 'google-map-react';
-import { fitBounds } from 'google-map-react/utils';
+// import { fitBounds } from 'google-map-react/utils';
 import {SLUG_PINS} from '../../constants/constants';
 import {MAP_STYLE} from '../../constants/settings';
 import {connect} from 'react-redux';
@@ -154,12 +154,11 @@ class HeatMap extends Component {
   // };
   }
 
-
   render() {
     return (
       <GoogleMapReact
         ref='map'
-        defaultCenter={{lat: 36.9945, lng: -122.060}}
+        defaultCenter={{lat: 36.9955, lng: -122.060}}
         defaultZoom={this.props.device === 'touchscreen' ? 16 : 15}
         options={this.createMapOptions}
         bootstrapURLKeys={{key: mapsJavascriptKey}}

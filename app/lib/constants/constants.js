@@ -9,17 +9,17 @@
 // ];
 
 export const COLLEGE_INFO = {
-  "College 9": {shortName: "College 9", lat: 37.0015, lng: -122.0570},
+  "College 9": {shortName: "College 9", lat: 37.0018, lng: -122.0568},
   "College 10": {shortName: "College 10", lat: 37.0003, lng: -122.0589},
   "Cowell College": {shortName: "Cowell College", lat: 36.9970, lng: -122.0544},
-  "Crown College": {shortName: "Crown College", lat: 36.9995, lng: -122.0548},
+  "Crown College": {shortName: "Crown College", lat: 36.9995, lng: -122.0555},
   "Crown/Merrill Apartments": {shortName: "Crown/Merrill Apts", lat: 37.0019, lng: -122.0537},
   "Kresge College": {shortName: "Kresge College", lat: 36.9975, lng: -122.0668},
-  "Merrill College": {shortName: "Merrill College", lat: 36.9998, lng: -122.0530},
-  "Oakes College": {shortName: "Oakes College", lat: 36.9894, lng: -122.0636},
+  "Merrill College": {shortName: "Merrill College", lat: 36.9998, lng: -122.0526},
+  "Oakes College": {shortName: "Oakes College", lat: 36.9894, lng: -122.0630},
   "Porter College": {shortName: "Porter College", lat: 36.9944, lng: -122.0653},
-  "Rachel Carson (Col. 8) College": {shortName: "R. Carson College", lat: 36.9911, lng: -122.0648},
-  "Stevenson College": {shortName: "Stevenson College", lat: 36.9965, lng: -122.0520},
+  "Rachel Carson (Col. 8) College": {shortName: "R. Carson College", lat: 36.9911, lng: -122.0653},
+  "Stevenson College": {shortName: "Stevenson College", lat: 36.9965, lng: -122.0515},
 };
 
 export const COLLEGE_NAMES = Object.keys(COLLEGE_INFO);
