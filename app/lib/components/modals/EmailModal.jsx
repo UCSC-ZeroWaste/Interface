@@ -32,7 +32,9 @@ export default class EmailModal extends Component {
       email: 'nycdelisauce@gmail.com'
     };
     this.handleInput = this.handleInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit1 = this.handleSubmit1.bind(this);
+    this.handleSubmit2 = this.handleSubmit2.bind(this);
+    this.handleSubmit3 = this.handleSubmit3.bind(this);
   }
 
   handleSubmit1(e) {
