@@ -35,32 +35,62 @@ export default class EmailModal extends Component {
     this.handleSubmit1 = this.handleSubmit1.bind(this);
     this.handleSubmit2 = this.handleSubmit2.bind(this);
     this.handleSubmit3 = this.handleSubmit3.bind(this);
+    this.endpoint = '/3.0/lists/9e67587f52/members/';
+    this.API = '2a04c7d10e3db23c8d9b9f7dcb35909a-us16';
+    this.u = '76d746e403a6787587fe63836';
+    this.list_id = '58a2a694d1';
+    this.email = 'test1@gmail.com';
+    this.json_obj =  {
+      "email_address": this.state.email,
+      "status": "subscribed",
+      "merge_fields": {
+        "FNAME": "Urist",
+        "LNAME": "McVankab"
+      }
+    };
   }
+
+  // POST request to the List Members endpoint:
 
   handleSubmit1(e) {
     console.log('hit submission handler');
     e.preventDefault();
-    let u = '76d746e403a6787587fe63836';
-    let id = '58a2a694d1';
-    let email = 'test1@gmail.com';
-    fetch(`https://username.us2.list-manage.com/subscribe/post-json?u=${u}&id=${id}&c=?&EMAIL=${email}`);
+    fetch(`https://username.us2.list-manage.com/subscribe/post-json?u=${this.u}&id=${this.list_id}&c=?&EMAIL=${this.email}`);
   }
   handleSubmit2(e) {
     request
-      .post("//ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1" )
+      .post(`https://usX.api.mailchimp.com/3.0/lists/${this.list_id}/members/${this.u}`)
       .set({'content-type': 'application/json'})
-      .send({ email_address: 'test2@gmail.com'}) // sends a JSON post body
+      .send(this.json_obj) // sends a JSON post body
       .end((err, res) => {
         console.log('err', err, 'res', res);
       });
   }
   handleSubmit3(e) {
     request
-      .post("ucsc.us16.list-manage.com/subscribe/")
-      .send({ email: 'test3@gmail.com', u: '76d746e403a6787587fe63836', id: '58a2a694d1'}) // sends a JSON post body
+      // .get(`https://us16.api.mailchimp.com/3.0/lists/${this.list_id}.`)
+      // https://us16.api.mailchimp.com/3.0/lists/58a2a694d1/members/
+
+      .post('https://us16.api.mailchimp.com/3.0/lists/58a2a694d1/members/')
+       .set('Content-Type', 'application/json;charset=utf-8')
+       .set('Authorization', 'Basic ' + this.Key)
+       .send({
+         'email_address': 'test@gmail.com',
+         'status': 'subscribed',
+         'merge_fields': {
+           'FNAME': 'a',
+           'LNAME': 'd'
+         }
+       })
       .end((err, res) => {
         console.log('err', err, 'res', res);
       });
+    // request
+    //   .post("ucsc.us16.list-manage.com/subscribe/")
+    //   .send({ email: 'test3@gmail.com', u: '76d746e403a6787587fe63836', id: '58a2a694d1'}) // sends a JSON post body
+    //   .end((err, res) => {
+    //     console.log('err', err, 'res', res);
+    //   });
   }
 
   handleInput(e) {
