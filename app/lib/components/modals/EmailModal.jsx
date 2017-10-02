@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import request from 'superagent';
 import Keyboard, {KeyboardButton, LatinLayout} from 'react-screen-keyboard';
+import SubscribeFrom from 'react-mailchimp-subscribe';
+
+
 
 const MyComponent = ({inputNode, submit}) => (
   <Keyboard
@@ -55,7 +58,7 @@ export default class EmailModal extends Component {
   handleSubmit1(e) {
     console.log('hit submission handler');
     e.preventDefault();
-    fetch(`https://username.us2.list-manage.com/subscribe/post-json?u=${this.u}&id=${this.list_id}&c=?&EMAIL=${this.email}`);
+    fetch(`//ucsc.us16.list-manage.com/subscribe/post-json?u=${this.u}&id=${this.list_id}&c=?&EMAIL=${'test@gmail.com'}`);
   }
   handleSubmit2(e) {
     request
@@ -107,66 +110,105 @@ export default class EmailModal extends Component {
     );
   }
 
+  render() {
+    //ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1
+    const formProps = {
+      action: '//ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1',
+      messages: {
+        inputPlaceholder: "Votre email",
+        btnLabel: "Envoyer",
+        sending: "Envoi en cours...",
+        success: "Merci de votre intérêt!",
+        error: "Oops, cant register"
+      },
+      styles: {
+        sending: {
+          fontSize: 18,
+          color: "auto"
+        },
+        success: {
+          fontSize: 18,
+          color: "green"
+        },
+        error: {
+          fontSize: 18,
+          color: "red"
+        }
+      }
+    };
 
-  render (){
     return (
-      <div>
-        <div>
-          If you'd like to get more involved enter your email below:
-        </div>
-
-        <div id="mc_embed_signup">
-          <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
-            <div id="mc_embed_signup_scroll">
-              <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
-              <input
-                type="email"
-                value={this.state.email}
-                ref='email_input'
-                onChange={this.handleInput}
-                name="EMAIL"
-                className="email"
-                id="mce-EMAIL"
-                placeholder="email address"
-                required
-                />
-              <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
-                <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
-              </div>
-              <div className="clear">
-                <input
-                  type="submit"
-                  onClick={this.handleSubmit1}
-                  value="Subscribe1"
-                  name="subscribe"
-                  id="mc-embedded-subscribe"
-                  className="button"
-                  />
-                <input
-                  type="submit"
-                  onClick={this.handleSubmit2}
-                  value="Subscribe2"
-                  name="subscribe"
-                  id="mc-embedded-subscribe"
-                  className="button"
-                  />
-                <input
-                  type="submit"
-                  onClick={this.handleSubmit3}
-                  value="Subscribe3"
-                  name="subscribe"
-                  id="mc-embedded-subscribe"
-                  className="button"
-                  />
-              </div>
-            </div>
-          </form>
-        </div>
-
-      </div>
+      <SubscribeFrom {...formProps}/>
     );
   }
+
+  // render (){
+  //   return (
+  //     <div>
+  //       <div>
+  //         If you'd like to get more involved enter your email below:
+  //       </div>
+  //
+  //       <div id="mc_embed_signup">
+  //         <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
+  //           <div id="mc_embed_signup_scroll">
+  //             <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
+  //             <input
+  //               type="email"
+  //               value={this.state.email}
+  //               ref='email_input'
+  //               onChange={this.handleInput}
+  //               name="EMAIL"
+  //               className="email"
+  //               id="mce-EMAIL"
+  //               placeholder="email address"
+  //               required
+  //               />
+  //             <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
+  //               <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
+  //             </div>
+  //             <div className="clear">
+  //               <input
+  //                 type="submit"
+  //                 onClick={this.handleSubmit1}
+  //                 value="Subscribe1"
+  //                 name="subscribe"
+  //                 id="mc-embedded-subscribe"
+  //                 className="button"
+  //                 />
+  //               <input
+  //                 type="submit"
+  //                 onClick={this.handleSubmit2}
+  //                 value="Subscribe2"
+  //                 name="subscribe"
+  //                 id="mc-embedded-subscribe"
+  //                 className="button"
+  //                 />
+  //               <input
+  //                 type="submit"
+  //                 onClick={this.handleSubmit3}
+  //                 value="Subscribe3"
+  //                 name="subscribe"
+  //                 id="mc-embedded-subscribe"
+  //                 className="button"
+  //                 />
+  //             </div>
+  //           </div>
+  //         </form>
+  //       </div>
+  //
+  //     </div>
+  //   );
+  // }
+
+
 }
+
+
+
+
+
+
 // <input
 //   type="email"
 //   value={this.state.email}
@@ -183,5 +225,7 @@ export default class EmailModal extends Component {
 
 
 
+
+// "//ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1"
 
 // "//ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1"
