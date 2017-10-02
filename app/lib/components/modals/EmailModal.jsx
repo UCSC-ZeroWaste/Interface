@@ -35,24 +35,30 @@ export default class EmailModal extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
+  handleSubmit1(e) {
+    console.log('hit submission handler');
     e.preventDefault();
-    // "//ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1"
+    let u = '76d746e403a6787587fe63836';
+    let id = '58a2a694d1';
+    let email = 'test1@gmail.com';
+    fetch(`https://username.us2.list-manage.com/subscribe/post-json?u=${u}&id=${id}&c=?&EMAIL=${email}`);
+  }
+  handleSubmit2(e) {
     request
       .post("//ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1" )
       .set({'content-type': 'application/json'})
-      .send({ email_address: this.state.email}) // sends a JSON post body
+      .send({ email_address: 'test2@gmail.com'}) // sends a JSON post body
       .end((err, res) => {
         console.log('err', err, 'res', res);
-        // Calling the end function will send the request
       });
-    // request
-    //   .post("ucsc.us16.list-manage.com/subscribe/")
-    //   .send({ email: this.state.email, u: '76d746e403a6787587fe63836', id: '58a2a694d1'}) // sends a JSON post body
-    //   .end((err, res) => {
-    //     console.log('err', err, 'res', res);
-    //     // Calling the end function will send the request
-    //   });
+  }
+  handleSubmit3(e) {
+    request
+      .post("ucsc.us16.list-manage.com/subscribe/")
+      .send({ email: 'test3@gmail.com', u: '76d746e403a6787587fe63836', id: '58a2a694d1'}) // sends a JSON post body
+      .end((err, res) => {
+        console.log('err', err, 'res', res);
+      });
   }
 
   handleInput(e) {
@@ -76,56 +82,74 @@ export default class EmailModal extends Component {
         <div>
           If you'd like to get more involved enter your email below:
         </div>
-        <input
-          type="email"
-          value={this.state.email}
-          ref='email_input'
-          onChange={this.handleInput}
-          name="EMAIL"
-          className="email"
-          id="mce-EMAIL"
-          placeholder="email address"
-          required
-          />
 
-        //this.renderKeyboard()}
+        <div id="mc_embed_signup">
+          <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
+            <div id="mc_embed_signup_scroll">
+              <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
+              <input
+                type="email"
+                value={this.state.email}
+                ref='email_input'
+                onChange={this.handleInput}
+                name="EMAIL"
+                className="email"
+                id="mce-EMAIL"
+                placeholder="email address"
+                required
+                />
+              <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
+                <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
+              </div>
+              <div className="clear">
+                <input
+                  type="submit"
+                  onClick={this.handleSubmit1}
+                  value="Subscribe1"
+                  name="subscribe"
+                  id="mc-embedded-subscribe"
+                  className="button"
+                  />
+                <input
+                  type="submit"
+                  onClick={this.handleSubmit2}
+                  value="Subscribe2"
+                  name="subscribe"
+                  id="mc-embedded-subscribe"
+                  className="button"
+                  />
+                <input
+                  type="submit"
+                  onClick={this.handleSubmit3}
+                  value="Subscribe3"
+                  name="subscribe"
+                  id="mc-embedded-subscribe"
+                  className="button"
+                  />
+              </div>
+            </div>
+          </form>
+        </div>
 
       </div>
     );
   }
 }
+// <input
+//   type="email"
+//   value={this.state.email}
+//   ref='email_input'
+//   onChange={this.handleInput}
+//   name="EMAIL"
+//   className="email"
+//   id="mce-EMAIL"
+//   placeholder="email address"
+//   required
+//   />
+//
+// {this.renderKeyboard()}
 
-// <div id="mc_embed_signup">
-//   <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
-//     <div id="mc_embed_signup_scroll">
-//       <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
-//       <input
-//         type="email"
-//         value={this.state.email}
-//         ref='email_input'
-//         onChange={this.handleInput}
-//         name="EMAIL"
-//         className="email"
-//         id="mce-EMAIL"
-//         placeholder="email address"
-//         required
-//         />
-//       <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
-//         <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
-//       </div>
-//       <div className="clear">
-//         <input
-//           type="submit"
-//           onClick={this.handleSubmit}
-//           value="Subscribe"
-//           name="subscribe"
-//           id="mc-embedded-subscribe"
-//           className="button"
-//           />
-//       </div>
-//     </div>
-//   </form>
-// </div>
+
 
 
 // "//ucsc.us16.list-manage.com/subscribe/post?u=76d746e403a6787587fe63836&amp;id=58a2a694d1"
