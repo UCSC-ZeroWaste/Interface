@@ -41,13 +41,13 @@ class LineChartComponent extends Component {
   chartState() {
     if (this.props.type === 'green') {
       var state = {
-        title: "Waste Ratio (higher is better)",
+        title: "Percentage of waste diverted from landfill",
         xLabel: "Time Period",
-        yLabel: "Ratio",
+        yLabel: "Diversion percentage (%)",
       };
     } else {
       state = {
-        title: "Waste to Landfill",
+        title: "Pounds of waste to landfill",
         xLabel: "Date",
         yLabel: "Weight (lbs)",
       };
@@ -217,11 +217,15 @@ class LineChartComponent extends Component {
   }
 
   getTickInterval() {
-    if (this.props.daysInRange <= 14) {
+    let temp = this.props.type === 'green' ? this.state.rollingAverageLength : 0;
+    let days = this.props.daysInRange - temp;
+    if ( days <= 14) {
       return {unit: 'day', interval: 1};
-    } else if (this.props.daysInRange <= 50) {
+    } else if (days <= 30) {
+      return {unit: 'day', interval: 7}; //setting will only show months
+    } else if (days <= 50) {
       return {unit: 'day', interval: 1000}; //setting will only show months
-    } else if (this.props.daysInRange > 50) {
+    } else if (days > 50) {
       return {}; //setting will auto set ticks -- should be good?
     }
   }

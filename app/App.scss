@@ -4,9 +4,13 @@
 /*<link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'/>*/
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-@import './lib/assets/stylesheets/reset.scss';
-/*@import './lib/assets/stylesheets/nav_bar.css';*/
-/*@import './lib/assets/background.png';*/
+@import './lib/assets/stylesheets/base/reset.scss';
+@import './lib/assets/stylesheets/base/colors.scss';
+@import './lib/assets/stylesheets/base/variables.scss';
+@import './lib/assets/stylesheets/base/fonts.scss';
+
+@import './lib/assets/stylesheets/email.scss';
+@import './lib/assets/stylesheets/keyboard.scss';
 
 /*TODO -- need to figure out how to import from node modules (i think i need to include a loader (eg. url-loader) for certain files: gif, eot, woff, ttf, svg)*/
 /*@import "slick-carousel/slick/slick.css";
@@ -14,33 +18,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 
-@font-face {
-    font-family: "logofont";
-    src: url("./lib/assets/fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff") format('woff');
-}
-
-$font: "HelveticaNeue-Light","HelveticaNeue-Bold", "Helvetica Neue Medium", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-
-$cutoff_for_touchscreen: 1910px;
-$small: $cutoff_for_touchscreen - 1px;
-$large: $small + 1px;
-
-$logo_color: #f6f6f6;
-$nav_click_color: #f6f6f6;
-$nav_touch_color: #2cf4a4;
-$nav_fa_color: #a8a6a6;
-$email_btn_font_color: #0f3356;
-
-/*.app {
-  background-color: green;
-  height: 50px;
-  border: 1px solid blue;
-}
-
-.bap {
-  background-color: red;
-  height: 25px;
-}*/
+@import url('https://cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css');
 
 
 html, body, #root {
@@ -130,29 +108,16 @@ body > div {
   background-color: transparent;
 }
 
-.nav_button_background {
+.nav_button_press_response {
   width: 4em;
   height: 100%;
   box-sizing: border-box;
   border-radius: 5px;
   display: flex;
-}
-.nav_button_press_response {
-  @extend .nav_button_background;
   position: relative;
   align-items: center;
   justify-content: center;
   background-color: transparent;
-
-  &:hover::after {
-    @extend .nav_button_background;
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: $nav_click_color;
-    opacity: 0.3;
-  }
 
   &:active {
     @media (max-width: $small) {
@@ -213,28 +178,27 @@ body > div {
 
 .tip_container {
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
   height: 100%;
-  width: 80%;
-  padding: 5% 0 5% 10%;
+  width: 85%;
+  padding: 0% 0 0% 10%;
   color: white;
 }
 .tip_header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /*height: 20%;*/
+  text-align: center;
   width: 100%;
   color: white;
   font-size: 2.8em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   box-sizing: border-box;
-  margin-bottom: 3%;
 }
 .tip_subheader {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /*height: 20%;*/
   width: 100%;
   color: white;
   font-size: 1.9em;
@@ -245,56 +209,55 @@ body > div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
-  height: 80%;
+  height: 65%;
   width: 100%;
 }
-.tip_img {
-  @media (max-width: $small) {
-    width: 55%
-  }
-  @media (min-width: $large) {
-    width: 68%;
+.tip_img_container {
+  display: flex;
+  height: 100%;
+  flex: 65;
+  //all images are 1500x1000
+  .tip_img {
+    height: 100%;
   }
 }
 .tip_textbox_and_buttons {
-  width: auto;
-  height: 100%;
-  margin-left: 5%;
-  margin-right: 5%;
   display: flex;
+  flex: 35;
+  height: 100%;
+  padding: 0 2% 0 2%;
   flex-direction: column;
   justify-content: space-between;
 }
 .tip_textbox {
-  height: 80%;
-  overflow-y: scroll;
+  flex: 8;
+  overflow-y: auto;
   color: white;
   @media (max-width: $small) {
     font-size: 1.1em;
-    line-height: 1.5em;
+    line-height: 1.3em;
   }
   @media (min-width: $large) {
     font-size: 1.2em;
-    line-height: 2.1em;
+    line-height: 1.5em;
   }
 }
 .tip_buttons_container {
-  height: 12%;
+  flex: 2;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-end;
 }
 .tip_button {
   width: 40%;
-  height: 100%;
+  height: 3em;
   color: grey;
   text-align: center;
   background-color: white;
   box-sizing: border-box;
   border: .2em grey solid;
 }
-
 .tip_button:hover {
   background-color: lightgray;
 }
@@ -625,11 +588,12 @@ body > div {
 .line_chart_header {
   flex: 10;
   width: 100%;
-  font-size: 2.0em;
+  font-size: 2.8em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
   color: white;
   /*box-sizing: border-box;
@@ -652,19 +616,17 @@ body > div {
   height: 1px;
   width: 3%;
   align-items: center;
-  /*box-sizing: border-box;
-  border: 1px solid red;*/
 }
 .yAxisLabel {
+  display: block;
   position: absolute;
+  white-space: nowrap;
   top: 0;
   left: 100%;
   transform: rotate(-90deg) translate(-50%, -100%);
   transform-origin: left top 0;
   color: white;
   font-size: 1.4em;
-  /*box-sizing: border-box;
-  border: 1px solid yellow;*/
 }
 .xAxisLabel {
   flex: 7;
@@ -739,7 +701,6 @@ body > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 }
 .leader_rows {
@@ -752,7 +713,6 @@ body > div {
   justify-content: space-around;
   align-items: center;
   color: white;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 
 }
@@ -816,7 +776,6 @@ body > div {
 }
 
 .rank_text {
-  font-family: $font;
   @media (max-width: $small) {
     font-size: 0.95em;
   }

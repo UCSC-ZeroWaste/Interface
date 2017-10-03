@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {mapsStaticKey, mapsJavascriptKey} from '../../../config.js';
 import styles from '../../../App.scss';
 import GoogleMapReact from 'google-map-react';
-import { fitBounds } from 'google-map-react/utils';
+// import { fitBounds } from 'google-map-react/utils';
 import {SLUG_PINS} from '../../constants/constants';
 import {MAP_STYLE} from '../../constants/settings';
 import {connect} from 'react-redux';
@@ -51,18 +51,25 @@ class HeatMap extends Component {
       let slugImage = SLUG_PINS[index];
 
       if (this.props.device === 'touchscreen') {
-        var MARKER_SIZE = '6.5em';
-        var TEXT_WIDTH = '11em';
-        var TEXT_HEIGHT = '4.4em';
-        var MARGIN = '.5em';
+        var MARKER_SIZE = 6.5;
+        var TEXT_WIDTH = 11;
+        var TEXT_HEIGHT = 4.4;
+        var MARGIN = .5;
         var fontSize = '1em';
       } else {
-        MARKER_SIZE = '4.0em';
-        TEXT_WIDTH = '12em';
-        TEXT_HEIGHT = '4.0em';
-        MARGIN = '.25em';
-        var fontSize = '.75em';
+        MARKER_SIZE = 4.0;
+        TEXT_WIDTH = 12;
+        TEXT_HEIGHT = 4.0;
+        MARGIN = .25;
+        fontSize = '.75em';
       }
+      const CONTAINER_HEIGHT = MARKER_SIZE + TEXT_HEIGHT;
+      const CONTAINER_ADJUST_LEFT = -TEXT_WIDTH / 2;
+      const CONTAINER_ADJUST_TOP = -MARKER_SIZE;
+
+      // console.log('height: MARKER_SIZE + TEXT_HEIGHT', MARKER_SIZE + TEXT_HEIGHT,
+      // 'left: -TEXT_WIDTH / 2', -TEXT_WIDTH / 2,
+      // 'top: -MARKER_SIZE', -MARKER_SIZE);
 
       const containerStyle = {
         position: 'absolute',
@@ -71,9 +78,9 @@ class HeatMap extends Component {
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: 'auto',
-        height: MARKER_SIZE + TEXT_HEIGHT,
-        left: -TEXT_WIDTH / 2,
-        top: -MARKER_SIZE,
+        height: CONTAINER_HEIGHT + 'em',
+        left: CONTAINER_ADJUST_LEFT + 'em',
+        top: CONTAINER_ADJUST_TOP + 'em',
       };
 
       const textStyle = {
@@ -81,8 +88,8 @@ class HeatMap extends Component {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        width: TEXT_WIDTH,
-        height: TEXT_HEIGHT,
+        width: TEXT_WIDTH + 'em',
+        height: TEXT_HEIGHT + 'em',
         backgroundColor: 'white',
         padding: '5px',
         border: '2.5px #B1AFAF solid',
@@ -93,9 +100,9 @@ class HeatMap extends Component {
       };
 
       const markerStyle = {
-        width: MARKER_SIZE,
-        height: MARKER_SIZE,
-        marginBottom: MARGIN,
+        width: MARKER_SIZE + 'em',
+        height: MARKER_SIZE + 'em',
+        marginBottom: MARGIN + 'em',
         backgroundImage: `url(${slugImage})`,
         backgroundSize: 'cover',
       };
@@ -147,12 +154,11 @@ class HeatMap extends Component {
   // };
   }
 
-
   render() {
     return (
       <GoogleMapReact
         ref='map'
-        defaultCenter={{lat: 36.9935, lng: -122.060}}
+        defaultCenter={{lat: 36.9955, lng: -122.060}}
         defaultZoom={this.props.device === 'touchscreen' ? 16 : 15}
         options={this.createMapOptions}
         bootstrapURLKeys={{key: mapsJavascriptKey}}
