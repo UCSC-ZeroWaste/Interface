@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import styles from '../../../App.scss';
 
 export default class EmailModal extends Component {
   constructor(props){
