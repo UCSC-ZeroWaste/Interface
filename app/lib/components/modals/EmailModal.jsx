@@ -13,12 +13,6 @@ import styles from '../../../App.scss';
 //     layouts={[LatinLayout]}
 //     />
 // );
-// leftButtons={[
-//   <KeyboardButton
-//     onClick={submit}
-//     value="Back"
-//     />
-// ]}
 // rightButtons={[
 //   <KeyboardButton
 //     onClick={submit}
@@ -28,7 +22,7 @@ import styles from '../../../App.scss';
 // ]}
 
 
-export default class EmailModal extends Component {
+class EmailModal extends Component {
   constructor(props){
     super(props);
 
@@ -43,8 +37,9 @@ export default class EmailModal extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    if (!this.state.email || this.state.email.length < 5 || this.state.email.indexOf("@") === -1) {
+    let email = this.refs.email_input.value;
+    if (this.props.device === 'home') e.preventDefault();
+    if (!email || email.length < 5 || email.indexOf("@") === -1) {
       this.setState({
         status: "error"
       });
@@ -53,7 +48,7 @@ export default class EmailModal extends Component {
 
     let listId = '58a2a694d1';
     let u = '76d746e403a6787587fe63836';
-    let url =  `//ucsc.us16.list-manage.com/subscribe/post-json?u=${u}&amp;id=${listId}&EMAIL=${this.state.email}`;
+    let url =  `//ucsc.us16.list-manage.com/subscribe/post-json?u=${u}&amp;id=${listId}&EMAIL=${email}`;
 
     const responseCallback = (err, data) => {
       if (err) {
@@ -94,17 +89,26 @@ export default class EmailModal extends Component {
   }
 
   componentDidMount() {
-    console.log('ref', this.refs.email_input);
+    console.log('ref', this.refs.email_input.dataset);
 
   }
 
   renderKeyboard() {
-    if (this.state.focused) {
+    if (this.state.focused && this.props.device === 'touchscreen') {
       return (
         <Keyboard
           inputNode={this.refs.email_input}
-          submit={this.handleSubmit}
           layouts={[LatinLayout]}
+          leftButtons={[
+
+          ]}
+          rightButtons={[
+              <KeyboardButton
+                onClick={this.handleSubmit}
+                value="Submit"
+                classes="keyboard-submit-button"
+              />
+            ]}
           />
       );
     } else {return;}
@@ -121,8 +125,8 @@ export default class EmailModal extends Component {
             <div id="mc_embed_signup_scroll">
               <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
               <input
-                type="email"
-                value={this.state.email}
+                type="text"
+
                 ref="email_input"
                 onChange={this.handleInput}
                 onFocus={this.handleFocus}
@@ -136,14 +140,16 @@ export default class EmailModal extends Component {
                 <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
               </div>
               <div className="clear">
-                <input
-                  type="submit"
-                  onClick={this.handleSubmit}
-                  value="Subscribe"
-                  name="subscribe"
-                  id="mc-embedded-subscribe"
-                  className="button"
-                  />
+                {this.props.device === 'touchscreen' ? '' :
+                  <input
+                    type="submit"
+                    onClick={this.handleSubmit}
+                    value="Subscribe"
+                    name="subscribe"
+                    id="mc-embedded-subscribe"
+                    className="button"
+                    />
+                }
               </div>
               <div>{this.state.msg}</div>
             </div>
@@ -154,3 +160,10 @@ export default class EmailModal extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => ({
+  device: state.currentView.device,
+});
+
+export default connect(mapStateToProps)(EmailModal);

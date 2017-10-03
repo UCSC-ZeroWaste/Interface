@@ -194,21 +194,16 @@ export default class Keyboard extends PureComponent {
 				</div>
 
 				<div className={styles['keyboard-row']}>
-					{leftButtons}
-					{this.props.layouts.length > 1 ?
-						<KeyboardButton
-							value={<LanguageIcon />}
-							classes="keyboard-languageButton"
-							onClick={this.handleLanguageClick}
-						/>
-					: null}
-					{inputNode.dataset.type === 'email' ?
-						<KeyboardButton
-							value={'@'}
-							classes="keyboard-atButton"
-							onClick={this.handleLetterButtonClick}
-						/>
-					: null}
+					<KeyboardButton
+						value="@ucsc.edu"
+						classes="keyboard-email-button"
+						onClick={this.handleLetterButtonClick}
+					/>
+					<KeyboardButton
+						value={'@'}
+						classes="keyboard-atButton"
+						onClick={this.handleLetterButtonClick}
+					/>
 					<KeyboardButton
 						value={' '}
 						classes="keyboard-spaceButton"
