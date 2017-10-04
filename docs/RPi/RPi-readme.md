@@ -1,4 +1,10 @@
 # Raspberry Pi Setup
+1. Update Raspbian to latest version
+2. Remove black border on screen
+3. Create kiosk.sh executable file
+4. Update autostart file
+5. Update lightdm.conf file to hide mouse
+6. Set up remote access
 
 ## OS Information
 cat /etc/debian_version <br/>
@@ -127,7 +133,7 @@ unclutter -idle 3
 ```
 [see file](autostart.txt)
 
-## Hiding the mouse
+## Hiding the mouse (lightdm.conf)
 Careful as this will remove mouse visibility from screen (but not the mouse itself!!!)<br/>
 In this case, instead of using unclutter, we simply edit the `lightdm.conf` file.
 
@@ -152,7 +158,7 @@ https://www.raspberrypi.org/documentation/remote-access/vnc/
 Select Menu > Preferences > Raspberry Pi Configuration > Interfaces.
 Ensure VNC is Enabled.
 
-The autostart script in
-
 CmdL + fn + F4 == Alt + F4 == exit scripts
 CmdR == WindowsKey
+
+[RealVNC key mapping](https://www.realvnc.com/en/connect/docs/mac-keyboard-mapping.html)
