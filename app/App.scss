@@ -10,6 +10,7 @@
 @import './lib/assets/stylesheets/base/fonts.scss';
 
 @import './lib/assets/stylesheets/email.scss';
+@import './lib/assets/stylesheets/info.scss';
 @import './lib/assets/stylesheets/keyboard.scss';
 
 /*TODO -- need to figure out how to import from node modules (i think i need to include a loader (eg. url-loader) for certain files: gif, eot, woff, ttf, svg)*/

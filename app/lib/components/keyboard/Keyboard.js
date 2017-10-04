@@ -135,7 +135,7 @@ export default class Keyboard extends PureComponent {
 
 		return (
 			<div className={styles.keyboard}>
-				<div className={styles['keyboard-row']}>
+				<div className={styles['keyboard-row1']}>
 					{numbers.map(button =>
 						<KeyboardButton
 							value={button}
@@ -145,13 +145,13 @@ export default class Keyboard extends PureComponent {
 						/>
 					)}
 					<KeyboardButton
-						value={<BackspaceIcon />}
-						classes="keyboard-backspaceButton"
-						onClick={this.handleBackspaceClick}
+						value={'_'}
+						onClick={this.handleLetterButtonClick}
 					/>
 				</div>
 
-				<div className={styles['keyboard-row']}>
+				<div className={styles['keyboard-row2']}>
+					<div className={styles['keyboard-halfButtonSpacer']} />
 					{keys[0].map(button =>
 						<KeyboardButton
 							value={button}
@@ -159,10 +159,11 @@ export default class Keyboard extends PureComponent {
 							key={button}
 						/>
 					)}
+					<div className={styles['keyboard-halfButtonSpacer']} />
 				</div>
 
-				<div className={styles['keyboard-row']}>
-					<div className={styles['keyboard-halfButton']} />
+				<div className={styles['keyboard-row3']}>
+					<div className={styles['keyboard-fullButtonSpacer']} />
 					{keys[1].map(button =>
 						<KeyboardButton
 							value={button}
@@ -170,10 +171,11 @@ export default class Keyboard extends PureComponent {
 							key={button}
 						/>
 					)}
-					<div className={styles['keyboard-halfButton']} />
+					<div className={styles['keyboard-fullButtonSpacer']} />
 				</div>
 
-				<div className={styles['keyboard-row']}>
+
+				<div className={styles['keyboard-row4']}>
 					<KeyboardButton
 						value={<ShiftIcon />}
 						classes="keyboard-shiftButton"
@@ -187,13 +189,14 @@ export default class Keyboard extends PureComponent {
 						/>
 					)}
 					<KeyboardButton
-						value={symbolsKeyValue}
-						classes="keyboard-symbolButton"
-						onClick={this.handleSymbolsClick}
+						value={<BackspaceIcon />}
+						classes="keyboard-backspaceButton"
+						onClick={this.handleBackspaceClick}
 					/>
 				</div>
 
-				<div className={styles['keyboard-row']}>
+
+				<div className={styles['keyboard-row5']}>
 					<KeyboardButton
 						value="@ucsc.edu"
 						classes="keyboard-email-button"
@@ -205,19 +208,24 @@ export default class Keyboard extends PureComponent {
 						onClick={this.handleLetterButtonClick}
 					/>
 					<KeyboardButton
+						value={'.'}
+						classes="keyboard-periodButton"
+						onClick={this.handleLetterButtonClick}
+					/>
+					<KeyboardButton
+						value={symbolsKeyValue}
+						classes="keyboard-symbolButton"
+						onClick={this.handleSymbolsClick}
+					/>
+					<KeyboardButton
 						value={' '}
 						classes="keyboard-spaceButton"
 						onClick={this.handleLetterButtonClick}
 					/>
-					{inputNode.dataset.type === 'email' ?
-						<KeyboardButton
-							value={'.'}
-							classes="keyboard-fullstopButton"
-							onClick={this.handleLetterButtonClick}
-						/>
-					: null}
 					{rightButtons}
 				</div>
+
+
 			</div>
 		);
 	}

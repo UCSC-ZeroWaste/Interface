@@ -120,41 +120,39 @@ class EmailModal extends Component {
   render (){
     return (
       <div className={styles.signup_container}>
-        <div id="mc_embed_signup">
-          <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
-            <div id="mc_embed_signup_scroll">
-              <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
-              <input
-                type="text"
+        <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
+          <div id="mc_embed_signup_scroll">
+            <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
+            <input
+              type="text"
 
-                ref="email_input"
-                onChange={this.handleInput}
-                onFocus={this.handleFocus}
-                name="EMAIL"
-                className="email"
-                id="mce-EMAIL"
-                placeholder="email address"
-                required
-                />
-              <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
-                <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
-              </div>
-              <div className="clear">
-                {this.props.device === 'touchscreen' ? '' :
-                  <input
-                    type="submit"
-                    onClick={this.handleSubmit}
-                    value="Subscribe"
-                    name="subscribe"
-                    id="mc-embedded-subscribe"
-                    className="button"
-                    />
-                }
-              </div>
-              <div>{this.state.msg}</div>
+              ref="email_input"
+              onChange={this.handleInput}
+              onFocus={this.handleFocus}
+              name="EMAIL"
+              className="email"
+              id="mce-EMAIL"
+              placeholder="email address"
+              required
+              />
+            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
+              <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
             </div>
-          </form>
-        </div>
+            <div className="clear">
+              {this.props.device === 'touchscreen' ? '' :
+                <input
+                  type="submit"
+                  onClick={this.handleSubmit}
+                  value="Subscribe"
+                  name="subscribe"
+                  id="mc-embedded-subscribe"
+                  className="button"
+                  />
+              }
+            </div>
+            <div>{this.state.msg}</div>
+          </div>
+        </form>
         {this.renderKeyboard()}
       </div>
     );

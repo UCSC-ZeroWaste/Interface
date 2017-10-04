@@ -1,13 +1,14 @@
 .keyboard {
-	width: 100%;
+	// width: 100%;
 	// max-width: 1030px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 1500px;
+	// justify-content: center;
 	margin: 0 auto;
 	background: #dadada;
 	box-shadow: 0px 2px 12px 0px rgba(0,0,0,0.5);
-}
-
-.keyboard-row {
-	display: flex;
 }
 
 .keyboard-keysSet {
@@ -19,7 +20,7 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	flex-basis: 100px;
+	// flex-basis: 100px;
 	font-size: 18px;
 	height: 60px;
 	margin: 5px;
@@ -28,6 +29,7 @@
 	border: 1px solid #CECECE;
 	font-family: 'Roboto';
 	font-weight: 300;
+	flex-grow: 1;
 }
 
 .keyboard-button:focus {
@@ -47,14 +49,6 @@
 	flex-grow: 1;
 }
 
-.keyboard-halfButton {
-	flex-basis: 56px;
-}
-
-.keyboard-space,
-.keyboard-spaceButton{
-	flex-grow: 1;
-}
 
 .keyboard-utilButton {
 	flex-grow: 2;
@@ -64,18 +58,77 @@
 .keyboard-additionalButton {
 	flex-basis: 128px;
 }
+.keyboard-halfButtonSpacer {
+	flex: .5;
+}
+.keyboard-fullButtonSpacer {
+	flex: 1;
+}
 
-.keyboard-submit-button {
-	flex-basis: 144px;
-	background-color: #63b324;
-	border-color: #63b324;
+/////////////////////////// 1ST ROW ///////////////////////////
+.keyboard-row1 {
+	display: flex;
+	width: 100%;
+}
+
+
+/////////////////////////// 2ND ROW ///////////////////////////
+.keyboard-row2 {
+	display: flex;
+	// justify-content: center;
+	width: 100%;
+}
+
+
+
+/////////////////////////// 3RD ROW ///////////////////////////
+.keyboard-row3 {
+	display: flex;
+	width: 100%;
+}
+
+
+
+/////////////////////////// 4TH ROW ///////////////////////////
+.keyboard-row4 {
+	display: flex;
+	width: 100%;
+}
+
+.keyboard-shiftButton {
+	flex: 1.5;
+}
+
+.keyboard-backspaceButton {
+	flex: 1.5;
+}
+
+
+/////////////////////////// BOTTOM ROW ///////////////////////////
+.keyboard-row5 {
+	display: flex;
+	width: 100%;
+}
+//@ucsc.edu
+.keyboard-email-button {
+	flex: 1.5 80px;
+	background-color: #b32463;
+	border-color: #b32463;
 	color: #ffffff;
 }
 
-//@ucsc.edu
-.keyboard-email-button {
-	flex-basis: 100px;
-	background-color: #b32463;
-	border-color: #b32463;
+.keyboard-atButton, .keyboard-periodButton {
+	flex: 1 40px;
+}
+
+.keyboard-space,
+.keyboard-spaceButton{
+	flex: 8 ;
+}
+
+.keyboard-submit-button {
+	flex: 2 144px;
+	background-color: #63b324;
+	border-color: #63b324;
 	color: #ffffff;
 }
