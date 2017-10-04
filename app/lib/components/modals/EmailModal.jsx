@@ -34,7 +34,6 @@ class EmailModal extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
-    console.log('this.props.device',this.props.device);
     this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 

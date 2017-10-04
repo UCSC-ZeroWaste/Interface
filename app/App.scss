@@ -121,21 +121,22 @@ body > div {
   background-color: transparent;
 
   &:active {
-    @media (max-width: $small) {
-      background-color: $nav_click_color;
-    }
-    @media (min-width: $large) {
-      background-color: $nav_touch_color;
-    }
+    background-color: $nav_click_color;
+  }
+
+  &.touchscreen:active {
+    background-color: $nav_touch_color;
   }
 }
 
 .nav_button_fa {
   color: $nav_fa_color;
+
+  &.selected {
+    color: $logo_color;
+  }
 }
-.nav_button_fa_selected {
-  color: $logo_color;
-}
+
 .email_button {
   opacity: 1;
   color: $email_btn_font_color;
