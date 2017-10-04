@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Kiosk
-Exec=/home/pi/kiosk.sh
-X-GNOME-Autostart-enabled=true
