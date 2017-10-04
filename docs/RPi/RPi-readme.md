@@ -47,61 +47,37 @@ sudo apt-get install -y realvnc-vnc-server <br/>
 - set `disable_overscan=1`
 
 
-## Kiosk Setup (incomplete)
-
+## Kiosk.sh file Setup
 https://obrienlabs.net/setup-raspberry-pi-kiosk-chromium/
-
-- Run `nano /home/pi/.config/autostart/kiosk.desktop` and add:
-      [Desktop Entry]
-      Type=Application
-      Name=Kiosk
-      Exec=/home/pi/kiosk.sh
-      X-GNOME-Autostart-enabled=true
-[see file](kiosk.desktop)
-
 - Run `nano /home/pi/kiosk.sh` and add:
-[see file](kiosk.sh)
 
-- make the kiosk script executable
-`chmod +x kiosk.sh`
+```
+#!/bin/bash
 
-- reboot Pi to start in kiosk mode or go to `/home/pi` enter `./kiosk.sh` in the command line
-- press Alt+F4 to exit
+# Run this script in display 0 - the monitor
+export DISPLAY=:0
 
+# Hide the mouse from the display
+unclutter &
 
-##### TO DO
--
+# If Chrome crashes (usually due to rebooting), clear the crash flag so we don't have the annoying warning bar
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/pi/.config/chromium/Default/Preferences
+sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium/Default/Preferences
 
+# Run Chromium and open tabs
+/usr/bin/chromium-browser --window-size=1920,1080 --kiosk --window-position=0,0 http://zerowaste.ucsc.edu:3000/#/touchscreeen/carousel/site/0 &
+```
 
-## REMOTE ACCESS
-http://lifehacker.com/how-to-control-a-raspberry-pi-remotely-from-anywhere-in-1792892937
+[SEE FILE](kiosk.sh)
 
-https://www.raspberrypi.org/documentation/remote-access/vnc/
-Select Menu > Preferences > Raspberry Pi Configuration > Interfaces.
-Ensure VNC is Enabled.
+- make the kiosk script executable in CLI:
 
-RealVNC
-email: #######
-password: #######
+```
+chmod +x kiosk.sh
+```
 
-My laptop info
-password: ######
-
-raspberry pi info
-ID: pi
-password: raspberry
-
-
-
-
-
-
-## Hiding mouse cursor
-##### Display only
-If you don't plan to use a touch screen, the solution is to use `unclutter`, which is a tool, that hides the cursor after some idle time.
-
-## Kiosk mode
-To configure the pi to become a kiosk machine, all you need to do is edit the `autostart` file in `~/.config/lxsession/LXDE-pi/`
+## Autostart file Setup
+To configure the pi to become a kiosk machine, all you need to do is edit the `autostart` file in `/home/pi/.config/lxsession/LXDE-pi/`
 
 ```
 sudo nano ~/.config/lxsession/LXDE-pi/autostart
@@ -119,44 +95,40 @@ Add these `xset` options to disable some of the power saving settings:
 @xset -dpms
 ```
 
-If you've decided to use `unclutter`, you can configure it by using commands described [here](http://manpages.ubuntu.com/manpages/wily/man1/unclutter.1.html), for example adding this line will set the mouse pointer to disappear after 3 seconds of inactivity:
+Unclutter can be configured by using commands described [here](http://manpages.ubuntu.com/manpages/wily/man1/unclutter.1.html).<br/>
+(CAN'T GET UNCLUTTER TO WORK CORRECTLY -- shouldn't really matter as long
+I set the cursor to hidden and style accordingly.) <br/>
+For example adding this line will set the mouse pointer to disappear after 3 seconds of inactivity:
 
 ```
-unclutter -idle .1
+unclutter -idle 3
 ```
 
-Resulting in:
+
+#### Resulting file:
 ```
 @lxpanel --profile LXDE-pi
 @pcmanfm --desktop --profile LXDE-pi
-# @screensaver -no-splash
+# @xscreensaver -no-splash
 @point-rpi
 
 @xset s off
 @xset s noblank
 @xset -dpms
-@/home/pi/kiosk.sh
+
+# opens terminal session (for remote access)
+@lxterminal &
+
+# runs kiosk.sh file
+@/home/pi/kiosk.sh &
+
+# runs unclutter (not working?)
+@sudo unclutter -idle 1 -root &
 ```
+[see file](autostart.txt)
 
-CAN'T GET UNCLUTTER TO WORK CORRECTLY -- shouldn't really matter as long
-I set the cursor to hidden and style accordingly.
-```
-@unclutter -idle 0 -root
-```
-
-remove:
-      Add this line to start the Chromium browser in kiosk mode after boot:
-      ```
-      @chromium-browser --noerrdialogs --kiosk --incognito https://google.com
-      ```
-      The `--noerrdialogs` parameter will make sure that no error messages will pop up after restart if something causes Chromium to end unexpetedly.
-      Save, exit and restart your pi.
-
-##### Touch screen
-Careful as this will remove mouse visibility from screen (but not the mouse itself!!!)
-
-If you use touch screen to interact with you device, you probably don't want to see the mouse cursor appearing under your finger every time you touch the screen, so the answer here is to disable the mouse pointer alltogether. Just be sure your display is properly configured. (The 7" Raspberry Pi Display works pretty much out of the box)
-
+## Hiding the mouse
+Careful as this will remove mouse visibility from screen (but not the mouse itself!!!)<br/>
 In this case, instead of using unclutter, we simply edit the `lightdm.conf` file.
 
 ```
@@ -169,5 +141,18 @@ Uncomment the `xserver-command` line under `[SeatDefaults]` (below the documenta
 xserver-command=X -nocursor
 ```
 
-## See also
+##### See also:
 https://github.com/lukaskubis/raspbian-jesse-kiosk/blob/master/README.md
+
+
+## REMOTE ACCESS
+http://lifehacker.com/how-to-control-a-raspberry-pi-remotely-from-anywhere-in-1792892937
+
+https://www.raspberrypi.org/documentation/remote-access/vnc/
+Select Menu > Preferences > Raspberry Pi Configuration > Interfaces.
+Ensure VNC is Enabled.
+
+The autostart script in
+
+CmdL + fn + F4 == Alt + F4 == exit scripts
+CmdR == WindowsKey

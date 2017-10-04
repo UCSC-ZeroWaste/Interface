@@ -1,0 +1,17 @@
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+# @xscreensaver -no-splash
+@point-rpi
+
+@xset s off
+@xset s noblank
+@xset -dpms
+
+# opens terminal session (for remote access)
+@lxterminal &
+
+# runs kiosk.sh file
+@/home/pi/kiosk.sh &
+
+# runs unclutter (not working?)
+@sudo unclutter -idle 1 -root &
