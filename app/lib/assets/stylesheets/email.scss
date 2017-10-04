@@ -1,19 +1,63 @@
 .signup_container {
-	padding: 8%;
-  	display: flex;
-  	flex-direction: column;
-  	justify-content: space-between;
-  	height: 100%;
-  	width: 100%;
-  	text-align: center;
-  	color: #192744;
-  	font-size: 1.5em;
-  	line-height: 2.0em;
+  padding: 8%;
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: #192744;
+  font-size: 1.5em;
+  line-height: 2.0em;
+
+  &.touchscreen {
+    padding: 2%;
+  }
+
+  form {
+    padding-bottom: 5%;
+  }
 }
 
 .title {
-	font-size: 1.8em;
-	line-height: 2.0em;
+  font-size: 1.8em;
+  line-height: 2.0em;
+}
+
+.email_input {
+  font-size: 1em;
+  border: .1em solid #ABB0B2;
+  border-radius: .2em;
+  color: #343434;
+  background-color: #fff;
+  box-sizing: border-box;
+  height: 2em;
+  padding: 0 0.4em;
+  display: inline-block;
+  margin: .4em;
+  width: 15em;
+  vertical-align: top;
+}
+
+.email_submit_button {
+  font-size: 1em;
+  border: none;
+  border-radius: .2em;
+  letter-spacing: .03em;
+  color: #fff;
+  background-color: #aaa;
+  box-sizing:border-box;
+  height: 2em;
+  line-height: 2em;
+  padding:0 1em;
+  display: inline-block;
+  margin: 0;
+  transition: all 0.23s ease-in-out 0s;
+}
+
+.email_submit_button:hover {
+  background-color:#777;
+  cursor:pointer;
 }
 
 

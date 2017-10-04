@@ -29,11 +29,13 @@ class EmailModal extends Component {
     this.state = {
       email: '',
       msg: '',
-      focused: false,
+      mounted: false,
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    console.log('this.props.device',this.props.device);
+    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 
   handleSubmit(e) {
@@ -89,12 +91,12 @@ class EmailModal extends Component {
   }
 
   componentDidMount() {
-    console.log('ref', this.refs.email_input.dataset);
-
+    // console.log('ref', this.refs.email_input.dataset);
+    this.setState({mounted: true});
   }
 
   renderKeyboard() {
-    if (this.state.focused && this.props.device === 'touchscreen') {
+    if (this.state.mounted && this.props.device === 'touchscreen') {
       return (
         <Keyboard
           inputNode={this.refs.email_input}
@@ -114,14 +116,14 @@ class EmailModal extends Component {
     } else {return;}
   }
   handleFocus() {
-    this.setState({focused: true});
+    // TODO maybe make some sort of animation?
   }
 
   render (){
     return (
-      <div className={styles.signup_container}>
-        <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
-          <div id="mc_embed_signup_scroll">
+      <div className={`${styles.signup_container} ${this.touchscreenStyle}`}>
+        <form name="mc-embedded-subscribe-form" className="validate" noValidate>
+          <div>
             <div className={styles.title}>
             <label htmlFor="mce-EMAIL">TAKE ACTION</label><br />
             </div>
@@ -129,12 +131,13 @@ class EmailModal extends Component {
             <label htmlFor="mce-EMAIL">Add your email and we'll send you 90 days of (genuinely) awesome zero waste living tips.</label><br /><br />
             <input
               type="text"
-
+              autoFocus
+              autoComplete={'off'}
               ref="email_input"
               onChange={this.handleInput}
               onFocus={this.handleFocus}
               name="EMAIL"
-              className="email"
+              className={styles.email_input}
               id="mce-EMAIL"
               placeholder="email address"
               required
@@ -150,7 +153,7 @@ class EmailModal extends Component {
                   value="Subscribe"
                   name="subscribe"
                   id="mc-embedded-subscribe"
-                  className="button"
+                  className={styles.email_submit_button}
                   />
               }
             </div>
