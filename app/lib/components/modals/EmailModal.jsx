@@ -122,7 +122,11 @@ class EmailModal extends Component {
       <div className={styles.signup_container}>
         <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate" noValidate>
           <div id="mc_embed_signup_scroll">
-            <label htmlFor="mce-EMAIL">Subscribe to our mailing list</label>
+            <div className={styles.title}>
+            <label htmlFor="mce-EMAIL">TAKE ACTION</label><br />
+            </div>
+          <label htmlFor="mce-EMAIL">Join us to help make UCSC a zero waste campus!</label><br />
+            <label htmlFor="mce-EMAIL">Add your email and we'll send you 90 days of (genuinely) awesome zero waste living tips.</label><br /><br />
             <input
               type="text"
 
