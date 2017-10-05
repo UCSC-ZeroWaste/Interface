@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import tips from './tipContent.js';
-// import tip1_image from '../../../assets/images/tips/corgy_image.jpg';
+import {connect} from 'react-redux';
 import styles from '../../../../App.scss';
 
-export default class ViewTemplate extends Component {
+class Tip extends Component {
   constructor(props) {
     super(props);
     this.numTips = tips.length;
@@ -11,6 +11,7 @@ export default class ViewTemplate extends Component {
       tipIndex: 0
     };
     this.clickHandler = this.clickHandler.bind(this);
+    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 
   clickHandler(direction) {
@@ -43,7 +44,7 @@ export default class ViewTemplate extends Component {
           </div>
           <div className={styles.tip_textbox_and_buttons}>
 
-            <div className={styles.tip_textbox}>
+            <div className={`${styles.tip_textbox} ${this.touchscreenStyle}`}>
               {tips[this.state.tipIndex].text}
             </div>
 
@@ -59,3 +60,7 @@ export default class ViewTemplate extends Component {
   }
 }
 // <div style={{backgroundImage: `url(${tips[this.state.tipIndex].image})`}} className={styles.tip1_img}/>
+const mapStateToProps = (state) => ({
+  device: state.currentView.device,
+});
+export default connect(mapStateToProps)(Tip);

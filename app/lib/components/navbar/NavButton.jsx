@@ -8,6 +8,7 @@ class NavButton extends Component {
   constructor(props) {
     super(props);
     this.clickHandler = this.clickHandler.bind(this);
+    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 
   clickHandler(e) {
@@ -26,21 +27,18 @@ class NavButton extends Component {
   }
 
   render() {
-    // if (this.props.nav === 'modal') {
-    //   var styleIcon = styles.info_button_fa;
-    // } else
     if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
-      var styleIcon = styles.nav_button_fa_selected;
+      var isSelected = styles.selected;
     } else {
-      styleIcon = styles.nav_button_fa;
+      isSelected = '';
     }
 
     return (
       <button
         onClick={this.clickHandler}
-        className={styles.nav_button_press_response}>
+        className={`${styles.nav_button_press_response} ${this.touchscreenStyle}`}>
         <FontAwesome
-          className={styleIcon}
+          className={`${styles.nav_button_fa} ${isSelected}`}
           name={this.props.fa}
           size='2x'
           />
@@ -51,7 +49,8 @@ class NavButton extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   currentView: state.currentView,
-  name: ownProps.title
+  name: ownProps.title,
+  device: state.currentView.device,
 });
 
 const mapDispatchToProps = (dispatch) => ({
