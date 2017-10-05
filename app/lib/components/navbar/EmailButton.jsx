@@ -8,6 +8,8 @@ class EmailButton extends Component {
   constructor(props) {
     super(props);
     this.clickHandler = this.clickHandler.bind(this);
+    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
+
   }
 
   clickHandler() {
@@ -15,16 +17,17 @@ class EmailButton extends Component {
   }
 
   render() {
+
     return (
-      <div onClick={this.clickHandler} className={styles.email_button}>
+      <button onClick={this.clickHandler} className={`${styles.email_button} ${this.touchscreenStyle}`}>
         Take Action
-      </div>
+      </button>
     );
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-
+  device: state.currentView.device,
 });
 
 const mapDispatchToProps = (dispatch) => ({
