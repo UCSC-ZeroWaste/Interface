@@ -19,9 +19,6 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 
-// @import url('https://cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css');
-
-
 html, body, #root {
   display: flex;
   height: 100%;
@@ -149,14 +146,12 @@ body > div {
   font-size: 1.0em;
   text-transform: uppercase;
   /*animation: color_change1 5s infinite linear;*/
-}
-.email_button:active {
-  @media (max-width: $small) {
-    background-color: $nav_click_color;
-  }
-  @media (min-width: $large) {
-    background-color: $nav_touch_color;
-  }
+    &:active {
+      background-color: $nav_click_color;
+    }
+    &.touchscreen:active {
+      background-color: $nav_touch_color;
+    }
 }
 
 @keyframes color_change1 {
@@ -235,11 +230,10 @@ body > div {
   flex: 8;
   overflow-y: auto;
   color: white;
-  @media (max-width: $small) {
-    font-size: 1.1em;
-    line-height: 1.3em;
-  }
-  @media (min-width: $large) {
+  font-size: 1.1em;
+  line-height: 1.3em;
+
+  &.touchscreen {
     font-size: 1.2em;
     line-height: 1.5em;
   }
@@ -720,21 +714,17 @@ body > div {
 }
 .leader_row {
   flex: 1;
-
-  /*border: 1px red solid;*/
-  box-sizing: border-box;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
   margin: .45% 0em .45% 0em;
-
   width: 80%;
-}
-.leader_row_selected {
-  composes: leader_row;
-  flex: 1.3;
+  box-sizing: border-box;
+  /*border: 1px red solid;*/
+
+  &.selected {
+    flex: 1.3;
+  }
 }
 
 .rank_and_slug_container {
@@ -778,25 +768,11 @@ body > div {
 }
 
 .rank_text {
-  @media (max-width: $small) {
-    font-size: 0.95em;
-  }
-  @media (min-width: $large) {
-    font-size: 1.2em;
-  }
+                            font-size: 0.95em;
+  &.selected              { font-size: 1.10em; }
+  &.touchscreen           { font-size: 1.20em; }
+  &.touchscreen.selected  { font-size: 2.00em; }
 }
-.rank_text_selected {
-  composes: rank_text;
-  @media (max-width: $small) {
-    font-size: 1.10em;
-  }
-  @media (min-width: $large) {
-    font-size: 2em;
-  }
-}
-
-
-
 
 .slugContainer {
   /*width and height set using inline styles*/
@@ -884,13 +860,14 @@ body > div {
   box-sizing: border-box;
   border-radius: 12px;
   display: flex;
+
+  &.selected {
+    width: 96%;
+    border: solid 3px #D0D3D3;
+    /*background-color: lightgrey;*/
+  }
 }
-.details_selected {
-  composes: details;
-  width: 96%;
-  border: solid 3px #D0D3D3;
-  /*background-color: lightgrey;*/
-}
+
 
 .details_text {
   height: 100%;
@@ -904,28 +881,25 @@ body > div {
   composes: details_text;
   width: 80%;
   justify-content: flex-start;
-}
-.details_site_selected {
-  composes: details_text;
-  width: 80%;
-  justify-content: flex-start;
-  font-size: 1.8em;
+
+  &.selected {
+    width: 80%;
+    justify-content: flex-start;
+    font-size: 1.8em;
+  }
 }
 
 .details_ratio {
   composes: details_text;
   width: 20%;
   justify-content: flex-end;
+
+  &.selected {
+    width: 20%;
+    justify-content: flex-end;
+    font-size: 1.8em;
+  }
 }
-.details_ratio_selected {
-  composes: details_text;
-  width: 20%;
-  justify-content: flex-end;
-  font-size: 1.8em;
-}
-
-
-
 
 
 /*TODO may want to create a hover effect for viewing on the web*/

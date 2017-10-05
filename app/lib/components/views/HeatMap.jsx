@@ -52,7 +52,7 @@ class HeatMap extends Component {
 
       if (this.props.device === 'touchscreen') {
         var MARKER_SIZE = 6.5;
-        var TEXT_WIDTH = 11;
+        var TEXT_WIDTH = 12;
         var TEXT_HEIGHT = 4.4;
         var MARGIN = .5;
         var fontSize = '1em';

@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 class LeaderRow extends Component {
   constructor(props) {
     super(props);
+    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 
   renderSlug(height, width) {
@@ -58,7 +59,7 @@ class LeaderRow extends Component {
         position: 'relative'
       };
       var rankCircleStyle = styles.rank_circle_selected;
-      var rankTextStyle = styles.rank_text_selected;
+      var selected = styles.selected;
     } else {
       rankContainer = {
         width: height,
@@ -66,7 +67,7 @@ class LeaderRow extends Component {
         position: 'relative'
       };
       rankCircleStyle = styles.rank_circle;
-      rankTextStyle = styles.rank_text;
+      selected = '';
     }
     return (
       <div style={rankContainer}>
@@ -74,7 +75,7 @@ class LeaderRow extends Component {
           <div style={{backgroundColor: this.props.color}} className={rankCircleStyle}></div>
         </div>
         <div className={styles.opacityFixContainer}>
-          <div className={rankTextStyle}>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
+          <div className={`${styles.rank_text} ${this.touchscreenStyle} ${selected}`}>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
         </div>
       </div>
     );
@@ -94,31 +95,20 @@ class LeaderRow extends Component {
   }
 
   render() {
-    if (this.props.selected && this.props.scope === 'local') {
-      var rowStyle = styles.leader_row_selected;
-      var color = {backgroundColor: this.props.color};
-      var details = styles.details_selected;
-      var site = styles.details_site_selected;
-      var ratio = styles.details_ratio_selected;
-    } else {
-      rowStyle = styles.leader_row;
-      color = undefined;
-      details = styles.details;
-      site = styles.details_site;
-      ratio = styles.details_ratio;
-    }
+    let selected = (this.props.selected && this.props.scope === 'local') ? styles.selected : '';
+    let backgroundColor = (selected ? {backgroundColor: this.props.color} : undefined);
 
     return (
-      <div className={rowStyle} ref="leader_row">
+      <div className={`${styles.leader_row} ${selected}`} ref="leader_row">
 
         <ContainerDimensions>
           { ({ height, width }) => this.renderRankAndSlug(height, width) }
         </ContainerDimensions>
 
         <div className={styles.details_container}>
-          <div className={details} style={color}>
-            <div className={site} >{this.props.site.site}</div>
-            <div className={ratio} >{Math.round(this.props.site.diversionRatio)}%</div>
+          <div className={`${styles.details} ${selected}`} style={backgroundColor}>
+            <div className={`${styles.details_site} ${selected}`} >{this.props.site.site}</div>
+            <div className={`${styles.details_ratio} ${selected}`} >{Math.round(this.props.site.diversionRatio)}%</div>
           </div>
         </div>
       </div>
@@ -127,7 +117,8 @@ class LeaderRow extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  scope: state.currentView.scope
+  scope: state.currentView.scope,
+  device: state.currentView.device
 });
 
 export default connect(mapStateToProps)(LeaderRow);
