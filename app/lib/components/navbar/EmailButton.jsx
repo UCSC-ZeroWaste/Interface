@@ -8,8 +8,6 @@ class EmailButton extends Component {
   constructor(props) {
     super(props);
     this.clickHandler = this.clickHandler.bind(this);
-    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
-
   }
 
   clickHandler() {
@@ -17,9 +15,10 @@ class EmailButton extends Component {
   }
 
   render() {
+    let touchscreen = this.props.device === 'touchscreen' ? styles.touchscreen : "";
 
     return (
-      <button onClick={this.clickHandler} className={`${styles.email_button} ${this.touchscreenStyle}`}>
+      <button onClick={this.clickHandler} className={`${styles.email_button} ${touchscreen}`}>
         Take Action
       </button>
     );

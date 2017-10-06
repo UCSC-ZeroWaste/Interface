@@ -8,7 +8,6 @@ class NavButton extends Component {
   constructor(props) {
     super(props);
     this.clickHandler = this.clickHandler.bind(this);
-    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 
   clickHandler(e) {
@@ -27,18 +26,20 @@ class NavButton extends Component {
   }
 
   render() {
+    let touchscreen = this.props.device === 'touchscreen' ? styles.touchscreen : "";
+
     if (this.props.currentView.view === this.props.view || this.props.currentView.scope === this.props.scope) {
-      var isSelected = styles.selected;
+      var selected = styles.selected;
     } else {
-      isSelected = '';
+      selected = '';
     }
 
     return (
       <button
         onClick={this.clickHandler}
-        className={`${styles.nav_button_press_response} ${this.touchscreenStyle}`}>
+        className={`${styles.nav_button_press_response} ${touchscreen}`}>
         <FontAwesome
-          className={`${styles.nav_button_fa} ${isSelected}`}
+          className={`${styles.nav_button_fa} ${selected}`}
           name={this.props.fa}
           size='2x'
           />

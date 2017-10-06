@@ -8,7 +8,6 @@ import {connect} from 'react-redux';
 class LeaderRow extends Component {
   constructor(props) {
     super(props);
-    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 
   renderSlug(height, width) {
@@ -52,6 +51,8 @@ class LeaderRow extends Component {
   }
 
   renderRank(height, width) {
+    let touchscreen = this.props.device === 'touchscreen' ? styles.touchscreen : "";
+
     if (this.props.selected && this.props.scope === 'local') {
       var rankContainer = {
         width: 1.0 * height,
@@ -75,7 +76,7 @@ class LeaderRow extends Component {
           <div style={{backgroundColor: this.props.color}} className={rankCircleStyle}></div>
         </div>
         <div className={styles.opacityFixContainer}>
-          <div className={`${styles.rank_text} ${this.touchscreenStyle} ${selected}`}>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
+          <div className={`${styles.rank_text} ${touchscreen} ${selected}`}>{ this.props.rank }<sup>{ this.renderRankDegree() }</sup></div>
         </div>
       </div>
     );
