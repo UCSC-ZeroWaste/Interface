@@ -1,9 +1,20 @@
-.info_test {
-  color: #192744;
-  font-size: 1.5em;
-  line-height: 1.5em;
-}
-
 .info_container {
+  // display: flex;
+  color: #192744;
   padding: 8%;
+  font-size: 1.4em;
+  line-height: 1.4em;
+
+
+  @media (min-width: 1281px) {
+    color: blue;
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
+
+  &.touchscreen {
+    color: yellow;
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
 }
