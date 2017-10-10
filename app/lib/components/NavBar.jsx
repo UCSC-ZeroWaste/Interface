@@ -11,21 +11,19 @@ export default class NavBar extends Component {
 
   render (){
     return (
-      <div className={styles.nav_bar_container}>
-        <div className={styles.nav_bar}>
-          <div className={styles.nav_bar_left}>
-            <LogoButton/>
-            <div className={styles.nav_icons_container}>
-              <NavButton title={'LeaderBoard'} nav={'view'} view={0} fa={'bars'}/>
-              <NavButton title={'RefuseTypesChart'} nav={'view'} view={1} fa={'area-chart'}/>
-              <NavButton title={'RatioChart'} nav={'view'} view={2} fa={'bar-chart'}/>
-              <NavButton title={'Map'} nav={'view'} view={3} fa={'map'}/>
-              <NavButton title={'Tips'} nav={'view'} view={4} fa={'lightbulb-o'}/>
-            </div>
+      <div className={styles.nav_bar}>
+        <div className={styles.nav_bar_left}>
+          <LogoButton/>
+          <div className={styles.nav_icons_container}>
+            <NavButton title={'LeaderBoard'} nav={'view'} view={0} fa={'bars'}/>
+            <NavButton title={'RefuseTypesChart'} nav={'view'} view={1} fa={'area-chart'}/>
+            <NavButton title={'RatioChart'} nav={'view'} view={2} fa={'bar-chart'}/>
+            <NavButton title={'Map'} nav={'view'} view={3} fa={'map'}/>
+            <NavButton title={'Tips'} nav={'view'} view={4} fa={'lightbulb-o'}/>
           </div>
-          <div className={styles.nav_bar_right}>
-            <EmailButton />
-          </div>
+        </div>
+        <div className={styles.nav_bar_right}>
+          <EmailButton />
         </div>
       </div>
     );
