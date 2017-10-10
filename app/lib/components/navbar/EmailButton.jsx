@@ -20,7 +20,7 @@ class EmailButton extends Component {
     return (
       <button onClick={this.clickHandler} className={`${styles.email_button} ${device}`}>
         Take Action!
-      </button>
+      </button>  
     );
   }
 }

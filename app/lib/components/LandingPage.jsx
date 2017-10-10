@@ -74,13 +74,11 @@ class LandingPage extends Component {
   render() {
     return (
       <div className={styles.landing_page}>
-        <div className={styles.nav_bar_container}>
-          <div className={styles.nav_bar}>
-            <div className={styles.nav_bar_left}>
-              <LogoButton/>
-            </div>
-            <div className={styles.nav_bar_right}>
-            </div>
+        <div className={styles.nav_bar}>
+          <div className={styles.nav_bar_left}>
+            <LogoButton/>
+          </div>
+          <div className={styles.nav_bar_right}>
           </div>
         </div>
         <div className={styles.main_view}>
