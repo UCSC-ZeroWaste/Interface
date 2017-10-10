@@ -18,12 +18,12 @@ class LogoButton extends Component {
     // let pathName = this.props.location.pathname;
     // let device = pathName.split('/')[0];
     // console.log(device);
-    // if (device === 'home') {
+    // if (device === 'desktop') {
     //   this.props.history.push(`/home`);
     // }
 
     //redux version:
-    if (this.props.device !== 'touchscreen') {
+    if (this.props.device === 'desktop') {
       this.props.history.push(`/home`);
     } else {
       this.props.handleViewSelect(0);

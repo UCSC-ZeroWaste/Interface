@@ -19,10 +19,15 @@ export const handleScopeSelect = (scope) => ({
   scope
 });
 
-export const handleDeviceSelect = (device) => ({
-  type: UPDATE_DEVICE,
-  device
-});
+export const handleDeviceSelect = (device) => {
+  let deviceType = (device === 'home' ? 'desktop' : 'touchscreen');
+  return (
+    {
+      type: UPDATE_DEVICE,
+      device: deviceType
+    }
+  );
+};
 
 export const toggleModal = (modal) => ({
   type: TOGGLE_MODAL,
