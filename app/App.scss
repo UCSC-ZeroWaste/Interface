@@ -12,6 +12,8 @@
 @import './lib/assets/stylesheets/email.scss';
 @import './lib/assets/stylesheets/info.scss';
 @import './lib/assets/stylesheets/keyboard.scss';
+@import './lib/assets/stylesheets/tips.scss';
+
 
 /*TODO -- need to figure out how to import from node modules (i think i need to include a loader (eg. url-loader) for certain files: gif, eot, woff, ttf, svg)*/
 /*@import "slick-carousel/slick/slick.css";
@@ -178,93 +180,6 @@ body > div {
 
 
 
-
-.tip_container {
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  height: 100%;
-  width: 85%;
-  padding: 0% 0 0% 10%;
-  color: white;
-}
-.tip_header {
-  display: flex;
-  text-align: center;
-  width: 100%;
-  color: white;
-  font-size: 2.8em;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  box-sizing: border-box;
-}
-.tip_subheader {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  color: white;
-  font-size: 1.9em;
-  box-sizing: border-box;
-  margin-bottom: 3%;
-}
-.tip_content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 65%;
-  width: 100%;
-}
-.tip_img_container {
-  display: flex;
-  height: 100%;
-  flex: 65;
-  //all images are 1500x1000
-  .tip_img {
-    height: 100%;
-  }
-}
-.tip_textbox_and_buttons {
-  display: flex;
-  flex: 35;
-  height: 100%;
-  padding: 0 2% 0 2%;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.tip_textbox {
-  flex: 8;
-  overflow-y: auto;
-  color: white;
-  font-size: 1.1em;
-  line-height: 1.3em;
-
-  &.touchscreen {
-    font-size: 1.2em;
-    line-height: 1.5em;
-  }
-}
-.tip_buttons_container {
-  flex: 2;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.tip_button {
-  width: 40%;
-  height: 3em;
-  color: grey;
-  text-align: center;
-  background-color: white;
-  box-sizing: border-box;
-  border: .2em grey solid;
-}
-.tip_button:hover {
-  background-color: lightgray;
-}
-
-
 .landing_page {
   background-image: url('./lib/assets/images/landingpage-background.png');
   // background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/landingpage-background.png");
@@ -326,21 +241,26 @@ body > div {
 }
 .landing_page_button {
   font-size: 1.1em;
-  color: grey;
+  color: $grey-dark;
   width: 12em;
   height: 3em;
   background-color: white;
-  border-radius: .15em;
-  border: .1em solid grey;
+  // border-radius: .15em;
+  box-sizing: border-box;
+  // border: .1em solid $grey;
   text-align: center;
-  /*margin-right: 4.0em;*/
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.4),
+              0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background-color: $grey;
+    color: white;
+  }
 }
 
-.landing_page_button:hover {
-  background-color: lightgray;
-}
 .landing_page_site_selection_container:hover .landing_page_button {
-  background-color: lightgray;
+  background-color: $grey;
+  color: white;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -354,29 +274,28 @@ body > div {
 }
 /* Dropdown Content (Hidden by Default) */
 .dropdown_content {
-  /*height: 14em;*/
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
-  /*overflow-y: scroll;*/
+  background-color: $off-white;
   width: 100%;
-  /*min-width: 160px;*/
+  box-sizing: border-box;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 /* Links inside the dropdown */
 .dropdown_content button {
   font-size: .9em;
-  color: grey;
+  color: $grey-dark;
   width: 100%;
   padding: .2em .2em;
-  text-decoration: none;
+  box-sizing: border-box;
   display: block;
+
+  &:hover {
+    background-color: $grey-light;
+  }
 }
-/* Change color of dropdown links on hover */
-.dropdown_content button:hover {
-  background-color: #f1f1f1
-}
+
 /* Show the dropdown menu on hover */
 .landing_page_site_selection_container:hover .dropdown_content {
   display: block;
