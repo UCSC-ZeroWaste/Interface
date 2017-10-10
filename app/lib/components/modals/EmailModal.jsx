@@ -38,7 +38,7 @@ class EmailModal extends Component {
 
   handleSubmit(e) {
     let email = this.refs.email_input.value;
-    if (this.props.device === 'home') e.preventDefault();
+    if (this.props.device === 'desktop') e.preventDefault();
     if (!email || email.length < 5 || email.indexOf("@") === -1) {
       this.setState({
         status: "error"

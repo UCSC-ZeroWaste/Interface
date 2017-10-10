@@ -15,11 +15,11 @@ class EmailButton extends Component {
   }
 
   render() {
-    let touchscreen = this.props.device === 'touchscreen' ? styles.touchscreen : "";
+    let device = this.props.device === 'touchscreen' ? styles.touchscreen : styles.desktop;
 
     return (
-      <button onClick={this.clickHandler} className={`${styles.email_button} ${touchscreen}`}>
-        Take Action
+      <button onClick={this.clickHandler} className={`${styles.email_button} ${device}`}>
+        Take Action!
       </button>
     );
   }
