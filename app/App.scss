@@ -234,8 +234,8 @@ body > div {
   box-sizing: border-box;
   // border: .1em solid $grey;
   text-align: center;
-  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.4),
-              0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 10px 0px rgba(black, 0.4),
+              0px 6px 10px 0px rgba(black, 0.2);
 
   &:hover {
     background-color: $grey;
@@ -264,7 +264,7 @@ body > div {
   background-color: $off-white;
   width: 100%;
   box-sizing: border-box;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(black, 0.2);
   z-index: 1;
 }
 /* Links inside the dropdown */
