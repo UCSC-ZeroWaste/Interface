@@ -37,7 +37,7 @@ class App extends React.Component {
 
   componentDidMount() {
     // this.props.getRecords(API_ENDPOINTS['fall']);
-    this.props.getRandomRecordSet();
+    setTimeout(this.props.getRandomRecordSet, .1);
   }
 
 

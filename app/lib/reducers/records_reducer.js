@@ -68,11 +68,6 @@ function parsePickupData(data) {
               totalLoad,
               diversionRatio
             };
-    // return  { site: siteName,
-    //           totalLoad: totalLoad,
-    //           loadWithoutRefuse: loadWithoutRefuse,
-    //           greenRatio: greenRatio
-    //         };
   }).sort( (siteA, siteB) => siteB.diversionRatio - siteA.diversionRatio );
 
   return {data: filteredData, leaders: leaders, daysInRange, dateRange: [firstPickupDate, lastPickupDate]};

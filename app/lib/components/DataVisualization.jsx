@@ -43,8 +43,8 @@ class DataVisualization extends Component {
 
     this.slides = [
       <LeaderBoard/>,
-      <LineChart type={'green'}/>,
-      <LineChart type={'general'}/>,
+      <LineChart type={'diversion'}/>,
+      <LineChart type={'refuse'}/>,
       <HeatMap/>,
       <Tip/>,
     ];
