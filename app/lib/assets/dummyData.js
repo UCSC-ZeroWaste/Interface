@@ -3,22 +3,22 @@ import _ from 'underscore';
 import moment from 'moment';
 
 const settings = {
-  dataRows: 3000,
+  dataRows: 500,
   diversionRatioArray: COLLEGE_NAMES.map( () => Math.random() ),
   recordFields: Object.keys(API_SAMPLE_RELEVANT)
 };
 
 const getTime = function () {
-  let begDate = new Date('2017-04-15').valueOf();
-  let endDate = new Date('2017-06-25').valueOf();
+  let begDate = new Date('2017-09-25').valueOf();
+  let endDate = new Date('2017-10-11').valueOf();
   let diff = endDate - begDate;
   let newDate = new Date(begDate + (diff * Math.random()));
   return newDate.toISOString();
 };
 
 const getLoadSplit = function() {
-  let min = 500;
-  let maxDiff = 500;
+  let min = 50;
+  let maxDiff = 1000;
   let load = min + (maxDiff * Math.random());
   return load;
 };

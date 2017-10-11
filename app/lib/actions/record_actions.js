@@ -20,6 +20,6 @@ export const fetchRecords = (url) => (dispatch) => (
     .catch((error) => dispatch(receiveError(error)))
 );
 
-export const fetchDummyRecords = () => (dispatch) => (
+export const createRandomRecordSet = () => (dispatch) => (
   dispatch(receiveRecords(dummyData))
 );

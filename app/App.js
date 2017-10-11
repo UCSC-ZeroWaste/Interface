@@ -4,7 +4,7 @@ import Carousel from './lib/components/Carousel.jsx';
 import LandingPage from './lib/components/LandingPage.jsx';
 
 import { Provider } from 'react-redux';
-import {fetchRecords, fetchDummyRecords} from './lib/actions/record_actions';
+import {fetchRecords, createRandomRecordSet} from './lib/actions/record_actions';
 
 import {connect} from 'react-redux';
 import _ from 'underscore';
@@ -36,8 +36,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getRecords(API_ENDPOINTS['fall']);
-    // props.getDummyRecords();
+    // this.props.getRecords(API_ENDPOINTS['fall']);
+    this.props.getRandomRecordSet();
   }
 
 
@@ -78,7 +78,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getRecords: (url) => dispatch(fetchRecords(url)),
-  getDummyRecords: () => dispatch(fetchDummyRecords()),
+  getRandomRecordSet: () => dispatch(createRandomRecordSet()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

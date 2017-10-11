@@ -77,7 +77,35 @@ const bluegreen3= '#4DC79D';
 const turquoise2 = '#39C4BF';
 const blue1= '#39B9C4';
 
+const red_test = '#e6194b';
+const green_test = '#3cb44b';
+const yellow_test = '#ffe119';
+const blue_test = '#0082c8';
+const orange_test = '#f58231';
+const purple_test = '#911eb4';
+const cyan_test = '#46f0f0';
+const magenta_test = '#f032e6';
+const brown_test = '#aa6e28';
+const white_test = '#FFFFFF';
+const black_test = '#000000';
+
+
 export const LEADER_BOARD_COLORS = [
+  red_test,
+  green_test,
+  yellow_test,
+  blue_test,
+  orange_test,
+  purple_test,
+  cyan_test,
+  magenta_test,
+  brown_test,
+  white_test,
+  black_test
+];
+
+
+export const LEADER_BOARD_COLORS1 = [
   blue1,
   turquoise2,
   bluegreen3,
