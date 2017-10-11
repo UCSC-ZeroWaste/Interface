@@ -3,13 +3,13 @@ import _ from 'underscore';
 import moment from 'moment';
 
 const settings = {
-  dataRows: 100,
+  dataRows: 1000,
   diversionRatioArray: COLLEGE_NAMES.map( () => Math.random() ),
   recordFields: Object.keys(API_SAMPLE_RELEVANT)
 };
 
 const getTime = function () {
-  let begDate = new Date('2017-09-25').valueOf();
+  let begDate = new Date('2017-09-15').valueOf();
   let endDate = new Date('2017-10-11').valueOf();
   let diff = endDate - begDate;
   let newDate = new Date(begDate + (diff * Math.random()));

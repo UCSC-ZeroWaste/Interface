@@ -3,7 +3,7 @@ import _ from 'underscore';
 import moment from 'moment';
 
 //TODO switch back to 'rd3' when my changes have been accepted
-import {LineChart} from 'rd3';
+import {ScatterChart} from 'rd3';
 
 import ChartLegend from './ChartLegend';
 
@@ -16,7 +16,7 @@ import styles from '../../../App.scss';
 import ContainerDimensions from 'react-container-dimensions';
 import merge from 'lodash/merge';
 
-class LineChartComponent extends Component {
+class ScatterChartComponent extends Component {
   constructor(props) {
     super(props);
     // console.log(this.props.site, this.props.allData);
@@ -92,13 +92,12 @@ class LineChartComponent extends Component {
     .map((datum, i) => ({
       'x' : new Date(datum.PickupTime),
       'y' : datum.Load_Split,
+      'name': siteName
     }));
 
     return {
       name: siteName,
       values: sitePickups,
-      strokeWidth: this.refuseChartStrokeWidth,
-      strokeDashArray: this.refuseChartStrokeDashArray,
     };
   }
 
@@ -271,7 +270,7 @@ class LineChartComponent extends Component {
 
     return (
       //TODO get a handle on color & colorAccessor props
-      <LineChart
+      <ScatterChart
 
         data={this.getData()}
         width={width}
@@ -279,11 +278,16 @@ class LineChartComponent extends Component {
         colors={ (colorAccessorFunc) => chartColorsArray[colorAccessorFunc] }
         colorAccessor={(d, idx) => {
           let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
+
+
+
+
+
           let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
 
-          if (!d.name && idx === 8 && this.props.type === 'diversion' && this.props.scope === 'global') {
+          if (idx === 8 && this.props.type === 'refuse' && this.props.scope === 'global') {
             console.log(`colorAccessor for ${this.props.type} d: ${d} and idx: ${idx}`);
-            console.log(d.name);
+            console.log(d);
             console.log(leaderBoardIndexValue);
           }
 
@@ -395,4 +399,4 @@ const mapStateToProps = (state) => ({
   daysInRange: state.records.daysInRange
 });
 
-export default connect(mapStateToProps)(LineChartComponent);
+export default connect(mapStateToProps)(ScatterChartComponent);

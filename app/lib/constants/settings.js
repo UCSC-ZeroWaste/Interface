@@ -7,6 +7,17 @@ export const AUTOPLAY = {
   slideSpeed: 1 * 1000 //time it takes to move from one slide to the next
 };
 
+export const ROLLING_AVERAGE_SPAN = 7;
+
+export const LINE_CHART_DATA_POINT_SETTINGS = {
+  strokeWidth: 4,
+  strokeDashArray: undefined, //"5,5";
+};
+export const SCATTER_CHART_DATA_POINT_SETTINGS = {
+  strokeWidth: 0,
+  strokeDashArray: undefined, //"5,5";
+};
+
 export const CHART = {
   // xAxisLabelOffset: 40,
   // yAxisLabelOffset: 40,
