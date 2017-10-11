@@ -36,8 +36,6 @@ export const CHART = {
     xAxisLabelColor: 'white',
     yAxisLabelColor: 'white',
 
-    xAxisStrokeWidth: '3',
-    yAxisStrokeWidth: '3',
     xAxisTickStroke: 'white',
     yAxisTickStroke: 'white',
 

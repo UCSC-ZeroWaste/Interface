@@ -10,8 +10,8 @@ import ChartLegend from './ChartLegend';
 import d3 from 'd3';
 
 import {connect} from 'react-redux';
-import {WASTE_TYPES, LEADER_BOARD_COLORS, ROLLING_AVERAGE_SPAN} from '../../constants/constants';
-import {CHART} from '../../constants/settings';
+import {WASTE_TYPES, LEADER_BOARD_COLORS} from '../../constants/constants';
+import {CHART, ROLLING_AVERAGE_SPAN} from '../../constants/settings';
 import styles from '../../../App.scss';
 import ContainerDimensions from 'react-container-dimensions';
 import merge from 'lodash/merge';
@@ -146,7 +146,40 @@ class Chart extends Component {
     // );
 
     const chartColorsArray = LEADER_BOARD_COLORS;
+    let settings = {
+      data: this.getData(),
+      width: width,
+      height: height,
+      colors: (colorAccessorFunc) => chartColorsArray[colorAccessorFunc],
+      colorAccessor: (d, idx) => {
+        let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
+        let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
 
+        // if (!d.name && idx === 8 && this.props.type === 'line' && this.props.scope === 'global') {
+        //   console.log(`colorAccessor for ${this.props.type} d: ${d} and idx: ${idx}`);
+        //   console.log(d.name);
+        //   console.log(leaderBoardIndexValue);
+        // }
+
+        if (leaderBoardIndexValue >= 0) {
+          // console.log(siteName, leaderBoardIndexValue, this.props.type);
+          return leaderBoardIndexValue;
+        } else {
+          return idx;
+        }
+      },
+
+      circleRadius: this.props.type === 'line' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius,
+      viewBoxObject: {
+        x: 0,
+        y: height * -.04,
+        width: Number(width) * 1,
+        height: Number(height) * 1
+      },
+      domain: this.getChartDomain(),
+      xAccessor: this.getXAccessor(),
+      xAxisTickInterval: this.getTickInterval()
+    };
 
 
     // xAxisLabel={options.xLabel}
@@ -155,91 +188,23 @@ class Chart extends Component {
     // yAxisLabelOffset={height * .07}
     if (this.props.type === 'line') {
       return (
-        //TODO get a handle on color & colorAccessor props
         <LineChart
-
-          data={this.getData()}
-          width={width}
-          height={height}
-          colors={ (colorAccessorFunc) => chartColorsArray[colorAccessorFunc] }
-          colorAccessor={(d, idx) => {
-            let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
-            let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
-
-            // if (!d.name && idx === 8 && this.props.type === 'line' && this.props.scope === 'global') {
-            //   console.log(`colorAccessor for ${this.props.type} d: ${d} and idx: ${idx}`);
-            //   console.log(d.name);
-            //   console.log(leaderBoardIndexValue);
-            // }
-
-            if (leaderBoardIndexValue >= 0) {
-              // console.log(siteName, leaderBoardIndexValue, this.props.type);
-              return leaderBoardIndexValue;
-            } else {
-              return idx;
-            }
-          }}
-
-          circleRadius={this.props.type === 'line' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius}
-          viewBoxObject={{
-            x: 0,
-            y: height * -.04,
-            width: Number(width) * 1,
-            height: Number(height) * 1
-          }}
-
-          domain={this.getChartDomain()}
-          xAccessor={this.getXAccessor()}
-          xAxisTickInterval={this.getTickInterval()}
-
+          xAxisStrokeWidth='3'
+          yAxisStrokeWidth='3'
+          {...settings}
           {...CHART.axes}
           {...CHART.settings}
-
         />
       );
     }
     else if (this.props.type === 'scatter') {
       return (
-        //TODO get a handle on color & colorAccessor props
         <ScatterChart
-
-          data={this.getData()}
-          width={width}
-          height={height}
-          colors={ (colorAccessorFunc) => chartColorsArray[colorAccessorFunc] }
-          colorAccessor={(d, idx) => {
-            let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
-            let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
-
-            // if (!d.name && idx === 8 && this.props.type === 'line' && this.props.scope === 'global') {
-            //   console.log(`colorAccessor for ${this.props.type} d: ${d} and idx: ${idx}`);
-            //   console.log(d.name);
-            //   console.log(leaderBoardIndexValue);
-            // }
-
-            if (leaderBoardIndexValue >= 0) {
-              // console.log(siteName, leaderBoardIndexValue, this.props.type);
-              return leaderBoardIndexValue;
-            } else {
-              return idx;
-            }
-          }}
-
-          circleRadius={this.props.type === 'line' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius}
-          viewBoxObject={{
-            x: 0,
-            y: height * -.04,
-            width: Number(width) * 1,
-            height: Number(height) * 1
-          }}
-
-          domain={this.getChartDomain()}
-          xAccessor={this.getXAccessor()}
-          xAxisTickInterval={this.getTickInterval()}
-
+          xAxisStrokeWidth={3}
+          yAxisStrokeWidth={3}
+          {...settings}
           {...CHART.axes}
           {...CHART.settings}
-
         />
       );
     }
