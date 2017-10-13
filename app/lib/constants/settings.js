@@ -22,7 +22,7 @@ export const CHART = {
   // xAxisLabelOffset: 40,
   // yAxisLabelOffset: 40,
 
-  settings: {
+  general: {
     legend: false,
     gridHorizontal: false,
     gridVertical: false,
@@ -41,6 +41,16 @@ export const CHART = {
 
     xAxisTickTextStroke: 'white',
     yAxisTickTextStroke: 'white',
+  },
+
+  line: {
+    xAxisStrokeWidth: '3',
+    yAxisStrokeWidth: '3'
+  },
+
+  scatter: {
+    xAxisStrokeWidth: 3,
+    yAxisStrokeWidth: 3
   }
 };
 

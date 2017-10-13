@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import _ from 'underscore';
 import moment from 'moment';
-
-//TODO switch back to 'rd3' when my changes have been accepted
-import {LineChart, ScatterChart} from 'rd3';
-
+import {LineChart} from 'rd3';
+// import {ScatterChart} from 'rd3';
 import ChartLegend from './ChartLegend';
-
 import d3 from 'd3';
-
 import {connect} from 'react-redux';
 import {WASTE_TYPES, LEADER_BOARD_COLORS} from '../../constants/constants';
 import {CHART, ROLLING_AVERAGE_SPAN} from '../../constants/settings';
@@ -22,11 +18,11 @@ class Chart extends Component {
     this.state = this.chartState();
 
     // this.diversionChartStrokeWidth = 4;
-    this.diversionChartCircleRadius = 4; //TODO set to zero
+    this.diversionChartCircleRadius = 0; //TODO set to zero
     // this.diversionChartStrokeDashArray = undefined;//"5,5";
 
     // this.refuseChartStrokeWidth = 0;
-    this.refuseChartCircleRadius = 7;
+    this.refuseChartCircleRadius = 5;
     // this.refuseChartStrokeDashArray = undefined;//"5,5";
 
     // this.handleSelector = this.handleSelector.bind(this);
@@ -77,7 +73,7 @@ class Chart extends Component {
       case 'scatter':
         begRange = new Date(this.props.dateRange[0]);
         endRange = moment.utc(this.props.dateRange[1]).add(1, 'days');
-        return {x: [begRange, endRange], y: [0,]};
+        return {x: [begRange, endRange], y: [0,undefined]};
       default:
         return {x: [undefined,undefined], y: [undefined,undefined]};
       }
@@ -125,6 +121,8 @@ class Chart extends Component {
       if (this.props.scope === 'local') {
         return this.props.diversionPlotPoints.filter( (site) => site.name === this.props.site);
       } else {
+        // let test = this.deepDupe(this.props.diversionPlotPoints[0]);
+        // return this.props.diversionPlotPoints.concat(test);
         return this.props.diversionPlotPoints;
       }
     }
@@ -132,10 +130,22 @@ class Chart extends Component {
       if (this.props.scope === 'local') {
         return this.props.refusePlotPoints.filter( (site) => site.name === this.props.site);
       } else {
+        // return this.props.refusePlotPoints.concat(this.props.refusePlotPoints[0]);
         return this.props.refusePlotPoints;
       }
     }
   }
+
+  deepDupe(object) {
+    let a = Object.assign({}, object);
+    a.name = 'test';
+    a.values = a.values.map( (coordinates) => Object.assign({}, coordinates));
+    // console.log('test', test);
+    return a;
+  }
+  // shouldComponentUpdate(nextProps) {
+  //       return true;
+    // }
 
   renderChart(height, width) {
     const index = this.props.leaders.findIndex( leader => leader.site === this.props.site );
@@ -146,11 +156,17 @@ class Chart extends Component {
     // );
 
     const chartColorsArray = LEADER_BOARD_COLORS;
+
     let settings = {
       data: this.getData(),
       width: width,
       height: height,
-      colors: (colorAccessorFunc) => chartColorsArray[colorAccessorFunc],
+      colors: (colorAccessorFunc) => {
+        let color = chartColorsArray[colorAccessorFunc];
+        // console.log(color);
+        return color;
+      },
+      // TODO need to take another look at the color accessor
       colorAccessor: (d, idx) => {
         let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
         let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
@@ -160,13 +176,32 @@ class Chart extends Component {
         //   console.log(d.name);
         //   console.log(leaderBoardIndexValue);
         // }
-
-        if (leaderBoardIndexValue >= 0) {
-          // console.log(siteName, leaderBoardIndexValue, this.props.type);
-          return leaderBoardIndexValue;
+        if (this.props.scope === 'local') {
+          return this.props.leaders.findIndex( leader => leader.site === this.props.site );
         } else {
-          return idx;
+          // if (d.name === undefined) {
+          //   console.log('idx: idx', d.point.seriesIndex, idx, d.point.id);
+          // } else {
+          //   console.log('idx: ', idx, d.name);
+          // }
+
+          //TODO Somehow the plot points for the first data line (when switching from local to global)
+          //do not follow the rules that the other plot points do -- it will default to the local
+          //color trend line.
+          // if (d.name === undefined) {
+          //   return 0;
+          // } else if (idx === 11) {
+          //   return 10;
+          // } else {
+            return idx;
+          // }
         }
+        // if (leaderBoardIndexValue >= 0) {
+        //   // console.log(siteName, leaderBoardIndexValue, this.props.type);
+        //   return leaderBoardIndexValue;
+        // } else {
+        //   return idx;
+        // }
       },
 
       circleRadius: this.props.type === 'line' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius,
@@ -177,7 +212,7 @@ class Chart extends Component {
         height: Number(height) * 1
       },
       domain: this.getChartDomain(),
-      xAccessor: this.getXAccessor(),
+      // xAccessor: this.getXAccessor(),
       xAxisTickInterval: this.getTickInterval()
     };
 
@@ -189,22 +224,21 @@ class Chart extends Component {
     if (this.props.type === 'line') {
       return (
         <LineChart
-          xAxisStrokeWidth='3'
-          yAxisStrokeWidth='3'
           {...settings}
           {...CHART.axes}
-          {...CHART.settings}
+          {...CHART.general}
+          {...CHART.line}
         />
       );
     }
     else if (this.props.type === 'scatter') {
       return (
-        <ScatterChart
-          xAxisStrokeWidth={3}
-          yAxisStrokeWidth={3}
+        <LineChart
           {...settings}
           {...CHART.axes}
-          {...CHART.settings}
+          {...CHART.general}
+          {...CHART.line}
+
         />
       );
     }

@@ -36,11 +36,14 @@ function parsePickupData(data) {
   let groupDataBySite = _.groupBy(relevantPickups, 'Location');
 
   let leaders = calculateLeaders(groupDataBySite);
-  let refusePlotPoints = calculatePlotPoints('refuse', groupDataBySite);
-  let diversionPlotPoints = calculatePlotPoints('diversion', groupDataBySite, dateRange, daysInRange);
+  let leaderBoardOrder = leaders.map( leader => leader.site );
+  // let leaderBoardOrder = ['chart_fix'].concat(leaders.map( leader => leader.site ));
+  // console.log(leaderBoardOrder);
+  let refusePlotPoints = calculatePlotPoints('refuse', groupDataBySite, leaderBoardOrder);
+  let diversionPlotPoints = calculatePlotPoints('diversion', groupDataBySite, leaderBoardOrder, dateRange, daysInRange);
 
-  console.log(refusePlotPoints);
-  console.log(diversionPlotPoints);
+  // console.log(refusePlotPoints);
+  // console.log(diversionPlotPoints);
   return {
     data: groupDataBySite,
     leaders,
@@ -69,65 +72,83 @@ function calculateLeaders (groupDataBySite) {
   }).sort( (siteA, siteB) => siteB.diversionRatio - siteA.diversionRatio );
 }
 
-function calculatePlotPoints(chartType, dataSet, dateRange, daysInRange) {
+function calculatePlotPoints(chartType, dataSet, leaderBoardOrder, dateRange, daysInRange) {
   if (chartType === 'diversion') {
-    return COLLEGE_NAMES.map( (siteName) => parseDiversionData(siteName, dataSet, dateRange, daysInRange) );
+    return leaderBoardOrder.map( (siteName) => parseDiversionData(siteName, dataSet, dateRange, daysInRange) );
   } else {
-    return COLLEGE_NAMES.map( (siteName) => parseRefuseData(siteName, dataSet) );
+    return leaderBoardOrder.map( (siteName) => parseRefuseData(siteName, dataSet) );
   }
 }
 
 function parseDiversionData(siteName, dataSet, dateRange, daysInRange) {
-    let sitePickups = dataSet[siteName];
-    let oneDayInMsec = 24 * 60 * 60 * 1000;
-    let begDateInMsec = new Date(dateRange[0]).valueOf();
-    let endDateInMsec = new Date(dateRange[1]).valueOf() + oneDayInMsec;
-    let timeDiff = endDateInMsec - begDateInMsec;
+  // if (siteName === 'chart_fix') {
+  //   return ({
+  //     name: siteName,
+  //     values: {
+  //       y : 1,
+  //       x : new Date(dateRange[0])
+  //     }
+  //   });
+  // }
 
-    //create empty arrays of n days
-    let totalDiverted = Array(daysInRange).fill(0);
-    let totalRefuse = Array(daysInRange).fill(0);
+  let sitePickups = dataSet[siteName];
+  let oneDayInMsec = 24 * 60 * 60 * 1000;
+  let begDateInMsec = new Date(dateRange[0]).valueOf();
+  let endDateInMsec = new Date(dateRange[1]).valueOf() + oneDayInMsec;
+  let timeDiff = endDateInMsec - begDateInMsec;
 
-    sitePickups.forEach( (pickup, i) => {
-      let thisDateInMsec = new Date(pickup.PickupTime).valueOf();
-      let day = Math.floor((thisDateInMsec - begDateInMsec) / oneDayInMsec);
-      if (pickup.Diversion_Type === 'Refuse') {
-        totalRefuse[day] += pickup.Load_Split;
-      } else if (pickup.Diversion_Type === 'Diverted') {
-        totalDiverted[day] += pickup.Load_Split;
-      }
-    });
+  //create empty arrays of n days
+  let totalDiverted = Array(daysInRange).fill(0);
+  let totalRefuse = Array(daysInRange).fill(0);
 
-    let diversionRatio = [];
-    for (let i = 0 ; i < daysInRange - ROLLING_AVERAGE_SPAN; i++) {
-      let diverted = totalDiverted
-        .slice(i, i + ROLLING_AVERAGE_SPAN)
-        .reduce( (total, load) => total + load);
-      let refuse = totalRefuse
-        .slice(i, i + ROLLING_AVERAGE_SPAN)
-        .reduce( (total, load) => total + load);
-      diversionRatio.push(
-        Math.floor(100 * diverted /( refuse + diverted ))
-      );
+  sitePickups.forEach( (pickup, i) => {
+    let thisDateInMsec = new Date(pickup.PickupTime).valueOf();
+    let day = Math.floor((thisDateInMsec - begDateInMsec) / oneDayInMsec);
+    if (pickup.Diversion_Type === 'Refuse') {
+      totalRefuse[day] += pickup.Load_Split;
+    } else if (pickup.Diversion_Type === 'Diverted') {
+      totalDiverted[day] += pickup.Load_Split;
     }
+  });
 
-    diversionRatio = diversionRatio
-      .map((ratio, i) => ({
-        y : ratio,
-        x : new Date(begDateInMsec + (i + ROLLING_AVERAGE_SPAN) * oneDayInMsec)
-      }));
-
-
-    return merge({
-      name: siteName,
-      values: diversionRatio
-      },
-      LINE_CHART_DATA_POINT_SETTINGS
+  let diversionRatio = [];
+  for (let i = 0 ; i < daysInRange - ROLLING_AVERAGE_SPAN; i++) {
+    let diverted = totalDiverted
+      .slice(i, i + ROLLING_AVERAGE_SPAN)
+      .reduce( (total, load) => total + load);
+    let refuse = totalRefuse
+      .slice(i, i + ROLLING_AVERAGE_SPAN)
+      .reduce( (total, load) => total + load);
+    diversionRatio.push(
+      Math.floor(100 * diverted /( refuse + diverted ))
     );
+  }
 
+  diversionRatio = diversionRatio
+    .map((ratio, i) => ({
+      y : ratio,
+      x : new Date(begDateInMsec + (i + ROLLING_AVERAGE_SPAN) * oneDayInMsec)
+    }));
+
+  return merge({
+    name: siteName,
+    values: diversionRatio
+    },
+    LINE_CHART_DATA_POINT_SETTINGS
+  );
 }
 
 function parseRefuseData(siteName, dataSet) {
+  // if (siteName === 'chart_fix') {
+  //   return ({
+  //     name: siteName,
+  //     values: {
+  //       x : new Date('2017-09-22'),
+  //       y : 1,
+  //     }
+  //   });
+  // }
+
   let sitePickups = dataSet[siteName]
   .filter( (datum) => (datum.Product === 'Refuse'))
   .map((datum, i) => ({

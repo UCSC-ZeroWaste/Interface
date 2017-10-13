@@ -3,7 +3,7 @@ import _ from 'underscore';
 import moment from 'moment';
 
 const settings = {
-  dataRows: 1000,
+  dataRows: 500,
   diversionRatioArray: COLLEGE_NAMES.map( () => Math.random() ),
   recordFields: Object.keys(API_SAMPLE_RELEVANT)
 };

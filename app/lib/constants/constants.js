@@ -77,6 +77,20 @@ const bluegreen3= '#4DC79D';
 const turquoise2 = '#39C4BF';
 const blue1= '#39B9C4';
 
+export const LEADER_BOARD_COLORS = [
+  blue1,
+  turquoise2,
+  bluegreen3,
+  midgreen4,
+  grassgreen5,
+  lightgreen6,
+  yellow7,
+  lightorange8,
+  orange9,
+  darkorange10,
+  red11,
+];
+
 const red_test = '#e6194b';
 const green_test = '#3cb44b';
 const yellow_test = '#ffe119';
@@ -89,8 +103,7 @@ const brown_test = '#aa6e28';
 const white_test = '#FFFFFF';
 const black_test = '#000000';
 
-
-export const LEADER_BOARD_COLORS = [
+export const LEADER_BOARD_COLORS_TESTING = [
   red_test,
   green_test,
   yellow_test,
@@ -102,21 +115,6 @@ export const LEADER_BOARD_COLORS = [
   brown_test,
   white_test,
   black_test
-];
-
-
-export const LEADER_BOARD_COLORS1 = [
-  blue1,
-  turquoise2,
-  bluegreen3,
-  midgreen4,
-  grassgreen5,
-  lightgreen6,
-  yellow7,
-  lightorange8,
-  orange9,
-  darkorange10,
-  red11,
 ];
 
 import happiest from '../assets/images/emotional_slugs/Slug1.png';
