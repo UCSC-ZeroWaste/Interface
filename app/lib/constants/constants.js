@@ -77,7 +77,7 @@ const bluegreen3= '#4DC79D';
 const turquoise2 = '#39C4BF';
 const blue1= '#39B9C4';
 
-export const LEADER_BOARD_COLORS = [
+export const LEADER_BOARD_COLORS_TESTING = [
   blue1,
   turquoise2,
   bluegreen3,
@@ -103,7 +103,7 @@ const brown_test = '#aa6e28';
 const white_test = '#FFFFFF';
 const black_test = '#000000';
 
-export const LEADER_BOARD_COLORS_TESTING = [
+export const LEADER_BOARD_COLORS = [
   red_test,
   green_test,
   yellow_test,

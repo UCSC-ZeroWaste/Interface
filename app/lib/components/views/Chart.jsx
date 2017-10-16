@@ -73,7 +73,7 @@ class Chart extends Component {
       case 'scatter':
         begRange = new Date(this.props.dateRange[0]);
         endRange = moment.utc(this.props.dateRange[1]).add(1, 'days');
-        return {x: [begRange, endRange], y: [0,undefined]};
+        return {x: [begRange, endRange], y: [0,1100]};
       default:
         return {x: [undefined,undefined], y: [undefined,undefined]};
       }
@@ -157,54 +157,10 @@ class Chart extends Component {
 
     const chartColorsArray = LEADER_BOARD_COLORS;
 
-    let settings = {
+    let generalSettings = {
       data: this.getData(),
       width: width,
       height: height,
-      colors: (colorAccessorFunc) => {
-        let color = chartColorsArray[colorAccessorFunc];
-        // console.log(color);
-        return color;
-      },
-      // TODO need to take another look at the color accessor
-      colorAccessor: (d, idx) => {
-        let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
-        let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
-
-        // if (!d.name && idx === 8 && this.props.type === 'line' && this.props.scope === 'global') {
-        //   console.log(`colorAccessor for ${this.props.type} d: ${d} and idx: ${idx}`);
-        //   console.log(d.name);
-        //   console.log(leaderBoardIndexValue);
-        // }
-        if (this.props.scope === 'local') {
-          return this.props.leaders.findIndex( leader => leader.site === this.props.site );
-        } else {
-          // if (d.name === undefined) {
-          //   console.log('idx: idx', d.point.seriesIndex, idx, d.point.id);
-          // } else {
-          //   console.log('idx: ', idx, d.name);
-          // }
-
-          //TODO Somehow the plot points for the first data line (when switching from local to global)
-          //do not follow the rules that the other plot points do -- it will default to the local
-          //color trend line.
-          // if (d.name === undefined) {
-          //   return 0;
-          // } else if (idx === 11) {
-          //   return 10;
-          // } else {
-            return idx;
-          // }
-        }
-        // if (leaderBoardIndexValue >= 0) {
-        //   // console.log(siteName, leaderBoardIndexValue, this.props.type);
-        //   return leaderBoardIndexValue;
-        // } else {
-        //   return idx;
-        // }
-      },
-
-      circleRadius: this.props.type === 'line' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius,
       viewBoxObject: {
         x: 0,
         y: height * -.04,
@@ -213,8 +169,58 @@ class Chart extends Component {
       },
       domain: this.getChartDomain(),
       // xAccessor: this.getXAccessor(),
-      xAxisTickInterval: this.getTickInterval()
+      xAxisTickInterval: this.getTickInterval(),
+      colors: (colorAccessorFunc) => {
+        let color = chartColorsArray[colorAccessorFunc];
+        // console.log(color);
+        return color;
+      },
+      circleRadius: this.props.type === 'line' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius,
     };
+
+
+
+
+
+
+      // TODO need to take another look at the color accessor
+      // colorAccessor: (d, idx) => {
+      //   let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
+      //   let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
+      //
+      //   // if (!d.name && idx === 8 && this.props.type === 'line' && this.props.scope === 'global') {
+      //   //   console.log(`colorAccessor for ${this.props.type} d: ${d} and idx: ${idx}`);
+      //   //   console.log(d.name);
+      //   //   console.log(leaderBoardIndexValue);
+      //   // }
+      //   if (this.props.scope === 'local') {
+      //     return this.props.leaders.findIndex( leader => leader.site === this.props.site );
+      //   } else {
+      //     // if (d.name === undefined) {
+      //     //   console.log('idx: idx', d.point.seriesIndex, idx, d.point.id);
+      //     // } else {
+      //     //   console.log('idx: ', idx, d.name);
+      //     // }
+      //
+      //     //TODO Somehow the plot points for the first data line (when switching from local to global)
+      //     //do not follow the rules that the other plot points do -- it will default to the local
+      //     //color trend line.
+      //     // if (d.name === undefined) {
+      //     //   return 0;
+      //     // } else if (idx === 11) {
+      //     //   return 10;
+      //     // } else {
+      //       return idx;
+      //     // }
+      //   }
+      //   // if (leaderBoardIndexValue >= 0) {
+      //   //   // console.log(siteName, leaderBoardIndexValue, this.props.type);
+      //   //   return leaderBoardIndexValue;
+      //   // } else {
+      //   //   return idx;
+      //   // }
+      // },
+
 
 
     // xAxisLabel={options.xLabel}
@@ -222,25 +228,58 @@ class Chart extends Component {
     // yAxisLabel={options.yLabel}
     // yAxisLabelOffset={height * .07}
     if (this.props.type === 'line') {
-      return (
-        <LineChart
-          {...settings}
-          {...CHART.axes}
-          {...CHART.general}
-          {...CHART.line}
-        />
-      );
+      if (this.props.scope === 'local') {
+        return (
+          <LineChart
+            colorAccessor={(d, idx) => {
+              let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
+              let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
+              return this.props.leaders.findIndex( leader => leader.site === this.props.site );
+            }}
+            {...generalSettings}
+            {...CHART.axes}
+            {...CHART.general}
+            {...CHART.line}
+            />
+        );
+      } else if (this.props.scope === 'global') {
+        return (
+          <LineChart
+            colorAccessor={(d, idx) => idx}
+            {...generalSettings}
+            {...CHART.axes}
+            {...CHART.general}
+            {...CHART.line}
+            />
+        );
+      }
     }
     else if (this.props.type === 'scatter') {
-      return (
-        <LineChart
-          {...settings}
-          {...CHART.axes}
-          {...CHART.general}
-          {...CHART.line}
-
-        />
-      );
+      if (this.props.scope === 'local') {
+        return (
+          <LineChart
+            colorAccessor={(d, idx) => {
+              let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
+              let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
+              return this.props.leaders.findIndex( leader => leader.site === this.props.site );
+            }}
+            {...generalSettings}
+            {...CHART.axes}
+            {...CHART.general}
+            {...CHART.line}
+            />
+        );
+      } else if (this.props.scope === 'global') {
+        return (
+          <LineChart
+            colorAccessor={(d, idx) => idx}
+            {...generalSettings}
+            {...CHART.axes}
+            {...CHART.general}
+            {...CHART.line}
+            />
+        );
+      }
     }
   }
   // xAxisTickInterval={{unit: 'day', interval: 21}}
