@@ -16,17 +16,6 @@ class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = this.chartState();
-
-    // this.diversionChartStrokeWidth = 4;
-    this.diversionChartCircleRadius = 0; //TODO set to zero
-    // this.diversionChartStrokeDashArray = undefined;//"5,5";
-
-    // this.refuseChartStrokeWidth = 0;
-    this.refuseChartCircleRadius = 5;
-    // this.refuseChartStrokeDashArray = undefined;//"5,5";
-
-    // this.handleSelector = this.handleSelector.bind(this);
-    // this.setRollingAverageLength = this.setRollingAverageLength.bind(this);
   }
 
   chartState() {
@@ -46,24 +35,6 @@ class Chart extends Component {
     return state;
   }
 
-  componentDidMount() {
-    // console.log('widthreceiveprops', this.props.widtha);
-    // console.log('WIDTH',this.refs.childNode.parentNode);
-    // width={this.refs.parentNode}
-  }
-
-  componentWillReceiveProps(nextProps){
-    // console.log('widthreceiveprops', nextProps);
-    // console.log('WIDTH',this.refs.childNode.parentNode);
-  //  this.refs.chart.onWindowResized();
- }
-
-  getTimeDiff(a, b) {
-    return Math.abs((a - b) / (3600 * 24 * 1000));
-  }
-
-
-
   getChartDomain() {
     switch (this.props.type) {
       case 'line':
@@ -73,7 +44,7 @@ class Chart extends Component {
       case 'scatter':
         begRange = new Date(this.props.dateRange[0]);
         endRange = moment.utc(this.props.dateRange[1]).add(1, 'days');
-        return {x: [begRange, endRange], y: [0,1100]};
+        return {x: [begRange, endRange], y: [0,undefined]};
       default:
         return {x: [undefined,undefined], y: [undefined,undefined]};
       }
@@ -93,72 +64,10 @@ class Chart extends Component {
     }
   }
 
-  //TODO Don't think I need this. Also delete from chart props.
-  getXAccessor(){
-    switch (this.props.type) {
-      case 'line':
-        return (d) => {
-          // console.log(d.x);
-          return d.x;
-        };
-      case 'scatter':
-        // return {};
-        return (d) => {
-          // var formatter = d3.time.format("%Y-%m-%d").parse;
-          // return formatter(d.x.slice(0,10));
-            // console.log(d.x);
-            return d.x;
-            // return new Date(d.x);
-          };
-      default:
-        return {};
-      }
-  }
-
-
-  getData() {
-    if (this.props.type === 'line') {
-      if (this.props.scope === 'local') {
-        return this.props.diversionPlotPoints.filter( (site) => site.name === this.props.site);
-      } else {
-        // let test = this.deepDupe(this.props.diversionPlotPoints[0]);
-        // return this.props.diversionPlotPoints.concat(test);
-        return this.props.diversionPlotPoints;
-      }
-    }
-    else if (this.props.type === 'scatter') {
-      if (this.props.scope === 'local') {
-        return this.props.refusePlotPoints.filter( (site) => site.name === this.props.site);
-      } else {
-        // return this.props.refusePlotPoints.concat(this.props.refusePlotPoints[0]);
-        return this.props.refusePlotPoints;
-      }
-    }
-  }
-
-  deepDupe(object) {
-    let a = Object.assign({}, object);
-    a.name = 'test';
-    a.values = a.values.map( (coordinates) => Object.assign({}, coordinates));
-    // console.log('test', test);
-    return a;
-  }
-  // shouldComponentUpdate(nextProps) {
-  //       return true;
-    // }
-
   renderChart(height, width) {
     const index = this.props.leaders.findIndex( leader => leader.site === this.props.site );
-    // const chartColorsArray = (
-    //   this.props.scope === 'local' ?
-    //   [LEADER_BOARD_COLORS[index]] :
-    //   LEADER_BOARD_COLORS
-    // );
-
-    const chartColorsArray = LEADER_BOARD_COLORS;
 
     let generalSettings = {
-      data: this.getData(),
       width: width,
       height: height,
       viewBoxObject: {
@@ -168,20 +77,10 @@ class Chart extends Component {
         height: Number(height) * 1
       },
       domain: this.getChartDomain(),
-      // xAccessor: this.getXAccessor(),
       xAxisTickInterval: this.getTickInterval(),
-      colors: (colorAccessorFunc) => {
-        let color = chartColorsArray[colorAccessorFunc];
-        // console.log(color);
-        return color;
-      },
-      circleRadius: this.props.type === 'line' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius,
+      colors: (colorAccessorFunc) => LEADER_BOARD_COLORS[colorAccessorFunc],
+      circleRadius: this.props.type === 'line' ? 0 : 5,
     };
-
-
-
-
-
 
       // TODO need to take another look at the color accessor
       // colorAccessor: (d, idx) => {
@@ -221,22 +120,13 @@ class Chart extends Component {
       //   // }
       // },
 
-
-
-    // xAxisLabel={options.xLabel}
-    // xAxisLabelOffset={width * .04}
-    // yAxisLabel={options.yLabel}
-    // yAxisLabelOffset={height * .07}
     if (this.props.type === 'line') {
       if (this.props.scope === 'local') {
         return (
           <LineChart
-            colorAccessor={(d, idx) => {
-              let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
-              let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
-              return this.props.leaders.findIndex( leader => leader.site === this.props.site );
-            }}
+            colorAccessor={(d, idx) => this.props.leaders.findIndex( leader => leader.site === this.props.site)}
             {...generalSettings}
+            data={this.props.diversionPlotPoints.filter( (site) => site.name === this.props.site)}
             {...CHART.axes}
             {...CHART.general}
             {...CHART.line}
@@ -247,6 +137,7 @@ class Chart extends Component {
           <LineChart
             colorAccessor={(d, idx) => idx}
             {...generalSettings}
+            data={this.props.diversionPlotPoints}
             {...CHART.axes}
             {...CHART.general}
             {...CHART.line}
@@ -258,12 +149,9 @@ class Chart extends Component {
       if (this.props.scope === 'local') {
         return (
           <LineChart
-            colorAccessor={(d, idx) => {
-              let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
-              let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
-              return this.props.leaders.findIndex( leader => leader.site === this.props.site );
-            }}
+            colorAccessor={(d, idx) => this.props.leaders.findIndex( leader => leader.site === this.props.site)}
             {...generalSettings}
+            data={this.props.refusePlotPoints.filter( (site) => site.name === this.props.site)}
             {...CHART.axes}
             {...CHART.general}
             {...CHART.line}
@@ -274,6 +162,7 @@ class Chart extends Component {
           <LineChart
             colorAccessor={(d, idx) => idx}
             {...generalSettings}
+            data={this.props.refusePlotPoints}
             {...CHART.axes}
             {...CHART.general}
             {...CHART.line}
@@ -282,8 +171,6 @@ class Chart extends Component {
       }
     }
   }
-  // xAxisTickInterval={{unit: 'day', interval: 21}}
-  // xAxisTickInterval={{unit: 'day', interval: this.calculateTickInterval()}}
 
   renderHeader() {
     return (
@@ -292,12 +179,6 @@ class Chart extends Component {
       </div>
     );
   }
-  // <LineChart
-  //   data= {options.data}
-  //   x= {(d) => new Date(d.picked_up).valueOf()}
-  //   xScale= 'time'
-  //   yLabelPosition = {this.state.yLabelPosition}
-  //   />
 
   render() {
     if (this.props.refusePlotPoints === undefined || this.props.diversionPlotPoints === undefined) return (<div></div>);
@@ -326,11 +207,8 @@ class Chart extends Component {
 
       </div>
     );
-
   }
-
 }
-
 
 const mapStateToProps = (state) => ({
   refusePlotPoints: state.records.refusePlotPoints,

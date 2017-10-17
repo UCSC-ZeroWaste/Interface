@@ -45,13 +45,14 @@ export const CHART = {
 
   line: {
     xAxisStrokeWidth: '3',
-    yAxisStrokeWidth: '3'
+    yAxisStrokeWidth: '3',
+
   },
 
-  scatter: {
-    xAxisStrokeWidth: 3,
-    yAxisStrokeWidth: 3
-  }
+  // scatter: {
+  //   xAxisStrokeWidth: 3,
+  //   yAxisStrokeWidth: 3
+  // }
 };
 
 const mapColor = {
