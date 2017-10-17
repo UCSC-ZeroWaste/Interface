@@ -23,8 +23,8 @@ class DataVisualizationPRC extends Component {
     this.keyHandler = this.keyHandler.bind(this);
     this.components = [
       <LeaderBoard/>,
-      <LineChart type={'green'}/>,
-      <LineChart type={'general'}/>,
+      <LineChart type={'diversion'}/>,
+      <LineChart type={'refuse'}/>,
       <SizeView />,
       <_ViewTemplate title={'Empty View 5'}/>,
       <_ViewTemplate title={'Empty View 6'}/>,

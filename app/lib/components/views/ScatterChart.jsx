@@ -3,7 +3,7 @@ import _ from 'underscore';
 import moment from 'moment';
 
 //TODO switch back to 'rd3' when my changes have been accepted
-import {LineChart} from 'rd3';
+import {ScatterChart} from 'rd3';
 
 import ChartLegend from './ChartLegend';
 
@@ -16,7 +16,7 @@ import styles from '../../../App.scss';
 import ContainerDimensions from 'react-container-dimensions';
 import merge from 'lodash/merge';
 
-class LineChartComponent extends Component {
+class ScatterChartComponent extends Component {
   constructor(props) {
     super(props);
     // console.log(this.props.site, this.props.allData);
@@ -27,7 +27,7 @@ class LineChartComponent extends Component {
     );
 
     this.diversionChartStrokeWidth = 4;
-    this.diversionChartCircleRadius = 0;
+    this.diversionChartCircleRadius = 4; //TODO set to zero
     this.diversionChartStrokeDashArray = undefined;//"5,5";
 
     this.refuseChartStrokeWidth = 0;
@@ -39,7 +39,7 @@ class LineChartComponent extends Component {
   }
 
   chartState() {
-    if (this.props.type === 'green') {
+    if (this.props.type === 'diversion') {
       var state = {
         title: "Percentage of waste diverted from landfill",
         xLabel: "Time Period",
@@ -67,22 +67,6 @@ class LineChartComponent extends Component {
   //  this.refs.chart.onWindowResized();
  }
 
-  parseWasteBreakdown(site) {
-    let sitePickups = this.props.allData[site]
-      .filter( (datum) => (datum.Product === this.state.wasteType))
-      .map((datum, i) => ({
-        'x' : new Date(datum.PickupTime),
-        'y' : datum.Load_Split,
-      }));
-
-    return {
-      name: site,
-      values: sitePickups,
-      strokeWidth: this.refuseChartStrokeWidth,
-      strokeDashArray: this.refuseChartStrokeDashArray,
-    };
-  }
-
   handleSelector(e) {
     this.setState({wasteType: e.target.value});
   }
@@ -92,7 +76,7 @@ class LineChartComponent extends Component {
   }
 
   getData() {
-    const parseData = (this.props.type === 'green' ? (site) => this.parseDiversionRatioData(site) : (site) => this.parseWasteBreakdown(site) );
+    const parseData = (this.props.type === 'diversion' ? (siteName) => this.parseDiversionData(siteName) : (siteName) => this.parseRefuseData(siteName) );
 
     if (this.props.scope === 'global') {
       let sites = _.keys(this.props.allData);
@@ -102,7 +86,22 @@ class LineChartComponent extends Component {
     }
   }
 
-  parseDiversionRatioData(siteName) {
+  parseRefuseData(siteName) {
+    let sitePickups = this.props.allData[siteName]
+    .filter( (datum) => (datum.Product === this.state.wasteType))
+    .map((datum, i) => ({
+      'x' : new Date(datum.PickupTime),
+      'y' : datum.Load_Split,
+      'name': siteName
+    }));
+
+    return {
+      name: siteName,
+      values: sitePickups,
+    };
+  }
+
+  parseDiversionData(siteName) {
     let sitePickups = this.props.allData[siteName];
     //TODO probably can simplify next two lines since data should be in date order
 
@@ -169,7 +168,7 @@ class LineChartComponent extends Component {
   // renderSelector() {
   //   let settings;
   //   switch (this.props.type) {
-  //     case 'green':
+  //     case 'diversion':
   //       settings = {
   //         array: _.range(2,30),
   //         changeHandler: this.setRollingAverageLength,
@@ -177,7 +176,7 @@ class LineChartComponent extends Component {
   //         title: 'Select # of Days for Rolling Average'
   //       };
   //       break;
-  //     case 'general':
+  //     case 'refuse':
   //       settings = {
   //         array: WASTE_TYPES,
   //         changeHandler: this.handleSelector,
@@ -203,11 +202,11 @@ class LineChartComponent extends Component {
 
   getChartDomain() {
     switch (this.props.type) {
-      case 'green':
+      case 'diversion':
         let begRange = moment.utc(this.props.dateRange[0]).add(this.state.rollingAverageLength, 'days');
         let endRange = new Date(this.props.dateRange[1]);
         return {x: [begRange, endRange], y: [0,100]};
-      case 'general':
+      case 'refuse':
         begRange = new Date(this.props.dateRange[0]);
         endRange = moment.utc(this.props.dateRange[1]).add(1, 'days');
         return {x: [begRange, endRange], y: [0,]};
@@ -217,7 +216,7 @@ class LineChartComponent extends Component {
   }
 
   getTickInterval() {
-    let temp = this.props.type === 'green' ? this.state.rollingAverageLength : 0;
+    let temp = this.props.type === 'diversion' ? this.state.rollingAverageLength : 0;
     let days = this.props.daysInRange - temp;
     if ( days <= 14) {
       return {unit: 'day', interval: 1};
@@ -233,12 +232,12 @@ class LineChartComponent extends Component {
   //TODO Don't think I need this. Also delete from chart props.
   getXAccessor(){
     switch (this.props.type) {
-      case 'green':
+      case 'diversion':
         return (d) => {
           // console.log(d.x);
           return d.x;
         };
-      case 'general':
+      case 'refuse':
         // return {};
         return (d) => {
           // var formatter = d3.time.format("%Y-%m-%d").parse;
@@ -253,13 +252,17 @@ class LineChartComponent extends Component {
   }
 
   renderChart(height, width) {
-
     const index = this.props.leaders.findIndex( leader => leader.site === this.props.site );
-    const chartColorsArray = (
-      this.props.scope === 'local' ?
-      [LEADER_BOARD_COLORS[index]] :
-      LEADER_BOARD_COLORS
-    );
+    // const chartColorsArray = (
+    //   this.props.scope === 'local' ?
+    //   [LEADER_BOARD_COLORS[index]] :
+    //   LEADER_BOARD_COLORS
+    // );
+
+    const chartColorsArray = LEADER_BOARD_COLORS;
+
+
+
     // xAxisLabel={options.xLabel}
     // xAxisLabelOffset={width * .04}
     // yAxisLabel={options.yLabel}
@@ -267,15 +270,36 @@ class LineChartComponent extends Component {
 
     return (
       //TODO get a handle on color & colorAccessor props
-      <LineChart
+      <ScatterChart
 
         data={this.getData()}
         width={width}
         height={height}
         colors={ (colorAccessorFunc) => chartColorsArray[colorAccessorFunc] }
-        colorAccessor={(d, idx) => idx}
+        colorAccessor={(d, idx) => {
+          let siteName = (this.props.scope === 'local' ? this.props.site : d.name);
 
-        circleRadius={this.props.type === 'green' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius}
+
+
+
+
+          let leaderBoardIndexValue = this.props.leaders.findIndex( leader => leader.site === siteName );
+
+          if (idx === 8 && this.props.type === 'refuse' && this.props.scope === 'global') {
+            console.log(`colorAccessor for ${this.props.type} d: ${d} and idx: ${idx}`);
+            console.log(d);
+            console.log(leaderBoardIndexValue);
+          }
+
+          if (leaderBoardIndexValue >= 0) {
+            // console.log(siteName, leaderBoardIndexValue, this.props.type);
+            return leaderBoardIndexValue;
+          } else {
+            return idx;
+          }
+        }}
+
+        circleRadius={this.props.type === 'diversion' ? this.diversionChartCircleRadius : this.refuseChartCircleRadius}
         viewBoxObject={{
           x: 0,
           y: height * -.04,
@@ -313,7 +337,7 @@ class LineChartComponent extends Component {
   render() {
     // console.log('this.props.allData', this.props.allData);
     if (this.props.allData === undefined) return (<div></div>);
-    // console.log("Site Data: ", this.parseWasteBreakdown(this.props.allData));
+    // console.log("Site Data: ", this.parseRefuseData(this.props.allData));
 
     return (
       <div className={styles.line_chart_view}>
@@ -346,7 +370,7 @@ class LineChartComponent extends Component {
   // {this.renderWasteTypeSelector()}
   // <LineChart
   //
-  //   data= {this.parseWasteBreakdown(this.props.allData)}
+  //   data= {this.parseRefuseData(this.props.allData)}
   //   chartSeries= {[{
   //     field: 'quantity',
   //     name:  this.props.site + ' - Site Waste Weight',
@@ -375,4 +399,4 @@ const mapStateToProps = (state) => ({
   daysInRange: state.records.daysInRange
 });
 
-export default connect(mapStateToProps)(LineChartComponent);
+export default connect(mapStateToProps)(ScatterChartComponent);
