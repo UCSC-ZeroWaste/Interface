@@ -16,24 +16,44 @@ import modalStyle from '../assets/stylesheets/modal';
 import {COLLEGE_NAMES} from '../constants/constants';
 import {AUTOPLAY} from '../constants/settings';
 
+var ReactGA = require('react-ga');
+ReactGA.initialize('UA-108280148-1', {
+  debug: true,
+  titleCase: false,
+  // gaOptions: {
+  //   userId: 123
+  // }
+});
+
+
 class Carousel extends Component {
   constructor(props) {
     super(props);
-    // console.log(this.props);
-    // console.log('THIS', props.match.params.siteIndex, COLLEGE_NAMES[Number(props.match.params.siteIndex)]);
-    // console.log('THIS', props.match.params.siteIndex);
-    // console.log(COLLEGE_NAMES[1]);
-    // console.log('props.match', props.match);
-    // console.log('props.location', props.location);
-    // console.log('props.history', props.history);
     const site = COLLEGE_NAMES[Number(props.match.params.siteIndex)];
     props.handleSiteSelect(site);
     props.handleDeviceSelect(props.match.params.device);
     this.touchHandler = this.touchHandler.bind(this);
   }
 
+
+  // function logPageView() {
+  //   ReactGA.set({ page: window.location.pathname + window.location.search });
+  //   ReactGA.pageview(window.location.pathname + window.location.search);
+  // }
+
+
   touchHandler(e) {
-    // console.log("TOUCH EVENT!!!", e.target);
+    console.log("TOUCH EVENT!!!", e.target, this.props.currentView);
+    ReactGA.set({ page: window.location.pathname + window.location.search });
+    // - clicked item
+    // - college site
+    // - scope -- this.props.currentView.scope
+    // - device -- this.props.currentView.device
+    console.log('test', window.location);
+    console.log('test', this.props.match.url);
+    ReactGA.set({ userId: 123 });
+    ReactGA.pageview(this.props.match.url);
+
     this.props.handleTouchEvent();
   }
 
@@ -71,7 +91,8 @@ class Carousel extends Component {
 const mapStateToProps = (state) => ({
   data: state.records.data,
   modalState: !!state.currentView.modal,
-  modalType: state.currentView.modal
+  modalType: state.currentView.modal,
+  currentView: state.currentView
 });
 
 const mapDispatchToProps = (dispatch) => {
