@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import _ViewTemplate from './views/_ViewTemplate';
 import LeaderBoard from './views/LeaderBoard.jsx';
-import LineChart from './views/LineChart.jsx';
+import Chart from './views/Chart.jsx';
+// import ScatterChart from './views/ScatterChart.jsx';
 import HeatMap from './views/HeatMap.jsx';
 // import SizeView from './views/SizeView.jsx';
 // import Table from './views/Table.jsx';
@@ -43,8 +44,8 @@ class DataVisualization extends Component {
 
     this.slides = [
       <LeaderBoard/>,
-      <LineChart type={'green'}/>,
-      <LineChart type={'general'}/>,
+      <Chart type={'line'}/>,
+      <Chart type={'scatter'}/>,
       <HeatMap/>,
       <Tip/>,
     ];

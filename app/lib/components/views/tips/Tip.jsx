@@ -11,7 +11,6 @@ class Tip extends Component {
       tipIndex: 0
     };
     this.clickHandler = this.clickHandler.bind(this);
-    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 
   clickHandler(direction) {
@@ -26,6 +25,8 @@ class Tip extends Component {
   }
 
   render(){
+    let touchscreen = this.props.device === 'touchscreen' ? styles.touchscreen : "";
+
     return (
       <div className={styles.tip_container}>
         <div className={styles.tip_header}>
@@ -44,13 +45,13 @@ class Tip extends Component {
           </div>
           <div className={styles.tip_textbox_and_buttons}>
 
-            <div className={`${styles.tip_textbox} ${this.touchscreenStyle}`}>
+            <div className={`${styles.tip_textbox} ${touchscreen}`}>
               {tips[this.state.tipIndex].text}
             </div>
 
             <div className={styles.tip_buttons_container}>
-              <button onClick={() => this.clickHandler('prev')} className={styles.tip_button}>{"PREVIOUS"}</button>
-              <button onClick={() => this.clickHandler('next')} className={styles.tip_button}>{"NEXT"}</button>
+              <button id='NewTip_InfoButton' onClick={() => this.clickHandler('prev')} className={styles.tip_button}>{"PREVIOUS"}</button>
+              <button id='NewTip_InfoButton' onClick={() => this.clickHandler('next')} className={styles.tip_button}>{"NEXT"}</button>
             </div>
 
           </div>

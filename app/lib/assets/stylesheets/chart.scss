@@ -1,0 +1,81 @@
+.xLabel_chart_and_legend_container {
+  width: 100%;
+  flex: 83;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /*box-sizing: border-box;
+  border: 1px solid pink;*/
+}
+.yLabel_container {
+  display: flex;
+  position: relative;
+  height: 1px;
+  width: 3%;
+  align-items: center;
+}
+.yAxisLabel {
+  display: block;
+  position: absolute;
+  white-space: nowrap;
+  top: 0;
+  left: 100%;
+  transform: rotate(-90deg) translate(-50%, -100%);
+  transform-origin: left top 0;
+  color: white;
+  font-size: 1.4em;
+}
+.xAxisLabel {
+  flex: 7;
+  width: 75%;
+  color: white;
+  margin-left: 5%;
+  font-size: 1.4em;
+  text-align: center;
+  /*box-sizing: border-box;
+  border: 1px solid yellow;*/
+}
+.chart_container {
+  height: 100%;
+  width: 77%;
+  // box-sizing: border-box;
+  // border: 1px solid red;
+}
+.chart_legend {
+  display: flex;
+  align-self: flex-start;
+  height: auto;
+  min-width: 220px;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: .6em;
+  background-color: rgba($blue-background, .6);
+}
+.chart_legend_row {
+  display: flex;
+  align-items: center;
+  height: 1.5em;
+  flex-direction: row;
+  margin: .3em 0;
+  color: white;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+.chart_legend_color {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: .6em;
+}
+.chart_legend_site_label {
+  display: inline-flex;
+  font-size: 1.3em;
+  align-items: center;
+  height: 8%;
+  flex-wrap: nowrap;
+}

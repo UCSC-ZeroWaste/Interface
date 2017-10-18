@@ -16,25 +16,63 @@ import modalStyle from '../assets/stylesheets/modal';
 import {COLLEGE_NAMES} from '../constants/constants';
 import {AUTOPLAY} from '../constants/settings';
 
+var ReactGA = require('react-ga');
+ReactGA.initialize('UA-108280148-1', {
+  debug: true,
+  titleCase: false,
+  // gaOptions: {
+  //   userId: 123
+  // }
+});
+
+
 class Carousel extends Component {
   constructor(props) {
     super(props);
-    // console.log(this.props);
-    // console.log('THIS', props.match.params.siteIndex, COLLEGE_NAMES[Number(props.match.params.siteIndex)]);
-    // console.log('THIS', props.match.params.siteIndex);
-    // console.log(COLLEGE_NAMES[1]);
-    // console.log('props.match', props.match);
-    // console.log('props.location', props.location);
-    // console.log('props.history', props.history);
     const site = COLLEGE_NAMES[Number(props.match.params.siteIndex)];
     props.handleSiteSelect(site);
     props.handleDeviceSelect(props.match.params.device);
     this.touchHandler = this.touchHandler.bind(this);
   }
 
+
+  // function logPageView() {
+  //   ReactGA.set({ page: window.location.pathname + window.location.search });
+  //   ReactGA.pageview(window.location.pathname + window.location.search);
+  // }
+
+
   touchHandler(e) {
-    console.log("TOUCH EVENT!!!", e.target);
+    console.log("TOUCH EVENT!!!");
+    this.sendGoogleAnalytics(e.target.id);
     this.props.handleTouchEvent();
+  }
+
+  sendGoogleAnalytics(touchID) {
+    let categories = [
+      'NavButton',
+      'InfoButton',
+      'ScopeButton',
+      'OtherTouch'
+    ];
+
+    if (!categories.some( category => touchID.search(category) >= 0 )) {
+      touchID = 'OtherTouch';
+    }
+
+    let siteName = this.props.currentView.site;
+    let device = this.props.currentView.device;
+    let category = touchID;
+    let action = device + '_' + siteName + '_' + touchID;
+    let label = device + '_' + siteName;
+
+    //sample analytics event:
+    // category: 'Leaderboard_NavButton'
+    // action: 'touchscreen_College 9_Leaderboard_NavButton'
+    // label: 'touchscreen_College 9'
+    ReactGA.set({ page: this.props.match.url });
+    ReactGA.event({ category, action, label });
+    if (device !== 'touchscreen') ReactGA.pageview(this.props.match.url);
   }
 
   renderModal() {
@@ -71,7 +109,8 @@ class Carousel extends Component {
 const mapStateToProps = (state) => ({
   data: state.records.data,
   modalState: !!state.currentView.modal,
-  modalType: state.currentView.modal
+  modalType: state.currentView.modal,
+  currentView: state.currentView,
 });
 
 const mapDispatchToProps = (dispatch) => {

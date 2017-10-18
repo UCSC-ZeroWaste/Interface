@@ -34,12 +34,11 @@ class EmailModal extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
-    this.touchscreenStyle = this.props.device === 'touchscreen' ? styles.touchscreen : '';
   }
 
   handleSubmit(e) {
     let email = this.refs.email_input.value;
-    if (this.props.device === 'home') e.preventDefault();
+    if (this.props.device === 'desktop') e.preventDefault();
     if (!email || email.length < 5 || email.indexOf("@") === -1) {
       this.setState({
         status: "error"
@@ -119,8 +118,10 @@ class EmailModal extends Component {
   }
 
   render (){
+    let touchscreen = this.props.device === 'touchscreen' ? styles.touchscreen : "";
+
     return (
-      <div className={`${styles.signup_container} ${this.touchscreenStyle}`}>
+      <div className={`${styles.signup_container} ${touchscreen}`}>
         <form name="mc-embedded-subscribe-form" className="validate" noValidate>
           <div>
             <div className={styles.title}>
@@ -151,7 +152,7 @@ class EmailModal extends Component {
                   onClick={this.handleSubmit}
                   value="Subscribe"
                   name="subscribe"
-                  id="mc-embedded-subscribe"
+                  id="SubmitEmail_InfoButton"
                   className={styles.email_submit_button}
                   />
               }
