@@ -18,7 +18,7 @@ import {AUTOPLAY} from '../constants/settings';
 
 var ReactGA = require('react-ga');
 ReactGA.initialize('UA-108280148-1', {
-  debug: true,
+  // debug: true,
   titleCase: false,
   // gaOptions: {
   //   userId: 123
@@ -43,7 +43,7 @@ class Carousel extends Component {
 
 
   touchHandler(e) {
-    console.log("TOUCH EVENT!!!");
+    // console.log("TOUCH EVENT!!!");
     this.sendGoogleAnalytics(e.target.id);
     this.props.handleTouchEvent();
   }
@@ -102,9 +102,6 @@ class Carousel extends Component {
     );
   }
 }
-
-// <Route path={`${this.props.match.url}/carousel/site/:siteIndex`} component={Carousel} />
-
 
 const mapStateToProps = (state) => ({
   data: state.records.data,
