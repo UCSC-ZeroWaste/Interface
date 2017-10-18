@@ -7,21 +7,6 @@ import LatinLayout from '../keyboard/layouts/LatinLayout';
 import jsonp from 'jsonp';
 import styles from '../../../App.scss';
 
-// const MyComponent = ({inputNode, submit}) => (
-//   <Keyboard
-//     inputNode={inputNode}
-//     layouts={[LatinLayout]}
-//     />
-// );
-// rightButtons={[
-//   <KeyboardButton
-//     onClick={submit}
-//     value="Submit"
-//     classes="keyboard-submit-button"
-//     />
-// ]}
-
-
 class EmailModal extends Component {
   constructor(props){
     super(props);
@@ -41,7 +26,8 @@ class EmailModal extends Component {
     if (this.props.device === 'desktop') e.preventDefault();
     if (!email || email.length < 5 || email.indexOf("@") === -1) {
       this.setState({
-        status: "error"
+        status: "error",
+        msg: "Not a valid email. Please try again."
       });
       return;
     }
@@ -73,15 +59,21 @@ class EmailModal extends Component {
     };
 
     this.setState(
-      {
-        status: "sending",
-        msg: null
-      },
-
-      () => jsonp(url, {
-        param: "c"
-      }, responseCallback)
+      { status: "sending", msg: null },
+      () => jsonp(url, { param: "c" }, responseCallback)
     );
+  }
+
+  renderSubmissionMessage() {
+    if (this.state.msg === '') {
+      return <div hidden></div>;
+    } else {
+      return (
+        <div className={styles.email_submit_message}>
+          {this.state.msg}
+        </div>
+      );
+    }
   }
 
   handleInput(e) {
@@ -122,43 +114,41 @@ class EmailModal extends Component {
 
     return (
       <div className={`${styles.signup_container} ${touchscreen}`}>
-        <form name="mc-embedded-subscribe-form" className="validate" noValidate>
-          <div>
-            <div className={styles.title}>
-            <label htmlFor="mce-EMAIL">TAKE ACTION</label><br />
-            </div>
-          <label htmlFor="mce-EMAIL">Join us to help make UCSC a zero waste campus!</label><br />
-            <label htmlFor="mce-EMAIL">Add your email and we'll send you 90 days of (genuinely) awesome zero waste living tips.</label><br /><br />
-            <input
-              type="text"
-              autoFocus
-              autoComplete={'off'}
-              ref="email_input"
-              onChange={this.handleInput}
-              onFocus={this.handleFocus}
-              name="EMAIL"
-              className={styles.email_input}
-              id="mce-EMAIL"
-              placeholder="email address"
-              required
-              />
-            <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
-              <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
-            </div>
-            <div className="clear">
-              {this.props.device === 'touchscreen' ? '' :
-                <input
-                  type="submit"
-                  onClick={this.handleSubmit}
-                  value="Subscribe"
-                  name="subscribe"
-                  id="InfoButton_SubmitEmail"
-                  className={styles.email_submit_button}
-                  />
+        <form name="mc-embedded-subscribe-form" className={styles.signup_form} noValidate>
+          <div className={styles.title}></div>
+          <p className={styles.signup_header1}>Join us to help make UCSC a zero waste campus!</p>
+          <p className={styles.signup_header2}>Add your email and we'll send you 90 days <br /> of (genuinely) awesome zero waste living tips.</p>
+          <input
+            type="text"
+            autoFocus
+            autoComplete={'off'}
+            ref="email_input"
+            onChange={this.handleInput}
+            onFocus={this.handleFocus}
+            name="EMAIL"
+            className={styles.email_input}
+            id="mce-EMAIL"
+            placeholder="email address"
+            required
+            />
+
+          <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
+            <input type="text" name="b_169807c453e90727dcebdcb04_ecc956188b" tabIndex="-1" value=""/>
+          </div>
+
+          <div className="clear">
+            {this.props.device === 'touchscreen' ? '' :
+              <input
+                type="submit"
+                onClick={this.handleSubmit}
+                value="Subscribe"
+                name="subscribe"
+                id="InfoButton_SubmitEmail"
+                className={styles.email_submit_button}
+                />
               }
             </div>
-            <div>{this.state.msg}</div>
-          </div>
+          {this.renderSubmissionMessage()}
         </form>
         {this.renderKeyboard()}
       </div>

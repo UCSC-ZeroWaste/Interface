@@ -54,10 +54,7 @@
 }
 
 .signup_container {
-  padding: 8%;
-  display: flex;
-  flex-direction: column;
-  // justify-content: space-between;
+  padding: 4%;
   height: 100%;
   width: 100%;
   text-align: center;
@@ -70,6 +67,9 @@
   }
 
   form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding-bottom: 5%;
   }
 }
@@ -77,6 +77,14 @@
 .title {
   font-size: 1.8em;
   line-height: 2.0em;
+}
+.signup_header1 {
+  font-size: 1.6em;
+  padding: .5em 0;
+}
+.signup_header2 {
+  font-size: 1.3em;
+  padding: .3em 0;
 }
 
 .email_input {
@@ -92,36 +100,43 @@
   margin: .4em;
   width: 15em;
   vertical-align: top;
+  text-align: left;
+
+  &::placeholder {
+    text-align:center;
+  }
 }
+
+// .email_input
+
+// .email_input:focus{
+//   text-align:left;
+// }
 
 .email_submit_button {
   font-size: 1em;
   border: none;
   border-radius: .2em;
   letter-spacing: .03em;
-  // color: #fff;
   color: $off-white;
-  // background-color: #aaa;
   background-color: $grey;
   box-sizing:border-box;
   height: 2em;
   line-height: 2em;
   padding:0 1em;
   display: inline-block;
-  margin: 0;
+  margin: .5em;
   transition: all 0.23s ease-in-out 0s;
 }
 
 .email_submit_button:hover {
-  // background-color:#777;
   background-color: $grey-dark;
   cursor: pointer;
 }
 
-
-// #mc_embed_signup {
-//   background: #fff;
-//   clear: left;
-//   font: 14px;
-//   width: 100%;
-// }
+.email_submit_message {
+  width: 60%;
+  color: red;
+  font-size: .8em;
+  line-height: 1.2;
+}
