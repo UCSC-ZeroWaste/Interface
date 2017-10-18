@@ -105,13 +105,11 @@
   &::placeholder {
     text-align:center;
   }
+
+  &.error {
+    border: .1em solid red;
+  }
 }
-
-// .email_input
-
-// .email_input:focus{
-//   text-align:left;
-// }
 
 .email_submit_button {
   font-size: 1em;
@@ -135,8 +133,18 @@
 }
 
 .email_submit_message {
-  width: 60%;
-  color: red;
+  width: 70%;
+  padding: .8em;
   font-size: .8em;
   line-height: 1.2;
+  border-radius: 3px;
+
+  &.success {
+    color: green;
+    background-color: #DEF0DA;
+  }
+  &.error {
+    color: red;
+    background-color: #F3DEDF;
+  }
 }

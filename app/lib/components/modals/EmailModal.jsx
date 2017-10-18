@@ -15,6 +15,7 @@ class EmailModal extends Component {
       email: '',
       msg: '',
       mounted: false,
+      status: '',
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,22 +39,24 @@ class EmailModal extends Component {
 
     const responseCallback = (err, data) => {
       if (err) {
-        console.log('error', err);
+        // console.log('error', err);
         this.setState({
           status: 'error',
           msg: err
         });
       } else if (data.result !== 'success') {
-        console.log('result', data.result);
+        // console.log('result', data.result);
         this.setState({
           status: 'error',
           msg: data.msg
         });
       } else {
-        console.log('data', data);
+        // console.log('data', data);
+        this.refs.email_input.value = '';
         this.setState({
+          email: '',
           status: 'success',
-          msg: data.msg
+          msg: 'Success!! Almost finished... To complete the subscription process, please click the link in the email we just sent you.'
         });
       }
     };
@@ -65,11 +68,12 @@ class EmailModal extends Component {
   }
 
   renderSubmissionMessage() {
+    let status = (this.state.status === 'success' ? styles.success : styles.error);
     if (this.state.msg === '') {
       return <div hidden></div>;
     } else {
       return (
-        <div className={styles.email_submit_message}>
+        <div className={`${styles.email_submit_message} ${status}`}>
           {this.state.msg}
         </div>
       );
@@ -77,7 +81,11 @@ class EmailModal extends Component {
   }
 
   handleInput(e) {
-    this.setState({email: e.target.value});
+    this.setState({
+      email: e.target.value,
+      status: '',
+      msg: '',
+    });
   }
 
   componentDidMount() {
@@ -111,6 +119,7 @@ class EmailModal extends Component {
 
   render (){
     let touchscreen = this.props.device === 'touchscreen' ? styles.touchscreen : "";
+    let status = (this.state.status === 'error' ? styles.error : '');
 
     return (
       <div className={`${styles.signup_container} ${touchscreen}`}>
@@ -126,7 +135,7 @@ class EmailModal extends Component {
             onChange={this.handleInput}
             onFocus={this.handleFocus}
             name="EMAIL"
-            className={styles.email_input}
+            className={`${styles.email_input} ${status}`}
             id="mce-EMAIL"
             placeholder="email address"
             required
