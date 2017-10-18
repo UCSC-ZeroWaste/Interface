@@ -43,18 +43,36 @@ class Carousel extends Component {
 
 
   touchHandler(e) {
-    console.log("TOUCH EVENT!!!", e.target, this.props.currentView);
-    ReactGA.set({ page: window.location.pathname + window.location.search });
-    // - clicked item
-    // - college site
-    // - scope -- this.props.currentView.scope
-    // - device -- this.props.currentView.device
-    console.log('test', window.location);
-    console.log('test', this.props.match.url);
-    ReactGA.set({ userId: 123 });
-    ReactGA.pageview(this.props.match.url);
-
+    console.log("TOUCH EVENT!!!");
+    this.sendGoogleAnalytics(e.target.id);
     this.props.handleTouchEvent();
+  }
+
+  sendGoogleAnalytics(touchID) {
+    let categories = [
+      'NavButton',
+      'InfoButton',
+      'ScopeButton',
+      'OtherTouch'
+    ];
+
+    if (!categories.some( category => touchID.search(category) >= 0 )) {
+      touchID = 'OtherTouch';
+    }
+
+    let siteName = this.props.currentView.site;
+    let device = this.props.currentView.device;
+    let category = touchID;
+    let action = device + '_' + siteName + '_' + touchID;
+    let label = device + '_' + siteName;
+
+    //sample analytics event:
+    // category: 'Leaderboard_NavButton'
+    // action: 'touchscreen_College 9_Leaderboard_NavButton'
+    // label: 'touchscreen_College 9'
+    ReactGA.set({ page: this.props.match.url });
+    ReactGA.event({ category, action, label });
+    if (device !== 'touchscreen') ReactGA.pageview(this.props.match.url);
   }
 
   renderModal() {
@@ -92,7 +110,7 @@ const mapStateToProps = (state) => ({
   data: state.records.data,
   modalState: !!state.currentView.modal,
   modalType: state.currentView.modal,
-  currentView: state.currentView
+  currentView: state.currentView,
 });
 
 const mapDispatchToProps = (dispatch) => {

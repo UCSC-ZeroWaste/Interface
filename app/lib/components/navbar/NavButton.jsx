@@ -36,9 +36,11 @@ class NavButton extends Component {
 
     return (
       <button
+        id={this.props.title}
         onClick={this.clickHandler}
         className={`${styles.nav_button_press_response} ${touchscreen}`}>
         <FontAwesome
+          id={this.props.title}
           className={`${styles.nav_button_fa} ${selected}`}
           name={this.props.fa}
           size='2x'

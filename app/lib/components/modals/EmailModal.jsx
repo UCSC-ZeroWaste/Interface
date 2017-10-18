@@ -152,7 +152,7 @@ class EmailModal extends Component {
                   onClick={this.handleSubmit}
                   value="Subscribe"
                   name="subscribe"
-                  id="mc-embedded-subscribe"
+                  id="SubmitEmail_InfoButton"
                   className={styles.email_submit_button}
                   />
               }
