@@ -67,8 +67,8 @@ class Carousel extends Component {
     let label = device + '_' + siteName;
 
     //sample analytics event:
-    // category: 'Leaderboard_NavButton'
-    // action: 'touchscreen_College 9_Leaderboard_NavButton'
+    // category: 'NavButton_Leaderboard'
+    // action: 'touchscreen_College 9_NavButton_Leaderboard'
     // label: 'touchscreen_College 9'
     ReactGA.set({ page: this.props.match.url });
     ReactGA.event({ category, action, label });

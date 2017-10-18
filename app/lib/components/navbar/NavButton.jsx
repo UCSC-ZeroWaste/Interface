@@ -19,7 +19,7 @@ class NavButton extends Component {
     } else if (this.props.nav === 'scope') {
       // TODO need to flesh this out
       this.props.handleScopeSelect(this.props.scope);
-      console.log('hit scope clickHandler', this.props.scope);
+      // console.log('hit scope clickHandler', this.props.scope);
     } else {
       console.log('nav button clickHandler error');
     }

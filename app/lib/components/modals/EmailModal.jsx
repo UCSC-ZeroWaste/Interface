@@ -152,7 +152,7 @@ class EmailModal extends Component {
                   onClick={this.handleSubmit}
                   value="Subscribe"
                   name="subscribe"
-                  id="SubmitEmail_InfoButton"
+                  id="InfoButton_SubmitEmail"
                   className={styles.email_submit_button}
                   />
               }

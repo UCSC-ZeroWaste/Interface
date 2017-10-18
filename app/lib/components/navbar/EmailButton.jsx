@@ -18,7 +18,7 @@ class EmailButton extends Component {
     let device = this.props.device === 'touchscreen' ? styles.touchscreen : styles.desktop;
 
     return (
-      <button id='EmailModal_InfoButton' onClick={this.clickHandler} className={`${styles.email_button} ${device}`}>
+      <button id='InfoButton_EmailModal' onClick={this.clickHandler} className={`${styles.email_button} ${device}`}>
         Take Action!
       </button>
     );
