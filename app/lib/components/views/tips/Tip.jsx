@@ -50,8 +50,8 @@ class Tip extends Component {
             </div>
 
             <div className={styles.tip_buttons_container}>
-              <button id='NewTip_InfoButton' onClick={() => this.clickHandler('prev')} className={styles.tip_button}>{"PREVIOUS"}</button>
-              <button id='NewTip_InfoButton' onClick={() => this.clickHandler('next')} className={styles.tip_button}>{"NEXT"}</button>
+              <button id='InfoButton_NewTip' onClick={() => this.clickHandler('prev')} className={styles.tip_button}>{"PREVIOUS"}</button>
+              <button id='InfoButton_NewTip' onClick={() => this.clickHandler('next')} className={styles.tip_button}>{"NEXT"}</button>
             </div>
 
           </div>
