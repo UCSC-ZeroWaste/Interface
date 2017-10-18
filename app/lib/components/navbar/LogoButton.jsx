@@ -33,7 +33,7 @@ class LogoButton extends Component {
   render() {
     return (
       <button
-        id="Logo_NavButton"
+        id="NavButton_Logo"
         className={styles.logo}
         onClick={this.clickHandler}
         >

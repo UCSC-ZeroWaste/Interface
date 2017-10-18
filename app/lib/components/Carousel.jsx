@@ -18,7 +18,7 @@ import {AUTOPLAY} from '../constants/settings';
 
 var ReactGA = require('react-ga');
 ReactGA.initialize('UA-108280148-1', {
-  debug: true,
+  // debug: true,
   titleCase: false,
   // gaOptions: {
   //   userId: 123
@@ -43,7 +43,7 @@ class Carousel extends Component {
 
 
   touchHandler(e) {
-    console.log("TOUCH EVENT!!!");
+    // console.log("TOUCH EVENT!!!");
     this.sendGoogleAnalytics(e.target.id);
     this.props.handleTouchEvent();
   }
@@ -67,8 +67,8 @@ class Carousel extends Component {
     let label = device + '_' + siteName;
 
     //sample analytics event:
-    // category: 'Leaderboard_NavButton'
-    // action: 'touchscreen_College 9_Leaderboard_NavButton'
+    // category: 'NavButton_Leaderboard'
+    // action: 'touchscreen_College 9_NavButton_Leaderboard'
     // label: 'touchscreen_College 9'
     ReactGA.set({ page: this.props.match.url });
     ReactGA.event({ category, action, label });
@@ -102,9 +102,6 @@ class Carousel extends Component {
     );
   }
 }
-
-// <Route path={`${this.props.match.url}/carousel/site/:siteIndex`} component={Carousel} />
-
 
 const mapStateToProps = (state) => ({
   data: state.records.data,

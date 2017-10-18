@@ -121,54 +121,44 @@ class Chart extends Component {
       // },
 
     if (this.props.type === 'line') {
-      if (this.props.scope === 'local') {
-        return (
-          <LineChart
-            colorAccessor={(d, idx) => this.props.leaders.findIndex( leader => leader.site === this.props.site)}
-            {...generalSettings}
-            data={this.props.diversionPlotPoints.filter( (site) => site.name === this.props.site)}
-            {...CHART.axes}
-            {...CHART.general}
-            {...CHART.line}
-            />
-        );
-      } else if (this.props.scope === 'global') {
-        return (
-          <LineChart
-            colorAccessor={(d, idx) => idx}
-            {...generalSettings}
-            data={this.props.diversionPlotPoints}
-            {...CHART.axes}
-            {...CHART.general}
-            {...CHART.line}
-            />
-        );
-      }
+      return (
+        <LineChart
+          {...generalSettings}
+          {...CHART.axes}
+          {...CHART.general}
+          {...CHART.line}
+          colorAccessor={
+            this.props.scope === 'local' ?
+            (d, idx) => this.props.leaders.findIndex( leader => leader.site === this.props.site) :
+            (d, idx) => idx
+          }
+          data={
+            this.props.scope === 'local' ?
+            this.props.diversionPlotPoints.filter( (site) => site.name === this.props.site) :
+            this.props.diversionPlotPoints
+          }
+          />
+      );
     }
     else if (this.props.type === 'scatter') {
-      if (this.props.scope === 'local') {
-        return (
-          <LineChart
-            colorAccessor={(d, idx) => this.props.leaders.findIndex( leader => leader.site === this.props.site)}
-            {...generalSettings}
-            data={this.props.refusePlotPoints.filter( (site) => site.name === this.props.site)}
-            {...CHART.axes}
-            {...CHART.general}
-            {...CHART.line}
-            />
-        );
-      } else if (this.props.scope === 'global') {
-        return (
-          <LineChart
-            colorAccessor={(d, idx) => idx}
-            {...generalSettings}
-            data={this.props.refusePlotPoints}
-            {...CHART.axes}
-            {...CHART.general}
-            {...CHART.line}
-            />
-        );
-      }
+      return (
+        <LineChart
+          {...generalSettings}
+          {...CHART.axes}
+          {...CHART.general}
+          {...CHART.line}
+          colorAccessor={
+            this.props.scope === 'local' ?
+            (d, idx) => this.props.leaders.findIndex( leader => leader.site === this.props.site) :
+            (d, idx) => idx
+          }
+          data={
+            this.props.scope === 'local' ?
+            this.props.refusePlotPoints.filter( (site) => site.name === this.props.site) :
+            this.props.refusePlotPoints
+          }
+          />
+      );
     }
   }
 
