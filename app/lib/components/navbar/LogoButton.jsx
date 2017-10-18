@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import styles from '../../../App.scss';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {handleViewSelect} from '../../actions/view_actions';
-
+import {resetView, handleViewSelect} from '../../actions/view_actions';
 
 class LogoButton extends Component {
   constructor(props) {
@@ -24,6 +23,7 @@ class LogoButton extends Component {
 
     //redux version:
     if (this.props.device === 'desktop') {
+      this.props.resetView();
       this.props.history.push(`/home`);
     } else {
       this.props.handleViewSelect(0);
@@ -48,7 +48,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum))
+  handleViewSelect: (navButtonNum) => dispatch(handleViewSelect(navButtonNum)),
+  resetView: () => dispatch(resetView())
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LogoButton));
