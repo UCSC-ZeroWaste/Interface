@@ -168,6 +168,12 @@ class EmailModal extends Component {
 
 const mapStateToProps = (state) => ({
   device: state.currentView.device,
+  // modalTimeout: state.touch.modalTimeout
 });
 
+// const mapDispatchToProps = (dispatch) => ({
+//   toggleModal: (type) => dispatch(toggleModal(type)),
+// });
+
 export default connect(mapStateToProps)(EmailModal);
+// export default connect(mapStateToProps, mapDispatchToProps)(EmailModal);

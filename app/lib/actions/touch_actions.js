@@ -1,4 +1,5 @@
 export const UPDATE_AUTOPLAY = 'UPDATE_AUTOPLAY';
+// export const RESET_MODAL_TIMEOUT = 'RESET_MODAL_TIMEOUT';
 
 export const setAutoplay = (setting) => {
   // let timer = null;
@@ -9,3 +10,10 @@ export const setAutoplay = (setting) => {
     setting
   });
 };
+
+// export const modalTimeout = (bool) => {
+//   return ({
+//     type: RESET_MODAL_TIMEOUT,
+//     setting: bool
+//   });
+// };
