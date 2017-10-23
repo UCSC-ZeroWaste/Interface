@@ -2,17 +2,11 @@ import React from 'react';
 import styles from './App.scss';
 import Carousel from './lib/components/Carousel.jsx';
 import LandingPage from './lib/components/LandingPage.jsx';
-
 import { Provider } from 'react-redux';
 import {fetchRecords, createRandomRecordSet} from './lib/actions/record_actions';
-
 import {connect} from 'react-redux';
 import _ from 'underscore';
 import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
-
-// import TestTransitions from './lib/components/test_carousel/TestTransitions';
-// import TestRouter from './lib/components/test_carousel/TestRouter';
-// import TestSlide from './lib/components/test_carousel/TestSlide';
 
 // spring dates:
 //   springStart = `'2017-04-03'`;

@@ -1,11 +1,11 @@
-
-
-
 export const AUTOPLAY = {
   restartInterval: 500 * 1000, //time interval for autoplay to restart after touch
   nextSlideInterval: 20 * 1000, //time until slider moves to the next slide
   slideSpeed: 1 * 1000 //time it takes to move from one slide to the next
 };
+
+//close the email modal after 100 seconds of inactivity
+export const EMAIL_MODAL_TIMEOUT = 100 * 1000;
 
 export const ROLLING_AVERAGE_SPAN = 7;
 
