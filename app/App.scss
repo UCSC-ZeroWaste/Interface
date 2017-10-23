@@ -34,6 +34,12 @@ body > div {
   width: 100%;
 }
 
+.max_contain {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
 .page {
   background-image: url('./lib/assets/images/background.png');
   // background-image: url("http://res.cloudinary.com/delisauce/image/upload/v1506389418/ZeroWaste/background.png");

@@ -1,6 +1,6 @@
 import merge from 'lodash/merge';
 import {COLLEGE_NAMES} from '../constants/constants';
-import {UPDATE_VIEW, UPDATE_SITE, UPDATE_SCOPE, TOGGLE_MODAL, UPDATE_DEVICE} from '../actions/view_actions';
+import {RESET_VIEW, UPDATE_VIEW, UPDATE_SITE, UPDATE_SCOPE, TOGGLE_MODAL, UPDATE_DEVICE} from '../actions/view_actions';
 
 const defaultState = {view: 0, site: COLLEGE_NAMES[0], scope: 'local', modal: false, device: 'desktop', autoplay: true};
 
@@ -8,6 +8,8 @@ const ViewReducer = (state = defaultState, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
   switch(action.type) {
+    case RESET_VIEW:
+      return defaultState;
     case UPDATE_VIEW:
       newState.view = action.view;
       return newState;

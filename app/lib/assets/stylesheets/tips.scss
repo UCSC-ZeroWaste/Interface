@@ -73,12 +73,21 @@
 .tip_button {
   width: 40%;
   height: 3em;
-  color: grey;
+  color: $grey-dark;
   text-align: center;
   background-color: white;
   box-sizing: border-box;
-  border: .2em grey solid;
+  // border: .2em grey solid;
+
+  box-shadow: 4px 4px 10px 0px rgba(black, 0.4),
+              0px 6px 10px 0px rgba(black, 0.2);
+
+  &:hover {
+    background-color: $grey;
+    color: white;
+  }
+
 }
-.tip_button:hover {
-  background-color: lightgray;
-}
+// .tip_button:hover {
+//   background-color: lightgray;
+// }

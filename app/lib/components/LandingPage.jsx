@@ -1,23 +1,10 @@
 import React, { Component } from 'react';
 import styles from '../../App.scss';
-// import NavBar from './NavBar.jsx';
-// import Footer from './Footer.jsx';
 import LogoButton from './navbar/LogoButton';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 import {COLLEGE_NAMES} from '../constants/constants';
 import {connect} from 'react-redux';
 import {handleScopeSelect} from '../actions/view_actions';
-
-// const SiteButton = ({siteName, goToCarousel}) => {
-//   return (
-//     <button
-//       className={styles.landing_page_site_button}
-//       onClick={goToCarousel}
-//       >
-//       {siteName}
-//     </button>
-//   );
-// };
 
 class LandingPage extends Component {
   constructor(props) {
@@ -26,7 +13,6 @@ class LandingPage extends Component {
       siteSelectionHidden: true
     };
     this.handleCampusSelect = this.handleCampusSelect.bind(this);
-    // this.toggleSiteSelection = this.toggleSiteSelection.bind(this);
   }
 
   handleCampusSelect() {
@@ -34,33 +20,12 @@ class LandingPage extends Component {
     this.props.history.push(`/home/carousel/site/0`);
   }
 
-  // toggleSiteSelection() {
-  //   this.setState({siteSelectionHidden: !this.state.siteSelectionHidden});
-  // }
-
-  // renderSiteSelectionContainer() {
-  //   return (
-  //     <div className={styles.landing_page_site_selection_container}>
-  //       {COLLEGE_NAMES.map( (siteName, i) => {
-  //         return (
-  //           <SiteButton
-  //             key={i}
-  //             siteName={siteName}
-  //             goToCarousel={() => this.props.history.push(`/home/carousel/site/${i}`)}
-  //             />
-  //         );
-  //       })}
-  //     </div>
-  //   );
-  // }
-
   renderSiteSelectors(){
     return (
       COLLEGE_NAMES.map( (siteName, i) => {
         return (
           <button
             key={i}
-            siteName={siteName}
             onClick={() => this.props.history.push(`/home/carousel/site/${i}`)}
             >
             {siteName}
@@ -111,15 +76,9 @@ class LandingPage extends Component {
     );
   }
 }
-// {this.state.siteSelectionHidden
-//   ?
-//   null
-//   : this.renderSiteSelectionContainer()
-// }
 
 const mapDispatchToProps = (dispatch) => ({
   handleScopeSelect: (scope) => dispatch(handleScopeSelect(scope))
 });
-
 
 export default connect(null, mapDispatchToProps)(LandingPage);
