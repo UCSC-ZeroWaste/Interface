@@ -7,6 +7,7 @@ import {fetchRecords, createRandomRecordSet} from './lib/actions/record_actions'
 import {connect} from 'react-redux';
 import _ from 'underscore';
 import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
+import moment from 'moment';
 
 // spring dates:
 //   springStart = `'2017-04-03'`;
@@ -26,14 +27,28 @@ const API_ENDPOINTS = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    //TODO Only getting records when the app loads. OK?
+
+  }
+  fetchData() {
+    console.log('fetching data: ', moment().format("YYYY-MM-DD HH:mm:ss"));
+    this.props.getRecords(API_ENDPOINTS['60']);
   }
 
   componentDidMount() {
-    this.props.getRecords(API_ENDPOINTS['fall']);
+    let dayInMilliseconds = 24 * 60 * 60 * 1000;
+    var start = moment.utc(moment().format("HH:mm:ss"), "HH:mm:ss");
+    var end = moment.utc("3:35:00", "HH:mm:ss");
+    if (end.isBefore(start)) end.add(1, 'day');
+    let timeoutInterval = end.diff(start);
+
+    this.fetchData();
+
+    window.setTimeout(()=> {
+      this.fetchData();
+      window.setInterval(() => this.fetchData(), dayInMilliseconds);
+    }, timeoutInterval);
     // setTimeout(this.props.getRandomRecordSet, .1);
   }
-
 
   render() {
     let assetType = _.groupBy(this.props.data, 'AssetType');

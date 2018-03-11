@@ -37,7 +37,7 @@ class LogoButton extends Component {
         className={styles.logo}
         onClick={this.clickHandler}
         >
-        ZERO
+        SLUG&nbsp;&nbsp;ZERO
       </button>
     );
   }
