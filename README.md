@@ -1,11 +1,32 @@
 # ZeroWaste Interface
-## Install and Running
+## Install and Run Development Server
 
 1. npm install
 2. npm start
 3. navigate to http://localhost:3000
 
 - The Heat Map requires a `config.js` file (located in 'app' folder) with the Google Maps API key.
+
+## Setting up the Production Server
+- Remote into the UCSC server<br/>
+`~/$ ssh kp@zerowaste.ucsc.edu`<br/>
+`~/$ password: ########`<br/>
+`~/$ cd Interface`<br/>
+- Update the UCSC files with the latest master version<br/>
+`~/$ git pull`
+- update the node modules<br/>
+`~/$ npm update && npm update -dev`
+- update the production build<br/>
+`~/$ npm run build`
+- Find the running processes<br/>
+`~/$ ps aux | grep "node"` or `~/$ ps aux | grep "node server.js"`
+- Kill the running processes<br/>
+`~/$ kill #####`
+- Or do the last two in one step (careful because this will kill all processes with this name)<br/>
+`~/$ pkill -f "node server.js"`
+- Start Server by running (include 'nohup' and '&' so the server will run in the background)<br/>
+`~/$ nohup node server.js &`
+
 
 ## Touchscreen Setup
 [Raspberry Pi Setup](docs/RPi/RPi-readme.md)
