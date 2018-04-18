@@ -24,9 +24,9 @@ const TouchReducer = (state = defaultState, action) => {
       }
 
       if (newState.autoplay === true) {
-        console.log('autoplay on');
+        // console.log('autoplay on');
       } else {
-        console.log('autoplay off: ', newState.autoplay);
+        // console.log('autoplay off: ', newState.autoplay);
       }
 
       return newState;

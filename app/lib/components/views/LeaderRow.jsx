@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import styles from '../../../App.scss';
 import merge from 'lodash/merge';
 import ContainerDimensions from 'react-container-dimensions';
-import {SLUG_IMAGES} from '../../constants/constants';
+import {SLUG_IMAGES, COLLEGE_NAMES} from '../../constants/constants';
+import {handleScopeSelect, handleSiteSelect} from '../../actions/view_actions';
+import { withRouter } from 'react-router-dom';
+
 import {connect} from 'react-redux';
 
 class LeaderRow extends Component {
   constructor(props) {
     super(props);
+    this.handleRowSelect = this.handleRowSelect.bind(this);
   }
 
   renderSlug(height, width) {
@@ -95,6 +99,14 @@ class LeaderRow extends Component {
     }
   }
 
+  handleRowSelect() {
+    let siteName = this.props.site.site;
+    let idx = COLLEGE_NAMES.indexOf(siteName);
+    this.props.history.push(`/home/carousel/site/${idx}`);
+    this.props.changeSiteSelection(siteName);
+    this.props.changeScopeToLocal();
+  }
+
   render() {
     let selected = (this.props.selected && this.props.scope === 'local') ? styles.selected : '';
     let backgroundColor = (selected ? {backgroundColor: this.props.color} : undefined);
@@ -107,7 +119,7 @@ class LeaderRow extends Component {
         </ContainerDimensions>
 
         <div className={styles.details_container}>
-          <div className={`${styles.details} ${selected}`} style={backgroundColor}>
+          <div className={`${styles.details} ${selected}`} style={backgroundColor} onClick={this.handleRowSelect}>
             <div className={`${styles.details_site} ${selected}`} >{this.props.site.site}</div>
             <div className={`${styles.details_ratio} ${selected}`} >{Math.round(this.props.site.diversionRatio)}%</div>
           </div>
@@ -122,4 +134,9 @@ const mapStateToProps = (state) => ({
   device: state.currentView.device
 });
 
-export default connect(mapStateToProps)(LeaderRow);
+const mapDispatchToProps = (dispatch) => ({
+  changeScopeToLocal: () => dispatch(handleScopeSelect('local')),
+  changeSiteSelection: (site) => dispatch(handleSiteSelect(site)),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeaderRow));

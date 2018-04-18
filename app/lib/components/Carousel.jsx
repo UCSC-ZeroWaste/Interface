@@ -33,7 +33,7 @@ class Carousel extends Component {
   }
 
   touchHandler(e) {
-    console.log("TOUCH EVENT!!!");
+    // console.log("TOUCH EVENT!!!");
     this.sendGoogleAnalytics(e.target.id);
     this.props.handleTouchEvent();
   }
